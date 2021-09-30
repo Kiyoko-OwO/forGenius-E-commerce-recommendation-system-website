@@ -1,0 +1,6 @@
+Week 1:
+Find group members. There were initally 4 members in our group, which is unaccpetable in another lab. So we find the fifth member in our group. Also there is timetable clash for one of our member, we have to change to another lab W18A. We roughly design and allocate the programming environment and language for backend and frondend. Then we start to write proposal. I am allocated to write user story. Later on, our team have serveral meeting to update each process.
+Week 2:
+There are serveral meetings to choose the backend mainframe, which is Django + SQLite. And we continuely fix our user stories and UML diagram in proposals. There are some difficulties in proposals at first, including misunderstanding some requirements, some argument between different opinions, and techinical issues using Mic-Office Word. Luckilty, we solve all the problems and all part have been done. 
+Week 3:
+During team meetings, I change the initial Admin design in user stories and update it with more clear version. Also, me and Kevin in our team drew and system architecture graph, re-build the UML diagram and review the proposals. Finally, I put serveal time in learning how to user Django and SQLite framework.

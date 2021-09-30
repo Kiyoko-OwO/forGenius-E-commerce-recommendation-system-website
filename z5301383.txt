@@ -1,0 +1,17 @@
+WEEK 1
+Formed a group, We had a meeting to discuss which project to choose, at the same time we invited a new member to join our group.
+Join the webcms group and jira. swich from H18A to W16A
+Start to make proposal, I search the E-Commerce Recommender System imformation and write the background with Minghao.
+Determined to use VUE as front-end technology。
+
+WEEK 2
+We discuess the functional requirements of the project.And we begin to write the epic and user story.
+I write the User Authorization and Order section of user story. And I fixed the user story many times.
+We had meeting to discuss and determine the final version of the user story.
+I start to draw the flow chart with Minghao.
+
+
+
+
+
+

@@ -1,0 +1,28 @@
+WEEK 1
+1. Joined to the group and we choose the e-commerce project.
+2. Joined the webcms group and jira. 
+3. Because one of our group members has a timetable clash, we need to switch from the original lab session H18A to another lab session W16A.
+4. Started to make proposal, I discussed with the team all technical details that we can use for the project and explore the availability of different technologies.
+5. Determined to use VUE as front-end technology.
+6. Planed to end all parts of purposal before Wed week3.
+
+WEEK 2
+1. Finalized our backend technical stacks (Django + SQLite).
+2. Planed to have team meeting at least 3 times a week.
+3. Continue to work on user stories and epics part of the proposal with my team.
+4. Had a meeting to check and fix all of the user stories with my team. 
+5. I finished all of the basic UI design for the first sprint and put the UI diagrams in purposal.
+6. We had meeting to discuss and determine the final version of the user stories and epics.
+
+
+
+WEEK 3
+1. I finished ER and Relational Model diagram and put them in the purposal.
+2. Had a meeting to discuss the final version of the puposal.
+3. Improved the flow chart diagram with Minghao Cai and Wenxin Ma.
+4. Improved the UML diagram with Kaiyu Chen and Tianchen Ma.
+5. Discussed with tutor about the our purposal and got a lot of feedback. 
+6. Improved the database layer of system architecture.
+
+Week 4
+1. I finished to build the Django and sqlite database frame.

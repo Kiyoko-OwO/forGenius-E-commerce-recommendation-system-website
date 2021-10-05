@@ -1,7 +1,12 @@
+@font-face {
+    font-family: myFont;
+    src: url(seguiemj.ttf);
+}
 * {
     margin: 0;
     padding: 0;
     background-color: #d1dbda;
+    font-family: myFont;
 }
 header {
     height: 100px;
@@ -30,10 +35,11 @@ button {
     border-color: grey;
     color: grey;
     cursor: pointer;
+    
 }
 main .slogon {
     text-align: center;
-    margin-left: 340px;
+    margin-left: 300px;
 }
 
 .search {

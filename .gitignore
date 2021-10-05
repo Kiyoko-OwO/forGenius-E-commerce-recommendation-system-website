@@ -1,2 +1,17 @@
 forGenius/.vscode
 forGenius/venv
+*/__pycache__
+*/*/__pycache__
+*/*/*/__pycache__
+*/*/*/*/__pycache__
+*/*/*/*/*/__pycache__
+*/migrations
+*/*/migrations
+*/*/*/migrations
+*/*/*/*/migrations
+*/*/*/*/*/migrations
+z5213081.txt
+z5231859.txt
+z5248118.txt
+z5248280.txt
+z5301383.txt

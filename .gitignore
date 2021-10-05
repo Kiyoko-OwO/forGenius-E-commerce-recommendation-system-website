@@ -1,3 +1,4 @@
 forGenius/.vscode
 forGenius/venv
 */__pycache__
+*/migrations

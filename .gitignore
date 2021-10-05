@@ -1,2 +1,3 @@
 forGenius/.vscode
 forGenius/venv
+*/__pycache__

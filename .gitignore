@@ -4,9 +4,13 @@ forGenius/venv
 */*/__pycache__
 */*/*/__pycache__
 */*/*/*/__pycache__
+<<<<<<< HEAD
 */*/*/*/*/__pycache__
 */migrations
 */*/migrations
 */*/*/migrations
 */*/*/*/migrations
 */*/*/*/*/migrations
+=======
+*/*/*/*/*/__pycache__
+>>>>>>> add: add ignore

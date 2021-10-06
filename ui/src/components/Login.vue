@@ -3,19 +3,20 @@
         <img class="logo" src=../assets/2.png alt="logo">
         <div class="login_box">
             <h1>LOGIN</h1>
-        <el-form model="loginForm" label-position="left" label-width="150px" class="login_form">
-            <el-form-item label="email address"  class="username_change">
+        <el-form model="loginForm" label-position="left" label-width="225px" class="login_form">
+            <el-form-item label="EMAIL ADDRESS"  class="username_change">
               <el-input v-model="loginForm.email">
               </el-input>
         </el-form-item>
-            <el-form-item label="password">
-              <el-input v-model="loginForm.password" type = "password" class="password_change">
+            <el-form-item label="PASSWORD" class="password_change">
+              <el-input v-model="loginForm.password" type = "password">
               </el-input>
         </el-form-item>
         </el-form>
         <a href="" text-decoration:underline class="forget">FORGET MY PASSWORD</a>
         <el-button class='submit'>SUBMIT</el-button>
         <a href="" text-decoration:underline class="signup">SIGN UP</a>
+        <a text-decoration:underline class="signup_1">DON'T HAVE AN ACCOUNT YET? PLEASE</a>
         </div>
     </div>
 </template>
@@ -34,36 +35,43 @@ export default {
 </script>
 
 <style lang="less" scoped>
-*{
-    font-family: 'segUi';
-    letter-spacing:.2em;
-}
+
 h1{
     position: absolute;
     left: 50%;
     font-size: 40px;
-    transform: translate(-50%,0%);
+    transform: translate(-50%,20%);
     font-weight:normal;
+    font-family: 'segUi';
+    letter-spacing:.2em;
 }
-
 .forget{
     position: absolute;
-    left: 63%;
+    left: 66%;
     bottom:37%;
     color:black;
     transform: translate(-50%,0%);
     font-size: 15px;
+    letter-spacing:.2em;
 }
-
 .signup{
     position: absolute;
-    left: 80%;
+    left: 77.5%;
     bottom:10%;
     color:black;
     transform: translate(-50%,0%);
     font-size: 15px;
+    letter-spacing:.2em;
 }
-
+.signup_1{
+    position: absolute;
+    left: 45%;
+    bottom:10%;
+    color:black;
+    transform: translate(-50%,0%);
+    font-size: 15px;
+    letter-spacing:.2em;
+}
 .submit{
     position: absolute;
     left:50%;
@@ -77,37 +85,33 @@ h1{
     letter-spacing:10px;
     padding-left: 30px;
 }
-
 .login_container {
     background-color: #d1dbda;
     height: 100%;
-
 }
-
 .login_box{
     background-color:#e7eae8;
-    height: 375px;
-    width: 650px;
+    height: 425px;
+    width: 750px;
     position: absolute;
     border-radius: 30px;
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
-
 }
 .logo{
-        height: 20%;
+        height: 35%;
         width: 20%;
         position: absolute;
         right: 55%;
+        top:-7.5%;
 }
 .login_form{
-    margin: 100;
-    width: 400px;
+    width: 530px;
     position: absolute;
     border-radius: 80px;
     top: 30%;
-    left: 20%;
+    left: 15%;
 }
 .username{
       border-radius: 40px;
@@ -115,12 +119,15 @@ h1{
 .email{
       border-radius: 30px;
 }
-
 .username_change /deep/ .el-form-item__label{
-    font-family: "segui";
+    font-family: 'segUi';
+    letter-spacing:.1em;
+    font-size: 18px;
 }
 .password_change /deep/ .el-form-item__label{
-    font-family: "segui";
+    font-family: 'segUi';
+    letter-spacing:.1em;
+    font-size: 18px;
 }
 </style>
 

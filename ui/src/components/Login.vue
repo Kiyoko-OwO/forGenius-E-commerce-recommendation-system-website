@@ -2,7 +2,7 @@
     <div class="login_container">
         <img class="logo" src=../assets/2.png alt="logo">
         <div class="login_box">
-            <h1>login</h1>
+            <h1>LOGIN</h1>
         <el-form model="loginForm" label-position="left" label-width="150px" class="login_form">
             <el-form-item label="email address"  class="username_change">
               <el-input v-model="loginForm.email">
@@ -14,7 +14,7 @@
         </el-form-item>
         </el-form>
         <a href="" text-decoration:underline class="forget">FORGET MY PASSWORD</a>
-        <el-button class='submit'>submit</el-button>
+        <el-button class='submit'>SUBMIT</el-button>
         <a href="" text-decoration:underline class="signup">SIGN UP</a>
         </div>
     </div>
@@ -34,12 +34,16 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
+*{
+    font-family: 'segUi';
+    letter-spacing:.2em;
+}
 h1{
     position: absolute;
     left: 50%;
-    font-family: 'segui';
-    transform: translate(-50%,0%)
+    font-size: 40px;
+    transform: translate(-50%,0%);
+    font-weight:normal;
 }
 
 .forget{
@@ -47,8 +51,8 @@ h1{
     left: 63%;
     bottom:37%;
     color:black;
-    font-family: 'segui';
-    transform: translate(-50%,0%)
+    transform: translate(-50%,0%);
+    font-size: 15px;
 }
 
 .signup{
@@ -56,20 +60,22 @@ h1{
     left: 80%;
     bottom:10%;
     color:black;
-    font-family: 'segui';
-    transform: translate(-50%,0%)
+    transform: translate(-50%,0%);
+    font-size: 15px;
 }
 
 .submit{
     position: absolute;
     left:50%;
-    bottom:13%;
+    bottom:12%;
     height:50px;
     width:200px;
     transform: translate(-50%,-50%);
     border-radius: 10px;
     background: #786662;
     color: #fefefe;
+    letter-spacing:10px;
+    padding-left: 30px;
 }
 
 .login_container {

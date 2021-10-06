@@ -3,17 +3,17 @@
         <img class="logo" src=../assets/2.png alt="logo">
         <div class="login_box">
             <h1>REGISTER</h1>
-        <el-form model="loginForm" label-position="left" label-width="225px" class="login_form">
-            <el-form-item label="USERNAME"  class="username_change">
+        <el-form :model="loginForm" :rules="signupRules" label-position="left" label-width="225px" class="login_form">
+            <el-form-item label="USERNAME"  class="username_change" prop="username">
               <el-input v-model="loginForm.username">
               </el-input>
         </el-form-item>
-            <el-form-item label="EMAIL ADDRESS"  class="username_change">
+            <el-form-item label="EMAIL ADDRESS"  class="username_change" prop="email">
               <el-input v-model="loginForm.email">
               </el-input>
         </el-form-item>
             <el-form-item label="PASSWORD" class="password_change">
-              <el-input v-model="loginForm.password" type = "password">
+              <el-input v-model="loginForm.password" type = "password" prop="password">
               </el-input>
         </el-form-item>
         </el-form>
@@ -27,11 +27,50 @@
 <script>
 export default {
   data () {
+    var checkEmail = (rule, value, callback) => {
+      const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
+      if (!value) {
+        return callback(new Error('email address cannot be empty'))
+      }
+      setTimeout(() => {
+        if (mailReg.test(value)) {
+          callback()
+        } else {
+          callback(new Error('Please enter the correct email format'))
+        }
+      }, 100)
+    }
+    var checkUsername = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('email address cannot be empty'))
+      }
+    }
+    var checkPassword = (rule, value, callback) => {
+      const passwordreg = /(?![A-Z]*$)(?![a-z]*$)(?![0-9]*$)(?![^a-zA-Z0-9]*$)/
+      console.log(passwordreg.test(value))
+      if (!passwordreg.test(value)) {
+        callback(new Error('123'))
+      } else {
+        callback()
+      }
+    }
     return {
       loginForm: {
         username: '',
         email: '',
         password: ''
+      },
+      signupRules: {
+        email: [
+          { validator: checkEmail, trigger: 'blur' }
+        ],
+        username: [
+          { min: 6, max: 12, message: 'the username should be 6-12 characters', trigger: 'blur' },
+          { validator: checkUsername, trigger: 'blur' }
+        ],
+        password: [
+          { validator: checkPassword, trigger: 'blur' }
+        ]
       }
     }
   }
@@ -123,6 +162,12 @@ h1{
 .email{
       border-radius: 30px;
 }
+
+.login_form /deep/.timr.el-form .el-form-item__error {
+  top: 30%;
+  right: 25% !important;
+  left: unset;
+}
 .username_change /deep/ .el-form-item__label{
     font-family: 'segUi';
     letter-spacing:.1em;
@@ -134,7 +179,7 @@ h1{
     font-size: 18px;
 }
 .el-form-item{
-   margin-bottom:5px
+   margin-bottom:15px
 }
 </style>
 

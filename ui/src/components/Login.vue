@@ -2,20 +2,82 @@
     <div class="login_container">
         <img class="logo" src=../assets/2.png alt="logo">
         <div class="login_box">
-            <form action="" class="username">
-            <input type="text" name="username">
-            </form>
+            <h1>LOGIN</h1>
+        <el-form model="loginForm" label-position="left" label-width="150px" class="login_form">
+            <el-form-item label="email address"  class="username_change">
+              <el-input v-model="loginForm.email">
+              </el-input>
+        </el-form-item>
+            <el-form-item label="password">
+              <el-input v-model="loginForm.password" type = "password" class="password_change">
+              </el-input>
+        </el-form-item>
+        </el-form>
+        <a href="" text-decoration:underline class="forget">FORGET MY PASSWORD</a>
+        <el-button class='submit'>SUBMIT</el-button>
+        <a href="" text-decoration:underline class="signup">SIGN UP</a>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-
+  data () {
+    return {
+      loginForm: {
+        email: '',
+        password: ''
+      }
+    }
+  }
 }
 </script>
 
-<style>
+<style lang="less" scoped>
+*{
+    font-family: 'segUi';
+    letter-spacing:.2em;
+}
+h1{
+    position: absolute;
+    left: 50%;
+    font-size: 40px;
+    transform: translate(-50%,0%);
+    font-weight:normal;
+}
+
+.forget{
+    position: absolute;
+    left: 63%;
+    bottom:37%;
+    color:black;
+    transform: translate(-50%,0%);
+    font-size: 15px;
+}
+
+.signup{
+    position: absolute;
+    left: 80%;
+    bottom:10%;
+    color:black;
+    transform: translate(-50%,0%);
+    font-size: 15px;
+}
+
+.submit{
+    position: absolute;
+    left:50%;
+    bottom:12%;
+    height:50px;
+    width:200px;
+    transform: translate(-50%,-50%);
+    border-radius: 10px;
+    background: #786662;
+    color: #fefefe;
+    letter-spacing:10px;
+    padding-left: 30px;
+}
+
 .login_container {
     background-color: #d1dbda;
     height: 100%;
@@ -39,11 +101,32 @@ export default {
         position: absolute;
         right: 55%;
 }
+.login_form{
+    margin: 100;
+    width: 400px;
+    position: absolute;
+    border-radius: 80px;
+    top: 30%;
+    left: 20%;
+}
 .username{
-    width: 1000px;
-    position:absolute;
-    border-radius: 30px;
-    top: 0%;
-    left: 40%;
+      border-radius: 40px;
+}
+.email{
+      border-radius: 30px;
+}
+
+.username_change /deep/ .el-form-item__label{
+    font-family: "segui";
+}
+.password_change /deep/ .el-form-item__label{
+    font-family: "segui";
+}
+</style>
+
+<style>
+input.el-input__inner {
+    border-radius:50px;
+    height:30px;
 }
 </style>

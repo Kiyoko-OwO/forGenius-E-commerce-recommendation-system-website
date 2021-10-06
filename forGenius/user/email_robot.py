@@ -9,8 +9,8 @@ def send_email(user_name, email, reset_code):
     # set host and receiver
     host_name = "smtp.gmail.com"
     host_port = 465
-    sender_email = 'thu15mango2@gmail.com'
-    sender_password = '110110Aa'
+    sender_email = '3900forgenius@gmail.com'
+    sender_password = 'forGenius100'
     receivers = [email]
 
     # email info
@@ -18,7 +18,7 @@ def send_email(user_name, email, reset_code):
     subject = 'Here is your Reset Code ' + reset_code
 
     message = MIMEText(subject, 'plain', 'utf-8')
-    message['From'] = Header("thu15mango2", 'utf-8')
+    message['From'] = Header("3900forGenius", 'utf-8')
     message['To'] =  Header(user_name, 'utf-8')
     message['Subject'] = Header(Title, 'utf-8')
 
@@ -26,7 +26,3 @@ def send_email(user_name, email, reset_code):
     server.login(sender_email, sender_password)
     server.sendmail(sender_email,receivers,message.as_string())
     server.quit()
-
-if __name__ == "__main__":
-    print("Start Sending")
-    send_email('TEST', 'cky1102115652@gmail.com', 'TEST')

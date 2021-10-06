@@ -3,13 +3,19 @@ from django.apps import AppConfig
 from user.models import User
 import jwt
 import time
+import random
 
 class UserConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'user'
 
+class InputError(Exception):
+    code = 400
+    message = 'InputError'
+
 TOKEN_DB = list()
 PRIVATE_KEY = 'nLAghlDB8Qec4d6LD5dhV2QvVs3vpDSY'
+RESETCODE_DB = dict()
 
 def auth_login(email, password):
     """ 
@@ -54,6 +60,39 @@ def auth_register(email, name, password):
         return auth_login(email, password)
     raise InputError('Already registered, please log in')
 
+def auth_change_password(token, old_password, new_password):
+    email = token_to_email(token)
+    if (len(User.objects.get(pk=email).filter(password=old_password)) != 1):
+        raise InputError('Incorrect old password')
+    if not validate_password(new_password):
+        raise InputError('Invalid new password')
+    email_query = User.objects.get(pk=email)
+    email_query.password = new_password
+    email_query.save()
+    return True
+
+def auth_reset_password(reset_code, new_password):
+    if not validate_password(new_password):
+        raise InputError('Invalid new password')
+    email = reset_code_to_email(reset_code)
+    email_query = User.objects.get(pk=email)
+    email_query.password = new_password
+    email_query.save()
+    return True
+
+def auth_send_reset_code(email):
+    if not validate_email(email):
+        raise InputError('Invalid email address, please try again')
+    try:
+        User.objects.get(pk=email)
+    except User.DoesNotExist:
+        raise InputError('Not registered yet, please sign up')
+    reset_code = RESETCODE_DB.get(email, default=None)
+    if reset_code is None:
+        reset_code = generate_reset_code()
+    RESETCODE_DB.put(email, reset_code)
+    # send email here
+
 def validate_email(email):
     return True
 
@@ -90,3 +129,16 @@ def token_to_email(token):
         raise InputError('Invalid token')
     data = jwt.decode(token, PRIVATE_KEY, algorithms=["HS256"])
     return data['email']
+
+def generate_reset_code():
+    reset_code = ''
+    for i in range(6):
+        reset_code += str(random.choice([random.randrange(10), chr(random.randrange(97, 123))]))
+    return reset_code
+
+def reset_code_to_email(reset_code):
+    emails = list(RESETCODE_DB.keys())[list(RESETCODE_DB.values()).index(reset_code)]
+    if (len(emails) != 1):
+        raise InputError('Invalid reset code')
+    RESETCODE_DB.pop(emails[0])
+    return emails[0]

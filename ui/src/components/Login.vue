@@ -2,9 +2,14 @@
     <div class="login_container">
         <img class="logo" src=../assets/2.png alt="logo">
         <div class="login_box">
-            <form action="" class="username">
-            <input type="text" name="username">
-            </form>
+        <el-form ref="form" :model="form" label-width="80px" class="loginForm">
+            <el-form-item label="username" class="username">
+              <el-input></el-input>
+        </el-form-item>
+            <el-form-item label="password">
+              <el-input></el-input>
+        </el-form-item>
+        </el-form>
         </div>
     </div>
 </template>
@@ -15,7 +20,7 @@ export default {
 }
 </script>
 
-<style>
+<style >
 .login_container {
     background-color: #d1dbda;
     height: 100%;
@@ -39,11 +44,15 @@ export default {
         position: absolute;
         right: 55%;
 }
+.loginForm{
+    margin: 100;
+    width: 400px;
+    position: absolute;
+    border-radius: 80px;
+    top: 30%;
+    left: 20%;
+}
 .username{
-    width: 1000px;
-    position:absolute;
-    border-radius: 30px;
-    top: 0%;
-    left: 40%;
+      border-radius: 40px;
 }
 </style>

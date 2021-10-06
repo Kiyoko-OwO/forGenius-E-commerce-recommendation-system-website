@@ -4,6 +4,7 @@ from user.models import User
 import jwt
 import time
 import random
+import email_robot
 
 class UserConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
@@ -84,14 +85,15 @@ def auth_send_reset_code(email):
     if not validate_email(email):
         raise InputError('Invalid email address, please try again')
     try:
-        User.objects.get(pk=email)
+        email_query = User.objects.get(pk=email)
     except User.DoesNotExist:
         raise InputError('Not registered yet, please sign up')
     reset_code = RESETCODE_DB.get(email, default=None)
     if reset_code is None:
         reset_code = generate_reset_code()
     RESETCODE_DB.put(email, reset_code)
-    # send email here
+    name = email_query.values()[0].get('user_name')
+    email_robot.send_email(name, email, reset_code)
 
 def validate_email(email):
     return True

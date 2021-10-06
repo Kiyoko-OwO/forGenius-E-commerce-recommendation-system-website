@@ -2,8 +2,12 @@
     <div class="login_container">
         <img class="logo" src=../assets/2.png alt="logo">
         <div class="login_box">
-            <h1>LOGIN</h1>
+            <h1>REGISTER</h1>
         <el-form model="loginForm" label-position="left" label-width="225px" class="login_form">
+            <el-form-item label="USERNAME"  class="username_change">
+              <el-input v-model="loginForm.username">
+              </el-input>
+        </el-form-item>
             <el-form-item label="EMAIL ADDRESS"  class="username_change">
               <el-input v-model="loginForm.email">
               </el-input>
@@ -13,10 +17,9 @@
               </el-input>
         </el-form-item>
         </el-form>
-        <a href="" text-decoration:underline class="forget">FORGET MY PASSWORD</a>
         <el-button class='submit'>SUBMIT</el-button>
-        <a href="#/signup" text-decoration:underline class="signup">SIGN UP</a>
-        <a text-decoration:underline class="signup_1">DON'T HAVE AN ACCOUNT YET? PLEASE</a>
+        <a href="#/login" text-decoration:underline class="login">LOG IN</a>
+        <a text-decoration:underline class="login_1">ALREADY REGISTERED, PLEASE</a>
         </div>
     </div>
 </template>
@@ -26,6 +29,7 @@ export default {
   data () {
     return {
       loginForm: {
+        username: '',
         email: '',
         password: ''
       }
@@ -54,18 +58,18 @@ h1{
     font-size: 15px;
     letter-spacing:.2em;
 }
-.signup{
+.login{
     position: absolute;
-    left: 77.5%;
+    left: 73%;
     bottom:10%;
     color:black;
     transform: translate(-50%,0%);
     font-size: 15px;
     letter-spacing:.2em;
 }
-.signup_1{
+.login_1{
     position: absolute;
-    left: 45%;
+    left: 47%;
     bottom:10%;
     color:black;
     transform: translate(-50%,0%);
@@ -128,6 +132,9 @@ h1{
     font-family: 'segUi';
     letter-spacing:.1em;
     font-size: 18px;
+}
+.el-form-item{
+   margin-bottom:5px
 }
 </style>
 

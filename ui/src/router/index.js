@@ -38,6 +38,8 @@ const routes = [
   {
     path: '/resetpassword_forgot',
     component: ResetpasswordForgot
+  },
+  {
     path: '/intrest',
     component: Intrest
   }

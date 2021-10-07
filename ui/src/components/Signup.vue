@@ -84,6 +84,7 @@ export default {
       this.$refs.signupFormRef.validate(valid => {
         console.log(valid)
       })
+    },
     jumpHome () {
       this.$router.push('Home')
     }

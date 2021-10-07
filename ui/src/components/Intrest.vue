@@ -12,15 +12,15 @@
 
 </template>
 <script>
-  const tagOptions = ['Fastion', 'Toys', 'Hobby', 'DIY','Electronics', 'Media', 'Furniture', 'Appliance','Food','Personal Care'];
-  export default {
-    data () {
-      return {
-        tags: tagOptions,
-        intest:[]
-      };
+const tagOptions = ['Fastion', 'Toys', 'Hobby', 'DIY', 'Electronics', 'Media', 'Furniture', 'Appliance', 'Food', 'Personal Care']
+export default {
+  data () {
+    return {
+      tags: tagOptions,
+      intest: []
     }
   }
+}
 </script>
 
 <style>

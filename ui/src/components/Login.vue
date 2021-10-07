@@ -1,6 +1,6 @@
 <template>
     <div class="login_container">
-        <img class="logo" src=../assets/2.png alt="logo">
+        <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpHome">
         <div class="login_box">
             <h1>LOGIN</h1>
         <el-form ref="loginFormRef" :model="loginForm" :rules="loginRules" label-position="left" label-width="225px" class="login_form">
@@ -68,6 +68,8 @@ export default {
           console.log(this.loginForm)
         }
       })
+    jumpHome () {
+      this.$router.push('Home')
     }
   }
 }
@@ -143,11 +145,11 @@ h1{
     transform: translate(-50%,-50%);
 }
 .logo{
-        height: 35%;
-        width: 20%;
-        position: absolute;
-        right: 55%;
-        top:-7.5%;
+    height: 35%;
+    position: absolute;
+    right: 55%;
+    top:-7.5%;
+    cursor: pointer;
 }
 .login_form{
     width: 530px;

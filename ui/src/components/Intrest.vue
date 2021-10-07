@@ -1,10 +1,13 @@
 <template>
   <div>
-    <h1>Intrest Filed</h1>
+    <h1>Intrest Field</h1>
     <el-checkbox-group v-model="intest">
-      <el-checkbox-button v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox-button>
+      <el-checkbox-button v-for="city in tags" :label="city" :key="city">{{city}}</el-checkbox-button>
     </el-checkbox-group>
     <el-button class='submit'>SUBMIT</el-button>
+    <li v-for="item in intest" :key="item">
+        <span>{{ item }}</span>
+    </li>
   </div>
 
 </template>
@@ -13,7 +16,7 @@
   export default {
     data () {
       return {
-        cities: tagOptions,
+        tags: tagOptions,
         intest:[]
       };
     }

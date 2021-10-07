@@ -20,7 +20,7 @@ class Order(models.Model):
 
         
 
-class Cart():
+class Cart(models.Model):
     user_email = models.ForeignKey(User, on_delete=CASCADE, primary_key=True)
     product_id = models.ForeignKey(Product, on_delete=CASCADE, primary_key=True)
     quantity = models.IntegerField(validators=[MinValueValidator(1)])

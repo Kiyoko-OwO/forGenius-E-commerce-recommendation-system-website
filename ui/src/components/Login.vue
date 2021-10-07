@@ -12,9 +12,12 @@
               <el-input v-model="loginForm.password" type = "password">
               </el-input>
         </el-form-item>
+        <div class="block"></div>
+        <el-form-item>
+        <el-button class='submit' @click="login">SUBMIT</el-button>
+        </el-form-item>
         </el-form>
         <a  text-decoration:underline href="#/forgotpassword" class="forget">FORGET MY PASSWORD</a>
-        <el-button class='submit' @click="login">SUBMIT</el-button>
         <a href="#/signup" text-decoration:underline class="signup">SIGN UP</a>
         <a text-decoration:underline class="signup_1">DON'T HAVE AN ACCOUNT YET? PLEASE</a>
         </div>
@@ -61,6 +64,9 @@ export default {
     login () {
       this.$refs.loginFormRef.validate(valid => {
         console.log(valid)
+        if (valid) {
+          console.log(this.loginForm)
+        }
       })
     }
   }
@@ -77,6 +83,10 @@ h1{
     font-weight:normal;
     font-family: 'segUi';
     letter-spacing:.2em;
+}
+.block {
+  width: 1000px;
+  height: 60px;
 }
 .forget{
     position: absolute;
@@ -107,8 +117,7 @@ h1{
 }
 .submit{
     position: absolute;
-    left:50%;
-    bottom:12%;
+    left:7%;
     height:50px;
     width:200px;
     transform: translate(-50%,-50%);
@@ -117,6 +126,7 @@ h1{
     color: #fefefe;
     letter-spacing:10px;
     padding-left: 30px;
+    border-color: #786662;
 }
 .login_container {
     background-color: #d1dbda;

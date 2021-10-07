@@ -6,6 +6,7 @@ import Home from '../components/Home.vue'
 import Userprofile from '../components/Userprofile.vue'
 import Resetpassword from '../components/Resetpassword.vue'
 import Forgotpassword from '../components/Forgotpassword.vue'
+import ResetpasswordForgot from '../components/Resetpassword_forgot.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -32,6 +33,10 @@ const routes = [
   {
     path: '/forgotpassword',
     component: Forgotpassword
+  },
+  {
+    path: '/resetpassword_forgot',
+    component: ResetpasswordForgot
   }
 ]
 

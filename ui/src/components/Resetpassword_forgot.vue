@@ -3,9 +3,9 @@
         <img class="logo" src=../assets/2.png alt="logo">
         <div class="reset_box">
             <h1>RESET&nbsp;PASSWORD</h1>
-        <el-form ref="resetFormRef" :model="resetForm" :rules="resetpasswordRule" label-position="left" label-width="225px" class="reset_form">
-            <el-form-item label="OLD PASSWORD"  class="oldpassword_change" prop="oldpassword">
-              <el-input v-model="resetForm.oldpassword">
+        <el-form ref="resetFormRef" :model="resetForm" :rules="resetpasswordRules" label-position="left" label-width="225px" class="reset_form">
+            <el-form-item label="code"  class="code_change" prop="code">
+              <el-input v-model="resetForm.code">
               </el-input>
         </el-form-item>
             <el-form-item label="NEW PASSWORD" class="newpassword_change" prop="newpassword">
@@ -21,9 +21,9 @@
 <script>
 export default {
   data () {
-    var checkOldpassword = (rule, value, callback) => {
+    var checkCode = (rule, value, callback) => {
       if (!value) {
-        return callback(new Error('password cannot be empty'))
+        return callback(new Error('Code cannot be empty'))
       }
     }
     var checkPassword = (rule, value, callback) => {
@@ -41,13 +41,12 @@ export default {
     }
     return {
       resetForm: {
-        oldpassword: '',
+        code: '',
         newpassword: ''
       },
-      resetpasswordRole: {
-        oldpassword: [
-          { min: 6, max: 12, message: 'the password should be 6-12 characters', trigger: 'blur' },
-          { validator: checkOldpassword, trigger: 'blur' }
+      resetpasswordRules: {
+        code: [
+          { validator: checkCode, trigger: 'blur' }
         ],
         newpassword: [
           { min: 6, max: 12, message: 'the password should be 6-12 characters', trigger: 'blur' },
@@ -125,7 +124,7 @@ h1{
   right: 25% !important;
   left: unset;
 }
-.oldpassword_change /deep/ .el-form-item__label{
+.code_change /deep/ .el-form-item__label{
     font-family: 'segUi';
     letter-spacing:.1em;
     font-size: 18px;

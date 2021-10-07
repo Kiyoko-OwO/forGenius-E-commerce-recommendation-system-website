@@ -3,7 +3,7 @@
         <img class="logo" src=../assets/2.png alt="logo">
         <div class="login_box">
             <h1>LOGIN</h1>
-        <el-form :model="loginForm" :rules="loginRules" label-position="left" label-width="225px" class="login_form">
+        <el-form ref="loginFormRef" :model="loginForm" :rules="loginRules" label-position="left" label-width="225px" class="login_form">
             <el-form-item label="EMAIL ADDRESS"  class="email_change" prop="email">
               <el-input v-model="loginForm.email" placeholder="contains “@” and end with “.com”">
               </el-input>
@@ -14,7 +14,7 @@
         </el-form-item>
         </el-form>
         <a  text-decoration:underline href="#/forgotpassword" class="forget">FORGET MY PASSWORD</a>
-        <el-button class='submit'>SUBMIT</el-button>
+        <el-button class='submit' @click="login">SUBMIT</el-button>
         <a href="#/signup" text-decoration:underline class="signup">SIGN UP</a>
         <a text-decoration:underline class="signup_1">DON'T HAVE AN ACCOUNT YET? PLEASE</a>
         </div>
@@ -55,6 +55,13 @@ export default {
           { validator: checkPassword, trigger: 'blur' }
         ]
       }
+    }
+  },
+  methods: {
+    login () {
+      this.$refs.loginFormRef.validate(valid => {
+        console.log(valid)
+      })
     }
   }
 }

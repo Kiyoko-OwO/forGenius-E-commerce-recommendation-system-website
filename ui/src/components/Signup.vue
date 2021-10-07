@@ -3,7 +3,7 @@
         <img class="logo" src=../assets/2.png alt="logo">
         <div class="signup_box">
             <h1>REGISTER</h1>
-        <el-form :model="signupForm" :rules="signupRules" label-position="left" label-width="225px" class="signup_form">
+        <el-form ref="signupFormRef" :model="signupForm" :rules="signupRules" label-position="left" label-width="225px" class="signup_form">
             <el-form-item label="USERNAME"  class="email_change" prop="username">
               <el-input v-model="signupForm.username" placeholder="6-12 characters">
               </el-input>
@@ -17,7 +17,7 @@
               </el-input>
         </el-form-item>
         </el-form>
-        <el-button class='submit'>SUBMIT</el-button>
+        <el-button class='submit' @click="signup">SUBMIT</el-button>
         <a href="#/login" text-decoration:underline class="login">LOG IN</a>
         <a text-decoration:underline class="login_1">ALREADY REGISTERED, PLEASE</a>
         </div>
@@ -77,6 +77,13 @@ export default {
           { validator: checkPassword, trigger: 'blur' }
         ]
       }
+    }
+  },
+  methods: {
+    signup () {
+      this.$refs.signupFormRef.validate(valid => {
+        console.log(valid)
+      })
     }
   }
 }

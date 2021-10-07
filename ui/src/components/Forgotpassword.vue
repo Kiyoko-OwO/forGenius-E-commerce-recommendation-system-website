@@ -3,13 +3,13 @@
         <img class="logo" src=../assets/2.png alt="logo">
         <div class="fogot_box">
             <h1>FORGOT&nbsp;PASSWORD</h1>
-        <el-form :model="forgotForm" :rules="forgotRules" label-position="left" label-width="225px" class="forgot_form">
+        <el-form ref="forgotFormRef" :model="forgotForm" :rules="forgotRules" label-position="left" label-width="225px" class="forgot_form">
             <el-form-item label="EMAIL ADDRESS"  class="email_change" prop="email">
               <el-input v-model="forgotForm.email" placeholder="contains “@” and end with “.com”">
               </el-input>
         </el-form-item>
         </el-form>
-        <el-button class='send'>SEND CODE</el-button>
+        <el-button class='send' @click="forgot">SEND CODE</el-button>
         </div>
     </div>
 </template>
@@ -39,6 +39,13 @@ export default {
           { validator: checkEmail, trigger: 'blur' }
         ]
       }
+    }
+  },
+  methods: {
+    forgot () {
+      this.$refs.forgotFormRef.validate(valid => {
+        console.log(valid)
+      })
     }
   }
 }

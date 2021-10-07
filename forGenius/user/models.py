@@ -13,7 +13,7 @@ class Admin(models.Model):
     password = models.CharField(max_length=255)
     
 
-class Interest():
+class Interest(models.Model):
     user_email = models.ForeignKey(User, on_delete=CASCADE, primary_key=True)
     interests = models.CharField(max_length=255, primary_key=True)
 
@@ -23,7 +23,7 @@ class Interest():
 
         unique_together = ("user_email", "interests")
 
-class Address_book():
+class Address_book(models.Model):
     user_email = models.ForeignKey(User, on_delete=CASCADE)
     address_id = models.AutoField(primary_key=True)
     address = models.CharField(max_length=255)

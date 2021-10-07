@@ -2,21 +2,24 @@
     <div class="login_container">
         <img class="logo" src=../assets/2.png alt="logo">
         <div class="login_box">
-            <h1>LOGIN</h1>
-        <el-form :model="loginForm" :rules="loginRules" label-position="left" label-width="225px" class="login_form">
+            <h1>REGISTER</h1>
+        <el-form :model="loginForm" :rules="signupRules" label-position="left" label-width="225px" class="login_form">
+            <el-form-item label="USERNAME"  class="username_change" prop="username">
+              <el-input v-model="loginForm.username" placeholder="6-12 characters">
+              </el-input>
+        </el-form-item>
             <el-form-item label="EMAIL ADDRESS"  class="username_change" prop="email">
               <el-input v-model="loginForm.email" placeholder="contains “@” and end with “.com”">
               </el-input>
         </el-form-item>
             <el-form-item label="PASSWORD" class="password_change" prop="password">
-              <el-input v-model="loginForm.password" type = "password">
+              <el-input v-model="loginForm.password" type = "password" placeholder="6-12 characters contain uc,lc and number">
               </el-input>
         </el-form-item>
         </el-form>
-        <a href="" text-decoration:underline class="forget">FORGET MY PASSWORD</a>
         <el-button class='submit'>SUBMIT</el-button>
-        <a href="#/signup" text-decoration:underline class="signup">SIGN UP</a>
-        <a text-decoration:underline class="signup_1">DON'T HAVE AN ACCOUNT YET? PLEASE</a>
+        <a href="#/login" text-decoration:underline class="login">LOG IN</a>
+        <a text-decoration:underline class="login_1">ALREADY REGISTERED, PLEASE</a>
         </div>
     </div>
 </template>
@@ -37,21 +40,40 @@ export default {
         }
       }, 100)
     }
+    var checkUsername = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('username cannot be empty'))
+      }
+    }
     var checkPassword = (rule, value, callback) => {
+      const mailReg = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])/
       if (!value) {
         return callback(new Error('password cannot be empty'))
       }
+      setTimeout(() => {
+        if (mailReg.test(value)) {
+          callback()
+        } else {
+          callback(new Error('Invalid email'))
+        }
+      }, 100)
     }
     return {
       loginForm: {
+        username: '',
         email: '',
         password: ''
       },
-      loginRules: {
+      signupRules: {
         email: [
           { validator: checkEmail, trigger: 'blur' }
         ],
+        username: [
+          { min: 6, max: 12, message: 'the username should be 6-12 characters', trigger: 'blur' },
+          { validator: checkUsername, trigger: 'blur' }
+        ],
         password: [
+          { min: 6, max: 12, message: 'the username should be 6-12 characters', trigger: 'blur' },
           { validator: checkPassword, trigger: 'blur' }
         ]
       }
@@ -80,18 +102,18 @@ h1{
     font-size: 15px;
     letter-spacing:.2em;
 }
-.signup{
+.login{
     position: absolute;
-    left: 77.5%;
+    left: 73%;
     bottom:10%;
     color:black;
     transform: translate(-50%,0%);
     font-size: 15px;
     letter-spacing:.2em;
 }
-.signup_1{
+.login_1{
     position: absolute;
-    left: 45%;
+    left: 47%;
     bottom:10%;
     color:black;
     transform: translate(-50%,0%);
@@ -145,6 +167,12 @@ h1{
 .email{
       border-radius: 30px;
 }
+
+.login_form /deep/.timr.el-form .el-form-item__error {
+  top: 30%;
+  right: 25% !important;
+  left: unset;
+}
 .username_change /deep/ .el-form-item__label{
     font-family: 'segUi';
     letter-spacing:.1em;
@@ -154,6 +182,9 @@ h1{
     font-family: 'segUi';
     letter-spacing:.1em;
     font-size: 18px;
+}
+.el-form-item{
+   margin-bottom:15px
 }
 </style>
 

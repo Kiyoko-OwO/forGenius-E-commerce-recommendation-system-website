@@ -3,8 +3,8 @@
         <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpHome">
         <div class="login_box">
             <h1>LOGIN</h1>
-        <el-form :model="loginForm" :rules="loginRules" label-position="left" label-width="225px" class="login_form">
-            <el-form-item label="EMAIL ADDRESS"  class="username_change" prop="email">
+        <el-form ref="loginFormRef" :model="loginForm" :rules="loginRules" label-position="left" label-width="225px" class="login_form">
+            <el-form-item label="EMAIL ADDRESS"  class="email_change" prop="email">
               <el-input v-model="loginForm.email" placeholder="contains “@” and end with “.com”">
               </el-input>
         </el-form-item>
@@ -12,9 +12,12 @@
               <el-input v-model="loginForm.password" type = "password">
               </el-input>
         </el-form-item>
+        <div class="block"></div>
+        <el-form-item>
+        <el-button class='submit' @click="login">SUBMIT</el-button>
+        </el-form-item>
         </el-form>
-        <a href="" text-decoration:underline class="forget">FORGET MY PASSWORD</a>
-        <el-button class='submit'>SUBMIT</el-button>
+        <a  text-decoration:underline href="#/forgotpassword" class="forget">FORGET MY PASSWORD</a>
         <a href="#/signup" text-decoration:underline class="signup">SIGN UP</a>
         <a text-decoration:underline class="signup_1">DON'T HAVE AN ACCOUNT YET? PLEASE</a>
         </div>
@@ -25,7 +28,7 @@
 export default {
   data () {
     var checkEmail = (rule, value, callback) => {
-      const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
+      const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+.com/
       if (!value) {
         return callback(new Error('email address cannot be empty'))
       }
@@ -58,6 +61,13 @@ export default {
     }
   },
   methods: {
+    login () {
+      this.$refs.loginFormRef.validate(valid => {
+        console.log(valid)
+        if (valid) {
+          console.log(this.loginForm)
+        }
+      })
     jumpHome () {
       this.$router.push('Home')
     }
@@ -75,6 +85,10 @@ h1{
     font-weight:normal;
     font-family: 'segUi';
     letter-spacing:.2em;
+}
+.block {
+  width: 1000px;
+  height: 60px;
 }
 .forget{
     position: absolute;
@@ -105,8 +119,7 @@ h1{
 }
 .submit{
     position: absolute;
-    left:50%;
-    bottom:12%;
+    left:7%;
     height:50px;
     width:200px;
     transform: translate(-50%,-50%);
@@ -115,6 +128,7 @@ h1{
     color: #fefefe;
     letter-spacing:10px;
     padding-left: 30px;
+    border-color: #786662;
 }
 .login_container {
     background-color: #d1dbda;
@@ -145,12 +159,12 @@ h1{
     left: 15%;
 }
 .username{
-    border-radius: 40px;
+      border-radius: 40px;
 }
 .email{
-    border-radius: 30px;
+      border-radius: 30px;
 }
-.username_change /deep/ .el-form-item__label{
+.email_change /deep/ .el-form-item__label{
     font-family: 'segUi';
     letter-spacing:.1em;
     font-size: 18px;

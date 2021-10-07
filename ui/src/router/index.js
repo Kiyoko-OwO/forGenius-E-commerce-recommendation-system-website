@@ -3,6 +3,10 @@ import VueRouter from 'vue-router'
 import Login from '../components/Login.vue'
 import Signup from '../components/Signup.vue'
 import Home from '../components/Home.vue'
+import Userprofile from '../components/Userprofile.vue'
+import Resetpassword from '../components/Resetpassword.vue'
+import Forgotpassword from '../components/Forgotpassword.vue'
+import ResetpasswordForgot from '../components/Resetpassword_forgot.vue'
 import Intrest from '../components/Intrest.vue'
 Vue.use(VueRouter)
 
@@ -20,6 +24,20 @@ const routes = [
     component: Home
   },
   {
+    path: '/userprofile',
+    component: Userprofile
+  },
+  {
+    path: '/resetpassword',
+    component: Resetpassword
+  },
+  {
+    path: '/forgotpassword',
+    component: Forgotpassword
+  },
+  {
+    path: '/resetpassword_forgot',
+    component: ResetpasswordForgot
     path: '/intrest',
     component: Intrest
   }

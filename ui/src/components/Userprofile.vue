@@ -1,12 +1,13 @@
 <template>
-    <div id="home_container">
+    <div id="profile_container">
         <header>
             <img id="logo" src=../assets/logoThin.png alt="logo">
-            <button class="signUp" v-on:click="jumpSign">Sign up</button>
-            <button class="logIn" v-on:click="jumpLog">Log in</button>
         </header>
         <main>
             <img id="logo" src=../assets/logoThin.png alt="logo">
+            <button class="resetPassword" v-on:click="jumpResetpassword">Reset PASSWORD</button>
+            <button class="cart" v-on:click="jumpMycart">MY CART</button>
+            <button class="address" v-on:click="jumpAddressbook">ADDRESS BOOK</button>
         </main>
         <footer></footer>
     </div>
@@ -15,8 +16,8 @@
 <script>
 export default {
   methods: {
-    jumpSign () {
-      this.$router.push('Changepassword')
+    jumpResetpassword () {
+      this.$router.push('/resetpassword')
     },
     jumpLog () {
       this.$router.push('Login')
@@ -29,7 +30,7 @@ export default {
 *{
     font-family: 'segUi';
 }
-#home_container {
+#profile_container {
     background-color: #d1dbda;
     height: 100%;
 }

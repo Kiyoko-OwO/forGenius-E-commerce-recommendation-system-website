@@ -1,19 +1,19 @@
 <template>
-    <div class="login_container">
+    <div class="signup_container">
         <img class="logo" src=../assets/2.png alt="logo">
-        <div class="login_box">
+        <div class="signup_box">
             <h1>REGISTER</h1>
-        <el-form :model="loginForm" :rules="signupRules" label-position="left" label-width="225px" class="login_form">
-            <el-form-item label="USERNAME"  class="username_change" prop="username">
-              <el-input v-model="loginForm.username" placeholder="6-12 characters">
+        <el-form :model="signupForm" :rules="signupRules" label-position="left" label-width="225px" class="signup_form">
+            <el-form-item label="USERNAME"  class="email_change" prop="username">
+              <el-input v-model="signupForm.username" placeholder="6-12 characters">
               </el-input>
         </el-form-item>
             <el-form-item label="EMAIL ADDRESS"  class="username_change" prop="email">
-              <el-input v-model="loginForm.email" placeholder="contains “@” and end with “.com”">
+              <el-input v-model="signupForm.email" placeholder="contains “@” and end with “.com”">
               </el-input>
         </el-form-item>
             <el-form-item label="PASSWORD" class="password_change" prop="password">
-              <el-input v-model="loginForm.password" type = "password" placeholder="6-12 characters contain uc,lc and number">
+              <el-input v-model="signupForm.password" type = "password" placeholder="6-12 characters contain uc,lc and number">
               </el-input>
         </el-form-item>
         </el-form>
@@ -28,7 +28,7 @@
 export default {
   data () {
     var checkEmail = (rule, value, callback) => {
-      const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
+      const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+.com/
       if (!value) {
         return callback(new Error('email address cannot be empty'))
       }
@@ -54,12 +54,12 @@ export default {
         if (mailReg.test(value)) {
           callback()
         } else {
-          callback(new Error('Invalid email'))
+          callback(new Error('Invalid password'))
         }
       }, 100)
     }
     return {
-      loginForm: {
+      signupForm: {
         username: '',
         email: '',
         password: ''
@@ -73,7 +73,7 @@ export default {
           { validator: checkUsername, trigger: 'blur' }
         ],
         password: [
-          { min: 6, max: 12, message: 'the username should be 6-12 characters', trigger: 'blur' },
+          { min: 6, max: 12, message: 'the password should be 6-12 characters', trigger: 'blur' },
           { validator: checkPassword, trigger: 'blur' }
         ]
       }
@@ -93,20 +93,12 @@ h1{
     font-family: 'segUi';
     letter-spacing:.2em;
 }
-.forget{
-    position: absolute;
-    left: 66%;
-    bottom:37%;
-    color:black;
-    transform: translate(-50%,0%);
-    font-size: 15px;
-    letter-spacing:.2em;
-}
+
 .login{
     position: absolute;
     left: 73%;
     bottom:10%;
-    color:black;
+    color:rgb(0, 0, 0);
     transform: translate(-50%,0%);
     font-size: 15px;
     letter-spacing:.2em;
@@ -133,11 +125,11 @@ h1{
     letter-spacing:10px;
     padding-left: 30px;
 }
-.login_container {
+.signup_container {
     background-color: #d1dbda;
     height: 100%;
 }
-.login_box{
+.signup_box{
     background-color:#e7eae8;
     height: 425px;
     width: 750px;
@@ -148,12 +140,13 @@ h1{
     transform: translate(-50%,-50%);
 }
 .logo{
-    height: 35%;
-    position: absolute;
-    right: 55%;
-    top:-7.5%;
+        height: 35%;
+        width: 20%;
+        position: absolute;
+        right: 55%;
+        top:-7.5%;
 }
-.login_form{
+.signup_form{
     width: 530px;
     position: absolute;
     border-radius: 80px;
@@ -161,16 +154,21 @@ h1{
     left: 15%;
 }
 .username{
-    border-radius: 40px;
+      border-radius: 40px;
 }
 .email{
-    border-radius: 30px;
+      border-radius: 30px;
 }
 
-.login_form /deep/.timr.el-form .el-form-item__error {
-    top: 30%;
-    right: 25% !important;
-    left: unset;
+.signup_form /deep/.timr.el-form .el-form-item__error {
+  top: 30%;
+  right: 25% !important;
+  left: unset;
+}
+.email_change /deep/ .el-form-item__label{
+    font-family: 'segUi';
+    letter-spacing:.1em;
+    font-size: 18px;
 }
 .username_change /deep/ .el-form-item__label{
     font-family: 'segUi';

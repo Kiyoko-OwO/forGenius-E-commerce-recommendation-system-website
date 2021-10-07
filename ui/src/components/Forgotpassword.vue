@@ -1,22 +1,15 @@
 <template>
-    <div class="login_container">
+    <div class="fogot_container">
         <img class="logo" src=../assets/2.png alt="logo">
-        <div class="login_box">
-            <h1>LOGIN</h1>
-        <el-form :model="loginForm" :rules="loginRules" label-position="left" label-width="225px" class="login_form">
+        <div class="fogot_box">
+            <h1>FORGOT&nbsp;PASSWORD</h1>
+        <el-form :model="forgotForm" :rules="forgotRules" label-position="left" label-width="225px" class="forgot_form">
             <el-form-item label="EMAIL ADDRESS"  class="email_change" prop="email">
-              <el-input v-model="loginForm.email" placeholder="contains “@” and end with “.com”">
-              </el-input>
-        </el-form-item>
-            <el-form-item label="PASSWORD" class="password_change" prop="password">
-              <el-input v-model="loginForm.password" type = "password">
+              <el-input v-model="forgotForm.email" placeholder="contains “@” and end with “.com”">
               </el-input>
         </el-form-item>
         </el-form>
-        <a  text-decoration:underline href="#/forgotpassword" class="forget">FORGET MY PASSWORD</a>
-        <el-button class='submit'>SUBMIT</el-button>
-        <a href="#/signup" text-decoration:underline class="signup">SIGN UP</a>
-        <a text-decoration:underline class="signup_1">DON'T HAVE AN ACCOUNT YET? PLEASE</a>
+        <el-button class='send'>SEND CODE</el-button>
         </div>
     </div>
 </template>
@@ -37,22 +30,13 @@ export default {
         }
       }, 100)
     }
-    var checkPassword = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('password cannot be empty'))
-      }
-    }
     return {
-      loginForm: {
-        email: '',
-        password: ''
+      forgotForm: {
+        email: ''
       },
-      loginRules: {
+      forgotRules: {
         email: [
           { validator: checkEmail, trigger: 'blur' }
-        ],
-        password: [
-          { validator: checkPassword, trigger: 'blur' }
         ]
       }
     }
@@ -71,39 +55,13 @@ h1{
     font-family: 'segUi';
     letter-spacing:.2em;
 }
-.forget{
-    position: absolute;
-    left: 66%;
-    bottom:37%;
-    color:black;
-    transform: translate(-50%,0%);
-    font-size: 15px;
-    letter-spacing:.2em;
-}
-.signup{
-    position: absolute;
-    left: 77.5%;
-    bottom:10%;
-    color:black;
-    transform: translate(-50%,0%);
-    font-size: 15px;
-    letter-spacing:.2em;
-}
-.signup_1{
-    position: absolute;
-    left: 45%;
-    bottom:10%;
-    color:black;
-    transform: translate(-50%,0%);
-    font-size: 15px;
-    letter-spacing:.2em;
-}
-.submit{
+
+.send{
     position: absolute;
     left:50%;
     bottom:12%;
     height:50px;
-    width:200px;
+    width:240px;
     transform: translate(-50%,-50%);
     border-radius: 10px;
     background: #786662;
@@ -111,11 +69,11 @@ h1{
     letter-spacing:10px;
     padding-left: 30px;
 }
-.login_container {
+.fogot_container {
     background-color: #d1dbda;
     height: 100%;
 }
-.login_box{
+.fogot_box{
     background-color:#e7eae8;
     height: 425px;
     width: 750px;
@@ -132,11 +90,11 @@ h1{
         right: 55%;
         top:-7.5%;
 }
-.login_form{
+.forgot_form{
     width: 530px;
     position: absolute;
     border-radius: 80px;
-    top: 30%;
+    top: 37%;
     left: 15%;
 }
 .username{
@@ -145,15 +103,19 @@ h1{
 .email{
       border-radius: 30px;
 }
+
+.forgot_form /deep/.timr.el-form .el-form-item__error {
+  top: 30%;
+  right: 25% !important;
+  left: unset;
+}
 .email_change /deep/ .el-form-item__label{
     font-family: 'segUi';
     letter-spacing:.1em;
     font-size: 18px;
 }
-.password_change /deep/ .el-form-item__label{
-    font-family: 'segUi';
-    letter-spacing:.1em;
-    font-size: 18px;
+.el-form-item{
+   margin-bottom:15px
 }
 </style>
 

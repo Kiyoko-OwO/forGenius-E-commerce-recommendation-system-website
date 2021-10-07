@@ -148,11 +148,10 @@ h1{
     transform: translate(-50%,-50%);
 }
 .logo{
-        height: 35%;
-        width: 20%;
-        position: absolute;
-        right: 55%;
-        top:-7.5%;
+    height: 35%;
+    position: absolute;
+    right: 55%;
+    top:-7.5%;
 }
 .login_form{
     width: 530px;
@@ -162,16 +161,16 @@ h1{
     left: 15%;
 }
 .username{
-      border-radius: 40px;
+    border-radius: 40px;
 }
 .email{
-      border-radius: 30px;
+    border-radius: 30px;
 }
 
 .login_form /deep/.timr.el-form .el-form-item__error {
-  top: 30%;
-  right: 25% !important;
-  left: unset;
+    top: 30%;
+    right: 25% !important;
+    left: unset;
 }
 .username_change /deep/ .el-form-item__label{
     font-family: 'segUi';

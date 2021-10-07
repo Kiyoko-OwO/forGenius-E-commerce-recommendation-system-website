@@ -5,15 +5,15 @@
             <h1>REGISTER</h1>
         <el-form :model="loginForm" :rules="signupRules" label-position="left" label-width="225px" class="login_form">
             <el-form-item label="USERNAME"  class="username_change" prop="username">
-              <el-input v-model="loginForm.username">
+              <el-input v-model="loginForm.username" placeholder="6-12 characters">
               </el-input>
         </el-form-item>
             <el-form-item label="EMAIL ADDRESS"  class="username_change" prop="email">
-              <el-input v-model="loginForm.email">
+              <el-input v-model="loginForm.email" placeholder="contains “@” and end with “.com”">
               </el-input>
         </el-form-item>
-            <el-form-item label="PASSWORD" class="password_change">
-              <el-input v-model="loginForm.password" type = "password" prop="password">
+            <el-form-item label="PASSWORD" class="password_change" prop="password">
+              <el-input v-model="loginForm.password" type = "password" placeholder="6-12 characters contain uc,lc and number">
               </el-input>
         </el-form-item>
         </el-form>
@@ -42,17 +42,21 @@ export default {
     }
     var checkUsername = (rule, value, callback) => {
       if (!value) {
-        return callback(new Error('email address cannot be empty'))
+        return callback(new Error('username cannot be empty'))
       }
     }
     var checkPassword = (rule, value, callback) => {
-      const passwordreg = /(?![A-Z]*$)(?![a-z]*$)(?![0-9]*$)(?![^a-zA-Z0-9]*$)/
-      console.log(passwordreg.test(value))
-      if (!passwordreg.test(value)) {
-        callback(new Error('123'))
-      } else {
-        callback()
+      const mailReg = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])/
+      if (!value) {
+        return callback(new Error('password cannot be empty'))
       }
+      setTimeout(() => {
+        if (mailReg.test(value)) {
+          callback()
+        } else {
+          callback(new Error('Invalid email'))
+        }
+      }, 100)
     }
     return {
       loginForm: {
@@ -69,6 +73,7 @@ export default {
           { validator: checkUsername, trigger: 'blur' }
         ],
         password: [
+          { min: 6, max: 12, message: 'the username should be 6-12 characters', trigger: 'blur' },
           { validator: checkPassword, trigger: 'blur' }
         ]
       }

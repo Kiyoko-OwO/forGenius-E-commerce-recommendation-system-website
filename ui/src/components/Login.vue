@@ -3,12 +3,12 @@
         <img class="logo" src=../assets/2.png alt="logo">
         <div class="login_box">
             <h1>LOGIN</h1>
-        <el-form model="loginForm" label-position="left" label-width="225px" class="login_form">
-            <el-form-item label="EMAIL ADDRESS"  class="username_change">
-              <el-input v-model="loginForm.email">
+        <el-form :model="loginForm" :rules="loginRules" label-position="left" label-width="225px" class="login_form">
+            <el-form-item label="EMAIL ADDRESS"  class="username_change" prop="email">
+              <el-input v-model="loginForm.email" placeholder="contains “@” and end with “.com”">
               </el-input>
         </el-form-item>
-            <el-form-item label="PASSWORD" class="password_change">
+            <el-form-item label="PASSWORD" class="password_change" prop="password">
               <el-input v-model="loginForm.password" type = "password">
               </el-input>
         </el-form-item>
@@ -24,10 +24,36 @@
 <script>
 export default {
   data () {
+    var checkEmail = (rule, value, callback) => {
+      const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
+      if (!value) {
+        return callback(new Error('email address cannot be empty'))
+      }
+      setTimeout(() => {
+        if (mailReg.test(value)) {
+          callback()
+        } else {
+          callback(new Error('Please enter the correct email format'))
+        }
+      }, 100)
+    }
+    var checkPassword = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('password cannot be empty'))
+      }
+    }
     return {
       loginForm: {
         email: '',
         password: ''
+      },
+      loginRules: {
+        email: [
+          { validator: checkEmail, trigger: 'blur' }
+        ],
+        password: [
+          { validator: checkPassword, trigger: 'blur' }
+        ]
       }
     }
   }

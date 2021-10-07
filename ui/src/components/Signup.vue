@@ -1,6 +1,6 @@
 <template>
     <div class="login_container">
-        <img class="logo" src=../assets/2.png alt="logo">
+        <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpHome">
         <div class="login_box">
             <h1>REGISTER</h1>
         <el-form :model="loginForm" :rules="signupRules" label-position="left" label-width="225px" class="login_form">
@@ -78,6 +78,11 @@ export default {
         ]
       }
     }
+  },
+  methods: {
+    jumpHome () {
+      this.$router.push('Home')
+    }
   }
 }
 </script>
@@ -152,6 +157,7 @@ h1{
     position: absolute;
     right: 55%;
     top:-7.5%;
+    cursor: pointer;
 }
 .login_form{
     width: 530px;

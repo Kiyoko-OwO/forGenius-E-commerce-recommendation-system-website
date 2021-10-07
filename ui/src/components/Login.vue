@@ -1,6 +1,6 @@
 <template>
     <div class="login_container">
-        <img class="logo" src=../assets/2.png alt="logo">
+        <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpHome">
         <div class="login_box">
             <h1>LOGIN</h1>
         <el-form :model="loginForm" :rules="loginRules" label-position="left" label-width="225px" class="login_form">
@@ -55,6 +55,11 @@ export default {
           { validator: checkPassword, trigger: 'blur' }
         ]
       }
+    }
+  },
+  methods: {
+    jumpHome () {
+      this.$router.push('Home')
     }
   }
 }
@@ -130,6 +135,7 @@ h1{
     position: absolute;
     right: 55%;
     top:-7.5%;
+    cursor: pointer;
 }
 .login_form{
     width: 530px;

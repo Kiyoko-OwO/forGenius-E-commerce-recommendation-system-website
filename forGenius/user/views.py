@@ -126,16 +126,24 @@ def add_address_book(request):
     response = HttpResponse()
     if request.method == "POST":
         try:
-            #token = request.GET['token']
-            email = request.GET['email']
-            user_address = request.GET['address']
+            token = request.GET['token']
+            email = auth.token_to_email(token)
+            name = request.GET['name']
+            address = request.GET['address']
             phone_number = request.GET['phone_number']
         except MultiValueDictKeyError:
             response.status_code = 400
             return response
-        #except InputError: # invalid error
-        #    pass             
-        address.add_address_book(email, user_address, phone_number)
+        except InputError as e:
+            response.status_code = 400
+            response.content = e
+            return response
+        try:
+            address.add_address_book(email, name, address, phone_number)
+        except InputError as e:
+            response.status_code = 400
+            response.content = e
+            return response
         response.status_code = 200
         return response
     response.status_code = 405
@@ -150,9 +158,16 @@ def view_address_book(request):
         except MultiValueDictKeyError:
             response.status_code = 400
             return response
-        #except InputError: # invalid error
-        #    pass             
-        address.view_address_book(email)
+        except InputError as e:
+            response.status_code = 400
+            response.content = e
+            return response
+        try:
+            address.view_address_book(email)
+        except InputError as e:
+            response.status_code = 400
+            response.content = e
+            return response
         response.status_code = 200
         return response
     response.status_code = 405

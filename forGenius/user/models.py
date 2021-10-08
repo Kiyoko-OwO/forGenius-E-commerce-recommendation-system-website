@@ -26,6 +26,7 @@ class Interest(models.Model):
 class Address_book(models.Model):
     user_email = models.ForeignKey(User, on_delete=CASCADE)
     address_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255)
     address = models.CharField(max_length=255)
     phone_number = models.IntegerField(validators=[MinValueValidator(1)])
 

@@ -68,6 +68,7 @@ export default {
           console.log(this.loginForm)
         }
       })
+    },
     jumpHome () {
       this.$router.push('Home')
     }
@@ -88,7 +89,7 @@ h1{
 }
 .block {
   width: 1000px;
-  height: 60px;
+  height: 100px;
 }
 .forget{
     position: absolute;

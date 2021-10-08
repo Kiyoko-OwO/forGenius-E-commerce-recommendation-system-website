@@ -1,16 +1,13 @@
 from user.models import User
+from user.errors import InputError
 import jwt
 import time
 import random
 import user.email_robot as email_robot
 
-class InputError(Exception):
-    code = 400
-    message = 'InputError'
-
 TOKEN_DB = list()
-PRIVATE_KEY = 'nLAghlDB8Qec4d6LD5dhV2QvVs3vpDSY'
 RESETCODE_DB = dict()
+PRIVATE_KEY = 'nLAghlDB8Qec4d6LD5dhV2QvVs3vpDSY'
 
 def auth_login(email, password):
     """ 

@@ -1,8 +1,8 @@
-from json import encoder
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.utils.datastructures import MultiValueDictKeyError
 from user.errors import InputError
+import json
 import user.auth as auth
 import user.address as address
 
@@ -11,10 +11,15 @@ def register(request):
     response = HttpResponse()
     if request.method == "POST":
         try:
-            email = request.GET['email']
-            name = request.GET['name']
-            password = request.GET['password']
-        except MultiValueDictKeyError:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            response.status_code = 400
+            return response
+        try:
+            email = data["email"]
+            name = data["name"]
+            password = data["password"]
+        except KeyError:
             response.status_code = 400
             return response
         try:
@@ -32,9 +37,14 @@ def login(request):
     response = HttpResponse()
     if request.method == "POST":
         try:
-            email = request.GET['email']
-            password = request.GET['password']
-        except MultiValueDictKeyError:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            response.status_code = 400
+            return response
+        try:
+            email = data["email"]
+            password = data["password"]
+        except KeyError:
             response.status_code = 400
             return response
         try:
@@ -52,8 +62,13 @@ def logout(request):
     response = HttpResponse()
     if request.method == "POST":
         try:
-            token = request.GET['token']
-        except MultiValueDictKeyError:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            response.status_code = 400
+            return response
+        try:
+            token = data["token"]
+        except KeyError:
             response.status_code = 400
             return response
         auth.auth_logout(token)
@@ -66,10 +81,15 @@ def change_password(request):
     response = HttpResponse()
     if request.method == "POST":
         try:
-            token = request.GET['token']
-            old_password = request.GET['old_password']
-            new_password = request.GET['new_password']
-        except MultiValueDictKeyError:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            response.status_code = 400
+            return response
+        try:
+            token = data["token"]
+            old_password = data["old_password"]
+            new_password = data["new_password"]
+        except KeyError:
             response.status_code = 400
             return response
         try:
@@ -87,8 +107,13 @@ def send_reset_code(request):
     response = HttpResponse()
     if request.method == "POST":
         try:
-            email = request.GET['email']
-        except MultiValueDictKeyError:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            response.status_code = 400
+            return response
+        try:
+            email = data["email"]
+        except KeyError:
             response.status_code = 400
             return response
         try:
@@ -106,9 +131,14 @@ def reset_password(request):
     response = HttpResponse()
     if request.method == "POST":
         try:
-            reset_code = request.GET['reset_code']
-            new_password = request.GET['new_password']
-        except MultiValueDictKeyError:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            response.status_code = 400
+            return response
+        try:
+            reset_code = data["reset_code"]
+            new_password = data["new_password"]
+        except KeyError:
             response.status_code = 400
             return response
         try:
@@ -126,12 +156,17 @@ def add_address_book(request):
     response = HttpResponse()
     if request.method == "POST":
         try:
-            token = request.GET['token']
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            response.status_code = 400
+            return response
+        try:
+            token = data["token"]
             email = auth.token_to_email(token)
-            name = request.GET['name']
-            address = request.GET['address']
-            phone_number = request.GET['phone_number']
-        except MultiValueDictKeyError:
+            name = data['name']
+            address = data['address']
+            phone_number = data['phone_number']
+        except KeyError:
             response.status_code = 400
             return response
         except InputError as e:
@@ -153,9 +188,14 @@ def view_address_book(request):
     response = HttpResponse()
     if request.method == "POST":
         try:
-            token = request.GET['token']
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            response.status_code = 400
+            return response
+        try:
+            token = data["token"]
             email = auth.token_to_email(token)
-        except MultiValueDictKeyError:
+        except KeyError:
             response.status_code = 400
             return response
         except InputError as e:

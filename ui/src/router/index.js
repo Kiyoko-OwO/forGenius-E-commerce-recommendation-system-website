@@ -8,6 +8,7 @@ import Resetpassword from '../components/Resetpassword.vue'
 import Forgotpassword from '../components/Forgotpassword.vue'
 import ResetpasswordForgot from '../components/Resetpassword_forgot.vue'
 import Intrest from '../components/Intrest.vue'
+import Product from '../components/Product.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -42,6 +43,10 @@ const routes = [
   {
     path: '/intrest',
     component: Intrest
+  },
+  {
+    path: '/product',
+    component: Product
   }
 ]
 

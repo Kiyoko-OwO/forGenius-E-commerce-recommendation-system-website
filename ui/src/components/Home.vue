@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     jumpSign () {
-      this.$router.push('Changepassword')
+      this.$router.push('Signup')
     },
     jumpLog () {
       this.$router.push('Login')

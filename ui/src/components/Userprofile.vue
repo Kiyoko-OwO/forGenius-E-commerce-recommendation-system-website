@@ -19,8 +19,11 @@ export default {
     jumpResetpassword () {
       this.$router.push('/resetpassword')
     },
-    jumpLog () {
-      this.$router.push('Login')
+    jumpMycart () {
+      this.$router.push('/cart')
+    },
+    jumpAddressbook () {
+      this.$router.push('/address')
     }
   }
 }

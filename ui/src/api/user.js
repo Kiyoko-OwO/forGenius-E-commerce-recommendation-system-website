@@ -7,3 +7,10 @@ export const login = data => {
       data
     })
   }
+export const signup = data => {
+    return request({
+      method: 'POST',
+      url: 'signup',
+      data
+    })
+  } 

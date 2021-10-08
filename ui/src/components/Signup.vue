@@ -16,8 +16,11 @@
               <el-input v-model="signupForm.password" type = "password" placeholder="6-12 characters contain uc,lc and number">
               </el-input>
         </el-form-item>
-        </el-form>
+        <div class="block"></div>
+        <el-form-item>
         <el-button class='submit' @click="signup">SUBMIT</el-button>
+        </el-form-item>
+        </el-form>
         <a href="#/login" text-decoration:underline class="login">LOG IN</a>
         <a text-decoration:underline class="login_1">ALREADY REGISTERED, PLEASE</a>
         </div>
@@ -25,6 +28,8 @@
 </template>
 
 <script>
+import {signup } from '../api/user'
+
 export default {
   data () {
     var checkEmail = (rule, value, callback) => {
@@ -81,8 +86,13 @@ export default {
   },
   methods: {
     signup () {
-      this.$refs.signupFormRef.validate(valid => {
-        console.log(valid)
+      this.$refs.signupFormRef.validate(async valid => {
+        if (valid) {
+          console.log(this.signupForm);
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
       })
     },
     jumpHome () {
@@ -102,6 +112,10 @@ h1{
     font-weight:normal;
     font-family: 'segUi';
     letter-spacing:.2em;
+}
+
+.block{
+    height: 70px;
 }
 
 .login{
@@ -124,7 +138,7 @@ h1{
 }
 .submit{
     position: absolute;
-    left:50%;
+    left:15%;
     bottom:12%;
     height:50px;
     width:200px;

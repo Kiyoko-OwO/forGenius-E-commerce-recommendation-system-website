@@ -46,7 +46,7 @@ export default {
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.numberValidateForm.id = parseInt(this.product.id);
+            this.numberValidateForm.id = (this.product.id);
             console.log(this.numberValidateForm);
           } else {
             console.log('error submit!!');
@@ -69,7 +69,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less" scoped>
 img {
     height: 100px;
     width: 100px;

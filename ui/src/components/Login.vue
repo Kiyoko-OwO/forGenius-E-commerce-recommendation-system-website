@@ -49,9 +49,8 @@ export default {
     }
     return {
       loginForm: {
-        // email: 'admin',
-        username: 'admin',
-        password: '123456'
+        email: '',
+        password: ''
       },
       loginRules: {
         email: [
@@ -64,28 +63,23 @@ export default {
     }
   },
   methods: {
-    login () {
-      this.$refs.loginFormRef.validate(valid => {
-        console.log(valid)
-        if (valid) {
-          console.log(this.loginForm)
-        }
-      })
-    },
     jumpHome () {
       this.$router.push('Home')
     },
-    async onSubmit () {
-      console.log(this.loginForm)
-      const { data: res } = await login(this.loginForm)
-      console.log(res)
-      if (res.meta.status !== 200) {
-          return this.$message.error('Fail')
-        } else {
-          this.$message.success('Success')
-          window.sessionStorage.setItem('token', res.data.token)
-          this.$router.push('/home')
-        }
+    onSubmit () {
+      this.$refs.loginFormRef.validate(async valid => {
+        if(!valid) return;
+        console.log(this.loginForm)
+        const { data: res } = await login(this.loginForm)
+        console.log(res)
+        if (res.meta.status !== 200) {
+            return this.$message.error('Fail')
+          } else {
+            this.$message.success('Success')
+            window.sessionStorage.setItem('token', res.data.token)
+            this.$router.push('/home')
+          }
+      })
     }
   }
 }
@@ -162,6 +156,7 @@ h1{
 }
 .logo{
     height: 35%;
+    width: 40;
     position: absolute;
     right: 55%;
     top:-7.5%;

@@ -214,7 +214,6 @@ def view_address_book(request):
             'data' : data,
             'meta' : meta
         }
-        print(jsons)
         return JsonResponse(jsons)
     response.status_code = 405
     return response
@@ -250,7 +249,38 @@ def delete_address_book(request):
     response.status_code = 405
     return response
 
-
+def edit_address_book(request):
+    response = HttpResponse()
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            response.status_code = 400
+            return response
+        try:
+            token = data["token"]
+            email = auth.token_to_email(token)
+            name = data['name']
+            address_name = data['address']
+            phone_number = data['phone_number']
+            address_id = data['address_id']
+        except KeyError:
+            response.status_code = 400
+            return response
+        except InputError as e:
+            response.status_code = 400
+            response.content = e
+            return response
+        try:
+            address.edit_address_book(email, name, address_name, phone_number, address_id)
+        except InputError as e:
+            response.status_code = 400
+            response.content = e
+            return response
+        response.status_code = 200
+        return response
+    response.status_code = 405
+    return response
 
 def test():
     response = HttpResponse()

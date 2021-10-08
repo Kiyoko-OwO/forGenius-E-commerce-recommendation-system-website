@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.utils.datastructures import MultiValueDictKeyError
 from user.errors import InputError
 import user.auth as auth
+import user.address as address
 
 # Create your views here.
 def register(request):
@@ -116,6 +117,42 @@ def reset_password(request):
             response.status_code = 400
             response.content = e
             return response
+        response.status_code = 200
+        return response
+    response.status_code = 405
+    return response
+
+def add_address_book(request):
+    response = HttpResponse()
+    if request.method == "POST":
+        try:
+            #token = request.GET['token']
+            email = request.GET['email']
+            user_address = request.GET['address']
+            phone_number = request.GET['phone_number']
+        except MultiValueDictKeyError:
+            response.status_code = 400
+            return response
+        #except InputError: # invalid error
+        #    pass             
+        address.add_address_book(email, user_address, phone_number)
+        response.status_code = 200
+        return response
+    response.status_code = 405
+    return response
+
+def view_address_book(request):
+    response = HttpResponse()
+    if request.method == "POST":
+        try:
+            token = request.GET['token']
+            email = auth.token_to_email(token)
+        except MultiValueDictKeyError:
+            response.status_code = 400
+            return response
+        #except InputError: # invalid error
+        #    pass             
+        address.view_address_book(email)
         response.status_code = 200
         return response
     response.status_code = 405

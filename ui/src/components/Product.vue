@@ -16,6 +16,8 @@
         <el-input type="quantity" v-model.number="numberValidateForm.quantity" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item>
+          <i class="el-icon-remove-outline" @click='deleteOne'></i>
+          <i class="el-icon-circle-plus-outline" @click='addOne'></i>
           <el-button type="primary" @click="submitForm('numberValidateForm')">Add Cart</el-button>
           <el-button @click="resetForm('numberValidateForm')">Reset</el-button>
         </el-form-item>
@@ -36,7 +38,7 @@ export default {
             },
             numberValidateForm: {
               id:'',
-              quantity: '',
+              quantity: 1,
             }
         }
     },
@@ -54,6 +56,14 @@ export default {
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
+      },
+      deleteOne () {
+        if (this.numberValidateForm.quantity >= 1) {
+          this.numberValidateForm.quantity = this.numberValidateForm.quantity - 1;
+        }
+      },
+      addOne () {
+        this.numberValidateForm.quantity = this.numberValidateForm.quantity + 1;
       }
     }
 }

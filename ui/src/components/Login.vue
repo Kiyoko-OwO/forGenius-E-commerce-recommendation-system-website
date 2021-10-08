@@ -14,7 +14,7 @@
         </el-form-item>
         <div class="block"></div>
         <el-form-item>
-        <el-button class='submit' @click="login">SUBMIT</el-button>
+        <el-button class='submit' @click="onSubmit">SUBMIT</el-button>
         </el-form-item>
         </el-form>
         <a  text-decoration:underline href="#/forgotpassword" class="forget">FORGET MY PASSWORD</a>
@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import { login } from '../api/user'
+
 export default {
   data () {
     var checkEmail = (rule, value, callback) => {
@@ -47,8 +49,9 @@ export default {
     }
     return {
       loginForm: {
-        email: '',
-        password: ''
+        // email: 'admin',
+        username: 'admin',
+        password: '123456'
       },
       loginRules: {
         email: [
@@ -71,6 +74,18 @@ export default {
     },
     jumpHome () {
       this.$router.push('Home')
+    },
+    async onSubmit () {
+      console.log(this.loginForm)
+      const { data: res } = await login(this.loginForm)
+      console.log(res)
+      if (res.meta.status !== 200) {
+          return this.$message.error('Fail')
+        } else {
+          this.$message.success('Success')
+          window.sessionStorage.setItem('token', res.data.token)
+          this.$router.push('/home')
+        }
     }
   }
 }

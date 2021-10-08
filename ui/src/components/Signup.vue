@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import {signup } from '../api/user'
+//import {signup } from '../api/user'
 
 export default {
   data () {
@@ -48,6 +48,8 @@ export default {
     var checkUsername = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('username cannot be empty'))
+      } else {
+        callback()
       }
     }
     var checkPassword = (rule, value, callback) => {
@@ -115,7 +117,7 @@ h1{
 }
 
 .block{
-    height: 70px;
+    height: 80px;
 }
 
 .login{

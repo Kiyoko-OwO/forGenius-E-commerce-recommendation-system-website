@@ -69,7 +69,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less" scoped>
 img {
     height: 100px;
     width: 100px;

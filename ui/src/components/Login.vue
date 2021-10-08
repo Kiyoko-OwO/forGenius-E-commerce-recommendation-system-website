@@ -3,19 +3,19 @@
         <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpHome">
         <div class="login_box">
             <h1>LOGIN</h1>
-        <el-form ref="loginFormRef" :model="loginForm" :rules="loginRules" label-position="left" label-width="225px" class="login_form">
+        <el-form ref="loginForm" :model="loginForm" :rules="loginRules" label-position="left" label-width="225px" class="login_form">
             <el-form-item label="EMAIL ADDRESS"  class="email_change" prop="email">
               <el-input v-model="loginForm.email" placeholder="contains “@” and end with “.com”">
               </el-input>
-        </el-form-item>
+            </el-form-item>
             <el-form-item label="PASSWORD" class="password_change" prop="password">
               <el-input v-model="loginForm.password" type = "password">
               </el-input>
-        </el-form-item>
-        <div class="block"></div>
-        <el-form-item>
-        <el-button class='submit' @click="onSubmit">SUBMIT</el-button>
-        </el-form-item>
+            </el-form-item>
+            <div class="block"></div>
+            <el-form-item>
+              <el-button type="primary" class='submit' @click="submitForm('loginForm')">SUBMIT</el-button>
+            </el-form-item>
         </el-form>
         <a  text-decoration:underline href="#/forgotpassword" class="forget">FORGET MY PASSWORD</a>
         <a href="#/signup" text-decoration:underline class="signup">SIGN UP</a>
@@ -25,68 +25,56 @@
 </template>
 
 <script>
-import { login } from '../api/user'
+//import { login } from '../api/user'
 
 export default {
   data () {
-    var checkEmail = (rule, value, callback) => {
-      const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+.com/
-      if (!value) {
-        return callback(new Error('email address cannot be empty'))
-      }
-      setTimeout(() => {
-        if (mailReg.test(value)) {
-          callback()
-        } else {
-          callback(new Error('Please enter the correct email format'))
-        }
-      }, 100)
-    }
-    var checkPassword = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('password cannot be empty'))
-      }
-    }
     return {
       loginForm: {
-        // email: 'admin',
-        username: 'admin',
-        password: '123456'
+        email: '',
+        password: ''
       },
       loginRules: {
         email: [
-          { validator: checkEmail, trigger: 'blur' }
+          { pattern: /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+.com/, message: 'please enter the correct email format', trigger: 'blur' },
+          { required: true, message: 'Email address cannot be empty', trigger: 'blur' }
         ],
         password: [
-          { validator: checkPassword, trigger: 'blur' }
+          { required: true, message: 'Pass cannot be empty', trigger: 'blur' }
         ]
       }
     }
   },
   methods: {
-    login () {
-      this.$refs.loginFormRef.validate(valid => {
-        console.log(valid)
-        if (valid) {
-          console.log(this.loginForm)
-        }
-      })
-    },
     jumpHome () {
       this.$router.push('Home')
     },
-    async onSubmit () {
-      console.log(this.loginForm)
-      const { data: res } = await login(this.loginForm)
-      console.log(res)
-      if (res.meta.status !== 200) {
-          return this.$message.error('Fail')
-        } else {
-          this.$message.success('Success')
-          window.sessionStorage.setItem('token', res.data.token)
-          this.$router.push('/home')
-        }
+    submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            console.log(this.loginForm);
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
     }
+    // onSubmit () {
+    //   this.$refs.loginFormRef.validate(async valid => {
+    //     if(!valid) return;
+    //     console.log(this.loginForm)
+    //     const { data: res } = await login(this.loginForm)
+    //     console.log(res)
+    //     if (res.meta.status !== 200) {
+    //         return this.$message.error('Fail')
+    //       } else {
+    //         this.$message.success('Success')
+    //         window.sessionStorage.setItem('token', res.data.token)
+    //         this.$router.push('/home')
+    //       }
+    //   })
+    // }
+    
   }
 }
 </script>
@@ -162,6 +150,7 @@ h1{
 }
 .logo{
     height: 35%;
+    width: 40;
     position: absolute;
     right: 55%;
     top:-7.5%;

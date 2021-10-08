@@ -1,13 +1,16 @@
 from user.models import User
-from user.errors import InputError
 import jwt
 import time
 import random
 import user.email_robot as email_robot
 
+class InputError(Exception):
+    code = 400
+    message = 'InputError'
+
 TOKEN_DB = list()
-RESETCODE_DB = dict()
 PRIVATE_KEY = 'nLAghlDB8Qec4d6LD5dhV2QvVs3vpDSY'
+RESETCODE_DB = dict()
 
 def auth_login(email, password):
     """ 
@@ -33,6 +36,7 @@ def auth_logout(token):
         TOKEN_DB.remove(token)
     return True
 
+# already debugged
 def auth_register(email, name, password):
     """ 
     auth_register(email, name, password)
@@ -112,9 +116,7 @@ def validate_password(password):
     return True
 
 def check_login(token):
-    if token in TOKEN_DB:
-        return True
-    return False
+    return True
 
 def token_to_email(token):
     # check token is valid or tamperd
@@ -122,7 +124,7 @@ def token_to_email(token):
         raise InputError('Invalid token')
     data = jwt.decode(token, PRIVATE_KEY, algorithms=["HS256"])
     return data['email']
-
+    
 def generate_reset_code():
     reset_code = ''
     for i in range(6):

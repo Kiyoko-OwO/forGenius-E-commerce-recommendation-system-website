@@ -1,5 +1,6 @@
 from user.models import User
 from user.errors import InputError
+import re
 import jwt
 import time
 import random
@@ -87,7 +88,11 @@ def auth_send_reset_code(email):
     email_robot.send_email(name, email, reset_code)
 
 def validate_email(email):
-    return True
+    # frontend should convert email to lower case
+    regex = r'\b[a-z0-9._%+-]+@[a-z0-9.-]+\.com\b'
+    if re.fullmatch(regex, email):
+        return True
+    return False
 
 def validate_name(name):
     if len(name) < 6 or len(name) > 12:

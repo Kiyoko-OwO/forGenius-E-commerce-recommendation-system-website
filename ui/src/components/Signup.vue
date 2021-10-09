@@ -1,11 +1,11 @@
 <template>
     <div class="signup_container">
-        <img class="logo" src=../assets/2.png alt="logo">
+        <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpHome">
         <div class="signup_box">
             <h1>REGISTER</h1>
         <el-form ref="signupFormRef" :model="signupForm" :rules="signupRules" label-position="left" label-width="225px" class="signup_form">
-            <el-form-item label="USERNAME"  class="email_change" prop="username">
-              <el-input v-model="signupForm.username" placeholder="6-12 characters">
+            <el-form-item label="USERNAME"  class="email_change" prop="name">
+              <el-input v-model="signupForm.name" placeholder="6-12 characters">
               </el-input>
         </el-form-item>
             <el-form-item label="EMAIL ADDRESS"  class="username_change" prop="email">
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-//import {signup } from '../api/user'
+import { signup } from '../api/user'
 
 export default {
   data () {
@@ -67,9 +67,9 @@ export default {
     }
     return {
       signupForm: {
-        username: '',
-        email: '',
-        password: ''
+        email: "first@first.com",
+	      name : "firstfirst",
+	      password: "First1111"
       },
       signupRules: {
         email: [
@@ -91,6 +91,11 @@ export default {
       this.$refs.signupFormRef.validate(async valid => {
         if (valid) {
           console.log(this.signupForm);
+          const res = await signup(this.signupForm);
+          console.log(res);
+          if (res.status == 200) {
+            alert ("Sucess");
+          }
         } else {
           console.log('error submit!!');
           return false;

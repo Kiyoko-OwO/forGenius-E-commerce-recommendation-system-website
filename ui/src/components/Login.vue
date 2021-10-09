@@ -25,14 +25,14 @@
 </template>
 
 <script>
-//import { login } from '../api/user'
+import { login } from '../api/user'
 
 export default {
   data () {
     return {
       loginForm: {
-        email: '',
-        password: ''
+        email: 'first@first.com',
+        password: 'First1111'
       },
       loginRules: {
         email: [
@@ -50,9 +50,15 @@ export default {
       this.$router.push('Home')
     },
     submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
+        this.$refs[formName].validate(async (valid) => {
           if (valid) {
             console.log(this.loginForm);
+            const res = await login(this.loginForm);
+            console.log(res);
+            if (res.status == 200) {
+              alert ("Sucess");
+              this.$router.push('userprofile')
+            }
           } else {
             console.log('error submit!!');
             return false;

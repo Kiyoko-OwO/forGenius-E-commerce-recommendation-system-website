@@ -11,7 +11,7 @@ class Product(models.Model):
     warranty = models.IntegerField(validators=[MinValueValidator(0)], default=0)
     delivery_date = models.DateField(blank = True, auto_now=False, auto_now_add=False)
     sales_data = models.IntegerField(validators=[MinValueValidator(0)], default=0)
-    amin_email = models.ForeignKey(Admin, on_delete=CASCADE)
+    admin_email = models.ForeignKey(Admin, on_delete=CASCADE)
 
 class Features(models.Model):
     product_id = models.ForeignKey(Product, on_delete=CASCADE)

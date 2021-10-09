@@ -21,6 +21,7 @@ def view_product_user(request):
             product_id = data["product_id"]
         except :
             response.status_code = 400
+            response.content = "format is wrong"
             return response
         try:
             data = products.product_userView(product_id)

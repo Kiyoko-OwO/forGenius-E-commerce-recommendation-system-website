@@ -1,6 +1,5 @@
 from user.models import Address_book, User
-from user.auth import InputError, validate_email as validate_email
-
+from user.auth import InputError
 
 def view_address_book(email):
     try:        

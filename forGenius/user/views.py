@@ -6,6 +6,8 @@ import json
 import user.auth as auth
 import user.address as address
 
+ADMIN_EMAIL = '3900forgenius@gmail.com'
+
 # Create your views here.
 def register(request):
     response = HttpResponse()
@@ -58,6 +60,8 @@ def login(request):
         data = {
             'token':token,
         }
+        if email == ADMIN_EMAIL:
+            return HttpResponse(json.dumps(data), content_type="application/json", status=255)
         return HttpResponse(json.dumps(data), content_type="application/json")
     response.status_code = 405
     return response

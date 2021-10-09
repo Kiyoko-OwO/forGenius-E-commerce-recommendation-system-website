@@ -23,13 +23,15 @@ def register(request):
             response.status_code = 400
             return response
         try:
-            auth.auth_register(email, name, password)
+            token = auth.auth_register(email, name, password)
         except InputError as e:
             response.status_code = 400
             response.content = e
             return response
-        response.status_code = 200
-        return response
+        data = {
+            'token':token,
+        }
+        return HttpResponse(json.dumps(data), content_type="application/json")
     response.status_code = 405
     return response
 
@@ -48,13 +50,15 @@ def login(request):
             response.status_code = 400
             return response
         try:
-            auth.auth_login(email, password)
+            token = auth.auth_login(email, password)
         except InputError as e:
             response.status_code = 400
             response.content = e
             return response
-        response.status_code = 200
-        return response
+        data = {
+            'token':token,
+        }
+        return HttpResponse(json.dumps(data), content_type="application/json")
     response.status_code = 405
     return response
 

@@ -60,7 +60,7 @@ def auth_register(email, name, password):
 
 def auth_change_password(token, old_password, new_password):
     email = token_to_email(token)
-    if (len(User.objects.get(pk=email).filter(password=old_password)) != 1):
+    if (len(User.objects.filter(pk=email).filter(password=old_password)) != 1):
         raise InputError('Incorrect old password')
     if not validate_password(new_password):
         raise InputError('Invalid new password')

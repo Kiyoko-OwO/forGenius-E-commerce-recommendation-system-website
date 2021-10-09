@@ -14,8 +14,8 @@ class Admin(models.Model):
     
 
 class Interest(models.Model):
-    user_email = models.ForeignKey(User, on_delete=CASCADE, primary_key=True)
-    interests = models.CharField(max_length=255, primary_key=True)
+    user_email = models.ForeignKey(User, on_delete=CASCADE)
+    interests = models.CharField(max_length=255)
 
     class Meta:
 
@@ -26,8 +26,9 @@ class Interest(models.Model):
 class Address_book(models.Model):
     user_email = models.ForeignKey(User, on_delete=CASCADE)
     address_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255)
     address = models.CharField(max_length=255)
-    phone_number = models.IntegerField(max_length=11, validators=[MinValueValidator(1)])
+    phone_number = models.IntegerField(validators=[MinValueValidator(1)])
 
 
 

@@ -168,7 +168,7 @@ def add_address_book(request):
             token = data["token"]
             email = auth.token_to_email(token)
             name = data['name']
-            address = data['address']
+            address_name = data['address']
             phone_number = data['phone_number']
         except KeyError:
             response.status_code = 400
@@ -178,7 +178,7 @@ def add_address_book(request):
             response.content = e
             return response
         try:
-            address.add_address_book(email, name, address, phone_number)
+            address.add_address_book(email, name, address_name, phone_number)
         except InputError as e:
             response.status_code = 400
             response.content = e
@@ -225,7 +225,7 @@ def view_address_book(request):
 
 def delete_address_book(request):
     response = HttpResponse()
-    if request.method == "POST":
+    if request.method == "DELETE":
         try:
             data = json.loads(request.body)
         except json.JSONDecodeError:

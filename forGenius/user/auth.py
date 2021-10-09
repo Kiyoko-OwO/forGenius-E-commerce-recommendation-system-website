@@ -85,11 +85,13 @@ def auth_send_reset_code(email):
         email_query = User.objects.get(pk=email)
     except User.DoesNotExist:
         raise InputError('Not registered yet, please sign up')
-    reset_code = RESETCODE_DB.get(email, default=None)
+    print("email:" + email)
+    reset_code = RESETCODE_DB.get(email)
     if reset_code is None:
         reset_code = generate_reset_code()
-    RESETCODE_DB.put(email, reset_code)
-    name = email_query.values()[0].get('user_name')
+    RESETCODE_DB[email] = reset_code
+    name = email_query.user_name
+    print("email:" + email + "\treset_code:" + reset_code)
     email_robot.send_email(name, email, reset_code)
 
 def validate_email(email):
@@ -138,12 +140,13 @@ def token_to_email(token):
 def generate_reset_code():
     reset_code = ''
     for i in range(6):
-        reset_code += str(random.choice([random.randrange(10), chr(random.randrange(97, 123))]))
+        reset_code += str(random.choice([random.randrange(10), chr(random.randrange(65, 91))]))
     return reset_code
 
 def reset_code_to_email(reset_code):
-    emails = list(RESETCODE_DB.keys())[list(RESETCODE_DB.values()).index(reset_code)]
-    if (len(emails) != 1):
+    try:
+        email = list(RESETCODE_DB.keys())[list(RESETCODE_DB.values()).index(reset_code)]
+    except ValueError:
         raise InputError('Invalid reset code')
-    RESETCODE_DB.pop(emails[0])
-    return emails[0]
+    RESETCODE_DB.pop(email)
+    return email

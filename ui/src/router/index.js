@@ -9,6 +9,8 @@ import Forgotpassword from '../components/Forgotpassword.vue'
 import ResetpasswordForgot from '../components/Resetpassword_forgot.vue'
 import Intrest from '../components/Intrest.vue'
 import Product from '../components/Product.vue'
+import AddressBook from '../components/AddressBook.vue'
+import Cart from '../components/Cart.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -47,6 +49,12 @@ const routes = [
   {
     path: '/product',
     component: Product
+  }, {
+    path: '/address',
+    component: AddressBook
+  }, {
+    path: '/cart',
+    component: Cart
   }
 ]
 

@@ -13,11 +13,11 @@
           { type: 'number', message: 'Quantity need to be number'}
           ]"
         >
-        <el-input type="quantity" v-model.number="numberValidateForm.quantity" autocomplete="off"></el-input>
+        <el-button class="el-icon-remove-outline" @click='deleteOne' circle></el-button>
+        <el-input class="quaBox" type="quantity" v-model.number="numberValidateForm.quantity" autocomplete="off"></el-input>
+        <el-button class="el-icon-circle-plus-outline" @click='addOne' circle></el-button>
         </el-form-item>
         <el-form-item>
-          <i class="el-icon-remove-outline" @click='deleteOne'></i>
-          <i class="el-icon-circle-plus-outline" @click='addOne'></i>
           <el-button type="primary" @click="submitForm('numberValidateForm')">Add Cart</el-button>
           <el-button @click="resetForm('numberValidateForm')">Reset</el-button>
         </el-form-item>
@@ -73,5 +73,14 @@ export default {
 img {
     height: 100px;
     width: 100px;
+}
+.el-icon-remove-outline {
+  cursor: pointer;
+}
+.el-icon-circle-plus-outline{
+  cursor: pointer;
+}
+.quaBox {
+  width: 40px;
 }
 </style>

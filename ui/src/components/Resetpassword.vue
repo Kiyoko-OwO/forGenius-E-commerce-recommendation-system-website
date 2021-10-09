@@ -19,11 +19,14 @@
 </template>
 
 <script>
+import { change_password } from '../api/user'
 export default {
   data () {
     var checkOldpassword = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('password cannot be empty'))
+      } else {
+         callback()
       }
     }
     var checkPassword = (rule, value, callback) => {
@@ -41,10 +44,11 @@ export default {
     }
     return {
       resetForm: {
-        oldpassword: '',
-        newpassword: ''
+        token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6I…A4OX0.UCVPylmykavZvK7mIdjOonvmL9ajF0Sc1jw3LdezRK0",
+        oldpassword: 'First1111',
+        newpassword: 'First2222'
       },
-      resetpasswordRole: {
+      resetpasswordRule: {
         oldpassword: [
           { min: 6, max: 12, message: 'the password should be 6-12 characters', trigger: 'blur' },
           { validator: checkOldpassword, trigger: 'blur' }
@@ -58,8 +62,16 @@ export default {
   },
   methods: {
     reset () {
-      this.$refs.resetFormRef.validate(valid => {
+      this.$refs.resetFormRef.validate(async valid => {
         console.log(valid)
+        if (valid) {
+          console.log(this.resetForm);
+          const res = await change_password(this.signupForm);
+          console.log(res);
+          if (res.status == 200) {
+            alert ("Sucess");
+          }
+        }
       })
     }
   }

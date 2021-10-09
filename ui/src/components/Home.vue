@@ -30,10 +30,10 @@ export default {
   },
   methods: {
     jumpSign () {
-      this.$router.push('Signup')
+      this.$router.push('signup')
     },
     jumpLog () {
-      this.$router.push('Login')
+      this.$router.push('login')
     },
     jumpResult () {
       console.log('jump to result')

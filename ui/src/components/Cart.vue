@@ -5,7 +5,7 @@
       :proPrice="obj.price"
       :qua="obj.quantity">
       </Product>
-      <button>Check Out</button>
+      <el-button type="primary" @click="submitForm()">Check Out</el-button>
   </div>
 </template>
 
@@ -35,6 +35,11 @@ export default {
     },
     components: {
         Product
+    },
+    methods: {
+        submitForm() {
+            console.log(this.cart);
+        }
     }
 }
 </script>

@@ -3,8 +3,8 @@
     <p> Name: {{userName}} </p> 
     <p> Address: {{addressDe}}</p>
     <p> Phone Number: {{phoneNumber}}</p>
-    <button>Edit</button>
-    <button>Remove</button>
+    <el-button type="primary" icon="el-icon-edit"></el-button>
+    <el-button type="primary" icon="el-icon-delete"></el-button>
   </div>
 </template>
 

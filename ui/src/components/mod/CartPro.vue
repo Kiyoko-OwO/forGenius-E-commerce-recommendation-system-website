@@ -3,8 +3,9 @@
     <p> Product Name: {{proName}} </p> 
     <p> Price: {{proPrice}}</p>
     <p> Quantity: {{qua}}</p>
-    <button>less</button>
-    <button>more</button>
+    <el-button class="el-icon-remove-outline" circle></el-button>
+    <el-button class="el-icon-circle-plus-outline" circle></el-button>
+
   </div>
 </template>
 

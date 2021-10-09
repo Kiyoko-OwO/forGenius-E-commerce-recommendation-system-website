@@ -6,7 +6,7 @@
       :phoneNumber="obj.phone_number"
       >
       </Address>
-      <button>Save</button>
+      <el-button type="primary" @click="submitForm()">Save</el-button>
   </div>
 </template>
 
@@ -51,6 +51,11 @@ export default {
     },
     components: {
         Address
+    },
+    methods: {
+        submitForm() {
+            console.log(this.addressbook)
+        }
     }
 }
 </script>

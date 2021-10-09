@@ -13,9 +13,9 @@
           { type: 'number', message: 'Quantity need to be number'}
           ]"
         >
-        <i class="el-icon-remove-outline" @click='deleteOne'></i>
+        <el-button class="el-icon-remove-outline" @click='deleteOne' circle></el-button>
         <el-input class="quaBox" type="quantity" v-model.number="numberValidateForm.quantity" autocomplete="off"></el-input>
-        <i class="el-icon-circle-plus-outline" @click='addOne'></i>
+        <el-button class="el-icon-circle-plus-outline" @click='addOne' circle></el-button>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm('numberValidateForm')">Add Cart</el-button>

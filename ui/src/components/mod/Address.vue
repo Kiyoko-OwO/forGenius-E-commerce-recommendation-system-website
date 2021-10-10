@@ -4,13 +4,18 @@
     <p> Address: {{addressDe}}</p>
     <p> Phone Number: {{phoneNumber}}</p>
     <el-button type="primary" icon="el-icon-edit"></el-button>
-    <el-button type="primary" icon="el-icon-delete"></el-button>
+    <el-button type="primary" icon="el-icon-delete" @click="delFn"></el-button>
   </div>
 </template>
 
 <script>
 export default {
-    props: ['userName', 'addressId', 'addressDe', 'phoneNumber']
+    props: ['index', 'userName', 'addressId', 'addressDe', 'phoneNumber'],
+    methods: {
+      delFn(){
+        this.$emit("delAdd", this.index)
+      }
+    }
 }
 </script>
 

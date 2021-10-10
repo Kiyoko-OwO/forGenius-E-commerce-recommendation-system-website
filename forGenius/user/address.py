@@ -26,21 +26,16 @@ def delete_address_book(email, address_id):
     address.delete()
     # return view_address_book(email)
 
-def edit_address_book(token, email, name, address, phone_number, address_id):
+def edit_address_book(email, name, address, phone_number, address_id):
     # check user authorization (potential attack: one user edit another user's address)
     try:
         info = Address_book.objects.get(address_id=address_id)
-    except User.DoesNotExist:
+    except Address_book.DoesNotExist:
         raise InputError('User not exist')
     info.name = name
     info.address = address
     info.phone_number = phone_number 
     info.save()
-    data = {
-            "token" : token,
-            "address_id" : info.address_id,
-        } 
-    return data
     # return view_address_book(email)
 
 def add_address_book(email, name, address, phone_number):
@@ -51,3 +46,18 @@ def add_address_book(email, name, address, phone_number):
     reg = Address_book(user_email=user_email, name=name, address=address, phone_number= phone_number)
     reg.save()        
     # return view_address_book(email)
+
+
+def address_book_detail(token, email, address_id):
+    try:
+        info = Address_book.objects.get(address_id=address_id)
+    except Address_book.DoesNotExist:
+        raise InputError('User not exist')
+    data = {
+            "token" : token,
+            "address" : info.address,
+            "name" : info.name,
+            "phone_number" : info.phone_number,
+            "address_id" : info.address_id,
+        } 
+    return data

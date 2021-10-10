@@ -1,14 +1,20 @@
 <template>
-  <div id="address-container">
-      <Address v-for="(obj,ind) in addressbook" :key="obj.address_id"
-      :userName="obj.name"
-      :addressDe="obj.address"
-      :phoneNumber="obj.phone_number"
-      :index = "ind"
-      @delAdd = 'del'
-      >
-      </Address>
-      <el-button type="primary" @click="submitForm()">Save</el-button>
+  <div class="address_container">
+    <header>
+        ADDRESS&nbsp;BOOK
+    </header>
+    <img class="logo" src=../assets/2.png alt="logo">
+    <div id="address-container">
+        <Address v-for="(obj,ind) in addressbook" :key="obj.address_id"
+        :userName="obj.name"
+        :addressDe="obj.address"
+        :phoneNumber="obj.phone_number"
+        :index = "ind"
+        @delAdd = 'del'
+        >
+        </Address>
+        <el-button type="primary" class="save" @click="submitForm()">SAVE</el-button>
+    </div>
   </div>
 </template>
 
@@ -54,8 +60,48 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less" scoped>
 #address-container {
+    position: absolute;
+    top:100px;
     border: 1px solid black;
+}
+
+.address_container{
+    background-color: #d1dbda;
+    height: 100%;
+}
+header{
+    height: 100px;
+    width: 100%;
+    position: fixed;
+    left:0;
+    top:0;
+    z-index: 999;
+    border-bottom:3px solid #ccc;
+    text-align: center;
+    line-height: 130px;
+    font-weight:normal;
+    font-family: 'segUi';
+    font-size: 50px;
+}
+.logo{
+    height: 35%;    
+    position: absolute;
+    right: 80%;
+    top:-13.5%;
+    cursor: pointer;
+}
+
+.save{
+    position: absolute;
+    left:790px;
+    width: 200px;
+    background: #786662;
+    border-radius: 10px;
+    color: #fefefe;
+    letter-spacing:10px;
+    padding-left: 30px;
+    border-color: #786662;
 }
 </style>

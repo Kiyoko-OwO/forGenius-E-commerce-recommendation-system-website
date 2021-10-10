@@ -16,6 +16,12 @@ def add_to_cart(email, product_id, quantity):
     except Product.DoesNotExist:
         raise ProductIdError("This product does not exist")
 
-    to_cart = Cart(user_email=user_email, product_id=product_id, quantity=quantity)
-    to_cart.save()  
+    try:
+        user_cart = Cart.objects.get(user_email=user_email, product_id=product_id)
+        user_cart.quantity = quantity + user_cart.quantity
+        user_cart.save()
+    except Cart.DoesNotExist:
+        to_cart = Cart(user_email=user_email, product_id=product_id, quantity=quantity)
+        to_cart.save()  
+
 

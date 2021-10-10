@@ -300,7 +300,39 @@ def edit_address_book(request):
             response.content = e
             return response
         try:
-            data = address.edit_address_book(token, email, name, address_name, phone_number, address_id)
+            data = address.edit_address_book(email, name, address_name, phone_number, address_id)
+        except InputError as e:
+            response.status_code = 400
+            response.content = e
+            return response
+        response.status_code = 200
+        return response
+    response.status_code = 405
+    return response
+
+def address_book_detail(request):
+    response = HttpResponse()
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            response.status_code = 441
+            response.content = 'json.JSONDecodeErro'
+            return response
+        try:
+            token = data["token"]
+            email = auth.token_to_email(token)
+            address_id = data['address_id']
+        except KeyError:
+            response.status_code = 442
+            response.content = 'KeyError'
+            return response
+        except InputError as e:
+            response.status_code = 400
+            response.content = e
+            return response
+        try:
+            data = address.address_book_detail(token, email, address_id)
         except InputError as e:
             response.status_code = 400
             response.content = e
@@ -309,4 +341,3 @@ def edit_address_book(request):
         return HttpResponse(json.dumps(data), content_type="application/json")
     response.status_code = 405
     return response
-

@@ -15,14 +15,16 @@ def register(request):
         try:
             data = json.loads(request.body)
         except json.JSONDecodeError:
-            response.status_code = 400
+            response.status_code = 441
+            response.content = 'json.JSONDecodeErro'
             return response
         try:
             email = data["email"]
             name = data["name"]
             password = data["password"]
         except KeyError:
-            response.status_code = 400
+            response.status_code = 442
+            response.content = 'KeyError'
             return response
         try:
             token = auth.auth_register(email, name, password)
@@ -43,13 +45,15 @@ def login(request):
         try:
             data = json.loads(request.body)
         except json.JSONDecodeError:
-            response.status_code = 400
+            response.status_code = 441
+            response.content = 'json.JSONDecodeErro'
             return response
         try:
             email = data["email"]
             password = data["password"]
         except KeyError:
-            response.status_code = 400
+            response.status_code = 442
+            response.content = 'KeyError'
             return response
         try:
             token = auth.auth_login(email, password)
@@ -72,12 +76,14 @@ def logout(request):
         try:
             data = json.loads(request.body)
         except json.JSONDecodeError:
-            response.status_code = 400
+            response.status_code = 441
+            response.content = 'json.JSONDecodeErro'
             return response
         try:
             token = data["token"]
         except KeyError:
-            response.status_code = 400
+            response.status_code = 442
+            response.content = 'KeyError'
             return response
         auth.auth_logout(token)
         response.status_code = 200
@@ -91,14 +97,16 @@ def change_password(request):
         try:
             data = json.loads(request.body)
         except json.JSONDecodeError:
-            response.status_code = 400
+            response.status_code = 441
+            response.content = 'json.JSONDecodeErro'
             return response
         try:
             token = data["token"]
             old_password = data["old_password"]
             new_password = data["new_password"]
         except KeyError:
-            response.status_code = 400
+            response.status_code = 442
+            response.content = 'KeyError'
             return response
         try:
             auth.auth_change_password(token, old_password, new_password)
@@ -117,12 +125,14 @@ def send_reset_code(request):
         try:
             data = json.loads(request.body)
         except json.JSONDecodeError:
-            response.status_code = 400
+            response.status_code = 441
+            response.content = 'json.JSONDecodeErro'
             return response
         try:
             email = data["email"]
         except KeyError:
-            response.status_code = 400
+            response.status_code = 442
+            response.content = 'KeyError'
             return response
         try:
             auth.auth_send_reset_code(email)
@@ -141,13 +151,15 @@ def reset_password(request):
         try:
             data = json.loads(request.body)
         except json.JSONDecodeError:
-            response.status_code = 400
+            response.status_code = 441
+            response.content = 'json.JSONDecodeErro'
             return response
         try:
             reset_code = data["reset_code"]
             new_password = data["new_password"]
         except KeyError:
-            response.status_code = 400
+            response.status_code = 442
+            response.content = 'KeyError'
             return response
         try:
             auth.auth_reset_password(reset_code, new_password)
@@ -166,7 +178,8 @@ def add_address_book(request):
         try:
             data = json.loads(request.body)
         except json.JSONDecodeError:
-            response.status_code = 400
+            response.status_code = 441
+            response.content = 'json.JSONDecodeErro'
             return response
         try:
             token = data["token"]
@@ -175,7 +188,8 @@ def add_address_book(request):
             address_name = data['address']
             phone_number = data['phone_number']
         except KeyError:
-            response.status_code = 400
+            response.status_code = 442
+            response.content = 'KeyError'
             return response
         except InputError as e:
             response.status_code = 400
@@ -198,13 +212,15 @@ def view_address_book(request):
         try:
             data = json.loads(request.body)
         except json.JSONDecodeError:
-            response.status_code = 400
+            response.status_code = 441
+            response.content = 'json.JSONDecodeErro'
             return response
         try:
             token = data["token"]
             email = auth.token_to_email(token)
         except KeyError:
-            response.status_code = 400
+            response.status_code = 442
+            response.content = 'KeyError'
             return response
         except InputError as e:
             response.status_code = 400
@@ -233,14 +249,16 @@ def delete_address_book(request):
         try:
             data = json.loads(request.body)
         except json.JSONDecodeError:
-            response.status_code = 400
+            response.status_code = 441
+            response.content = 'json.JSONDecodeErro'
             return response
         try:
             token = data["token"]
             email = auth.token_to_email(token)
             address_id = data['address_id']
         except KeyError:
-            response.status_code = 400
+            response.status_code = 442
+            response.content = 'KeyError'
             return response
         except InputError as e:
             response.status_code = 400
@@ -263,7 +281,8 @@ def edit_address_book(request):
         try:
             data = json.loads(request.body)
         except json.JSONDecodeError:
-            response.status_code = 400
+            response.status_code = 441
+            response.content = 'json.JSONDecodeErro'
             return response
         try:
             token = data["token"]
@@ -273,7 +292,8 @@ def edit_address_book(request):
             phone_number = data['phone_number']
             address_id = data['address_id']
         except KeyError:
-            response.status_code = 400
+            response.status_code = 442
+            response.content = 'KeyError'
             return response
         except InputError as e:
             response.status_code = 400

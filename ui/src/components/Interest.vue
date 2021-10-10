@@ -1,14 +1,20 @@
 <template>
-  <div>
-    <h1>Interest Field</h1>
-    <el-checkbox-group v-model="intest">
-      <el-checkbox-button v-for="city in tags" :label="city" :key="city">{{city}}</el-checkbox-button>
-    </el-checkbox-group>
-    <el-button class='submit'>SUBMIT</el-button>
-    <li v-for="item in intest" :key="item">
-        <span>{{ item }}</span>
-    </li>
+  <div class="interest_container">
+    <header>
+        INTEREST
+    </header>
+    <img class="logo" src=../assets/2.png alt="logo">
+    <div>
+      <el-checkbox-group v-model="intest" class="checkbox">
+        <el-checkbox-button v-for="city in tags" :label="city" :key="city">{{city}}</el-checkbox-button>
+      </el-checkbox-group>
+      <el-button class='submit'>SUBMIT</el-button>
+      <li v-for="item in intest" :key="item" class="choose">
+          <span>{{ item }}</span>
+      </li>
+      </div>
   </div>
+
 
 </template>
 <script>
@@ -23,7 +29,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less" scoped>
 .submit{
     position: absolute;
     left:50%;
@@ -36,5 +42,38 @@ export default {
     color: #fefefe;
     letter-spacing:10px;
     padding-left: 30px;
+}
+.interest_container{
+    background-color: #d1dbda;
+    height: 100%;
+}
+header{
+    height: 100px;
+    width: 100%;
+    position: fixed;
+    left:0;
+    top:0;
+    z-index: 999;
+    border-bottom:3px solid #ccc;
+    text-align: center;
+    line-height: 130px;
+    font-weight:normal;
+    font-family: 'segUi';
+    font-size: 50px;
+}
+.logo{
+    height: 35%;    
+    position: absolute;
+    right: 80%;
+    top:-13.5%;
+    cursor: pointer;
+}
+.checkbox{
+  position: absolute;
+  top:100px;
+}
+.choose{
+  position: relative;
+  top:160px;
 }
 </style>

@@ -7,7 +7,7 @@ import Userprofile from '../components/Userprofile.vue'
 import Resetpassword from '../components/Resetpassword.vue'
 import Forgotpassword from '../components/Forgotpassword.vue'
 import ResetpasswordForgot from '../components/Resetpassword_forgot.vue'
-import Intrest from '../components/Intrest.vue'
+import Interest from '../components/Interest.vue'
 import Product from '../components/Product.vue'
 import AddressBook from '../components/AddressBook.vue'
 import AddressAdd from '../components/mod/AddressAdd.vue'
@@ -48,8 +48,8 @@ const routes = [
     component: ResetpasswordForgot
   },
   {
-    path: '/intrest',
-    component: Intrest
+    path: '/interest',
+    component: Interest
   },
   {
     path: '/product',

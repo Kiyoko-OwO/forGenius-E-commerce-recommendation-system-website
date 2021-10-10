@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Intrest Field</h1>
+    <h1>Interest Field</h1>
     <el-checkbox-group v-model="intest">
       <el-checkbox-button v-for="city in tags" :label="city" :key="city">{{city}}</el-checkbox-button>
     </el-checkbox-group>

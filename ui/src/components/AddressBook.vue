@@ -94,14 +94,14 @@ header{
 }
 
 .save{
-    position: absolute;
-    left:790px;
-    width: 200px;
+    position: relative;
+    left:50%;
+    width: 100px;
     background: #786662;
     border-radius: 10px;
     color: #fefefe;
-    letter-spacing:10px;
-    padding-left: 30px;
+    letter-spacing:4px;
+    padding-left: 26%;
     border-color: #786662;
 }
 </style>

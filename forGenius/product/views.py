@@ -15,12 +15,13 @@ def view_product_user(request):
         try:
             data = json.loads(request.body)
         except json.JSONDecodeError:
-            response.status_code = 400
+            response.status_code = 441
+            response.content = 'json.JSONDecodeErro'
             return response
         try:
             product_id = data["product_id"]
-        except :
-            response.status_code = 400
+        except KeyError:
+            response.status_code = 442
             response.content = "format is wrong"
             return response
         try:

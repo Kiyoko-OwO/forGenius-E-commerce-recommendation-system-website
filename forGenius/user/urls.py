@@ -14,4 +14,5 @@ urlpatterns = [
     path('address/view/', view_address_book, name='view_address_book'),
     path('address/delete/', delete_address_book, name='delete_address_book'),
     path('address/edit/', edit_address_book, name='edit_address_book'),
+    path('interests/add/', add_user_interests, name='add_user_interests')
 ]

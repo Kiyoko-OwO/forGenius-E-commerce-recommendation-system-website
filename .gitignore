@@ -5,6 +5,13 @@ forGenius/venv
 */*/*/__pycache__
 */*/*/*/__pycache__
 */*/*/*/*/__pycache__
+forGenius/forGenius/__pycache__
+forGenius/order/__pycache__/
+forGenius/order/migrations/
+forGenius/product/__pycache__/
+forGenius/product/migrations/
+forGenius/user/__pycache__/
+forGenius/user/migrations/
 */migrations
 */*/migrations
 */*/*/migrations

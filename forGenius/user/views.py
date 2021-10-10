@@ -287,7 +287,6 @@ def edit_address_book(request):
         try:
             token = data["token"]
             email = auth.token_to_email(token)
-            email = data['email']
             name = data['name']
             address_name = data['address']
             phone_number = data['phone_number']

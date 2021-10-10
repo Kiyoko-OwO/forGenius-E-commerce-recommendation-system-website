@@ -1,7 +1,7 @@
 <template>
   <div class="interest_container">
     <header>
-        INTEREST
+        PLEASE CHOOSE YOUR INTEREST FIELD
     </header>
     <img class="logo" src=../assets/2.png alt="logo">
     <div>
@@ -75,5 +75,6 @@ header{
 .choose{
   position: relative;
   top:160px;
+  background-color:#e7eae8;
 }
 </style>

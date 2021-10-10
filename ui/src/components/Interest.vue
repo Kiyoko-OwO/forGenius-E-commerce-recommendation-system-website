@@ -69,7 +69,7 @@ header{
     cursor: pointer;
 }
 .checkbox{
-  position: absolute;
+  position: relative;
   top:100px;
 }
 .choose{

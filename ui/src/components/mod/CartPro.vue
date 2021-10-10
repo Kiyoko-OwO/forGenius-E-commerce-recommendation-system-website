@@ -28,10 +28,12 @@ export default {
 
 <style>
 .my-cartpro {
-  width: 400px;
+  width: 500px;
+  height: 200 px;
   padding: 20px;
   border: 2px solid #000;
   border-radius: 5px;
   margin: 10px;
+  font-family: 'segUi';
 }
 </style>

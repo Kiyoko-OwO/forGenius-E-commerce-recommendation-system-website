@@ -25,4 +25,10 @@ WEEK 3
 6. Improved the database layer of system architecture.
 
 Week 4
-1. I finished to build the Django and sqlite database frame.
+1. I finished build the Django backend frame.
+2. I finished build the Django Sqlite database.
+3. I finished the backend part of the function "view product details" (user version).
+4. I finished the backend part of the function "get user interest to database".
+5. I finished the backend part of the function "user add the product to cart".
+
+Week5

@@ -300,22 +300,13 @@ def edit_address_book(request):
             response.content = e
             return response
         try:
-            address.edit_address_book(email, name, address_name, phone_number, address_id)
+            data = address.edit_address_book(token, email, name, address_name, phone_number, address_id)
         except InputError as e:
             response.status_code = 400
             response.content = e
             return response
         response.status_code = 200
-        return response
+        return HttpResponse(json.dumps(data), content_type="application/json")
     response.status_code = 405
     return response
 
-def test():
-    response = HttpResponse()
-    data = {
-        '11':'11',
-        '11':'11',
-    }
-    meta = {'msg' : '', 'status': 200}
-    json = [data, meta]
-    return JsonResponse(meta)

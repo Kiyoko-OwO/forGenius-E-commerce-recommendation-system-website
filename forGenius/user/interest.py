@@ -1,16 +1,14 @@
-from user.models import User
+from user.models import User, Interest
 from user.errors import InputError
 
-# def user_interest(interest_list):
-#     try:
-#         product_query = Product.objects.get(pk=product_id)
-#     except Product.DoesNotExist:
-#         raise ProductIdError("This product does not exist")
+def user_interest(email, interest_list):
+    try:
+        user_email = User.objects.get(pk=email)
+    except User.DoesNotExist:
+        raise InputError('User not exist')
+    
+    for interest in interest_list:
+        reg = Interest(user_email=user_email, interests=interest)
+        reg.save()        
 
-#     info = {
-#             "name" : product_query.name,
-#             "description" : product_query.description,
-#             "warranty" : product_query.warranty,
-#             "delivery_date" : product_query.delivery_date
-#         } 
-#     return info
+    return

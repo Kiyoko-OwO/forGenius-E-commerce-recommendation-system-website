@@ -5,6 +5,7 @@ from user.errors import InputError
 import json
 import user.auth as auth
 import user.address as address
+import user.interest as interest
 
 ADMIN_EMAIL = '3900forgenius@gmail.com'
 
@@ -319,3 +320,37 @@ def test():
     meta = {'msg' : '', 'status': 200}
     json = [data, meta]
     return JsonResponse(meta)
+
+
+
+def add_user_interests(request):
+    response = HttpResponse()
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            response.status_code = 441
+            response.content = 'json.JSONDecodeErro'
+            return response
+        try:
+            token = data["token"]
+            email = auth.token_to_email(token)
+            interest_list = data['interest']
+        except KeyError:
+            response.status_code = 442
+            response.content = 'KeyError'
+            return response
+        except InputError as e:
+            response.status_code = 400
+            response.content = e
+            return response
+        try:
+            interest.user_interest(email, interest_list)
+        except InputError as e:
+            response.status_code = 400
+            response.content = e
+            return response
+        response.status_code = 200
+        return response
+    response.status_code = 405
+    return response

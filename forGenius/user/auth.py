@@ -6,10 +6,6 @@ import time
 import random
 import user.email_robot as email_robot
 
-class InputError(Exception):
-    code = 400
-    message = 'InputError'
-
 TOKEN_DB = list()
 PRIVATE_KEY = 'nLAghlDB8Qec4d6LD5dhV2QvVs3vpDSY'
 RESETCODE_DB = dict()
@@ -60,7 +56,7 @@ def auth_register(email, name, password):
 
 def auth_change_password(token, old_password, new_password):
     email = token_to_email(token)
-    if (len(User.objects.get(pk=email).filter(password=old_password)) != 1):
+    if (len(User.objects.filter(pk=email).filter(password=old_password)) != 1):
         raise InputError('Incorrect old password')
     if not validate_password(new_password):
         raise InputError('Invalid new password')
@@ -85,11 +81,13 @@ def auth_send_reset_code(email):
         email_query = User.objects.get(pk=email)
     except User.DoesNotExist:
         raise InputError('Not registered yet, please sign up')
-    reset_code = RESETCODE_DB.get(email, default=None)
+    print("email:" + email)
+    reset_code = RESETCODE_DB.get(email)
     if reset_code is None:
         reset_code = generate_reset_code()
-    RESETCODE_DB.put(email, reset_code)
-    name = email_query.values()[0].get('user_name')
+    RESETCODE_DB[email] = reset_code
+    name = email_query.user_name
+    print("email:" + email + "\treset_code:" + reset_code)
     email_robot.send_email(name, email, reset_code)
 
 def validate_email(email):
@@ -138,12 +136,13 @@ def token_to_email(token):
 def generate_reset_code():
     reset_code = ''
     for i in range(6):
-        reset_code += str(random.choice([random.randrange(10), chr(random.randrange(97, 123))]))
+        reset_code += str(random.choice([random.randrange(10), chr(random.randrange(65, 91))]))
     return reset_code
 
 def reset_code_to_email(reset_code):
-    emails = list(RESETCODE_DB.keys())[list(RESETCODE_DB.values()).index(reset_code)]
-    if (len(emails) != 1):
+    try:
+        email = list(RESETCODE_DB.keys())[list(RESETCODE_DB.values()).index(reset_code)]
+    except ValueError:
         raise InputError('Invalid reset code')
-    RESETCODE_DB.pop(emails[0])
-    return emails[0]
+    RESETCODE_DB.pop(email)
+    return email

@@ -2,6 +2,7 @@
     <div id="profile_container">
         <header>
             <img id="logo" src=../assets/logoThin.png alt="logo">
+            <button v-on:click="jumpHome" @click="logOut">Log out</button>
         </header>
         <main>
             <img id="logo" src=../assets/logoThin.png alt="logo">
@@ -14,7 +15,15 @@
 </template>
 
 <script>
+import { logout } from '../api/user'
 export default {
+  data () {
+      return {
+        tokenForm: {
+            token: ''
+        }
+      }
+  },
   methods: {
     jumpResetpassword () {
       this.$router.push('/resetpassword')
@@ -24,6 +33,25 @@ export default {
     },
     jumpAddressbook () {
       this.$router.push('/address')
+    },
+    jumpHome () {
+      this.$router.push('home')
+    },
+    async logOut () {
+      this.tokenForm.token = sessionStorage.getItem('token');
+      logout(this.tokenForm).then ( res => {
+          this.$message({message: 'Log out Sucess!',type: 'success'});
+          sessionStorage.clear();
+          this.$router.push('home');
+      }).catch( error => {
+          this.$message.error('Log out Failed');
+      })
+    //   const res = await logout(this.tokenForm);
+    //   if (res.status == 200) {
+    //       this.$message({message: 'Log out Sucess!',type: 'success'});
+    //       sessionStorage.clear();
+    //       this.$router.push('home');
+    //   }
     }
   }
 }

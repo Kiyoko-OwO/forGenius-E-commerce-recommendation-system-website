@@ -4,12 +4,12 @@
         <div class="reset_box">
             <h1>RESET&nbsp;PASSWORD</h1>
         <el-form ref="resetFormRef" :model="resetForm" :rules="resetpasswordRule" label-position="left" label-width="225px" class="reset_form">
-            <el-form-item label="OLD PASSWORD"  class="oldpassword_change" prop="oldpassword">
-              <el-input v-model="resetForm.oldpassword">
+            <el-form-item label="OLD PASSWORD"  class="oldpassword_change" prop="old_password">
+              <el-input v-model="resetForm.old_password">
               </el-input>
         </el-form-item>
-            <el-form-item label="NEW PASSWORD" class="newpassword_change" prop="newpassword">
-              <el-input v-model="resetForm.newpassword" type = "password" placeholder="6-12 characters contain uc,lc and number">
+            <el-form-item label="NEW PASSWORD" class="newpassword_change" prop="new_password">
+              <el-input v-model="resetForm.new_password" type = "password" placeholder="6-12 characters contain uc,lc and number">
               </el-input>
         </el-form-item>
         </el-form>
@@ -19,11 +19,14 @@
 </template>
 
 <script>
+import { change_password } from '../api/user'
 export default {
   data () {
     var checkOldpassword = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('password cannot be empty'))
+      } else {
+         callback()
       }
     }
     var checkPassword = (rule, value, callback) => {
@@ -41,10 +44,11 @@ export default {
     }
     return {
       resetForm: {
-        oldpassword: '',
-        newpassword: ''
+        token: '',
+        old_password: 'First1111',
+        new_password: 'First2222'
       },
-      resetpasswordRole: {
+      resetpasswordRule: {
         oldpassword: [
           { min: 6, max: 12, message: 'the password should be 6-12 characters', trigger: 'blur' },
           { validator: checkOldpassword, trigger: 'blur' }
@@ -58,8 +62,17 @@ export default {
   },
   methods: {
     reset () {
-      this.$refs.resetFormRef.validate(valid => {
-        console.log(valid)
+      this.$refs.resetFormRef.validate(async valid => {
+        console.log(valid);
+        this.resetForm.token = sessionStorage.getItem('token');
+        if (valid) {
+          change_password(this.resetForm).then( res => {
+            this.$message({message: 'Reset password Sucess!',type: 'success'});
+            this.$router.push('userprofile');
+          }).catch( error => {
+             this.$message.error('Reset password Failed');
+          })
+        }
       })
     }
   }

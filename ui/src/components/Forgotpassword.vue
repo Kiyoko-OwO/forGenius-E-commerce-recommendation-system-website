@@ -91,11 +91,10 @@ h1{
     transform: translate(-50%,-50%);
 }
 .logo{
-        height: 35%;
-        width: 20%;
-        position: absolute;
-        right: 55%;
-        top:-7.5%;
+    height: 35%;
+    position: absolute;
+    right: 55%;
+    top:-7.5%;
 }
 .forgot_form{
     width: 530px;

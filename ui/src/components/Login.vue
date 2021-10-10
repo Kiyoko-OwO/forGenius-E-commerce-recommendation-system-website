@@ -25,14 +25,15 @@
 </template>
 
 <script>
-//import { login } from '../api/user'
+import { login } from '../api/user'
 
 export default {
   data () {
     return {
+      dialogVisible: false,
       loginForm: {
-        email: '',
-        password: ''
+        email: 'first@first.com',
+        password: 'First1111'
       },
       loginRules: {
         email: [
@@ -50,31 +51,23 @@ export default {
       this.$router.push('Home')
     },
     submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
+        this.$refs[formName].validate(async (valid) => {
           if (valid) {
-            console.log(this.loginForm);
+            login(this.loginForm).then( res => {
+              this.$message({message: 'Log in Sucess!',type: 'success'});
+              console.log(res.data.token);
+              sessionStorage.clear();
+              sessionStorage.setItem('token',res.data.token);
+              this.$router.push('userprofile');
+            }).catch( error => {
+              this.$message.error('Log in Failed');
+            })
           } else {
             console.log('error submit!!');
             return false;
           }
         });
     }
-    // onSubmit () {
-    //   this.$refs.loginFormRef.validate(async valid => {
-    //     if(!valid) return;
-    //     console.log(this.loginForm)
-    //     const { data: res } = await login(this.loginForm)
-    //     console.log(res)
-    //     if (res.meta.status !== 200) {
-    //         return this.$message.error('Fail')
-    //       } else {
-    //         this.$message.success('Success')
-    //         window.sessionStorage.setItem('token', res.data.token)
-    //         this.$router.push('/home')
-    //       }
-    //   })
-    // }
-    
   }
 }
 </script>

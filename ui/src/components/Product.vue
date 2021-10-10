@@ -58,12 +58,10 @@ export default {
         this.$refs[formName].resetFields();
       },
       deleteOne () {
-        if (this.numberValidateForm.quantity >= 1) {
-          this.numberValidateForm.quantity = this.numberValidateForm.quantity - 1;
-        }
+        this.numberValidateForm.quantity > 1 && (this.numberValidateForm.quantity -= 1)
       },
       addOne () {
-        this.numberValidateForm.quantity = this.numberValidateForm.quantity + 1;
+        this.numberValidateForm.quantity += 1;
       }
     }
 }

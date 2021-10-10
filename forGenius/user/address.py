@@ -1,6 +1,5 @@
 from user.models import Address_book, User
-from user.auth import InputError, validate_email as validate_email
-
+from user.auth import InputError
 
 def view_address_book(email):
     try:        
@@ -19,14 +18,16 @@ def view_address_book(email):
     return data
 
 def delete_address_book(email, address_id):
+    # check user authorization (potential attack: one user delete another user's address)
     try:
-        user_email = Address_book.objects.get(address_id=address_id)
-    except User.DoesNotExist:
-        raise InputError('User not exist')
-    user_email.delete()
-    #return view_address_book(email)
+        address = Address_book.objects.get(address_id=address_id)
+    except Address_book.DoesNotExist:
+        raise InputError('Address ID not exist')
+    address.delete()
+    # return view_address_book(email)
 
 def edit_address_book(email, name, address, phone_number, address_id):
+    # check user authorization (potential attack: one user edit another user's address)
     try:
         user_email = Address_book.objects.get(address_id=address_id)
     except User.DoesNotExist:
@@ -35,7 +36,7 @@ def edit_address_book(email, name, address, phone_number, address_id):
     user_email.address = address
     user_email.phone_number = phone_number 
     user_email.save()
-    #return view_address_book(email)
+    # return view_address_book(email)
 
 def add_address_book(email, name, address, phone_number):
     try:
@@ -44,4 +45,4 @@ def add_address_book(email, name, address, phone_number):
         raise InputError('User not exist')
     reg = Address_book(user_email=user_email, name=name, address=address, phone_number= phone_number)
     reg.save()        
-    #return view_address_book(email)
+    # return view_address_book(email)

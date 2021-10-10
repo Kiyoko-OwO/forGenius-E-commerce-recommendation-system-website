@@ -4,12 +4,12 @@
         <div class="reset_box">
             <h1>RESET&nbsp;PASSWORD</h1>
         <el-form ref="resetFormRef" :model="resetForm" :rules="resetpasswordRule" label-position="left" label-width="225px" class="reset_form">
-            <el-form-item label="OLD PASSWORD"  class="oldpassword_change" prop="oldpassword">
-              <el-input v-model="resetForm.oldpassword">
+            <el-form-item label="OLD PASSWORD"  class="oldpassword_change" prop="old_password">
+              <el-input v-model="resetForm.old_password">
               </el-input>
         </el-form-item>
-            <el-form-item label="NEW PASSWORD" class="newpassword_change" prop="newpassword">
-              <el-input v-model="resetForm.newpassword" type = "password" placeholder="6-12 characters contain uc,lc and number">
+            <el-form-item label="NEW PASSWORD" class="newpassword_change" prop="new_password">
+              <el-input v-model="resetForm.new_password" type = "password" placeholder="6-12 characters contain uc,lc and number">
               </el-input>
         </el-form-item>
         </el-form>
@@ -45,8 +45,8 @@ export default {
     return {
       resetForm: {
         token: '',
-        oldpassword: 'First1111',
-        newpassword: 'First2222'
+        old_password: 'First1111',
+        new_password: 'First2222'
       },
       resetpasswordRule: {
         oldpassword: [

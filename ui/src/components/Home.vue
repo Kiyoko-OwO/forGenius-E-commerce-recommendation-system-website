@@ -1,9 +1,12 @@
 <template>
     <div id="home_container">
         <header>
-            <img id="logo" src=../assets/logoThin.png alt="logo">
+            <img id="logo" src=../assets/logoThin.png alt="logo" v-on:click="addFn">
             <button class="signUp" v-on:click="jumpSign">Sign up</button>
             <button class="logIn" v-on:click="jumpLog">Log in</button>
+            <a href="http://127.0.0.1:8000/admin/login/?next=/admin/">
+            <button class="logIn" v-show="isOk">Admin Log in</button>
+            </a>
         </header>
         <main>
           <div>
@@ -25,7 +28,9 @@
 export default {
   data () {
     return {
-      keywords: ''
+      keywords: '',
+      counter: 1,
+      isOk: false
     }
   },
   methods: {
@@ -37,6 +42,13 @@ export default {
     },
     jumpResult () {
       console.log('jump to result')
+    },
+    addFn(){
+      if (this.counter == 5) {
+        this.isOk = true;
+      } else {
+        this.counter++;
+      }
     }
   }
 }
@@ -77,6 +89,7 @@ main {
 main #logo {
     width: 800px;
     margin-left: 100px;
+    background-color: aqua;
 }
 #slogon {
     position: absolute;
@@ -98,7 +111,7 @@ main #logo {
 }
 
 .parent>input:first-of-type {
-    width: 585px;
+    width: 550px;
     height: 40px;
     border: 1px solid #ccc;
     font-size: 16px;

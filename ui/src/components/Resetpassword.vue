@@ -44,7 +44,7 @@ export default {
     }
     return {
       resetForm: {
-        token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6I…A4OX0.UCVPylmykavZvK7mIdjOonvmL9ajF0Sc1jw3LdezRK0",
+        token: '',
         oldpassword: 'First1111',
         newpassword: 'First2222'
       },
@@ -66,7 +66,8 @@ export default {
         console.log(valid)
         if (valid) {
           console.log(this.resetForm);
-          const res = await change_password(this.signupForm);
+          this.resetForm.token = sessionStorage.getItem('token');
+          const res = await change_password(this.resetForm);
           console.log(res);
           if (res.status == 200) {
             alert ("Sucess");

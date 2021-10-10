@@ -95,6 +95,10 @@ export default {
           console.log(res);
           if (res.status == 200) {
             alert ("Sucess");
+            console.log(res.data.token);
+            sessionStorage.clear();
+            sessionStorage.setItem('token',res.data.token);
+            this.$router.push('userprofile')
           }
         } else {
           console.log('error submit!!');

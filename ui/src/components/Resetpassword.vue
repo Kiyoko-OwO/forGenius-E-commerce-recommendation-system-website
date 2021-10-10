@@ -63,15 +63,15 @@ export default {
   methods: {
     reset () {
       this.$refs.resetFormRef.validate(async valid => {
-        console.log(valid)
+        console.log(valid);
+        this.resetForm.token = sessionStorage.getItem('token');
         if (valid) {
-          console.log(this.resetForm);
-          this.resetForm.token = sessionStorage.getItem('token');
-          const res = await change_password(this.resetForm);
-          console.log(res);
-          if (res.status == 200) {
-            alert ("Sucess");
-          }
+          change_password(this.resetForm).then( res => {
+            this.$message({message: 'Reset password Sucess!',type: 'success'});
+            this.$router.push('userprofile');
+          }).catch( error => {
+             this.$message.error('Reset password Failed');
+          })
         }
       })
     }

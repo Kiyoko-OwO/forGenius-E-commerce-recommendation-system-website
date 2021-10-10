@@ -30,6 +30,7 @@ import { login } from '../api/user'
 export default {
   data () {
     return {
+      dialogVisible: false,
       loginForm: {
         email: 'first@first.com',
         password: 'First1111'
@@ -52,35 +53,21 @@ export default {
     submitForm(formName) {
         this.$refs[formName].validate(async (valid) => {
           if (valid) {
-            console.log(this.loginForm);
-            const res = await login(this.loginForm);
-            console.log(res);
-            if (res.status == 200) {
-              alert ("Sucess");
-              this.$router.push('userprofile')
-            }
+            login(this.loginForm).then( res => {
+              this.$message({message: 'Log in Sucess!',type: 'success'});
+              console.log(res.data.token);
+              sessionStorage.clear();
+              sessionStorage.setItem('token',res.data.token);
+              this.$router.push('userprofile');
+            }).catch( error => {
+              this.$message.error('Log in Failed');
+            })
           } else {
             console.log('error submit!!');
             return false;
           }
         });
     }
-    // onSubmit () {
-    //   this.$refs.loginFormRef.validate(async valid => {
-    //     if(!valid) return;
-    //     console.log(this.loginForm)
-    //     const { data: res } = await login(this.loginForm)
-    //     console.log(res)
-    //     if (res.meta.status !== 200) {
-    //         return this.$message.error('Fail')
-    //       } else {
-    //         this.$message.success('Success')
-    //         window.sessionStorage.setItem('token', res.data.token)
-    //         this.$router.push('/home')
-    //       }
-    //   })
-    // }
-    
   }
 }
 </script>

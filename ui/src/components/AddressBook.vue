@@ -4,6 +4,7 @@
       :userName="obj.name"
       :addressDe="obj.address"
       :phoneNumber="obj.phone_number"
+      @delPro = 'del'
       >
       </Address>
       <el-button type="primary" @click="submitForm()">Save</el-button>
@@ -12,49 +13,29 @@
 
 <script>
 import Address from './mod/Address.vue'
+import { address_view } from '../api/user'
 export default {
     data () {
         return {
-            addressbook : [
-                {
-                    name: "Cai",
-                    address_id: "1",
-                    address: "This is a random fake address",
-                    phone_number: 12345678901,
-                },
-                {
-                    name: "Yang",
-                    address_id: "2",
-                    address: "This is a random fake address",
-                    phone_number: 12345678901,
-                },
-                {
-                    name: "Ma",
-                    address_id: "3",
-                    address: "This is a random fake address",
-                    phone_number: 12345678901,
-                },
-                {
-                    name: "Guan",
-                    address_id: "4",
-                    address: "This is a random fake address",
-                    phone_number: 12345678901,
-                },
-                {
-                    name: "Chen",
-                    address_id: "5",
-                    address: "This is a random fake address",
-                    phone_number: 12345678901,
-                }
-            ]
+            addressbook : {},
+            tokenForm: {
+                token: ''
+            }
+            
         }
+    },
+    created () {
+        this.loadAddressBook()
     },
     components: {
         Address
     },
     methods: {
-        submitForm() {
-            console.log(this.addressbook)
+        async loadAddressBook () {
+            this.tokenForm.token = sessionStorage.getItem('token');
+            const { data } = await address_view(this.tokenForm);
+            console.log(data);
+            this.addressbook = data.data.address_book;
         }
     }
 }

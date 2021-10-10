@@ -21,3 +21,19 @@ export const change_password = data => {
     data
   })
 } 
+
+export const address_view = data => {
+  return request({
+    method: 'POST',
+    url: 'user/address/view/',
+    data
+  })
+}
+
+export const logout = data => {
+  return request({
+    method: 'POST',
+    url: 'user/logout/',
+    data
+  })
+}

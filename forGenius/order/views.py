@@ -7,6 +7,7 @@ from user.errors import InputError
 from product.errors import ProductIdError
 import json
 import order.cart as cart
+from jwt import InvalidSignatureError
 
 # Create your views here.
 
@@ -21,17 +22,24 @@ def add_to_cart(request):
             return response
         try:
             token = data['token']
-            email = token_to_email(token)
             product_id = data['product_id']
             quantity = data['quantity']
         except KeyError:
             response.status_code = 442
             response.content = 'KeyError'
             return response
+
+        try:
+            email = token_to_email(token)
         except InputError as e:
             response.status_code = 400
             response.content = e
             return response
+        except InvalidSignatureError:
+            response.status_code = 400
+            response.content = "token is wrong"
+            return response
+
         try:
             cart.add_to_cart(email, product_id, quantity)
         except InputError as e:

@@ -1,9 +1,13 @@
 <template>
   <div class="cart-container">
-      <Product v-for="obj in cart" :key="obj.id"
+      <Product v-for="(obj,ind) in cart" :key="obj.id"
       :proName="obj.name"
       :proPrice="obj.price"
-      :qua="obj.quantity">
+      :qua="obj.quantity"
+      :index = "ind"
+      @addQua = 'add'
+      @subQua = 'sub'
+      @delPro = 'del'>
       </Product>
       <el-button type="primary" @click="submitForm()">Check Out</el-button>
   </div>
@@ -38,6 +42,16 @@ export default {
     },
     methods: {
         submitForm() {
+            console.log(this.cart);
+        },
+        add(index) {
+            this.cart[index].quantity += 1;
+        },
+        sub(index) {
+            this.cart[index].quantity > 1 && (this.cart[index].quantity -= 1);
+        },
+        del(index) {
+            this.cart.splice(index, 1);
             console.log(this.cart);
         }
     }

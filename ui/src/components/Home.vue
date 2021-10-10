@@ -89,7 +89,6 @@ main {
 main #logo {
     width: 800px;
     margin-left: 100px;
-    background-color: aqua;
 }
 #slogon {
     position: absolute;

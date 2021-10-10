@@ -10,6 +10,8 @@ import ResetpasswordForgot from '../components/Resetpassword_forgot.vue'
 import Intrest from '../components/Intrest.vue'
 import Product from '../components/Product.vue'
 import AddressBook from '../components/AddressBook.vue'
+import AddressAdd from '../components/mod/AddressAdd.vue'
+import AddressEdit from '../components/mod/AddressEdit.vue'
 import Cart from '../components/Cart.vue'
 Vue.use(VueRouter)
 
@@ -56,6 +58,12 @@ const routes = [
     path: '/address',
     component: AddressBook
   }, {
+    path: '/address/add',
+    component: AddressAdd
+  },{
+    path: '/address/edit',
+    component: AddressEdit
+  },{
     path: '/cart',
     component: Cart
   }

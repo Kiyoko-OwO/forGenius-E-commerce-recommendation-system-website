@@ -37,3 +37,11 @@ export const logout = data => {
     data
   })
 }
+
+export const address_delete = data => {
+  return request({
+    method: 'DELETE',
+    url: '/user/address/delete/',
+    data
+  })
+}

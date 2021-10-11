@@ -5,11 +5,11 @@
     </header>
     <img class="logo" src=../assets/2.png alt="logo">
     <div>
-      <el-checkbox-group v-model="intest" class="checkbox">
-        <el-checkbox-button v-for="city in tags" :label="city" :key="city">{{city}}</el-checkbox-button>
+      <el-checkbox-group v-model="interestForm.interest" class="checkbox">
+        <el-checkbox-button v-for="int in tags" :label="int" :key="int">{{int}}</el-checkbox-button>
       </el-checkbox-group>
-      <el-button class='submit'>SUBMIT</el-button>
-      <li v-for="item in intest" :key="item" class="choose">
+      <el-button class='submit' @click="submitForm()">SUBMIT</el-button>
+      <li v-for="item in interestForm.interest" :key="item" class="choose">
           <span>{{ item }}</span>
       </li>
       </div>
@@ -18,12 +18,28 @@
 
 </template>
 <script>
+import { interest_add } from '../api/user'
 const tagOptions = ['Fastion', 'Toys', 'Hobby', 'DIY', 'Electronics', 'Media', 'Furniture', 'Appliance', 'Food', 'Personal Care']
 export default {
   data () {
     return {
       tags: tagOptions,
-      intest: []
+      intest: [],
+      interestForm: {
+        token : '',
+        interest: []
+      }
+    }
+  },
+  methods: {
+    submitForm() {
+      this.interestForm.token = sessionStorage.getItem('token');
+      interest_add(this.interestForm).then ( res => {
+          this.$message({message: 'Sucess!',type: 'success'});
+          this.$router.push('Home');
+      }).catch( error => {
+          this.$message.error('Failed');
+      })
     }
   }
 }

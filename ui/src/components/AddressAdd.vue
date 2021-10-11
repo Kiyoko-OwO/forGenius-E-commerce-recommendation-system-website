@@ -1,6 +1,6 @@
 <template>
     <div class="add_container">
-      <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpHome">
+      <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpAddress">
       <div class="add_box">
             <h1>ADD&nbsp;ADDRESS</h1>
       <el-form ref="add_FormRef" :rules="addRules" :model="addForm" class="add_form" label-position="left" label-width="225px">
@@ -9,10 +9,12 @@
             </el-input>
           </el-form-item>
           <el-form-item label="ADDRESS" class="username_change" prop="address">
-            <el-input v-model="addForm.address" autocomplete="off"></el-input>
+            <el-input v-model="addForm.address" autocomplete="off">
+            </el-input>
           </el-form-item>
-          <el-form-item label="PHONE NUMBER" class="username_change" prop="phone">
-            <el-input v-model="addForm.phone_number" autocomplete="off"></el-input>
+          <el-form-item label="PHONE NUMBER" class="username_change" prop="phone_number">
+            <el-input v-model="addForm.phone_number" autocomplete="off">
+            </el-input>
           </el-form-item>
           <div class="block"></div>
           <el-form-item>
@@ -62,25 +64,32 @@ export default {
         address: [
           { validator: checkAddress, trigger: 'blur' }
         ],
-        phone: [
+        phone_number: [
           { validator: checkPhone, trigger: 'blur'  }
         ]
       }
     }
   },
   methods: {
-    jumpHome () {
-      this.$router.push('Home')
+    jumpAddress () {
+      this.$router.push('/address')
     },
-    submitAdd() {
-      this.addForm.token = sessionStorage.getItem('token');
-      console.log(this.addForm);
-      address_add(this.addForm).then( res => {
-          this.$message({message: 'Sucess!======',type: 'success'});
-          this.$router.push('address');
-      }).catch( error => {
-          this.$message.error('Failed=====');
-      })
+    submitAdd () {
+        this.$refs.add_FormRef.validate(async (valid) => {
+          if (valid) {
+        this.addForm.token = sessionStorage.getItem('token');
+        console.log(this.addForm);
+        address_add(this.addForm).then( res => {
+            this.$message({message: 'Sucess!======',type: 'success'});
+            this.$router.push('address');
+        }).catch( error => {
+            this.$message.error('Failed=====');
+        })
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
     }
   }
 }

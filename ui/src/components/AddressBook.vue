@@ -9,17 +9,18 @@
         :userName="obj.name"
         :addressDe="obj.address"
         :phoneNumber="obj.phone_number"
+        :addressId="obj.address_id"
         :index = "ind"
         @delAdd = 'del'
         >
         </Address>
-        <el-button type="primary" class="save" @click="submitForm()">SAVE</el-button>
+        <el-button type="primary" class="add" @click="add()">Add</el-button>
     </div>
   </div>
 </template>
 
 <script>
-import Address from './mod/Address.vue'
+import Address from './Address.vue'
 import { address_view } from '../api/user'
 import { address_delete } from '../api/user'
 export default {
@@ -52,8 +53,14 @@ export default {
             this.deleteForm.address_id = this.addressbook[index].address_id;
             this.deleteForm.token = this.tokenForm.token;
             this.addressbook.splice(index, 1);
-            const res = address_delete(this.deleteForm);
-            console.log(res);
+            address_delete(this.deleteForm).then( res => {
+                this.$message({message: 'Delete Sucess!',type: 'success'});
+            }).catch( error => {
+                this.$message.error('Failed');
+            })
+        },
+        add() {
+            this.$router.push('addressadd');
         }
 
     }
@@ -93,7 +100,7 @@ header{
     cursor: pointer;
 }
 
-.save{
+.add{
     position: relative;
     left:50%;
     width: 100px;

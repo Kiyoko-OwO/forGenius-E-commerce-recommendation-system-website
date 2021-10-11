@@ -53,3 +53,19 @@ export const interest_add = data => {
     data
   })
 }
+
+export const address_edit = data => {
+  return request({
+    method: 'POST',
+    url: '/user/address/edit/',
+    data
+  })
+}
+
+export const address_add = data => {
+  return request({
+    method: 'POST',
+    url: '/user/address/add/',
+    data
+  })
+}

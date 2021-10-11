@@ -21,7 +21,7 @@
           <el-input class="quaBox" type="quantity" v-model.number="numberValidateForm.quantity" autocomplete="off"></el-input>
           <el-button class="el-icon-circle-plus-outline" @click='addOne' circle></el-button>
           </el-form-item>
-          <el-form-item>
+          <el-form-item class="save">
             <el-button type="primary" @click="submitForm('numberValidateForm')">Add Cart</el-button>
             <el-button @click="resetForm('numberValidateForm')">Reset</el-button>
           </el-form-item>
@@ -74,8 +74,9 @@ export default {
 
 <style lang="less" scoped>
 .picture {
-    height: 100px;
-    width: 100px;
+    position: relative;
+    height: 200px;
+    width: 200px;
 }
 .el-icon-remove-outline {
   cursor: pointer;
@@ -113,19 +114,12 @@ header{
 }
 
 .save{
-    position: relative;
-    left:50%;
-    width: 100px;
-    background: #786662;
-    border-radius: 10px;
-    color: #fefefe;
-    letter-spacing:4px;
-    padding-left: 26%;
-    border-color: #786662;
+  position: relative;
 }
 .product_box{
     position: relative;
     top:200px;
     border: 1px solid black;
+    width:25%;
 }
 </style>

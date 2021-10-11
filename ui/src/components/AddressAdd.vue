@@ -11,7 +11,7 @@
           <el-form-item label="ADDRESS" class="username_change" prop="address">
             <el-input v-model="addForm.address" autocomplete="off"></el-input>
           </el-form-item>
-          <el-form-item label="PHONE NUMBER" class="username_change">
+          <el-form-item label="PHONE NUMBER" class="username_change" prop="phone">
             <el-input v-model="addForm.phone_number" autocomplete="off"></el-input>
           </el-form-item>
           <div class="block"></div>
@@ -41,12 +41,19 @@ export default {
         callback()
       }
     }
+    var checkPhone = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('phone cannot be empty'))
+      } else {
+        callback()
+      }
+    }
     return {
       addForm: {
         token: '',
         name: '123',
         address: '',
-        phone_number: ''
+        phone_number: '123'
       },
       addRules: {
         name: [
@@ -54,11 +61,17 @@ export default {
         ],
         address: [
           { validator: checkAddress, trigger: 'blur' }
+        ],
+        phone: [
+          { validator: checkPhone, trigger: 'blur'  }
         ]
       }
     }
   },
   methods: {
+    jumpHome () {
+      this.$router.push('Home')
+    },
     submitAdd() {
       this.addForm.token = sessionStorage.getItem('token');
       console.log(this.addForm);

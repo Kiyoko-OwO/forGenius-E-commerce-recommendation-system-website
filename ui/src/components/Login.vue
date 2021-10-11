@@ -29,6 +29,26 @@ import { login } from '../api/user'
 
 export default {
   data () {
+    var checkEmail = (rule, value, callback) => {
+      const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+.com/
+      if (!value) {
+        return callback(new Error('email address cannot be empty'))
+      }
+      setTimeout(() => {
+        if (mailReg.test(value)) {
+          callback()
+        } else {
+          callback(new Error('Please enter the correct email format'))
+        }
+      }, 100)
+    }
+    var checkpassword = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('password cannot be empty'))
+      } else {
+         callback()
+      }
+    }
     return {
       dialogVisible: false,
       loginForm: {
@@ -37,11 +57,10 @@ export default {
       },
       loginRules: {
         email: [
-          { pattern: /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+.com/, message: 'please enter the correct email format', trigger: 'blur' },
-          { required: true, message: 'Email address cannot be empty', trigger: 'blur' }
+          { validator: checkEmail, trigger: 'blur' }
         ],
         password: [
-          { required: true, message: 'Pass cannot be empty', trigger: 'blur' }
+          { validator: checkpassword, trigger: 'blur' }
         ]
       }
     }

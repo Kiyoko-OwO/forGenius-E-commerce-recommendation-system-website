@@ -16,5 +16,17 @@ I completed the flow chart with Minghao and discussed with the other group membe
 We had a meet with totur and got the advice about proposal from tutor and improve the proposal.
 We assigned tasks based on sprint and workload and limitations. 
 
+WEEK 4
+I started to create front-end code with Minghao
+The VUE framework is set up
+Finished login, signup, logout, userprofile, product basic and function1 code.
+Packed up API and connected to backend
+Finished Address and forgotpassword base code
+Optimize router push
+Improve user experience
+
+WEEK5
+
+
 
 

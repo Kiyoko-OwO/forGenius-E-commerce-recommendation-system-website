@@ -4,11 +4,11 @@
         <div class="signup_box">
             <h1>REGISTER</h1>
         <el-form ref="signupFormRef" :model="signupForm" :rules="signupRules" label-position="left" label-width="225px" class="signup_form">
-            <el-form-item label="USERNAME"  class="email_change" prop="name">
+            <el-form-item label="USERNAME"  class="username_change" prop="name">
               <el-input v-model="signupForm.name" placeholder="6-12 characters">
               </el-input>
         </el-form-item>
-            <el-form-item label="EMAIL ADDRESS"  class="username_change" prop="email">
+            <el-form-item label="EMAIL ADDRESS"  class="email_change" prop="email">
               <el-input v-model="signupForm.email" placeholder="contains “@” and end with “.com”">
               </el-input>
         </el-form-item>

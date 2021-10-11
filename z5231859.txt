@@ -5,8 +5,8 @@ Week2
 Week3
 
 
-Week4
-home basic base and functional code done
+Week4 front end
+Home basic base and functional code done
 Vue build done
 User log in, sing on, log out base functional code done
 User profile base and functional code done
@@ -19,6 +19,6 @@ Reset password base and functional code done
 Optimize router push
 Forgot password base code done
 
-week5
+week5 front end
 Optimize user log in and log out experience
 Interest functional code done

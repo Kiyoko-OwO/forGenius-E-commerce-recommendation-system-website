@@ -90,12 +90,29 @@ export default {
     signup () {
       this.$refs.signupFormRef.validate(async valid => {
         if (valid) {
-          console.log(this.signupForm);
-          const res = await signup(this.signupForm);
-          console.log(res);
-          if (res.status == 200) {
-            alert ("Sucess");
-          }
+          // signup(this.signupForm).then ( res => {
+
+          // }).catch( error => {
+
+          // })
+          signup(this.signupForm).then ( res => {
+            this.$message({message: 'Sign up Sucess!',type: 'success'});
+            sessionStorage.clear();
+            sessionStorage.setItem('token',res.data.token);
+            this.$router.push('userprofile');
+          }).catch( error => {
+            this.$message.error('Sign up Failed');
+          })
+          // console.log(this.signupForm);
+          // const res = await signup(this.signupForm);
+          // console.log(res);
+          // if (res.status == 200) {
+          //   alert ("Sucess");
+          //   console.log(res.data.token);
+          //   sessionStorage.clear();
+          //   sessionStorage.setItem('token',res.data.token);
+          //   this.$router.push('userprofile');
+          // }
         } else {
           console.log('error submit!!');
           return false;
@@ -103,7 +120,7 @@ export default {
       })
     },
     jumpHome () {
-      this.$router.push('Home')
+      this.$router.push('Home');
     }
   }
 }

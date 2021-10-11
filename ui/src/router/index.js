@@ -7,13 +7,23 @@ import Userprofile from '../components/Userprofile.vue'
 import Resetpassword from '../components/Resetpassword.vue'
 import Forgotpassword from '../components/Forgotpassword.vue'
 import ResetpasswordForgot from '../components/Resetpassword_forgot.vue'
-import Intrest from '../components/Intrest.vue'
+import Interest from '../components/Interest.vue'
 import Product from '../components/Product.vue'
 import AddressBook from '../components/AddressBook.vue'
+import AddressAdd from '../components/mod/AddressAdd.vue'
+import AddressEdit from '../components/mod/AddressEdit.vue'
 import Cart from '../components/Cart.vue'
 Vue.use(VueRouter)
 
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 const routes = [
+  {
+    path: '/', redirect: 'home'
+  },
   {
     path: '/login',
     component: Login
@@ -43,8 +53,8 @@ const routes = [
     component: ResetpasswordForgot
   },
   {
-    path: '/intrest',
-    component: Intrest
+    path: '/interest',
+    component: Interest
   },
   {
     path: '/product',
@@ -53,6 +63,12 @@ const routes = [
     path: '/address',
     component: AddressBook
   }, {
+    path: '/address/add',
+    component: AddressAdd
+  },{
+    path: '/address/edit',
+    component: AddressEdit
+  },{
     path: '/cart',
     component: Cart
   }

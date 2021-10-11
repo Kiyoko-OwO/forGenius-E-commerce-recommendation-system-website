@@ -1,9 +1,14 @@
 <template>
     <div id="home_container">
         <header>
-            <img id="logo" src=../assets/logoThin.png alt="logo">
-            <button class="signUp" v-on:click="jumpSign">Sign up</button>
-            <button class="logIn" v-on:click="jumpLog">Log in</button>
+            <img id="logo" src=../assets/logoThin.png alt="logo" v-on:click="addFn">
+            <button class="signUp" v-on:click="jumpSign" v-show="isGuest">Sign up</button>
+            <button class="logIn" v-on:click="jumpLog" v-show="isGuest">Log in</button>
+            <button v-on:click="jumpHome" @click="logOut" v-show="isUser">Log out</button>
+            <button id="usern" v-show="isUser">{{ username }}</button>
+            <a href="http://127.0.0.1:8000/admin/login/?next=/admin/">
+            <button class="logIn" v-show="isOk">Admin Log in</button>
+            </a>
         </header>
         <main>
           <div>
@@ -22,13 +27,42 @@
 </template>
 
 <script>
+import { logout } from '../api/user'
+
 export default {
+  inject:['reload'],
   data () {
     return {
-      keywords: ''
+      tokenForm: {
+            token: ''
+      },
+      keywords: '',
+      counter: 1,
+      isOk: false,
+      isUser: false,
+      isGuest: false,
+      username: ''
     }
   },
+  created () {
+    this.checkStat()
+  },
   methods: {
+    async checkStat () {
+      console.log(await this.check());
+    },
+    check () {
+      if (sessionStorage.getItem("username") != null) {
+        this.isUser = true;
+        this.isGuest = false;
+        this.username = sessionStorage.getItem('username');
+        return this.username;
+      } else {
+        this.isGuest = true;
+        this.isUser = false;
+        return this.isUser;
+      }
+    },
     jumpSign () {
       this.$router.push('signup')
     },
@@ -37,6 +71,26 @@ export default {
     },
     jumpResult () {
       console.log('jump to result')
+    },
+    addFn(){
+      if (this.counter == 5) {
+        this.isOk = true;
+      } else {
+        this.counter++;
+      }
+    },
+    jumpHome () {
+      this.$router.push('home')
+    },
+    async logOut () {
+      this.tokenForm.token = sessionStorage.getItem('token');
+      logout(this.tokenForm).then ( res => {
+          this.$message({message: 'Log out Sucess!',type: 'success'});
+          sessionStorage.clear();
+          this.reload();
+      }).catch( error => {
+          this.$message.error('Log out Failed');
+      })
     }
   }
 }
@@ -98,7 +152,7 @@ main #logo {
 }
 
 .parent>input:first-of-type {
-    width: 585px;
+    width: 550px;
     height: 40px;
     border: 1px solid #ccc;
     font-size: 16px;

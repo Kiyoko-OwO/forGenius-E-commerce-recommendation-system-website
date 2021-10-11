@@ -3,18 +3,21 @@ Week1
 Week2
 
 Week3
-Vue base done
-User log in, sing on, log out base functional code done
-User profile base code done
-Product base code done
+
 
 Week4
-Cart base and functional code done
+home basic base and functional code done
+Vue build done
+User log in, sing on, log out base functional code done
+User profile base and functional code done
+Product base code done
+Pcked up API and connected to backend
+Cart basic base and functional code done
 Address basic functional code done
-Improve User log in, sing on, log out code
-Reset password functional code done
-User profile functional code done
+Improveed User log in, sing on, log out code
+Reset password base and functional code done
 Optimize router push
+Forgot password base code done
 
 week5
 Optimize user log in and log out experience

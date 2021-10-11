@@ -32,8 +32,8 @@ export default {
     return {
       dialogVisible: false,
       loginForm: {
-        email: 'first@first.com',
-        password: 'First1111'
+        email: 'apitest@test.com',
+        password: 'New123456'
       },
       loginRules: {
         email: [
@@ -55,9 +55,10 @@ export default {
           if (valid) {
             login(this.loginForm).then( res => {
               this.$message({message: 'Log in Sucess!',type: 'success'});
-              console.log(res.data.token);
+              console.log(res.data);
               sessionStorage.clear();
               sessionStorage.setItem('token',res.data.token);
+              sessionStorage.setItem('username',res.data.username);
               this.$router.push('userprofile');
             }).catch( error => {
               this.$message.error('Log in Failed');
@@ -85,7 +86,7 @@ h1{
 }
 .block {
   width: 1000px;
-  height: 100px;
+  height: 65px;
 }
 .forget{
     position: absolute;

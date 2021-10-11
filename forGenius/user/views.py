@@ -306,7 +306,7 @@ def edit_address_book(request):
             response.content = e
             return response
         try:
-            data = address.edit_address_book(token, email, name, address_name, phone_number, address_id)
+            data = address.edit_address_book(email, name, address_name, phone_number, address_id)
         except InputError as e:
             response.status_code = 400
             response.content = e

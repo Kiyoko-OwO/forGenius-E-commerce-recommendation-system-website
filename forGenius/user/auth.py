@@ -132,6 +132,12 @@ def token_to_email(token):
         raise InputError('Invalid token')
     data = jwt.decode(token, PRIVATE_KEY, algorithms=["HS256"])
     return data['email']
+
+def token_to_username(token):
+    # check token is valid or tamperd
+    email = token_to_email(token)
+    email_query = User.objects.get(pk=email)
+    return email_query.user_name
     
 def generate_reset_code():
     reset_code = ''

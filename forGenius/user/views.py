@@ -18,7 +18,7 @@ def register(request):
             data = json.loads(request.body)
         except json.JSONDecodeError:
             response.status_code = 441
-            response.content = 'json.JSONDecodeErro'
+            response.content = 'json.JSONDecodeError'
             return response
         try:
             email = data["email"]
@@ -30,12 +30,14 @@ def register(request):
             return response
         try:
             token = auth.auth_register(email, name, password)
+            username = auth.token_to_username(token)
         except InputError as e:
             response.status_code = 400
             response.content = e
             return response
         data = {
             'token':token,
+            'username':username,
         }
         return HttpResponse(json.dumps(data), content_type="application/json")
     response.status_code = 405
@@ -48,7 +50,7 @@ def login(request):
             data = json.loads(request.body)
         except json.JSONDecodeError:
             response.status_code = 441
-            response.content = 'json.JSONDecodeErro'
+            response.content = 'json.JSONDecodeError'
             return response
         try:
             email = data["email"]
@@ -59,12 +61,14 @@ def login(request):
             return response
         try:
             token = auth.auth_login(email, password)
+            username = auth.token_to_username(token)
         except InputError as e:
             response.status_code = 400
             response.content = e
             return response
         data = {
             'token':token,
+            'username':username,
         }
         if email == ADMIN_EMAIL:
             return HttpResponse(json.dumps(data), content_type="application/json", status=255)
@@ -79,7 +83,7 @@ def logout(request):
             data = json.loads(request.body)
         except json.JSONDecodeError:
             response.status_code = 441
-            response.content = 'json.JSONDecodeErro'
+            response.content = 'json.JSONDecodeError'
             return response
         try:
             token = data["token"]
@@ -100,7 +104,7 @@ def change_password(request):
             data = json.loads(request.body)
         except json.JSONDecodeError:
             response.status_code = 441
-            response.content = 'json.JSONDecodeErro'
+            response.content = 'json.JSONDecodeError'
             return response
         try:
             token = data["token"]
@@ -128,7 +132,7 @@ def send_reset_code(request):
             data = json.loads(request.body)
         except json.JSONDecodeError:
             response.status_code = 441
-            response.content = 'json.JSONDecodeErro'
+            response.content = 'json.JSONDecodeError'
             return response
         try:
             email = data["email"]
@@ -154,7 +158,7 @@ def reset_password(request):
             data = json.loads(request.body)
         except json.JSONDecodeError:
             response.status_code = 441
-            response.content = 'json.JSONDecodeErro'
+            response.content = 'json.JSONDecodeError'
             return response
         try:
             reset_code = data["reset_code"]
@@ -181,7 +185,7 @@ def add_address_book(request):
             data = json.loads(request.body)
         except json.JSONDecodeError:
             response.status_code = 441
-            response.content = 'json.JSONDecodeErro'
+            response.content = 'json.JSONDecodeError'
             return response
         try:
             token = data["token"]
@@ -215,7 +219,7 @@ def view_address_book(request):
             data = json.loads(request.body)
         except json.JSONDecodeError:
             response.status_code = 441
-            response.content = 'json.JSONDecodeErro'
+            response.content = 'json.JSONDecodeError'
             return response
         try:
             token = data["token"]
@@ -252,7 +256,7 @@ def delete_address_book(request):
             data = json.loads(request.body)
         except json.JSONDecodeError:
             response.status_code = 441
-            response.content = 'json.JSONDecodeErro'
+            response.content = 'json.JSONDecodeError'
             return response
         try:
             token = data["token"]
@@ -284,7 +288,7 @@ def edit_address_book(request):
             data = json.loads(request.body)
         except json.JSONDecodeError:
             response.status_code = 441
-            response.content = 'json.JSONDecodeErro'
+            response.content = 'json.JSONDecodeError'
             return response
         try:
             token = data["token"]
@@ -319,7 +323,7 @@ def address_book_detail(request):
             data = json.loads(request.body)
         except json.JSONDecodeError:
             response.status_code = 441
-            response.content = 'json.JSONDecodeErro'
+            response.content = 'json.JSONDecodeError'
             return response
         try:
             token = data["token"]
@@ -363,7 +367,7 @@ def add_user_interests(request):
             data = json.loads(request.body)
         except json.JSONDecodeError:
             response.status_code = 441
-            response.content = 'json.JSONDecodeErro'
+            response.content = 'json.JSONDecodeError'
             return response
         try:
             token = data["token"]
@@ -405,7 +409,7 @@ def add_user_interests(request):
             data = json.loads(request.body)
         except json.JSONDecodeError:
             response.status_code = 441
-            response.content = 'json.JSONDecodeErro'
+            response.content = 'json.JSONDecodeError'
             return response
         try:
             token = data["token"]

@@ -45,3 +45,11 @@ export const address_delete = data => {
     data
   })
 }
+
+export const interest_add = data => {
+  return request({
+    method: 'POST',
+    url: '/user/interests/add/',
+    data
+  })
+}

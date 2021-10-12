@@ -51,7 +51,7 @@ export default {
         send_code(this.forgotForm).then ( res => {
           this.$message({message: 'Sucess!',type: 'success'});
           console.log(res);
-          this.$router.push('login');
+          this.$router.push('/resetpassword/forgot');
         }).catch( error => {
           this.$message.error('Failed');
         })

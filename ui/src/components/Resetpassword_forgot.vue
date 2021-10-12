@@ -67,7 +67,7 @@ export default {
         reset_password(this.resetForm).then ( res => {
           this.$message({message: 'Sucess!',type: 'success'});
           console.log(res.data);
-          this.$router.push('login');
+          this.$router.push('/login');
         }).catch( error => {
             this.$message.error('Failed');
         })

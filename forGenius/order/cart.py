@@ -31,8 +31,10 @@ def view_cart(email):
         raise InputError('User not exist')
 
     cart = Cart.objects.filter(user_email=user_email)
+    total = 0
 
-    data = {"cart" : []}
+    data = {"cart" : [], 
+            "total": 0}
     for item in cart:
         info = {
             "product_id" : item.product_id.product_id,
@@ -41,7 +43,10 @@ def view_cart(email):
             "quantity" : item.quantity,
             "total_price": item.quantity * item.product_id.price
         } 
+        total += item.quantity * item.product_id.price
         data["cart"].append(info)
+    
+    data["total"] = total
     return data
 
 

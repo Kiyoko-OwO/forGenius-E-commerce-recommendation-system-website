@@ -67,9 +67,9 @@ export default {
     }
     return {
       signupForm: {
-        email: "first@first.com",
-	      name : "firstfirst",
-	      password: "First1111"
+        email: "",
+	      name : "",
+	      password: ""
       },
       signupRules: {
         email: [

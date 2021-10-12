@@ -45,8 +45,8 @@ export default {
     return {
       resetForm: {
         token: '',
-        old_password: 'First1111',
-        new_password: 'First2222'
+        old_password: '',
+        new_password: ''
       },
       resetpasswordRule: {
         oldpassword: [

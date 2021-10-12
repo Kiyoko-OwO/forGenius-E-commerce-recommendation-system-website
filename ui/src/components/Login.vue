@@ -52,8 +52,8 @@ export default {
     return {
       dialogVisible: false,
       loginForm: {
-        email: 'apitest@test.com',
-        password: 'New123456'
+        email: '',
+        password: ''
       },
       loginRules: {
         email: [

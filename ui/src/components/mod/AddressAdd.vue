@@ -53,9 +53,9 @@ export default {
     return {
       addForm: {
         token: '',
-        name: '123',
+        name: '',
         address: '',
-        phone_number: '123'
+        phone_number: ''
       },
       addRules: {
         name: [
@@ -80,10 +80,10 @@ export default {
         this.addForm.token = sessionStorage.getItem('token');
         console.log(this.addForm);
         address_add(this.addForm).then( res => {
-            this.$message({message: 'Sucess!======',type: 'success'});
+            this.$message({message: 'Add Address Sucess!',type: 'success'});
             this.$router.push('address');
         }).catch( error => {
-            this.$message.error('Failed=====');
+            this.$message.error('Failed');
         })
           } else {
             console.log('error submit!!');

@@ -1,9 +1,10 @@
 <template>
   <div class="address_container">
     <header>
+        <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpHome">
         ADDRESS&nbsp;BOOK
     </header>
-    <img class="logo" src=../assets/2.png alt="logo">
+    
     <div id="address-container">
         <Address v-for="(obj,ind) in addressbook" :key="obj.address_id"
         :userName="obj.name"
@@ -20,7 +21,7 @@
 </template>
 
 <script>
-import Address from './Address.vue'
+import Address from './mod/Address.vue'
 import { address_view } from '../api/user'
 import { address_delete } from '../api/user'
 export default {
@@ -61,8 +62,10 @@ export default {
         },
         add() {
             this.$router.push('addressadd');
+        },
+        jumpHome () {
+            this.$router.push('Home');
         }
-
     }
 }
 </script>
@@ -93,11 +96,12 @@ header{
     font-size: 50px;
 }
 .logo{
-    height: 35%;    
+    height: 200%;    
     position: absolute;
     right: 80%;
-    top:-13.5%;
+    top:-56%;
     cursor: pointer;
+    
 }
 
 .add{

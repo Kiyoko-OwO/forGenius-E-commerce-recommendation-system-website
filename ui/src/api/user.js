@@ -69,3 +69,19 @@ export const address_add = data => {
     data
   })
 }
+
+export const send_code = data => {
+  return request({
+    method: 'POST',
+    url: '/user/send_reset_code',
+    data
+  })
+}
+
+export const reset_password = data => {
+  return request({
+    method: 'POST',
+    url: '/user/reset_password',
+    data
+  })
+}

@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import { send_code } from '../api/user'
+
 export default {
   data () {
     var checkEmail = (rule, value, callback) => {
@@ -45,6 +47,14 @@ export default {
     forgot () {
       this.$refs.forgotFormRef.validate(valid => {
         console.log(valid)
+        console.log(this.forgotForm);
+        send_code(this.forgotForm).then ( res => {
+          this.$message({message: 'Sucess!',type: 'success'});
+          console.log(res);
+          this.$router.push('login');
+        }).catch( error => {
+          this.$message.error('Failed');
+        })
       })
     }
   }

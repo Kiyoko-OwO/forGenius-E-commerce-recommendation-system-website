@@ -1,6 +1,6 @@
 <template>
     <div class="add_container">
-      <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpAddress">
+      <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpAddress">
       <div class="add_box">
             <h1>ADD&nbsp;ADDRESS</h1>
       <el-form ref="add_FormRef" :rules="addRules" :model="addForm" class="add_form" label-position="left" label-width="225px">
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { address_add } from '../api/user'
+import { address_add } from '../../api/user'
 export default {
   data () {
     var checkName = (rule, value, callback) => {

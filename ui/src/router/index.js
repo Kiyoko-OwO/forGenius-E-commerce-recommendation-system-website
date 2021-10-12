@@ -10,7 +10,7 @@ import ResetpasswordForgot from '../components/Resetpassword_forgot.vue'
 import Interest from '../components/Interest.vue'
 import Product from '../components/Product.vue'
 import AddressBook from '../components/AddressBook.vue'
-import AddressAdd from '../components/AddressAdd.vue'
+import AddressAdd from '../components/mod/AddressAdd.vue'
 import Cart from '../components/Cart.vue'
 Vue.use(VueRouter)
 
@@ -48,7 +48,7 @@ const routes = [
     component: Forgotpassword
   },
   {
-    path: '/resetpassword_forgot',
+    path: '/resetpassword/forgot',
     component: ResetpasswordForgot
   },
   {

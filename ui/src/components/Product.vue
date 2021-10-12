@@ -42,8 +42,9 @@ export default {
               price: "123"
             },
             numberValidateForm: {
-              id:'',
-              quantity: 1,
+              token: '',
+              product_id:'',
+              quantity: 1
             }
         }
     },
@@ -51,7 +52,8 @@ export default {
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.numberValidateForm.id = parseInt(this.product.id);
+            this.numberValidateForm.product_id = parseInt(this.product.id);
+            this.numberValidateForm.token = sessionStorage.getItem('token');
             console.log(this.numberValidateForm);
           } else {
             console.log('error submit!!');

@@ -98,7 +98,9 @@ export default {
           signup(this.signupForm).then ( res => {
             this.$message({message: 'Sign up Sucess!',type: 'success'});
             sessionStorage.clear();
+            console.log(res.data);
             sessionStorage.setItem('token',res.data.token);
+            sessionStorage.setItem('username',res.data.username);
             this.$router.push('userprofile');
           }).catch( error => {
             this.$message.error('Sign up Failed');

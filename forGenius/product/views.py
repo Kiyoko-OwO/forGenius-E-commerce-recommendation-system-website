@@ -11,7 +11,7 @@ import json
 def view_product_user(request):
  
     response = HttpResponse()
-    if request.method == "GET":
+    if request.method == "POST":
         try:
             data = json.loads(request.body)
         except json.JSONDecodeError:

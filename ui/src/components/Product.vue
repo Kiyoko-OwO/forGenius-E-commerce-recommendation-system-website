@@ -2,12 +2,16 @@
   <div class="address_container">
     <header>
         PRODUCT&nbsp;DETAIL
+        <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpHome">
     </header>
-    <img class="logo" src=../assets/2.png alt="logo">
+    
     <div class="product_box">
-        <img class="picture" v-bind:src="product.imgPath" alt="product image" />
-        <h2>{{product.name}}</h2>
-        <h3>Price: {{product.price}}</h3>
+        <img class="picture" src=../assets/2.png alt="product image" />
+        <h2>Name: {{product.name}}</h2>
+        <h3>Description: {{product.description}}</h3>
+        <h3>Warranty: {{product.warranty}}</h3>
+        <h3>Delivery date: {{product.delivery_date}}</h3>
+        <!-- <h3>Price: {{product.price}}</h3> -->
         <el-form :model="numberValidateForm" ref="numberValidateForm" label-width="100px" class="demo-ruleForm">
           <el-form-item
             label="Quantity"
@@ -31,30 +35,46 @@
 </template>
 
 <script>
-import imgObj from '../assets/2.png'
+import { car_add } from '../api/order'
+import { product_view } from '../api/product'
 export default {
     data () {
         return {
-            product: {
-              id: "10",
-              imgPath: imgObj,
-              name: "Sample name",
-              price: "123"
-            },
+            product: {},
             numberValidateForm: {
               token: '',
               product_id:'',
               quantity: 1
+            },
+            product_id_form:{
+              product_id: 1
             }
         }
     },
+    created () {
+        this.loadProduct()
+    },
     methods: {
+      async loadProduct () {
+          console.log(this.product_id_form);
+          product_view(this.product_id_form).then ( res => {
+            console.log(res.data);
+            this.product = res.data.data
+          }).catch( error => {
+            console.log(error);
+          })
+      },
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.numberValidateForm.product_id = parseInt(this.product.id);
+            this.numberValidateForm.product_id = this.product_id_form.product_id;
             this.numberValidateForm.token = sessionStorage.getItem('token');
             console.log(this.numberValidateForm);
+            car_add(this.numberValidateForm).then( res => {
+              this.$message({message: 'Sucess!',type: 'success'});
+            }).catch( error => {
+              this.$message.error('Failed');
+            })
           } else {
             console.log('error submit!!');
             return false;
@@ -69,6 +89,9 @@ export default {
       },
       addOne () {
         this.numberValidateForm.quantity += 1;
+      },
+      jumpHome () {
+            this.$router.push('Home');
       }
     }
 }
@@ -87,7 +110,7 @@ export default {
   cursor: pointer;
 }
 .quaBox {
-  width: 40px;
+  width: 100px;
 }
 .address_container{
     background-color: #d1dbda;
@@ -108,10 +131,10 @@ header{
     font-size: 50px;
 }
 .logo{
-    height: 35%;    
+    height: 200%;    
     position: absolute;
     right: 80%;
-    top:-13.5%;
+    top:-56%;
     cursor: pointer;
 }
 

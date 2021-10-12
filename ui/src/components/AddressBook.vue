@@ -101,7 +101,6 @@ header{
     right: 80%;
     top:-56%;
     cursor: pointer;
-    
 }
 
 .add{

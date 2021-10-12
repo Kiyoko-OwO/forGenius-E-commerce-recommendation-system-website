@@ -100,6 +100,7 @@ header{
     font-weight:normal;
     font-family: 'segUi';
     font-size: 50px;
+    z-index: 50;
 }
 .logo{
     height: 35%;    
@@ -107,6 +108,7 @@ header{
     right: 80%;
     top:-13.5%;
     cursor: pointer;
+    z-index: 100;
 }
 
 .checkout{

@@ -103,7 +103,7 @@ export default {
             sessionStorage.setItem('username',res.data.username);
             this.$router.push('/interest');
           }).catch( error => {
-            this.$message.error('Sign up Failed');
+            this.$message.error('Already registered, please log in');
           })
           // console.log(this.signupForm);
           // const res = await signup(this.signupForm);

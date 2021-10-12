@@ -53,7 +53,7 @@ export default {
           console.log(res);
           this.$router.push('/resetpassword/forgot');
         }).catch( error => {
-          this.$message.error('Failed');
+          this.$message.error('Not registered yet, please sign up');
         })
       })
     }

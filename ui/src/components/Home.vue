@@ -140,8 +140,8 @@ main #logo {
     margin-left: 100px;
 }
 #slogon {
-    position: absolute;
-    left: 37%;
+    float: left;
+    margin-left: 300px;
     letter-spacing:10px;
 }
 

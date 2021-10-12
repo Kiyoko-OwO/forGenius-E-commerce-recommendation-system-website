@@ -71,13 +71,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-#address-container {
-    position: absolute;
-    top:100px;
-    left:50%;
-    transform: translate(-50%,0%);
-}
-
 .address_container{
     background-color: #d1dbda;
     height: 100%;
@@ -85,7 +78,7 @@ export default {
 header{
     height: 100px;
     width: 100%;
-    position: fixed;
+    position: absolute;
     left:0;
     top:0;
     z-index: 999;
@@ -95,6 +88,11 @@ header{
     font-weight:normal;
     font-family: 'segUi';
     font-size: 50px;
+}
+#address-container {
+    position: absolute;
+    top:100px;
+    left:38%;
 }
 .logo{
     height: 200%;    

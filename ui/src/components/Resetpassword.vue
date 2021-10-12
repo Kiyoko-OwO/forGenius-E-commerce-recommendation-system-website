@@ -67,10 +67,10 @@ export default {
         this.resetForm.token = sessionStorage.getItem('token');
         if (valid) {
           change_password(this.resetForm).then( res => {
-            this.$message({message: 'Reset password Sucess!',type: 'success'});
+            this.$message({message: 'Updated Successfully!',type: 'success'});
             this.$router.push('userprofile');
           }).catch( error => {
-             this.$message.error('Reset password Failed');
+             this.$message.error('Incorrect old password or new password invalid');
           })
         }
       })

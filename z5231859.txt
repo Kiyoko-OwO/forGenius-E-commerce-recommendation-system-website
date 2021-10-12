@@ -22,3 +22,8 @@ Forgot password base code done
 week5 front end
 Optimize user log in and log out experience
 Interest functional code done
+Admin draft page done
+Address done
+Product view page done
+Add to cart done
+Forgot password functional code done

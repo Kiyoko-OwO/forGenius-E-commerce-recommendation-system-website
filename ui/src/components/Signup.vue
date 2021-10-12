@@ -67,9 +67,9 @@ export default {
     }
     return {
       signupForm: {
-        email: "first@first.com",
-	      name : "firstfirst",
-	      password: "First1111"
+        email: "",
+	      name : "",
+	      password: ""
       },
       signupRules: {
         email: [
@@ -98,8 +98,10 @@ export default {
           signup(this.signupForm).then ( res => {
             this.$message({message: 'Sign up Sucess!',type: 'success'});
             sessionStorage.clear();
+            console.log(res.data);
             sessionStorage.setItem('token',res.data.token);
-            this.$router.push('userprofile');
+            sessionStorage.setItem('username',res.data.username);
+            this.$router.push('/interest');
           }).catch( error => {
             this.$message.error('Sign up Failed');
           })

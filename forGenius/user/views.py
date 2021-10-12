@@ -6,7 +6,7 @@ import json
 import user.auth as auth
 import user.address as address
 import user.interest as interest
-from jwt import InvalidSignatureError
+import jwt as jwt
 
 ADMIN_EMAIL = '3900forgenius@gmail.com'
 
@@ -425,7 +425,7 @@ def add_user_interests(request):
             response.status_code = 400
             response.content = e
             return response
-        except InvalidSignatureError:
+        except jwt.InvalidSignatureError:
             response.status_code = 400
             response.content = "token is wrong"
             return response

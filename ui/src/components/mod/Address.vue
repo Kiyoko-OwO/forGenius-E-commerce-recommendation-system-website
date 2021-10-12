@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { address_edit } from '../api/user'
+import { address_edit } from '../../api/user'
 export default {
     inject:['reload'],
     props: ['index', 'userName', 'addressId', 'addressDe', 'phoneNumber'],
@@ -80,7 +80,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less" scoped>
 .my-address {
   width: 400px;
   padding: 20px;

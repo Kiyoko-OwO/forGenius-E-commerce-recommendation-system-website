@@ -52,8 +52,8 @@ export default {
     return {
       dialogVisible: false,
       loginForm: {
-        email: 'apitest@test.com',
-        password: 'New123456'
+        email: '',
+        password: ''
       },
       loginRules: {
         email: [
@@ -75,10 +75,17 @@ export default {
             login(this.loginForm).then( res => {
               this.$message({message: 'Log in Sucess!',type: 'success'});
               console.log(res.data);
-              sessionStorage.clear();
-              sessionStorage.setItem('token',res.data.token);
-              sessionStorage.setItem('username',res.data.username);
-              this.$router.push('userprofile');
+              console.log(res.status);
+              if (res.status == 255) {
+                sessionStorage.clear();
+                sessionStorage.setItem('token',res.data.token);
+                this.$router.push('/admin');
+              } else {
+                sessionStorage.clear();
+                sessionStorage.setItem('token',res.data.token);
+                sessionStorage.setItem('username',res.data.username);
+                this.$router.push('/userprofile');
+              }
             }).catch( error => {
               this.$message.error('Log in Failed');
             })

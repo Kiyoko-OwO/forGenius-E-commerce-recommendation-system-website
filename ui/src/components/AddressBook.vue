@@ -1,9 +1,10 @@
 <template>
   <div class="address_container">
     <header>
+        <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpHome">
         ADDRESS&nbsp;BOOK
     </header>
-    <img class="logo" src=../assets/2.png alt="logo">
+    
     <div id="address-container">
         <Address v-for="(obj,ind) in addressbook" :key="obj.address_id"
         :userName="obj.name"
@@ -20,13 +21,13 @@
 </template>
 
 <script>
-import Address from './Address.vue'
+import Address from './mod/Address.vue'
 import { address_view } from '../api/user'
 import { address_delete } from '../api/user'
 export default {
     data () {
         return {
-            addressbook : {},
+            addressbook : [],
             tokenForm: {
                 token: ''
             },
@@ -61,8 +62,10 @@ export default {
         },
         add() {
             this.$router.push('addressadd');
+        },
+        jumpHome () {
+            this.$router.push('Home');
         }
-
     }
 }
 </script>
@@ -71,7 +74,8 @@ export default {
 #address-container {
     position: absolute;
     top:100px;
-    border: 1px solid black;
+    left:50%;
+    transform: translate(-50%,0%);
 }
 
 .address_container{
@@ -93,22 +97,23 @@ header{
     font-size: 50px;
 }
 .logo{
-    height: 35%;    
+    height: 200%;    
     position: absolute;
     right: 80%;
-    top:-13.5%;
+    top:-56%;
     cursor: pointer;
 }
 
 .add{
     position: relative;
-    left:50%;
-    width: 100px;
+    left:70%;
+    top: 30px;
+    width: 130px;
     background: #786662;
     border-radius: 10px;
     color: #fefefe;
-    letter-spacing:4px;
-    padding-left: 26%;
+    letter-spacing:2px;
+    padding-left: 25px;
     border-color: #786662;
 }
 </style>

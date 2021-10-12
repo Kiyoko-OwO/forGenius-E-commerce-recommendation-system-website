@@ -1,6 +1,6 @@
 <template>
     <div class="add_container">
-      <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpAddress">
+      <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpAddress">
       <div class="add_box">
             <h1>ADD&nbsp;ADDRESS</h1>
       <el-form ref="add_FormRef" :rules="addRules" :model="addForm" class="add_form" label-position="left" label-width="225px">
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { address_add } from '../api/user'
+import { address_add } from '../../api/user'
 export default {
   data () {
     var checkName = (rule, value, callback) => {
@@ -53,9 +53,9 @@ export default {
     return {
       addForm: {
         token: '',
-        name: '123',
+        name: '',
         address: '',
-        phone_number: '123'
+        phone_number: ''
       },
       addRules: {
         name: [
@@ -80,10 +80,10 @@ export default {
         this.addForm.token = sessionStorage.getItem('token');
         console.log(this.addForm);
         address_add(this.addForm).then( res => {
-            this.$message({message: 'Sucess!======',type: 'success'});
+            this.$message({message: 'Add Address Sucess!',type: 'success'});
             this.$router.push('address');
         }).catch( error => {
-            this.$message.error('Failed=====');
+            this.$message.error('Failed');
         })
           } else {
             console.log('error submit!!');
@@ -167,7 +167,7 @@ h1{
 }
 </style>
 
-<style>
+<style lang="less" scoped>
 input.el-input__inner {
     border-radius:50px;
     height:30px;

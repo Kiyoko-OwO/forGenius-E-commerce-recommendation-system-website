@@ -1,3 +1,6 @@
+.DS_Store
+ui/package.json
+ui/package-lock.json
 forGenius/.vscode
 forGenius/venv
 */__pycache__/*
@@ -22,4 +25,3 @@ z5231859.txt
 z5248118.txt
 z5248280.txt
 z5301383.txt
-.DS_Store

@@ -1,7 +1,7 @@
 <template>
     <div id="profile_container">
         <header>
-            <img id="logo" src=../assets/logoThin.png alt="logo">
+            <img id="logo" src=../assets/logoThin.png alt="logo" @click="jumpHome">
             <button class="signUp" v-on:click="jumpSign" v-show="isGuest">Sign up</button>
             <button class="logIn" v-on:click="jumpLog" v-show="isGuest">Log in</button>
             <button @click="logOut" v-show="isUser">Log out</button>

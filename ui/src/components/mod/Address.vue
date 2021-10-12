@@ -80,7 +80,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less" scoped>
 .my-address {
   width: 400px;
   padding: 20px;

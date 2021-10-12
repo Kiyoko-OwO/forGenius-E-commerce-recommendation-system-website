@@ -72,6 +72,7 @@ export default {
             console.log(this.numberValidateForm);
             car_add(this.numberValidateForm).then( res => {
               this.$message({message: 'Sucess!',type: 'success'});
+              this.$router.push('cart');
             }).catch( error => {
               this.$message.error('Failed');
             })

@@ -167,7 +167,7 @@ h1{
 }
 </style>
 
-<style>
+<style lang="less" scoped>
 input.el-input__inner {
     border-radius:50px;
     height:30px;

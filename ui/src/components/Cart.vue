@@ -3,7 +3,7 @@
     <header>
         MY&nbsp;CART
     </header>
-    <img class="logo" src=../assets/2.png alt="logo">
+    <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpHome">
     <div class="cart-container">
         <Product v-for="(obj,ind) in cart" :key="obj.id"
         :proName="obj.name"
@@ -14,6 +14,8 @@
         @subQua = 'sub'
         @delPro = 'del'>
         </Product>
+        <p>Total Price: $</p>
+        <p>{{total_price}}</p>
         <el-button type="primary" class="checkout" @click="submitForm()">Check Out</el-button>
     </div>
   </div>
@@ -22,31 +24,35 @@
 <script>
 import Product from './mod/CartPro.vue'
 import imgObj from '../assets/2.png'
+import { car_view } from '../api/order'
+
 export default {
     data () {
         return {
-            cart : [
-                {
-                    id: "10",
-                    imgPath: imgObj,
-                    name: "Sample name",
-                    price: "123",
-                    quantity: 2
-                },
-                {
-                    id: "12",
-                    imgPath: imgObj,
-                    name: "Sample name2",
-                    price: "30",
-                    quantity: 1
-                }
-            ]
+            cart : [],
+            tokenForm: {
+                token: ''
+            },
+            total_price: ''
         }
+    },
+    created () {
+        this.loadCart()
     },
     components: {
         Product
     },
     methods: {
+        async loadCart() {
+            this.tokenForm.token = sessionStorage.getItem('token');
+            car_view(this.tokenForm).then( res => {
+                console.log(res.data.data);
+                this.cart = res.data.data.cart;
+                this.total_price = res.data.data.total;
+            }).catch( error => {
+                this.$message.error('Failed');
+            })
+        },
         submitForm() {
             console.log(this.cart);
         },
@@ -59,7 +65,11 @@ export default {
         del(index) {
             this.cart.splice(index, 1);
             console.log(this.cart);
+        },
+        jumpHome () {
+            this.$router.push('Home');
         }
+
     }
 }
 </script>
@@ -69,7 +79,6 @@ export default {
 .cart-container {
     position: absolute;
     top:100px;
-    border: 1px solid black;
     left:50%;
     transform: translate(-50%,0%);
 }

@@ -11,15 +11,16 @@ import json
 def view_product_user(request):
  
     response = HttpResponse()
-    if request.method == "POST":
+    if request.method == "GET":
+        # try:
+        #     data = json.loads(request.body)
+        # except json.JSONDecodeError:
+        #     response.status_code = 441
+        #     response.content = 'json.JSONDecodeErro'
+        #     return response
+        
         try:
-            data = json.loads(request.body)
-        except json.JSONDecodeError:
-            response.status_code = 441
-            response.content = 'json.JSONDecodeErro'
-            return response
-        try:
-            product_id = data["product_id"]
+            product_id = request.GET.get("product_id")
         except KeyError:
             response.status_code = 442
             response.content = "format is wrong"

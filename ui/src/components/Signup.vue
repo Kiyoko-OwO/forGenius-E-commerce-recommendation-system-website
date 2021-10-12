@@ -101,7 +101,7 @@ export default {
             console.log(res.data);
             sessionStorage.setItem('token',res.data.token);
             sessionStorage.setItem('username',res.data.username);
-            this.$router.push('userprofile');
+            this.$router.push('/interest');
           }).catch( error => {
             this.$message.error('Sign up Failed');
           })

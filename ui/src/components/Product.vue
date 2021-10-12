@@ -11,7 +11,7 @@
         <h3>Description: {{product.description}}</h3>
         <h3>Warranty: {{product.warranty}}</h3>
         <h3>Delivery date: {{product.delivery_date}}</h3>
-        <!-- <h3>Price: {{product.price}}</h3> -->
+        <h3>Price: $ {{product.price}}</h3>
         <el-form :model="numberValidateForm" ref="numberValidateForm" label-width="100px" class="demo-ruleForm">
           <el-form-item
             label="Quantity"

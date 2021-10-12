@@ -36,7 +36,7 @@ export default {
       this.interestForm.token = sessionStorage.getItem('token');
       interest_add(this.interestForm).then ( res => {
           this.$message({message: 'Sucess!',type: 'success'});
-          this.$router.push('Home');
+          this.$router.push('userprofile');
       }).catch( error => {
           this.$message.error('Failed');
       })

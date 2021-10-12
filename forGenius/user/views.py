@@ -383,7 +383,7 @@ def add_user_interests(request):
             response.status_code = 400
             response.content = e
             return response
-        except InvalidSignatureError:
+        except jwt.InvalidSignatureError:
             response.status_code = 400
             response.content = "token is wrong"
             return response

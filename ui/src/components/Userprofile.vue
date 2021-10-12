@@ -4,7 +4,7 @@
             <img id="logo" src=../assets/logoThin.png alt="logo">
             <button class="signUp" v-on:click="jumpSign" v-show="isGuest">Sign up</button>
             <button class="logIn" v-on:click="jumpLog" v-show="isGuest">Log in</button>
-            <button v-on:click="jumpHome" @click="logOut" v-show="isUser">Log out</button>
+            <button @click="logOut" v-show="isUser">Log out</button>
             <button id="usern" v-show="isUser">{{ username }}</button>
         </header>
         <main>
@@ -73,7 +73,7 @@ export default {
       logout(this.tokenForm).then ( res => {
           this.$message({message: 'Log out Sucess!',type: 'success'});
           sessionStorage.clear();
-          this.reload();
+          this.$router.push('home')
       }).catch( error => {
           this.$message.error('Log out Failed');
       })

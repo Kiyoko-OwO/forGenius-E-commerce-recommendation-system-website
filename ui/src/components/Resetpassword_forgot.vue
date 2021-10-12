@@ -4,12 +4,12 @@
         <div class="reset_box">
             <h1>RESET&nbsp;PASSWORD</h1>
         <el-form ref="resetFormRef" :model="resetForm" :rules="resetpasswordRules" label-position="left" label-width="225px" class="reset_form">
-            <el-form-item label="code"  class="code_change" prop="code">
-              <el-input v-model="resetForm.code">
+            <el-form-item label="code"  class="code_change" prop="reset_code">
+              <el-input v-model="resetForm.reset_code">
               </el-input>
         </el-form-item>
-            <el-form-item label="NEW PASSWORD" class="newpassword_change" prop="newpassword">
-              <el-input v-model="resetForm.newpassword" type = "password" placeholder="6-12 characters contain uc,lc and number">
+            <el-form-item label="NEW PASSWORD" class="newpassword_change" prop="new_password">
+              <el-input v-model="resetForm.new_password" type = "password" placeholder="6-12 characters contain uc,lc and number">
               </el-input>
         </el-form-item>
         </el-form>
@@ -19,11 +19,15 @@
 </template>
 
 <script>
+import { reset_password } from '../api/user'
+
 export default {
   data () {
     var checkCode = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('Code cannot be empty'))
+      } else {
+        callback()
       }
     }
     var checkPassword = (rule, value, callback) => {
@@ -41,8 +45,8 @@ export default {
     }
     return {
       resetForm: {
-        code: '',
-        newpassword: ''
+        reset_code: '',
+        new_password: ''
       },
       resetpasswordRules: {
         code: [
@@ -58,7 +62,15 @@ export default {
   methods: {
     reset () {
       this.$refs.resetFormRef.validate(valid => {
-        console.log(valid)
+        console.log(valid);
+        console.log(this.resetForm);
+        reset_password(this.resetForm).then ( res => {
+          this.$message({message: 'Sucess!',type: 'success'});
+          console.log(res.data);
+          this.$router.push('/login');
+        }).catch( error => {
+            this.$message.error('Failed');
+        })
       })
     }
   }

@@ -21,6 +21,7 @@
               <input type="submit" v-on:click="jumpResult" value="SEARCH">
             </form>
           </div>
+          <button v-on:click="jumpProduct">Product example</button>
         </main>
         <footer></footer>
     </div>
@@ -74,6 +75,9 @@ export default {
     },
     jumpProfile () {
       this.$router.push('userprofile')
+    },
+    jumpProduct () {
+      this.$router.push('product')
     },
     addFn(){
       if (this.counter == 5) {

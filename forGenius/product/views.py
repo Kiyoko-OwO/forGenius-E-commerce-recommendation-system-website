@@ -19,12 +19,18 @@ def view_product_user(request):
         #     response.content = 'json.JSONDecodeErro'
         #     return response
         
-        try:
-            product_id = request.GET.get("product_id")
-        except KeyError:
+        
+        product_id = request.GET.get("product_id")
+        # except KeyError:
+        #     response.status_code = 442
+        #     response.content = "format is wrong"
+        #     return response
+
+        if product_id is None:
             response.status_code = 442
-            response.content = "format is wrong"
+            response.content = "KeyError"
             return response
+
         try:
             data = products.product_userView(product_id)
         except ProductIdError as e:

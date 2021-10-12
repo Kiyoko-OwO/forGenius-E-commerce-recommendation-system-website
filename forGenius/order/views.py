@@ -57,18 +57,23 @@ def add_to_cart(request):
 
 def view_cart(request):
     response = HttpResponse()
-    if request.method == "POST":
-        try:
-            data = json.loads(request.body)
-        except json.JSONDecodeError:
-            response.status_code = 441
-            response.content = 'json.JSONDecodeErro'
-            return response
-        try:
-            token = data['token']
-        except KeyError:
+    if request.method == "GET":
+        # try:
+        #     data = json.loads(request.body)
+        # except json.JSONDecodeError:
+        #     response.status_code = 441
+        #     response.content = 'json.JSONDecodeErro'
+        #     return response
+        # try:
+        token = request.GET.get("token")
+        # except KeyError:
+        #     response.status_code = 442
+        #     response.content = 'KeyError'
+        #     return response
+
+        if token is None:
             response.status_code = 442
-            response.content = 'KeyError'
+            response.content = "KeyError"
             return response
 
         try:

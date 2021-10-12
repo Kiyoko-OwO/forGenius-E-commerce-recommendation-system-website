@@ -27,7 +27,7 @@ import { address_delete } from '../api/user'
 export default {
     data () {
         return {
-            addressbook : {},
+            addressbook : [],
             tokenForm: {
                 token: ''
             },
@@ -74,7 +74,8 @@ export default {
 #address-container {
     position: absolute;
     top:100px;
-    border: 1px solid black;
+    left:50%;
+    transform: translate(-50%,0%);
 }
 
 .address_container{
@@ -105,13 +106,14 @@ header{
 
 .add{
     position: relative;
-    left:50%;
-    width: 100px;
+    left:70%;
+    top: 30px;
+    width: 130px;
     background: #786662;
     border-radius: 10px;
     color: #fefefe;
-    letter-spacing:4px;
-    padding-left: 26%;
+    letter-spacing:2px;
+    padding-left: 25px;
     border-color: #786662;
 }
 </style>

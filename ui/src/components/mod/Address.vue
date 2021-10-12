@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { address_edit } from '../api/user'
+import { address_edit } from '../../api/user'
 export default {
     inject:['reload'],
     props: ['index', 'userName', 'addressId', 'addressDe', 'phoneNumber'],

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="admin_container">
         <h1>Admin page</h1>
         <button @click="logOut">Log out</button>
     </div>
@@ -32,5 +32,8 @@ export default {
 </script>
 
 <style>
-
+#admin_container {
+    background-color: #d1dbda;
+    height: 100%;
+}
 </style>

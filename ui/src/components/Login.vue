@@ -87,7 +87,7 @@ export default {
                 this.$router.push('/userprofile');
               }
             }).catch( error => {
-              this.$message.error('Log in Failed');
+              this.$message.error('Incorrect email or password');
             })
           } else {
             console.log('error submit!!');

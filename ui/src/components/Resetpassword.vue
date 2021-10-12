@@ -70,7 +70,7 @@ export default {
             this.$message({message: 'Reset password Sucess!',type: 'success'});
             this.$router.push('userprofile');
           }).catch( error => {
-             this.$message.error('Reset password Failed');
+             this.$message.error('Incorrect old password or new password invalid');
           })
         }
       })

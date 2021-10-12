@@ -12,6 +12,7 @@ class Product(models.Model):
     delivery_date = models.DateField(blank = True, auto_now=False, auto_now_add=False)
     sales_data = models.IntegerField(validators=[MinValueValidator(0)], default=0)
     admin_email = models.ForeignKey(Admin, on_delete=CASCADE)
+    price = models.IntegerField(validators=[MinValueValidator(0)], default=0)
 
 class Features(models.Model):
     product_id = models.ForeignKey(Product, on_delete=CASCADE)

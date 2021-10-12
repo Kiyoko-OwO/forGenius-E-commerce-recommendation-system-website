@@ -12,7 +12,8 @@ def product_userView(product_id):
             "name" : product_query.name,
             "description" : product_query.description,
             "warranty" : product_query.warranty,
-            "delivery_date" : product_query.delivery_date
+            "delivery_date" : product_query.delivery_date,
+            "price" : product_query.price
         } 
     return info
 

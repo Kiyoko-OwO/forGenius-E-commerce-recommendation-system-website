@@ -54,3 +54,51 @@ def add_to_cart(request):
         return response
     response.status_code = 405
     return response
+
+def view_cart(request):
+    response = HttpResponse()
+    if request.method == "GET":
+        # try:
+        #     data = json.loads(request.body)
+        # except json.JSONDecodeError:
+        #     response.status_code = 441
+        #     response.content = 'json.JSONDecodeErro'
+        #     return response
+        # try:
+        token = request.GET.get("token")
+        # except KeyError:
+        #     response.status_code = 442
+        #     response.content = 'KeyError'
+        #     return response
+
+        if token is None:
+            response.status_code = 442
+            response.content = "KeyError"
+            return response
+
+        try:
+            email = token_to_email(token)
+        except InputError as e:
+            response.status_code = 400
+            response.content = e
+            return response
+        except jwt.InvalidSignatureError:
+            response.status_code = 400
+            response.content = "token is wrong"
+            return response
+
+        try:
+            data = cart.view_cart(email)
+        except InputError as e:
+            response.status_code = 400
+            response.content = e
+            return response
+        response.status_code = 200
+        meta = {'msg' : 'OK', 'status': 200}
+        jsons = {
+            'data' : data,
+            'meta' : meta
+        }
+        return JsonResponse(jsons)
+    response.status_code = 405
+    return response

@@ -1,9 +1,16 @@
 <template>
     <div id="admin_container">
-        <h1>Admin page</h1>
-        <button @click="logOut">Log out</button>
+        <header>
+            <button @click="logOut" v-show="isUser">Log out</button>
+            <button id="usern" v-show="isUser">{{ username }}</button>
+        </header>
+        <main>
+            <img id="logo" src=../assets/logoThin.png alt="logo">
+            <button class="manageProduct" v-on:click="jumpManageproduct">MANAGE PRODUCT</button>
+            <button class="address" v-on:click="jumpAddressbook">ADDRESS BOOK</button>
+        </main>
+        <footer></footer>
     </div>
-  
 </template>
 
 <script>
@@ -26,14 +33,52 @@ export default {
             }).catch( error => {
                 this.$message.error('Log out Failed');
             })
-        }
+        },
+    jumpAddproduct () {
+      this.$router.push('/addproduct')
+    },
+    jumpManageproduct () {
+      this.$router.push('/manageproduct')
+    }
     }
 }
 </script>
 
-<style>
+<style lang="less" scoped>
+*{
+    font-family: 'segUi';
+}
 #admin_container {
     background-color: #d1dbda;
     height: 100%;
+}
+header {
+    height: 100px;
+    width: 1000px;
+    margin: 0 auto;
+}
+header #logo {
+    height: 50px;
+    float: left;
+    margin-top: 25px;
+}
+button {
+    float: right;
+    border-radius: 4px;
+    padding: 2px 15px;
+    margin-left: 50px;
+    margin-top: 35px;
+    border-color: grey;
+    color: grey;
+    cursor: pointer;
+}
+main {
+    width: 1000px;
+    margin: 0 auto;
+}
+main #logo {
+    width: 800px;
+    margin-left: 100px;
+    margin-top: 0px;
 }
 </style>

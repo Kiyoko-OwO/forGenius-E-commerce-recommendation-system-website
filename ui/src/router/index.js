@@ -13,6 +13,8 @@ import AddressBook from '../components/AddressBook.vue'
 import AddressAdd from '../components/mod/AddressAdd.vue'
 import Cart from '../components/Cart.vue'
 import AdminPage from '../components/AdminPage'
+import Addproduct from '../components/Addproduct'
+import Manageproduct from '../components/Manageproduct'
 Vue.use(VueRouter)
 
 const originalPush = VueRouter.prototype.push
@@ -71,6 +73,12 @@ const routes = [
   },{
     path: '/admin',
     component: AdminPage
+  },{
+    path: '/addproduct',
+    component: Addproduct
+  },{
+    path: '/manageproduct',
+    component: Manageproduct
   }
 ]
 

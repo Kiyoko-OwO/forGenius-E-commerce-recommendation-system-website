@@ -1,7 +1,7 @@
 <template>
     <div class="signup_container">
-        <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpHome">
         <div class="signup_box">
+            <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpHome">
             <h1>REGISTER</h1>
         <el-form ref="signupFormRef" :model="signupForm" :rules="signupRules" label-position="left" label-width="225px" class="signup_form">
             <el-form-item label="USERNAME"  class="username_change" prop="name">
@@ -190,10 +190,10 @@ h1{
     transform: translate(-50%,-50%);
 }
 .logo{
-    height: 35%;
+    height: 90%;
     position: absolute;
-    right: 55%;
-    top:-7.5%;
+    right: 64%;
+    top:-83%;
     cursor: pointer;
 }
 .signup_form{

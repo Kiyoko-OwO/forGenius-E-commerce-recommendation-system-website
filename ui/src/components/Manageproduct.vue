@@ -51,7 +51,7 @@ header{
 .logo{
     height: 300%;    
     position: absolute;
-    right: 80%;
+    right: 81%;
     top:-120.5%;
     cursor: pointer;
     z-index: 100;

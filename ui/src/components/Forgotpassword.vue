@@ -1,7 +1,7 @@
 <template>
     <div class="fogot_container">
-        <img class="logo" src=../assets/2.png alt="logo">
         <div class="fogot_box">
+            <img class="logo" src=../assets/2.png alt="logo">
             <h1>FORGOT&nbsp;PASSWORD</h1>
         <el-form ref="forgotFormRef" :model="forgotForm" :rules="forgotRules" label-position="left" label-width="225px" class="forgot_form">
             <el-form-item label="EMAIL ADDRESS"  class="email_change" prop="email">
@@ -15,8 +15,6 @@
 </template>
 
 <script>
-import { send_code } from '../api/user'
-
 export default {
   data () {
     var checkEmail = (rule, value, callback) => {
@@ -47,14 +45,6 @@ export default {
     forgot () {
       this.$refs.forgotFormRef.validate(valid => {
         console.log(valid)
-        console.log(this.forgotForm);
-        send_code(this.forgotForm).then ( res => {
-          this.$message({message: 'Sucess!',type: 'success'});
-          console.log(res);
-          this.$router.push('/resetpassword/forgot');
-        }).catch( error => {
-          this.$message.error('Not registered yet, please sign up');
-        })
       })
     }
   }
@@ -101,10 +91,11 @@ h1{
     transform: translate(-50%,-50%);
 }
 .logo{
-    height: 35%;
+    height: 90%;
     position: absolute;
-    right: 55%;
-    top:-7.5%;
+    right: 64%;
+    top:-83%;
+    cursor: pointer;
 }
 .forgot_form{
     width: 530px;

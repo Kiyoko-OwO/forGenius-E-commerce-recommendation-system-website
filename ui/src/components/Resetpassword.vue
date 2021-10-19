@@ -1,7 +1,7 @@
 <template>
     <div class="reset_container">
-        <img class="logo" src=../assets/2.png alt="logo">
         <div class="reset_box">
+        <img class="logo" src=../assets/2.png alt="logo">
             <h1>RESET&nbsp;PASSWORD</h1>
         <el-form ref="resetFormRef" :model="resetForm" :rules="resetpasswordRule" label-position="left" label-width="225px" class="reset_form">
             <el-form-item label="OLD PASSWORD"  class="oldpassword_change" prop="old_password">
@@ -119,10 +119,11 @@ h1{
     transform: translate(-50%,-50%);
 }
 .logo{
-        height: 35%;
-        position: absolute;
-        right: 55%;
-        top:-7.5%;
+    height: 90%;
+    position: absolute;
+    right: 64%;
+    top:-83%;
+    cursor: pointer;
 }
 .reset_form{
     width: 530px;

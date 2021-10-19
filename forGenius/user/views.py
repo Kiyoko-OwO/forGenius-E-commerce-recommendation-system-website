@@ -193,6 +193,10 @@ def add_address_book(request):
             name = data['name']
             address_name = data['address']
             phone_number = data['phone_number']
+            if not str.isdigit(phone_number):
+                response.status_code = 443
+                response.content = 'Phone Number is not digitial'
+                return response
         except KeyError:
             response.status_code = 442
             response.content = 'KeyError'
@@ -297,6 +301,10 @@ def edit_address_book(request):
             address_name = data['address']
             phone_number = data['phone_number']
             address_id = data['address_id']
+            if not str.isdigit(phone_number):
+                response.status_code = 443
+                response.content = 'Phone Number is not digitial'
+                return response
         except KeyError:
             response.status_code = 442
             response.content = 'KeyError'

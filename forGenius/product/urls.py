@@ -5,4 +5,9 @@ app_name = 'product'
 
 urlpatterns = [
     path('user/view/', view_product_user, name='view_product_user'),
+    path('add/', admin_add_product, name='admin_add_product'),
+    path('edit/', admin_edit_product, name='admin_edit_product'),
+    path('delete/', admin_delete_product, name='admin_delete_product'),
+    path('all/', admin_products_all, name='admin_products_all'),
+ 
 ]

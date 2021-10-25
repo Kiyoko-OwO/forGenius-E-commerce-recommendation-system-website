@@ -16,8 +16,17 @@
               <el-input v-model="signupForm.password" type = "password" placeholder="6-12 characters contain uc,lc and number">
               </el-input>
         </el-form-item>
+            <el-form-item label="CONFIRM PASSWORD" class="password_change" prop="confirm_password">
+              <el-input v-model="signupForm.confirm_password" type = "password" placeholder="input password again">
+              </el-input>
+        </el-form-item>
+            <el-form-item label="EMAIL CODE" class="code_change" style="width: 400px">
+              <el-input v-model="signupForm.code" >
+              </el-input>
+        </el-form-item>
         <div class="block"></div>
         <el-form-item>
+        <el-button class='send' @click="send">SEND</el-button>
         <el-button class='submit' @click="signup">SUBMIT</el-button>
         </el-form-item>
         </el-form>
@@ -65,11 +74,22 @@ export default {
         }
       }, 100)
     }
+    var confirmPassword = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('password cannot be empty'));
+        } else if (value !== this.signupForm.password) {
+          callback(new Error('Two inputs don\'t match!'));
+        } else {
+          callback();
+        }
+    }
     return {
       signupForm: {
         email: "",
 	      name : "",
-	      password: ""
+	      password: "",
+        confirm_password:"",
+        code: ""
       },
       signupRules: {
         email: [
@@ -82,7 +102,10 @@ export default {
         password: [
           { min: 6, max: 12, message: 'the password should be 6-12 characters', trigger: 'blur' },
           { validator: checkPassword, trigger: 'blur' }
-        ]
+        ],
+       confirm_password: [
+         { validator: confirmPassword, trigger: 'blur'}
+       ]
       }
     }
   },
@@ -175,13 +198,29 @@ h1{
     letter-spacing:10px;
     padding-left: 30px;
 }
+.send{
+    position: absolute;
+    left:80%;
+    height:30px;
+    top:-115px;
+    width:100px;
+    transform: translate(-50%,-50%);
+    border-radius: 10px;
+    background: #786662;
+    color: #fefefe;
+    border-radius: 20px;
+    letter-spacing:7px;
+    padding-left: 22px;
+    padding-top:8px;
+    font-size:13px;
+}
 .signup_container {
     background-color: #d1dbda;
     height: 100%;
 }
 .signup_box{
     background-color:#e7eae8;
-    height: 425px;
+    height: 550px;
     width: 750px;
     position: absolute;
     border-radius: 30px;
@@ -193,14 +232,14 @@ h1{
     height: 90%;
     position: absolute;
     right: 64%;
-    top:-83%;
+    top:-66%;
     cursor: pointer;
 }
 .signup_form{
     width: 530px;
     position: absolute;
     border-radius: 80px;
-    top: 30%;
+    top: 20%;
     left: 15%;
 }
 .username{
@@ -230,6 +269,14 @@ h1{
     letter-spacing:.1em;
     font-size: 18px;
 }
+.code_change /deep/ .el-form-item__label{
+    font-family: 'segUi';
+    letter-spacing:.1em;
+    font-size: 18px;
+}
+
+
+
 .el-form-item{
    margin-bottom:15px
 }

@@ -13,7 +13,7 @@ import AddressBook from '../components/AddressBook.vue'
 import AddressAdd from '../components/mod/AddressAdd.vue'
 import Cart from '../components/Cart.vue'
 import AdminPage from '../components/AdminPage'
-import Addproduct from '../components/Addproduct'
+import Addproduct from '../components/mod/Addproduct'
 import Manageproduct from '../components/Manageproduct'
 Vue.use(VueRouter)
 

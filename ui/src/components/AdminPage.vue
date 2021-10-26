@@ -7,7 +7,6 @@
         <main>
             <img id="logo" src=../assets/logoThin.png alt="logo">
             <button class="manageProduct" v-on:click="jumpManageproduct">MANAGE PRODUCT</button>
-            <button class="address" v-on:click="jumpAddressbook">ADDRESS BOOK</button>
         </main>
         <footer></footer>
     </div>
@@ -34,13 +33,10 @@ export default {
                 this.$message.error('Log out Failed');
             })
         },
-    jumpAddproduct () {
-      this.$router.push('/addproduct')
-    },
     jumpManageproduct () {
       this.$router.push('/manageproduct')
     }
-    }
+  }
 }
 </script>
 

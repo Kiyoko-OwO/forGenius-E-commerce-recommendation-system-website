@@ -44,11 +44,17 @@ export default {
       }
     }
     var checkPhone = (rule, value, callback) => {
+      const mailReg = /^\d+$/
       if (!value) {
-        return callback(new Error('phone cannot be empty'))
-      } else {
-        callback()
+        return callback(new Error('phonenumber cannot be empty'))
       }
+      setTimeout(() => {
+        if (mailReg.test(value)) {
+          callback()
+        } else {
+          callback(new Error('the phonenumber should be number'))
+        }
+      }, 100)
     }
     return {
       addForm: {

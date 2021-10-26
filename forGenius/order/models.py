@@ -11,6 +11,11 @@ class Order(models.Model):
     user_email = models.ForeignKey(User, on_delete=CASCADE)
     date_time = models.DateTimeField(auto_now_add=True)
     quantity = models.IntegerField(validators=[MinValueValidator(1)])
+    price = models.IntegerField(validators=[MinValueValidator(0)], default=0)
+    name = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
+    phone_number = models.IntegerField(validators=[MinValueValidator(1)])
+    paid = models.BooleanField(default=False)
 
     class Meta:
 
@@ -18,7 +23,7 @@ class Order(models.Model):
 
         unique_together = ("order_id", "product_id", "user_email")
 
-        
+
 
 class Cart(models.Model):
     user_email = models.ForeignKey(User, on_delete=CASCADE)

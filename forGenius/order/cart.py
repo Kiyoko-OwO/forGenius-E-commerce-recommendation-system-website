@@ -3,7 +3,7 @@ from order.errors import CartProductError
 from product.models import Product
 from user.models import User
 from user.errors import InputError
-from product.errors import ProductIdError
+from order.errors import EmptyCartError
 
 
 def add_to_cart(email, product_id, quantity):
@@ -15,7 +15,7 @@ def add_to_cart(email, product_id, quantity):
     try:
         product_id = Product.objects.get(pk=product_id)
     except Product.DoesNotExist:
-        raise ProductIdError("This product does not exist")
+        raise EmptyCartError("Cart is empty")
 
     try:
         user_cart = Cart.objects.get(user_email=user_email, product_id=product_id)

@@ -1,19 +1,35 @@
 <template>
     <div class="add_container">
-      <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpAddress">
       <div class="add_box">
-            <h1>ADD&nbsp;ADDRESS</h1>
+            <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpAddress">
+            <h1>ADD&nbsp;PRODUCT</h1>
       <el-form ref="add_FormRef" :rules="addRules" :model="addForm" class="add_form" label-position="left" label-width="225px">
-          <el-form-item label="NAME" class="username_change" prop="name">
+          <el-form-item label="ID" class="change" prop="id">
+            <el-input v-model="addForm.id" autocomplete="off">
+            </el-input>
+          </el-form-item>
+          <el-form-item label="NAME" class="change" prop="name">
             <el-input v-model="addForm.name" autocomplete="off">
             </el-input>
           </el-form-item>
-          <el-form-item label="ADDRESS" class="username_change" prop="address">
-            <el-input v-model="addForm.address" autocomplete="off">
+          <el-form-item label="WARRANTY" class="change" prop="warranty">
+            <el-input v-model="addForm.warranty" autocomplete="off">
             </el-input>
           </el-form-item>
-          <el-form-item label="PHONE NUMBER" class="username_change" prop="phone_number">
-            <el-input v-model="addForm.phone_number" autocomplete="off">
+          <el-form-item label="DESCRIPTION" class="change" prop="description">
+            <el-input v-model="addForm.description" autocomplete="off">
+            </el-input>
+          </el-form-item>
+          <el-form-item label="DELIVERY DATE" class="change" prop="delivery">
+            <el-input v-model="addForm.delivery" autocomplete="off">
+            </el-input>
+          </el-form-item>
+          <el-form-item label="SALES DATA" class="change" prop="sales">
+            <el-input v-model="addForm.sales" autocomplete="off">
+            </el-input>
+          </el-form-item>
+          <el-form-item label="PRICE" class="change" prop="price">
+            <el-input v-model="addForm.price" autocomplete="off">
             </el-input>
           </el-form-item>
           <div class="block"></div>
@@ -59,9 +75,13 @@ export default {
     return {
       addForm: {
         token: '',
+        id: '',
         name: '',
-        address: '',
-        phone_number: ''
+        warranty: '',
+        description:'',
+        delivery:'',
+        sales:'',
+        price:'',
       },
       addRules: {
         name: [
@@ -122,7 +142,7 @@ h1{
 }
 .add_box{
     background-color:#e7eae8;
-    height: 425px;
+    height: 600px;
     width: 750px;
     position: absolute;
     border-radius: 30px;
@@ -131,22 +151,21 @@ h1{
     transform: translate(-50%,-50%);
 }
 .logo{
-    height: 35%;
-    width: 40;
+    height: 90%;
     position: absolute;
-    right: 55%;
-    top:-7.5%;
+    right: 64%;
+    top:-63%;
     cursor: pointer;
 }
 .add_form{
     width: 530px;
     position: absolute;
     border-radius: 80px;
-    top: 30%;
+    top: 18%;
     left: 15%;
 }
 
-.username_change /deep/ .el-form-item__label{
+.change /deep/ .el-form-item__label{
     font-family: 'segUi';
     letter-spacing:.1em;
     font-size: 18px;
@@ -162,8 +181,8 @@ h1{
     transform: translate(-50%,-50%);
     border-radius: 10px;
     background: #786662;
-    color: #fefefe;
     border-color: #786662;
+    color: #fefefe;
     letter-spacing:10px;
     padding-left: 30px;
 }

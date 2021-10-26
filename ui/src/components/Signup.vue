@@ -20,7 +20,7 @@
               <el-input v-model="signupForm.confirm_password" type = "password" placeholder="input password again">
               </el-input>
         </el-form-item>
-            <el-form-item label="EMAIL CODE" class="code_change" prop="code" style="width: 400px">
+            <el-form-item label="EMAIL CODE" class="code_change" prop="code">
               <el-input v-model="signupForm.code" >
               </el-input>
         </el-form-item>
@@ -282,6 +282,9 @@ h1{
     font-family: 'segUi';
     letter-spacing:.1em;
     font-size: 18px;
+}
+.code_change{
+  width: 400px
 }
 
 

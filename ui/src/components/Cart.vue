@@ -2,8 +2,8 @@
   <div class="cart_container">
     <header>
         MY&nbsp;CART
-    </header>
     <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpHome">
+    </header>
     <div class="cart-container">
         <Product v-for="(obj,ind) in cart" :key="obj.id"
         :proName="obj.name"
@@ -103,10 +103,10 @@ header{
     z-index: 50;
 }
 .logo{
-    height: 35%;    
+    height: 300%;    
     position: absolute;
-    right: 80%;
-    top:-13.5%;
+    right: 81%;
+    top:-120.5%;
     cursor: pointer;
     z-index: 100;
 }

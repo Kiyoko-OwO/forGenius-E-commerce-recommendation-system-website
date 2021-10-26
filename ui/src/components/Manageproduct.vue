@@ -3,7 +3,7 @@
     <header>
         MANAGE&nbsp;PRODUCT
        <el-button class="addProduct" v-on:click="jumpAddproduct">ADD PROCDUCT</el-button>
-       <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpHome">
+       <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpAdmin">
     </header>
     <div class="manage-container">
     </div>
@@ -15,6 +15,9 @@ export default {
   methods: {
     jumpAddproduct () {
       this.$router.push('/addproduct')
+    },
+    jumpAdmin () {
+      this.$router.push('/admin')
     }
   }
 }
@@ -58,13 +61,16 @@ header{
 }
 
 .addProduct{
+    height: 40%;
     position: absolute;
     border-radius: 4px;
     padding: 2px 20px;
-    margin-left: 10px;
-    margin-top: 35px;
-    border-color: grey;
-    color: grey;
+    margin-left: 300px;
+    margin-top: 40px;
+    background: #786662;
+    border-radius: 10px;
+    color: #fefefe;
+    border-color:#786662;
     cursor: pointer;
 }
 

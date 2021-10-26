@@ -132,11 +132,12 @@ header{
     font-size: 50px;
 }
 .logo{
-    height: 200%;    
+    height: 300%;    
     position: absolute;
-    right: 80%;
-    top:-56%;
+    right: 81%;
+    top:-120.5%;
     cursor: pointer;
+    z-index: 100;
 }
 
 .save{

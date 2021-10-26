@@ -59,6 +59,11 @@ def edit_cart_product_quantity(email, product_id, quantity):
         user_email = User.objects.get(pk=email)
     except User.DoesNotExist:
         raise InputError('User not exist')
+    
+    try:
+        product_id = Product.objects.get(pk=product_id)
+    except Product.DoesNotExist:
+        raise ProductIdError("This product does not exist")
 
     try:
         user_cart = Cart.objects.get(user_email=user_email, product_id=product_id)
@@ -73,6 +78,11 @@ def remove_cart_product(email, product_id):
         user_email = User.objects.get(pk=email)
     except User.DoesNotExist:
         raise InputError('User not exist')
+    
+    try:
+        product_id = Product.objects.get(pk=product_id)
+    except Product.DoesNotExist:
+        raise ProductIdError("This product does not exist")
 
     try:
         user_cart = Cart.objects.get(user_email=user_email, product_id=product_id)

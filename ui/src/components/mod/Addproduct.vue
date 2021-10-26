@@ -4,10 +4,6 @@
             <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpAddress">
             <h1>ADD&nbsp;PRODUCT</h1>
       <el-form ref="add_FormRef" :rules="addRules" :model="addForm" class="add_form" label-position="left" label-width="225px">
-          <el-form-item label="ID" class="change" prop="id">
-            <el-input v-model="addForm.id" autocomplete="off">
-            </el-input>
-          </el-form-item>
           <el-form-item label="NAME" class="change" prop="name">
             <el-input v-model="addForm.name" autocomplete="off">
             </el-input>
@@ -75,7 +71,6 @@ export default {
     return {
       addForm: {
         token: '',
-        id: '',
         name: '',
         warranty: '',
         description:'',

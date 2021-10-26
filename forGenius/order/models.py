@@ -7,15 +7,19 @@ from django.core.validators import MinValueValidator
 # Create your models here.
 class Order(models.Model):
     order_id = models.IntegerField(null = False, blank = False)
-    product_id = models.ForeignKey(Product, on_delete=CASCADE)
     user_email = models.ForeignKey(User, on_delete=CASCADE)
     date_time = models.DateTimeField(auto_now_add=True)
-    quantity = models.IntegerField(validators=[MinValueValidator(1)])
+    paid = models.BooleanField(default=False)
+    # product details
+    product_name = models.CharField(max_length=255, null=False, blank=False)
     price = models.IntegerField(validators=[MinValueValidator(0)], default=0)
+    product_id = models.IntegerField(null = False, blank = False)
+    quantity = models.IntegerField(validators=[MinValueValidator(1)])
+    # address detail
     name = models.CharField(max_length=255)
     address = models.CharField(max_length=255)
     phone_number = models.IntegerField(validators=[MinValueValidator(1)])
-    paid = models.BooleanField(default=False)
+    
 
     class Meta:
 

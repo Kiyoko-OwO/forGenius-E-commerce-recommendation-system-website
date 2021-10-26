@@ -151,6 +151,47 @@ def create_order(request):
     response.status_code = 405
     return response
 
+def view_order(request):
+    response = HttpResponse()
+    if request.method == "GET":
+        token = request.GET.get("token")
+        if token is None:
+            response.status_code = 442
+            response.content = "KeyError"
+            return response
+
+        order_id = request.GET.get("order_id")
+        if order_id is None:
+            response.status_code = 442
+            response.content = "KeyError"
+            return response
+
+        try:
+            email = token_to_email(token)
+        except InputError as e:
+            response.status_code = 400
+            response.content = e
+            return response
+        except jwt.InvalidSignatureError:
+            response.status_code = 400
+            response.content = "token is wrong"
+            return response
+
+        try:
+            data = order.view_order(email, order_id)
+        except InputError as e:
+            response.status_code = 400
+            response.content = e
+            return response
+        except EmptyCartError as e:
+            response.status_code = 400
+            response.content = e
+            return response
+        response.status_code = 200
+        return HttpResponse(json.dumps(data), content_type="application/json")
+    response.status_code = 405
+    return response
+
 def pay_order(request):
     response = HttpResponse()
     if request.method == "POST":

@@ -1,5 +1,6 @@
 from order.errors import EmptyCartError
 from order.models import Order, Cart
+from product.models import Product
 from user.models import User
 from user.errors import InputError
 import time
@@ -17,10 +18,12 @@ def create_order(email, name, address, phone_number):
     order_id = int(round(time.time() * 1000))
 
     for item in cart:
-        Order(order_id=order_id, product_id=item.product_id.product_id,
+        # product_id = Product.objects.get(pk=item.product_id)
+        Order(order_id=order_id, product_id=item.product_id,
               user_email=user_email, quantity=item.quantity, price=item.product_id.price,
               name=name, address=address, phone_number=phone_number).save()
     cart.delete()
+    return order_id
 
 def view_order(email, order_id):
     # check user authorization (potential attack: one user view another user's order)
@@ -33,15 +36,17 @@ def view_order(email, order_id):
     if len(order) == 0:
         raise InputError('Order not exist')
     
-    first_line = order[:1].get()
-    data = {"order_id": order_id,
-            "item" : [], 
-            "total": 0,
-            "name": first_line.name,
-            "address": first_line.address,
-            "phone_number": first_line.phone_number,
-            "paid": first_line.paid,
-            }
+    for temp in order:
+        data = {"order_id": order_id,
+                "item" : [], 
+                "total": 0,
+                "name": temp.name,
+                "address": temp.address,
+                "phone_number": temp.phone_number,
+                "paid": temp.paid,
+                }
+        break
+    
     total = 0
     for item in order:
         info = {
@@ -52,7 +57,7 @@ def view_order(email, order_id):
             "total_price": item.price * item.quantity
         } 
         total += item.price * item.quantity
-        data["order"].append(info)
+        data["item"].append(info)
     
     data["total"] = total
     return data

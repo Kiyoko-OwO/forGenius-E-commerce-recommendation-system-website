@@ -29,6 +29,3 @@ class Address_book(models.Model):
     name = models.CharField(max_length=255)
     address = models.CharField(max_length=255)
     phone_number = models.IntegerField(validators=[MinValueValidator(1)])
-
-
-

@@ -23,7 +23,7 @@ class Order(models.Model):
 
         unique_together = ("order_id", "product_id", "user_email")
 
-        
+
 
 class Cart(models.Model):
     user_email = models.ForeignKey(User, on_delete=CASCADE)

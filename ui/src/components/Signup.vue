@@ -20,7 +20,7 @@
               <el-input v-model="signupForm.confirm_password" type = "password" placeholder="input password again">
               </el-input>
         </el-form-item>
-            <el-form-item label="EMAIL CODE" class="code_change" style="width: 400px">
+            <el-form-item label="EMAIL CODE" class="code_change" prop="code" style="width: 400px">
               <el-input v-model="signupForm.code" >
               </el-input>
         </el-form-item>
@@ -56,7 +56,14 @@ export default {
     }
     var checkUsername = (rule, value, callback) => {
       if (!value) {
-        return callback(new Error('username cannot be empty'))
+        return callback(new Error('username cannot be empty'));
+      } else {
+        callback()
+      }
+    }
+    var checkCode = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('code cannot be empty'));
       } else {
         callback()
       }
@@ -88,14 +95,13 @@ export default {
         email: "",
 	      name : "",
 	      password: "",
-        confirm_password:"",
         code: ""
       },
       signupRules: {
         email: [
           { validator: checkEmail, trigger: 'blur' }
         ],
-        username: [
+        name: [
           { min: 6, max: 12, message: 'the username should be 6-12 characters', trigger: 'blur' },
           { validator: checkUsername, trigger: 'blur' }
         ],
@@ -103,9 +109,12 @@ export default {
           { min: 6, max: 12, message: 'the password should be 6-12 characters', trigger: 'blur' },
           { validator: checkPassword, trigger: 'blur' }
         ],
-       confirm_password: [
-         { validator: confirmPassword, trigger: 'blur'}
-       ]
+        confirm_password: [
+          { validator: confirmPassword, trigger: 'blur'}
+       ],
+        code: [
+          { validator: checkCode, trigger: 'blur'}
+        ]
       }
     }
   },

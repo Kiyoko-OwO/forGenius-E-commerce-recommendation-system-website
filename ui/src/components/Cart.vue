@@ -110,7 +110,6 @@ header{
     cursor: pointer;
     z-index: 100;
 }
-
 .checkout{
     position: relative;
     left:75%;

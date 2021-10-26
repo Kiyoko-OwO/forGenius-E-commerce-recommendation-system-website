@@ -243,6 +243,11 @@ def create_order(request):
             response.status_code = 400
             response.content = e
             return response
+        except ProductIdError as e:
+            response.status_code = 400
+            response.content = e
+            return response
+
         response.status_code = 200
         data = order.view_order(email, order_id)
         return HttpResponse(json.dumps(data), content_type="application/json")

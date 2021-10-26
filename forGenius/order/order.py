@@ -1,6 +1,7 @@
 from order.errors import EmptyCartError, EmptyOrderError
 from order.models import Order, Cart
 from product.models import Product
+from product.errors import ProductIdError
 from user.models import User
 from user.errors import InputError
 import time
@@ -18,7 +19,11 @@ def create_order(email, name, address, phone_number):
     order_id = int(round(time.time() * 1000))
 
     for item in cart:
-        # product_id = Product.objects.get(pk=item.product_id)
+        try:
+            product_id = Product.objects.get(pk=product_id)
+        except Product.DoesNotExist:
+            raise ProductIdError("This product does not exist")
+
         Order(order_id=order_id, user_email=user_email,
               product_id=item.product_id.product_id, 
               product_name=item.product_id.name,

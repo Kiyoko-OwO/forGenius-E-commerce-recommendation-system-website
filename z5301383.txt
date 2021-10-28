@@ -28,6 +28,8 @@ Improve user experience
 WEEK5
 Interest functional code done.
 Address add functional code done.
-
+Require users to double input passwords when users signup.
+Add check for data validation.
+Improve web page aesthetics.
 
 

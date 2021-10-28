@@ -12,6 +12,10 @@
               <el-input v-model="resetForm.new_password" type = "password" placeholder="6-12 characters contain uc,lc and number">
               </el-input>
         </el-form-item>
+            <el-form-item label="CONFIRM PASSWORD" class="password_change" prop="confirm_password">
+              <el-input v-model="resetForm.confirm_password" type = "password" placeholder="input password again">
+              </el-input>
+        </el-form-item>
         </el-form>
         <el-button class='submit' @click="reset">SUBMIT</el-button>
         </div>
@@ -42,6 +46,15 @@ export default {
         }
       }, 100)
     }
+    var confirmPassword = (rule, value, callback) => {
+        if (!value) {
+          callback(new Error('password cannot be empty'));
+        } else if (value !== this.resetForm.new_password) {
+          callback(new Error('Two inputs don\'t match!'));
+        } else {
+          callback();
+        }
+    }
     return {
       resetForm: {
         token: '',
@@ -49,14 +62,17 @@ export default {
         new_password: ''
       },
       resetpasswordRule: {
-        oldpassword: [
+        old_password: [
           { min: 6, max: 12, message: 'the password should be 6-12 characters', trigger: 'blur' },
           { validator: checkOldpassword, trigger: 'blur' }
         ],
-        newpassword: [
+        new_password: [
           { min: 6, max: 12, message: 'the password should be 6-12 characters', trigger: 'blur' },
           { validator: checkPassword, trigger: 'blur' }
-        ]
+        ],
+        confirm_password: [
+          { validator: confirmPassword, trigger: 'blur'}
+       ]
       }
     }
   },
@@ -94,7 +110,7 @@ h1{
 .submit{
     position: absolute;
     left:50%;
-    bottom:12%;
+    bottom:4%;
     height:50px;
     width:200px;
     transform: translate(-50%,-50%);
@@ -144,6 +160,12 @@ h1{
     font-size: 18px;
 }
 .newpassword_change /deep/ .el-form-item__label{
+    font-family: 'segUi';
+    letter-spacing:.1em;
+    font-size: 18px;
+}
+
+.password_change /deep/ .el-form-item__label{
     font-family: 'segUi';
     letter-spacing:.1em;
     font-size: 18px;

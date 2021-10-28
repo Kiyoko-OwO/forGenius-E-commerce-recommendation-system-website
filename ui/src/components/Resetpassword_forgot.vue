@@ -4,12 +4,16 @@
             <img class="logo" src=../assets/2.png alt="logo">
             <h1>RESET&nbsp;PASSWORD</h1>
         <el-form ref="resetFormRef" :model="resetForm" :rules="resetpasswordRules" label-position="left" label-width="225px" class="reset_form">
-            <el-form-item label="code"  class="code_change" prop="reset_code">
+            <el-form-item label="CODE"  class="code_change" prop="reset_code">
               <el-input v-model="resetForm.reset_code">
               </el-input>
         </el-form-item>
             <el-form-item label="NEW PASSWORD" class="newpassword_change" prop="new_password">
               <el-input v-model="resetForm.new_password" type = "password" placeholder="6-12 characters contain uc,lc and number">
+              </el-input>
+        </el-form-item>
+            <el-form-item label="CONFIRM PASSWORD" class="password_change" prop="confirm_password">
+              <el-input v-model="resetForm.confirm_password" type = "password" placeholder="input password again">
               </el-input>
         </el-form-item>
         </el-form>
@@ -43,19 +47,31 @@ export default {
         }
       }, 100)
     }
+    var confirmPassword = (rule, value, callback) => {
+        if (!value) {
+          callback(new Error('password cannot be empty'));
+        } else if (value !== this.resetForm.new_password) {
+          callback(new Error('Two inputs don\'t match!'));
+        } else {
+          callback();
+        }
+    }
     return {
       resetForm: {
         reset_code: '',
         new_password: ''
       },
       resetpasswordRules: {
-        code: [
+        reset_code: [
           { validator: checkCode, trigger: 'blur' }
         ],
-        newpassword: [
+        new_password: [
           { min: 6, max: 12, message: 'the password should be 6-12 characters', trigger: 'blur' },
           { validator: checkPassword, trigger: 'blur' }
-        ]
+        ],
+        confirm_password: [
+          { validator: confirmPassword, trigger: 'blur'}
+       ]
       }
     }
   },
@@ -92,7 +108,7 @@ h1{
 .submit{
     position: absolute;
     left:50%;
-    bottom:12%;
+    bottom:4%;
     height:50px;
     width:200px;
     transform: translate(-50%,-50%);
@@ -146,7 +162,11 @@ h1{
     letter-spacing:.1em;
     font-size: 18px;
 }
-
+.password_change /deep/ .el-form-item__label{
+    font-family: 'segUi';
+    letter-spacing:.1em;
+    font-size: 18px;
+}
 </style>
 
 <style>

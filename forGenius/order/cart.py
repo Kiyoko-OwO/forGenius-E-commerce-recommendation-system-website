@@ -1,8 +1,11 @@
+# from _typeshed import OpenBinaryModeWriting
 from order.models import Order, Cart
+from order.errors import CartProductError,EmptyCartError
 from product.models import Product
+from product.errors import ProductIdError
 from user.models import User
 from user.errors import InputError
-from order.errors import EmptyCartError
+
 
 
 def add_to_cart(email, product_id, quantity):
@@ -14,7 +17,7 @@ def add_to_cart(email, product_id, quantity):
     try:
         product_id = Product.objects.get(pk=product_id)
     except Product.DoesNotExist:
-        raise EmptyCartError("Cart is empty")
+        raise ProductIdError("This product does not exist")
 
     try:
         user_cart = Cart.objects.get(user_email=user_email, product_id=product_id)
@@ -48,3 +51,41 @@ def view_cart(email):
     
     data["total"] = total
     return data
+
+
+
+def edit_cart_product_quantity(email, product_id, quantity):
+    try:
+        user_email = User.objects.get(pk=email)
+    except User.DoesNotExist:
+        raise InputError('User not exist')
+    
+    try:
+        product_id = Product.objects.get(pk=product_id)
+    except Product.DoesNotExist:
+        raise ProductIdError("This product does not exist")
+
+    try:
+        user_cart = Cart.objects.get(user_email=user_email, product_id=product_id)
+        user_cart.quantity = quantity
+        user_cart.save()
+    except Cart.DoesNotExist:
+        raise CartProductError("This product does not exist in the cart")
+
+
+def remove_cart_product(email, product_id):
+    try:
+        user_email = User.objects.get(pk=email)
+    except User.DoesNotExist:
+        raise InputError('User not exist')
+    
+    try:
+        product_id = Product.objects.get(pk=product_id)
+    except Product.DoesNotExist:
+        raise ProductIdError("This product does not exist")
+
+    try:
+        user_cart = Cart.objects.get(user_email=user_email, product_id=product_id)
+        user_cart.delete()
+    except Cart.DoesNotExist:
+        raise CartProductError("This product does not exist in the cart")

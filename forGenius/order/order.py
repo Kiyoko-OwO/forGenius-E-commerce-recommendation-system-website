@@ -5,6 +5,7 @@ from product.errors import ProductIdError
 from user.models import User
 from user.errors import InputError
 import time
+import datetime
 
 def create_order(email, name, address, phone_number):
     try:
@@ -20,7 +21,7 @@ def create_order(email, name, address, phone_number):
 
     for item in cart:
         try:
-            product_id = Product.objects.get(pk=product_id)
+            product_id = Product.objects.get(pk=item.product_id.product_id)
         except Product.DoesNotExist:
             raise ProductIdError("This product does not exist")
 
@@ -51,7 +52,7 @@ def view_order(email, order_id):
                 "name": temp.name,
                 "address": temp.address,
                 "phone_number": temp.phone_number,
-                "order_date": temp.date_time,
+                "order_date": temp.date_time.strftime("%Y-%m-%d"),
                 "paid": temp.paid,
                 }
         break
@@ -128,7 +129,7 @@ def view_all_order(email):
                 "total_price": item.price * item.quantity
             } 
             if total == 0:
-                data['name'] = item.name;
+                data['name'] = item.name
                 data['address'] = item.address
                 data['phone_number'] = item.phone_number
                 data['paid'] = item.paid

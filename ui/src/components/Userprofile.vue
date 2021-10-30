@@ -12,6 +12,7 @@
             <button class="resetPassword" v-on:click="jumpResetpassword">Reset PASSWORD</button>
             <button class="cart" v-on:click="jumpMycart">MY CART</button>
             <button class="address" v-on:click="jumpAddressbook">ADDRESS BOOK</button>
+            <button class="order" v-on:click="jumpOrdHis">ORDER HISTORY</button>
         </main>
         <footer></footer>
     </div>
@@ -67,6 +68,9 @@ export default {
     },
     jumpHome () {
       this.$router.push('home')
+    },
+    jumpOrdHis () {
+      this.$router.push('user/order')
     },
     async logOut () {
       this.tokenForm.token = sessionStorage.getItem('token');

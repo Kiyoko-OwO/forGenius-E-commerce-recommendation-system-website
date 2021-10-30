@@ -58,9 +58,10 @@ export default {
         },
         add(index) {
             this.cart[index].quantity += 1;
+            this.total_price = this.total_price + this.cart[index].price
         },
         sub(index) {
-            this.cart[index].quantity > 1 && (this.cart[index].quantity -= 1);
+            this.cart[index].quantity > 1 && (this.cart[index].quantity -= 1) && (this.total_price = this.total_price - this.cart[index].price);
         },
         del(index) {
             this.cart.splice(index, 1);

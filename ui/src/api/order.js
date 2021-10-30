@@ -15,3 +15,11 @@ export const car_view = parameter => {
     params: parameter
   })
 }
+
+export const ord_view = parameter => {
+  return request({
+    method: 'GET',
+    url: '/order/view/all/',
+    params: parameter
+  })
+}

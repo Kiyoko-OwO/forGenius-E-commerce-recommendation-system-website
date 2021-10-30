@@ -1,7 +1,7 @@
 <template>
     <div class="add_container">
       <div class="add_box">
-            <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpAdmin">
+            <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpManage">
             <h1>ADD&nbsp;PRODUCT</h1>
       <el-form ref="add_FormRef" :rules="addRules" :model="addForm" class="add_form" label-position="left" label-width="225px">
           <el-form-item label="NAME" class="change" prop="name">
@@ -43,6 +43,13 @@ import { address_add } from '../../api/user'
 export default {
   data () {
     var checkName = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('name cannot be empty'))
+      } else {
+        callback()
+      }
+    }
+    var checkDes = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('name cannot be empty'))
       } else {
@@ -127,12 +134,15 @@ export default {
         price:[
           { validator: checkPrice, trigger: 'blur'}
         ],
+        description:[
+          { validator: checkDes, trigger: 'blur'}
+        ]
       }
     }
   },
   methods: {
-    jumpAddress () {
-      this.$router.push('/admin')
+    jumpManage () {
+      this.$router.push('/manageproduct')
     },
     submitAdd () {
         this.$refs.add_FormRef.validate(async (valid) => {

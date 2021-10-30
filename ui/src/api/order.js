@@ -23,3 +23,19 @@ export const ord_view = parameter => {
     params: parameter
   })
 }
+
+export const cart_qua = data => {
+  return request({
+    method: 'POST',
+    url: '/order/cart/product_quantity/edit/',
+    data
+  })
+}
+
+export const cart_del = data => {
+  return request({
+    method: 'DELETE',
+    url: '/order/cart/remove/',
+    data
+  })
+}

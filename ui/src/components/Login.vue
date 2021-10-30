@@ -79,6 +79,7 @@ export default {
               if (res.status == 255) {
                 sessionStorage.clear();
                 sessionStorage.setItem('token',res.data.token);
+                sessionStorage.setItem('username',res.data.username);
                 this.$router.push('/admin');
               } else {
                 sessionStorage.clear();

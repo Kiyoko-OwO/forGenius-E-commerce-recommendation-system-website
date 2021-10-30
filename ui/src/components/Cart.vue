@@ -25,6 +25,8 @@
 import Product from './mod/CartPro.vue'
 import imgObj from '../assets/2.png'
 import { car_view } from '../api/order'
+import { cart_qua } from '../api/order'
+import { cart_del } from '../api/order'
 
 export default {
     data () {
@@ -33,7 +35,16 @@ export default {
             tokenForm: {
                 token: ''
             },
-            total_price: ''
+            total_price: '',
+            qua_form: {
+                token: '',
+                product_id: '',
+                quantity: ''
+            },
+            del_form: {
+                token: '',
+                product_id: ''
+            }
         }
     },
     created () {
@@ -49,6 +60,8 @@ export default {
                 console.log(res.data.data);
                 this.cart = res.data.data.cart;
                 this.total_price = res.data.data.total;
+                this.qua_form.token = sessionStorage.getItem('token');
+                this.del_form.token = sessionStorage.getItem('token');
             }).catch( error => {
                 this.$message.error('Failed');
             })
@@ -58,14 +71,35 @@ export default {
         },
         add(index) {
             this.cart[index].quantity += 1;
-            this.total_price = this.total_price + this.cart[index].price
+            this.total_price = this.total_price + this.cart[index].price;
+            this.qua_form.quantity = this.cart[index].quantity;
+            this.qua_form.product_id = this.cart[index].product_id
+            cart_qua(this.qua_form).then( res => {
+
+            }).catch( error => {
+                this.$message.error('Failed');
+            })
         },
         sub(index) {
             this.cart[index].quantity > 1 && (this.cart[index].quantity -= 1) && (this.total_price = this.total_price - this.cart[index].price);
+            this.qua_form.quantity = this.cart[index].quantity;
+            this.qua_form.product_id = this.cart[index].product_id;
+            cart_qua(this.qua_form).then( res => {
+            }).catch( error => {
+                this.$message.error('Failed');
+            })
         },
         del(index) {
+            this.del_form.product_id = this.cart[index].product_id;
+            cart_del(this.del_form).then( res => {
+            }).catch( error => {
+                this.$message.error('Failed');
+            })
+            this.total_price = this.total_price - (this.cart[index].quantity * this.cart[index].price)
             this.cart.splice(index, 1);
+            
             console.log(this.cart);
+            
         },
         jumpHome () {
             this.$router.push('Home');

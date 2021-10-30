@@ -1,8 +1,8 @@
 <template>
     <div id="admin_container">
         <header>
-            <button @click="logOut" v-show="isUser">Log out</button>
-            <button id="usern" v-show="isUser">{{ username }}</button>
+            <button @click="logOut">Log out</button>
+            <button id="usern">{{ username }}</button>
         </header>
         <main>
             <img id="logo" src=../assets/logoThin.png alt="logo">
@@ -22,6 +22,9 @@ export default {
             },
         }
     },
+    created () {
+        this.username = sessionStorage.getItem('username');
+    },
     methods: {
         logOut () {
             this.tokenForm.token = sessionStorage.getItem('token');
@@ -33,9 +36,9 @@ export default {
                 this.$message.error('Log out Failed');
             })
         },
-    jumpManageproduct () {
-      this.$router.push('/manageproduct')
-    }
+        jumpManageproduct () {
+            this.$router.push('/manageproduct')
+        }
   }
 }
 </script>

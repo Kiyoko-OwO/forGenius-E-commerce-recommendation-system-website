@@ -51,6 +51,7 @@ def view_order(email, order_id):
                 "name": temp.name,
                 "address": temp.address,
                 "phone_number": temp.phone_number,
+                "order_date": temp.date_time,
                 "paid": temp.paid,
                 }
         break

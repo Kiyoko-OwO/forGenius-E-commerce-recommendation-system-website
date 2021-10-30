@@ -6,12 +6,17 @@
        <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpAdmin">
     </header>
     <div class="manage-container">
+      <manage />
     </div>
   </div>
 </template>
 
 <script>
+import manage from './mod/Manageproductpro.vue'
 export default {
+    components: {
+        manage
+    },
   methods: {
     jumpAddproduct () {
       this.$router.push('/addproduct')

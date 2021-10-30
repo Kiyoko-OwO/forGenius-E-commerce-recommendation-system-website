@@ -20,10 +20,6 @@
             <el-input v-model="addForm.delivery" autocomplete="off">
             </el-input>
           </el-form-item>
-          <el-form-item label="SALES DATA" class="change" prop="sales">
-            <el-input v-model="addForm.sales" autocomplete="off">
-            </el-input>
-          </el-form-item>
           <el-form-item label="PRICE" class="change" prop="price">
             <el-input v-model="addForm.price" autocomplete="off">
             </el-input>
@@ -205,7 +201,7 @@ h1{
     width: 500px;
     position: absolute;
     border-radius: 80px;
-    top: 18%;
+    top: 25%;
     left: 15%;
 }
 

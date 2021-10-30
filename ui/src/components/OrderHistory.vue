@@ -1,5 +1,19 @@
 <template>
-  <h1>Order History</h1>
+  
+  <div>
+      <h1>Order History</h1>
+      <Order v-for="(obj,ind) in order_list.slice().reverse()" :key="obj.order_id"
+      :ordId="obj.order_id"
+      :payStat="obj.paid"
+      :ordItem="obj.item"
+      :ordTotal="obj.total"
+      :index = "ind"
+      @checker = 'check'
+      @jump = 'jumpToOrd'
+      >
+
+      </Order>
+  </div>
 </template>
 
 <script>
@@ -25,9 +39,20 @@ export default {
             this.tokenForm.token = sessionStorage.getItem('token');
             ord_view(this.tokenForm).then( res => {
                 console.log(res.data.data.order_list);
+                this.order_list = res.data.data.order_list;
             }).catch( error => {
                 this.$message.error('Failed');
             })
+        },
+        check(index) {
+            if (this.order_list[index].paid) {
+                this.order_list[index].paid = "Success";
+            } else {
+                this.order_list[index].paid = "Fail";
+            }
+        },
+        jumpToOrd(index) {
+            this.$router.push('order/detail');
         }
     }
 }

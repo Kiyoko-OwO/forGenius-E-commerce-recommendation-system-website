@@ -1,7 +1,7 @@
 <template>
     <div class="add_container">
       <div class="add_box">
-            <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpAddress">
+            <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpAdmin">
             <h1>ADD&nbsp;PRODUCT</h1>
       <el-form ref="add_FormRef" :rules="addRules" :model="addForm" class="add_form" label-position="left" label-width="225px">
           <el-form-item label="NAME" class="change" prop="name">
@@ -43,7 +43,7 @@ export default {
   data () {
     var checkName = (rule, value, callback) => {
       if (!value) {
-        return callback(new Error('username cannot be empty'))
+        return callback(new Error('product name cannot be empty'))
       } else {
         callback()
       }
@@ -93,14 +93,14 @@ export default {
   },
   methods: {
     jumpAddress () {
-      this.$router.push('/address')
+      this.$router.push('/admin')
     },
     submitAdd () {
         this.$refs.add_FormRef.validate(async (valid) => {
           if (valid) {
-        this.addForm.token = sessionStorage.getItem('token');
-        console.log(this.addForm);
-        address_add(this.addForm).then( res => {
+            this.addForm.token = sessionStorage.getItem('token');
+            console.log(this.addForm);
+            address_add(this.addForm).then( res => {
             this.$message({message: 'Add Address Sucess!',type: 'success'});
             this.$router.push('address');
         }).catch( error => {

@@ -3,9 +3,9 @@
     <p> Product Name: {{proName}} </p> 
     <p> Price: {{proPrice}}</p>
     <p> Quantity: {{qua}}</p>
-    <el-button class="el-icon-remove-outline" circle @click="subFn"></el-button>
-    <el-button class="el-icon-circle-plus-outline" circle @click="addFn"></el-button>
-    <el-button class="el-icon-delete" circle @click="delFn"></el-button>
+    <el-button class="el-icon-minus" circle @click="subFn"></el-button>
+    <el-button class="el-icon-plus" circle @click="addFn"></el-button>
+    <el-button class="el-icon-close" circle @click="delFn"></el-button>
   </div>
 </template>
 

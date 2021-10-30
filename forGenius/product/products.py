@@ -23,11 +23,11 @@ def product_userView(product_id):
         } 
     return info
 
-def admin_add_product(name, description, warranty, delivery_date, sales_data, price):    
-    reg = Product(admin_email=get_Admin(), name=name, description=description, warranty=warranty, delivery_date=delivery_date, sales_data=sales_data, price=price)
+def admin_add_product(name, description, warranty, delivery_date, price):    
+    reg = Product(admin_email=get_Admin(), name=name, description=description, warranty=warranty, delivery_date=delivery_date, price=price)
     reg.save()
 
-def admin_edit_product(product_id, name, description, warranty, delivery_date, sales_data, price):    
+def admin_edit_product(product_id, name, description, warranty, delivery_date, price):    
     try:
         reg = Product.objects.get(product_id=product_id)
     except Product.DoesNotExist:
@@ -36,7 +36,6 @@ def admin_edit_product(product_id, name, description, warranty, delivery_date, s
     reg.description = description
     reg.warranty = warranty
     reg.delivery_date = delivery_date
-    reg.sales_data = sales_data
     reg.price = price    
     reg.save()
 

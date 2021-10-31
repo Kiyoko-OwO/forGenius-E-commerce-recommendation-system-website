@@ -8,12 +8,12 @@
             <el-input v-model="addForm.name" autocomplete="off">
             </el-input>
           </el-form-item>
-          <el-form-item label="WARRANTY" class="change" prop="warranty">
-            <el-input v-model="addForm.warranty" autocomplete="off">
-            </el-input>
-          </el-form-item>
           <el-form-item label="DESCRIPTION" class="change_description" prop="description">
             <el-input type="textarea" v-model="addForm.description" autocomplete="off">
+            </el-input>
+          </el-form-item>
+          <el-form-item label="WARRANTY" class="change" prop="warranty">
+            <el-input v-model="addForm.warranty" autocomplete="off">
             </el-input>
           </el-form-item>
           <el-form-item label="DELIVERY DATE" class="change" prop="delivery">
@@ -189,10 +189,10 @@ h1{
     transform: translate(-50%,-50%);
 }
 .logo{
-    height: 90%;
+    height: 70%;
     position: absolute;
     right: 64%;
-    top:-63%;
+    top:-53%;
     cursor: pointer;
 }
 .add_form{

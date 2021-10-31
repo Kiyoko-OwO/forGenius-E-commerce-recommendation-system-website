@@ -1,10 +1,10 @@
 import request from '../utils/request'
 
-export const car_view = parameter => {
+export const admin_view = data => {
     return request({
-      method: 'GET',
-      url: '/order/cart/view/',
-      params: parameter
+      method: 'POST',
+      url: '/product/all/',
+      data
     })
   }
 

@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { product_add } from '../../api/user'
+import { product_add } from '../../api/admin'
 export default {
   data () {
     var checkName = (rule, value, callback) => {

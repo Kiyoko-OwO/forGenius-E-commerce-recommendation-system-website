@@ -293,10 +293,3 @@ h1{
    margin-bottom:15px
 }
 </style>
-
-<style>
-input.el-input__inner {
-    border-radius:50px;
-    height:30px;
-}
-</style>

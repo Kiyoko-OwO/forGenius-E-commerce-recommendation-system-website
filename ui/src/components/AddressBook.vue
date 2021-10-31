@@ -1,4 +1,4 @@
-<template>
+<template class="ad">
   <div class="address_container">
     <header>
         <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpHome">
@@ -71,9 +71,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
+
 .address_container{
     background-color: #d1dbda;
-    height: 100%;
+    min-height: 100%;
 }
 header{
     height: 100px;
@@ -101,7 +102,6 @@ header{
     top:-56%;
     cursor: pointer;
 }
-
 .add{
     position: relative;
     left:70%;

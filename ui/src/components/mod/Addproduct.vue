@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { product_add } from '../../api/user'
+import { product_add } from '../../api/admin'
 export default {
   data () {
     var checkName = (rule, value, callback) => {
@@ -162,11 +162,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
 .block{
     height: 60px;
 }
-
 h1{
     position: absolute;
     left: 50%;
@@ -204,7 +202,6 @@ h1{
     top: 25%;
     left: 15%;
 }
-
 .change /deep/ .el-form-item__label{
     font-family: 'segUi';
     letter-spacing:.1em;
@@ -239,7 +236,6 @@ h1{
   right: 25% !important;
   left: unset;
 }
-
 </style>
 
 <style lang="less" scoped>

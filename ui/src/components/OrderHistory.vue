@@ -38,14 +38,14 @@ export default {
         async loadOrd() {
             this.tokenForm.token = sessionStorage.getItem('token');
             ord_view(this.tokenForm).then( res => {
-                console.log(res.data.data.order_list);
+                console.log(res.data.data);
                 this.order_list = res.data.data.order_list;
             }).catch( error => {
                 this.$message.error('Failed');
             })
         },
         check(index) {
-            if (this.order_list[index].paid) {
+            if (this.order_list[index].paid == 1) {
                 this.order_list[index].paid = "Success";
             } else {
                 this.order_list[index].paid = "Fail";

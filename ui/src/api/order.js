@@ -39,3 +39,11 @@ export const cart_del = data => {
     data
   })
 }
+
+export const cart_create = data => {
+  return request({
+    method: 'POST',
+    url: '/order/create/',
+    data
+  })
+}

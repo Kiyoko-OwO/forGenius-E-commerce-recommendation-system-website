@@ -13,12 +13,15 @@
           <p> Phone Number: {{create_form.phone_number}}</p>
           <el-button @click="chooseDialogFormVisible = true" align="left" style="float:left">Choose</el-button>
           <el-button @click="jumpAdd" align="right">Add</el-button>
-          <el-dialog title="Address Book" :visible.sync="chooseDialogFormVisible">
+          <el-dialog title="Address Book" :visible.sync="chooseDialogFormVisible" width="40%">
             <div v-for="(item,ind) in addressbook" :key="ind">
-                  Recipient's name: {{item.name}} ===
-                  Address: {{item.address}} ===
-                  Phone Number: {{item.phone_number}} ===
-                  <el-button @click="chooseAdd(ind)">Choose</el-button>
+                   <div class="block1"></div>
+                   <p>Recipient's name: {{item.name}} </p> 
+                   <p>Address: {{item.address}} </p> 
+                   <p>Phone Number: {{item.phone_number}} </p> 
+                   <el-button @click="chooseAdd(ind)" class="choose_in">Choose</el-button>
+                   <div class="block"></div>
+                   <div class="link-in"></div>
               </div>
             <div slot="footer" class="dialog-footer">
               <el-button @click="chooseDialogFormVisible = false">Cancel</el-button>
@@ -291,4 +294,22 @@ header{
     top:2px;
     font-size: 18px;
 }
+
+    .link-in {
+        position: relative;
+        width: 100%;
+        height: 1px;
+        border-top: solid #0b0b0f 1px;
+     }
+     .block {
+  height: 20px;
+}
+     .block1 {
+  height: 10px;
+}
+.choose_in{
+    position: relative;
+    left:80%;
+}
 </style>
+

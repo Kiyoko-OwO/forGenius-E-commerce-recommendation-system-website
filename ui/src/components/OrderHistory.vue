@@ -7,6 +7,7 @@
       :payStat="obj.paid"
       :ordItem="obj.item"
       :ordTotal="obj.total"
+      :orderDate ="obj.order_date"
       :index = "ind"
       @checker = 'check'
       @jump = 'jumpToOrd'
@@ -41,10 +42,11 @@ export default {
                 console.log(res.data.data);
                 this.order_list = res.data.data.order_list;
             }).catch( error => {
-                this.$message.error('Failed');
+                this.$message.error('No order exists');
             })
         },
         check(index) {
+
             if (this.order_list[index].paid == 1) {
                 this.order_list[index].paid = "Success";
             } else {

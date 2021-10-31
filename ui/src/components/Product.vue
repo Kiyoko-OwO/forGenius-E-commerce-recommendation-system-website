@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { car_add } from '../api/order'
+import { cart_add } from '../api/order'
 import { product_view } from '../api/product'
 export default {
     data () {
@@ -70,7 +70,7 @@ export default {
             this.numberValidateForm.product_id = this.product_id_form.product_id;
             this.numberValidateForm.token = sessionStorage.getItem('token');
             console.log(this.numberValidateForm);
-            car_add(this.numberValidateForm).then( res => {
+            cart_add(this.numberValidateForm).then( res => {
               this.$message({message: 'Sucess!',type: 'success'});
               this.$router.push('cart');
             }).catch( error => {

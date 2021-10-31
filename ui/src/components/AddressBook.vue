@@ -6,7 +6,7 @@
     </header>
     
     <div id="address-container">
-        <Address v-for="(obj,ind) in addressbook" :key="obj.address_id"
+        <Address v-for="(obj,ind) in addressbook.slice().reverse()" :key="obj.address_id"
         :userName="obj.name"
         :addressDe="obj.address"
         :phoneNumber="obj.phone_number"

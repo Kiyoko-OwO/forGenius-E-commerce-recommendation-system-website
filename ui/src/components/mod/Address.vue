@@ -68,6 +68,7 @@ export default {
       submitEdit() {
         this.editForm.token = sessionStorage.getItem('token');
         console.log(this.editForm);
+        this.editForm.phone_number = this.editForm.phone_number.toString();
         address_edit(this.editForm).then( res => {
             this.$message({message: 'Sucess!',type: 'success'});
             this.dialogFormVisible = false;

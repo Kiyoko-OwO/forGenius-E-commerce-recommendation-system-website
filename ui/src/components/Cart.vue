@@ -6,10 +6,6 @@
     </header>
     
     <div class="cart-container">
-        <div>
-            <h2>Address</h2>
-            <p> {{create_form.name}} === {{create_form.address}} ==== {{create_form.phone_number}}</p>
-        </div>
         <Product v-for="(obj,ind) in cart" :key="obj.id"
         :proName="obj.name"
         :proPrice="obj.price"
@@ -29,11 +25,10 @@
 <script>
 import Product from './mod/CartPro.vue'
 import imgObj from '../assets/2.png'
-import { car_view } from '../api/order'
+import { cart_view } from '../api/order'
 import { cart_qua } from '../api/order'
 import { cart_del } from '../api/order'
-import { cart_create } from '../api/order'
-import { address_view } from '../api/user'
+
 
 export default {
     data () {
@@ -52,17 +47,11 @@ export default {
                 token: '',
                 product_id: ''
             },
-            create_form: {
-                token: '',
-                name: "test",
-                address: "test",
-                phone_number: 1234567
-            }
+            
         }
     },
     created () {
-        this.loadCart(),
-        this.loadAddressBook()
+        this.loadCart()
     },
     components: {
         Product
@@ -70,33 +59,20 @@ export default {
     methods: {
         async loadCart() {
             this.tokenForm.token = sessionStorage.getItem('token');
-            car_view(this.tokenForm).then( res => {
-                
+            cart_view(this.tokenForm).then( res => {
                 this.cart = res.data.data.cart;
                 this.total_price = res.data.data.total;
                 this.qua_form.token = sessionStorage.getItem('token');
                 this.del_form.token = sessionStorage.getItem('token');
-                this.create_form.token = sessionStorage.getItem('token');
             }).catch( error => {
-                this.$message.error('Failed');
+                this.$message.error('Failed1');
             })
-        },
-        async loadAddressBook () {
-            this.tokenForm.token = sessionStorage.getItem('token');
-            const { data } = await address_view(this.tokenForm);
-            console.log(data);
-            this.addressbook = data.data.address_book;
         },
         submitForm() {
             console.log(this.cart);
             console.log(this.create_form);
             if (this.cart.length > 0) {
-                cart_create(this.create_form).then( res => {
-                    console.log(res.data.data);
-                    this.$router.push('payment');
-                }).catch( error => {
-                    this.$message.error('Failed');
-                })
+                this.$router.push('order');
             } else {
                 this.$message.error('The cart is empty');
             }
@@ -109,7 +85,7 @@ export default {
             cart_qua(this.qua_form).then( res => {
 
             }).catch( error => {
-                this.$message.error('Failed');
+                this.$message.error('Failed2');
             })
         },
         sub(index) {
@@ -118,7 +94,7 @@ export default {
             this.qua_form.product_id = this.cart[index].product_id;
             cart_qua(this.qua_form).then( res => {
             }).catch( error => {
-                this.$message.error('Failed');
+                this.$message.error('Failed3');
             })
         },
         del(index) {
@@ -129,9 +105,7 @@ export default {
             })
             this.total_price = this.total_price - (this.cart[index].quantity * this.cart[index].price)
             this.cart.splice(index, 1);
-            
             console.log(this.cart);
-            
         },
         jumpHome () {
             this.$router.push('Home');

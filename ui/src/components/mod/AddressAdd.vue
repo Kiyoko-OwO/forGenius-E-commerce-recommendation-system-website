@@ -87,7 +87,13 @@ export default {
         console.log(this.addForm);
         address_add(this.addForm).then( res => {
             this.$message({message: 'Add Address Sucess!',type: 'success'});
-            this.$router.push('address');
+            if (sessionStorage.getItem('from') == 1) {
+              sessionStorage.setItem('from', 0);
+              this.$router.push('order');
+            } else {
+               this.$router.push('address');
+            }
+           
         }).catch( error => {
             this.$message.error('Failed');
         })

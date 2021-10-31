@@ -4,6 +4,7 @@
         MY&nbsp;CART
     <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpHome">
     </header>
+    
     <div class="cart-container">
         <Product v-for="(obj,ind) in cart" :key="obj.id"
         :proName="obj.name"
@@ -24,7 +25,10 @@
 <script>
 import Product from './mod/CartPro.vue'
 import imgObj from '../assets/2.png'
-import { car_view } from '../api/order'
+import { cart_view } from '../api/order'
+import { cart_qua } from '../api/order'
+import { cart_del } from '../api/order'
+
 
 export default {
     data () {
@@ -33,7 +37,17 @@ export default {
             tokenForm: {
                 token: ''
             },
-            total_price: ''
+            total_price: '',
+            qua_form: {
+                token: '',
+                product_id: '',
+                quantity: ''
+            },
+            del_form: {
+                token: '',
+                product_id: ''
+            },
+            
         }
     },
     created () {
@@ -45,24 +59,51 @@ export default {
     methods: {
         async loadCart() {
             this.tokenForm.token = sessionStorage.getItem('token');
-            car_view(this.tokenForm).then( res => {
-                console.log(res.data.data);
+            cart_view(this.tokenForm).then( res => {
                 this.cart = res.data.data.cart;
                 this.total_price = res.data.data.total;
+                this.qua_form.token = sessionStorage.getItem('token');
+                this.del_form.token = sessionStorage.getItem('token');
             }).catch( error => {
-                this.$message.error('Failed');
+                this.$message.error('Failed1');
             })
         },
         submitForm() {
             console.log(this.cart);
+            console.log(this.create_form);
+            if (this.cart.length > 0) {
+                this.$router.push('order');
+            } else {
+                this.$message.error('The cart is empty');
+            }
         },
         add(index) {
             this.cart[index].quantity += 1;
+            this.total_price = this.total_price + this.cart[index].price;
+            this.qua_form.quantity = this.cart[index].quantity;
+            this.qua_form.product_id = this.cart[index].product_id
+            cart_qua(this.qua_form).then( res => {
+
+            }).catch( error => {
+                this.$message.error('Failed2');
+            })
         },
         sub(index) {
-            this.cart[index].quantity > 1 && (this.cart[index].quantity -= 1);
+            this.cart[index].quantity > 1 && (this.cart[index].quantity -= 1) && (this.total_price = this.total_price - this.cart[index].price);
+            this.qua_form.quantity = this.cart[index].quantity;
+            this.qua_form.product_id = this.cart[index].product_id;
+            cart_qua(this.qua_form).then( res => {
+            }).catch( error => {
+                this.$message.error('Failed3');
+            })
         },
         del(index) {
+            this.del_form.product_id = this.cart[index].product_id;
+            cart_del(this.del_form).then( res => {
+            }).catch( error => {
+                this.$message.error('Failed');
+            })
+            this.total_price = this.total_price - (this.cart[index].quantity * this.cart[index].price)
             this.cart.splice(index, 1);
             console.log(this.cart);
         },

@@ -1,7 +1,7 @@
 <template>
     <div class="add_container">
       <div class="add_box">
-            <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpAddress">
+            <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpAdmin">
             <h1>ADD&nbsp;PRODUCT</h1>
       <el-form ref="add_FormRef" :rules="addRules" :model="addForm" class="add_form" label-position="left" label-width="225px">
           <el-form-item label="NAME" class="change" prop="name">
@@ -12,8 +12,8 @@
             <el-input v-model="addForm.warranty" autocomplete="off">
             </el-input>
           </el-form-item>
-          <el-form-item label="DESCRIPTION" class="change" prop="description">
-            <el-input v-model="addForm.description" autocomplete="off">
+          <el-form-item label="DESCRIPTION" class="change_description" prop="description">
+            <el-input type="textarea" v-model="addForm.description" autocomplete="off">
             </el-input>
           </el-form-item>
           <el-form-item label="DELIVERY DATE" class="change" prop="delivery">
@@ -32,6 +32,7 @@
           <el-form-item>
           <el-button type="primary" @click="submitAdd" class="submit">CONFIRM</el-button>
           </el-form-item>
+
       </el-form>
       </div>
     </div>
@@ -43,28 +44,60 @@ export default {
   data () {
     var checkName = (rule, value, callback) => {
       if (!value) {
-        return callback(new Error('username cannot be empty'))
+        return callback(new Error('name cannot be empty'))
       } else {
         callback()
       }
     }
-    var checkAddress = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('address cannot be empty'))
-      } else {
-        callback()
-      }
-    }
-    var checkPhone = (rule, value, callback) => {
+    var checkWarranty = (rule, value, callback) => {
       const mailReg = /^\d+$/
       if (!value) {
-        return callback(new Error('phonenumber cannot be empty'))
+        return callback(new Error('warranty cannot be empty'))
       }
       setTimeout(() => {
         if (mailReg.test(value)) {
           callback()
         } else {
-          callback(new Error('the phonenumber should be number'))
+          callback(new Error('the warranty should be number'))
+        }
+      }, 100)
+    }
+    var checkDelivery= (rule, value, callback) => {
+      const mailReg = /^\d+$/
+      if (!value) {
+        return callback(new Error('number of day cannot be empty'))
+      }
+      setTimeout(() => {
+        if (mailReg.test(value)) {
+          callback()
+        } else {
+          callback(new Error('the data should be number of day'))
+        }
+      }, 100)
+    }
+    var checkSales= (rule, value, callback) => {
+      const mailReg = /^\d+$/
+      if (!value) {
+        return callback(new Error('Sales cannot be empty'))
+      }
+      setTimeout(() => {
+        if (mailReg.test(value)) {
+          callback()
+        } else {
+          callback(new Error('the sales should be number'))
+        }
+      }, 100)
+    }
+    var checkPrice= (rule, value, callback) => {
+      const mailReg = /^\d+$/
+      if (!value) {
+        return callback(new Error('Price cannot be empty'))
+      }
+      setTimeout(() => {
+        if (mailReg.test(value)) {
+          callback()
+        } else {
+          callback(new Error('the price should be number'))
         }
       }, 100)
     }
@@ -82,18 +115,24 @@ export default {
         name: [
           { validator: checkName, trigger: 'blur' }
         ],
-        address: [
-          { validator: checkAddress, trigger: 'blur' }
+        warranty:[
+          { validator: checkWarranty, trigger: 'blur'}
         ],
-        phone_number: [
-          { validator: checkPhone, trigger: 'blur'  }
-        ]
+        delivery:[
+          { validator: checkDelivery, trigger: 'blur'}
+        ],
+        sales:[
+          { validator: checkSales, trigger: 'blur'}
+        ],
+        price:[
+          { validator: checkPrice, trigger: 'blur'}
+        ],
       }
     }
   },
   methods: {
     jumpAddress () {
-      this.$router.push('/address')
+      this.$router.push('/admin')
     },
     submitAdd () {
         this.$refs.add_FormRef.validate(async (valid) => {
@@ -153,7 +192,7 @@ h1{
     cursor: pointer;
 }
 .add_form{
-    width: 530px;
+    width: 500px;
     position: absolute;
     border-radius: 80px;
     top: 18%;
@@ -164,6 +203,14 @@ h1{
     font-family: 'segUi';
     letter-spacing:.1em;
     font-size: 18px;
+}
+.change_description /deep/ .el-form-item__label{
+    font-family: 'segUi';
+    letter-spacing:.1em;
+    font-size: 18px;
+}
+.change_description /deep/ .el-form-item__input{
+      height: 100%;
 }
 .el-form-item{
    margin-bottom:15px
@@ -186,6 +233,7 @@ h1{
   right: 25% !important;
   left: unset;
 }
+
 </style>
 
 <style lang="less" scoped>

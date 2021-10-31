@@ -15,6 +15,8 @@ import Cart from '../components/Cart.vue'
 import AdminPage from '../components/AdminPage'
 import Addproduct from '../components/mod/Addproduct'
 import Manageproduct from '../components/Manageproduct'
+import OrderHistory from '../components/OrderHistory'
+import Order from '../components/Order'
 Vue.use(VueRouter)
 
 const originalPush = VueRouter.prototype.push
@@ -79,6 +81,12 @@ const routes = [
   },{
     path: '/manageproduct',
     component: Manageproduct
+  },{
+    path: '/user/order',
+    component: OrderHistory
+  },{
+    path: '/order',
+    component: Order
   }
 ]
 

@@ -7,6 +7,7 @@
     </header>
     <div class="manage-container">
       <manage />
+      <manage />
     </div>
   </div>
 </template>

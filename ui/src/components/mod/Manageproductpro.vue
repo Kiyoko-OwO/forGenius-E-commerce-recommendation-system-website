@@ -8,6 +8,8 @@
     <p> Sales Data: {{sales}}</p>
     <p> Price: {{price}}</p>  
   </div>
+  
+
 </template>
 
 <script>

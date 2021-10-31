@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { address_add } from '../../api/user'
+import { product_add } from '../../api/user'
 export default {
   data () {
     var checkName = (rule, value, callback) => {
@@ -145,9 +145,9 @@ export default {
           if (valid) {
         this.addForm.token = sessionStorage.getItem('token');
         console.log(this.addForm);
-        address_add(this.addForm).then( res => {
-            this.$message({message: 'Add Address Sucess!',type: 'success'});
-            this.$router.push('address');
+        product_add(this.addForm).then( res => {
+            this.$message({message: 'Add product Sucess!',type: 'success'});
+            this.$router.push('/manageproduct');
         }).catch( error => {
             this.$message.error('Failed');
         })

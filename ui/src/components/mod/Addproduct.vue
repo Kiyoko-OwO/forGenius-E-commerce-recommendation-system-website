@@ -1,7 +1,7 @@
 <template>
     <div class="add_container">
       <div class="add_box">
-            <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpAdmin">
+            <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpManage">
             <h1>ADD&nbsp;PRODUCT</h1>
       <el-form ref="add_FormRef" :rules="addRules" :model="addForm" class="add_form" label-position="left" label-width="225px">
           <el-form-item label="NAME" class="change" prop="name">
@@ -20,10 +20,6 @@
             <el-input v-model="addForm.delivery" autocomplete="off">
             </el-input>
           </el-form-item>
-          <el-form-item label="SALES DATA" class="change" prop="sales">
-            <el-input v-model="addForm.sales" autocomplete="off">
-            </el-input>
-          </el-form-item>
           <el-form-item label="PRICE" class="change" prop="price">
             <el-input v-model="addForm.price" autocomplete="off">
             </el-input>
@@ -39,10 +35,17 @@
 </template>
 
 <script>
-import { address_add } from '../../api/user'
+import { product_add } from '../../api/user'
 export default {
   data () {
     var checkName = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('name cannot be empty'))
+      } else {
+        callback()
+      }
+    }
+    var checkDes = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('name cannot be empty'))
       } else {
@@ -127,21 +130,24 @@ export default {
         price:[
           { validator: checkPrice, trigger: 'blur'}
         ],
+        description:[
+          { validator: checkDes, trigger: 'blur'}
+        ]
       }
     }
   },
   methods: {
-    jumpAddress () {
-      this.$router.push('/admin')
+    jumpManage () {
+      this.$router.push('/manageproduct')
     },
     submitAdd () {
         this.$refs.add_FormRef.validate(async (valid) => {
           if (valid) {
         this.addForm.token = sessionStorage.getItem('token');
         console.log(this.addForm);
-        address_add(this.addForm).then( res => {
-            this.$message({message: 'Add Address Sucess!',type: 'success'});
-            this.$router.push('address');
+        product_add(this.addForm).then( res => {
+            this.$message({message: 'Add product Sucess!',type: 'success'});
+            this.$router.push('/manageproduct');
         }).catch( error => {
             this.$message.error('Failed');
         })
@@ -195,7 +201,7 @@ h1{
     width: 500px;
     position: absolute;
     border-radius: 80px;
-    top: 18%;
+    top: 25%;
     left: 15%;
 }
 

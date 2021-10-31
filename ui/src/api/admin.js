@@ -7,3 +7,11 @@ export const car_view = parameter => {
       params: parameter
     })
   }
+
+  export const product_add = data => {
+    return request({
+      method: 'POST',
+      url: '/product/add/',
+      data
+    })
+  }

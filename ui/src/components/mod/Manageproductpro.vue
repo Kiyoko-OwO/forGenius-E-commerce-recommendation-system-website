@@ -2,9 +2,9 @@
   <div class="my-cartpro">
     <p> Product ID: {{id}} </p> 
     <p> Product Name: {{name}} </p> 
-    <p> Product warr: {{warr}} </p> 
+    <p> Product Warranty: {{warr}} </p> 
     <p> Description: {{description}}</p>
-    <p> Delivery date: {{delivery}}</p>
+    <p> Delivery Date: {{delivery}}</p>
     <p> Sales Data: {{sales}}</p>
     <p> Price: {{price}}</p>  
   </div>

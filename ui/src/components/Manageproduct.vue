@@ -6,20 +6,52 @@
        <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpAdmin">
     </header>
     <div class="manage-container">
+      <Manage v-for="(obj,ind) in product" :key="ind"
+      :id="obj.product_id"
+      :name="obj.name"
+      :warr="obj.warranty"
+      :description="obj.description"
+      :sales="obj.sales_data"
+      :price="obj.price"
+      >
+
+      </Manage>
     </div>
   </div>
 </template>
 
 <script>
+import Manage from './mod/Manageproductpro.vue'
+import { admin_view } from '../api/admin'
 export default {
-  methods: {
-    jumpAddproduct () {
-      this.$router.push('/addproduct')
+    data () {
+      return {
+        view_form: {},
+        product: []
+      }
     },
-    jumpAdmin () {
-      this.$router.push('/admin')
+    created () {
+      this.loadPro()
+    },
+    components: {
+        Manage
+    },
+    methods: {
+      async loadPro() {
+        admin_view(this.view_form).then( res => {
+          console.log(res.data.data.product_details);
+          this.product = res.data.data.product_details;
+        }).catch( error => {
+            this.$message.error('Failed');
+        })
+      },
+      jumpAddproduct () {
+        this.$router.push('/addproduct')
+      },
+      jumpAdmin () {
+        this.$router.push('/admin')
+      }
     }
-  }
 }
 </script>
 
@@ -31,7 +63,6 @@ export default {
     left:50%;
     transform: translate(-50%,0%);
 }
-
 .manage_container{
     background-color: #d1dbda;
     height: 100%;
@@ -39,7 +70,7 @@ export default {
 header{
     height: 100px;
     width: 100%;
-    position: fixed;
+    position: absolute;
     left:0;
     top:0;
     z-index: 999;
@@ -59,7 +90,6 @@ header{
     cursor: pointer;
     z-index: 100;
 }
-
 .addProduct{
     height: 40%;
     position: absolute;
@@ -73,5 +103,4 @@ header{
     border-color:#786662;
     cursor: pointer;
 }
-
 </style>

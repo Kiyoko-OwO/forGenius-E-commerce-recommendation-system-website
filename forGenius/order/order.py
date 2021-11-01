@@ -133,7 +133,8 @@ def view_all_order(email):
                 data['name'] = item.name
                 data['address'] = item.address
                 data['phone_number'] = item.phone_number
-                data['order_date']: item.date_time.strftime("%Y-%m-%d")
+                data['order_date'] = item.date_time.strftime("%Y-%m-%d")
+
                 data['paid'] = item.paid
 
             total += item.price * item.quantity

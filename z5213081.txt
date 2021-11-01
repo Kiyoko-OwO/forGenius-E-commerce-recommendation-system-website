@@ -14,8 +14,6 @@ WEEK 2
 5. I finished all of the basic UI design for the first sprint and put the UI diagrams in purposal.
 6. We had meeting to discuss and determine the final version of the user stories and epics.
 
-
-
 WEEK 3
 1. I finished ER and Relational Model diagram and put them in the purposal.
 2. Had a meeting to discuss the final version of the puposal.
@@ -32,3 +30,26 @@ Week 4
 5. I finished the backend part of the function "user add the product to cart".
 
 Week5
+1. We had a meeting to connect the backend and frontend, and improve something imperfect.
+2. Before the Demo A, we had a meeting to check everything is alright and have a rehearse for demo A.
+3. We discussed and finished the Retrospective A.
+4. We discussed the feedback from Yu, improve the points that Yu mentioned. 
+5. Then we assigned the new tasks (included the improvement and sprint2) to everyone. 
+
+Week 6 
+1. I finished the backend part of the function "view cart". (cart management)
+2. I finished the backend part of the function "edit cart product quantity".(cart management)
+3. I finished the backend part of the function "remove cart product".(cart management)
+
+Week7
+1. Kevin (Kaiyu Chen) wanted to rebuild the order part of database, but he met some issues and asked me about that. 
+   Then I fixed the database and rebuild the part.
+2. I finished the backend part of the function "view all order".
+3. We discussed and improved the Retrospective A based on Yu's feedback.
+4. We discussed the issues about the connection between frontend and backend, then fixed them.
+5. We planned to have the meeting on Week8 Monday and finished all thing in sprint2. And we also planned to start the final repornt on Week9.
+
+Week8
+1. We had a meeting to connect the backend and frontend.
+
+

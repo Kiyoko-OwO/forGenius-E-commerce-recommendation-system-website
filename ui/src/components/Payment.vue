@@ -5,18 +5,66 @@
        <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpHome">
     </header>
     <div class="payment-container">
-    <el-button class="Pay">Pay</el-button>
+      <el-select v-model="value" clearable placeholder="Choose payment method">
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </el-option>
+      </el-select>
+      <el-button class="Pay" @click="submitForm()">Pay</el-button>
     </div>
   </div>
 </template>
 
 <script>
+import { ord_pay } from '../api/order'
 export default {
+  data () {
+    return {
+      pay_from: {
+        token: '',
+        order_id: ''
+      },
+      options: [{
+          value: 'paypal',
+          label: 'Paypal'
+        }, {
+          value: 'debit',
+          label: 'Debit Card'
+        }, {
+          value: 'credit',
+          label: 'Credit Card'
+        }, {
+          value: 'gift',
+          label: 'Gift Card'
+        }],
+        value: ''
+      }
+  },
+  created () {
+    this.loadOrder()
+  },
   methods: {
+    loadOrder() {
+      this.pay_from.token = sessionStorage.getItem('token');
+      this.pay_from.order_id = sessionStorage.getItem('order');
+      sessionStorage.removeItem('order');
+    },
     jumpHome () {
       this.$router.push('/home')
+    },
+    submitForm() {
+      ord_pay(this.pay_from).then( res => {
+        this.$message({message: 'Payment Done',type: 'success'});
+        this.$router.push('/userprofile')
+      }).catch( error => {
+          this.$message.error('Failed');
+      })
     }
-  }
+  },
+  
 }
 </script>
 

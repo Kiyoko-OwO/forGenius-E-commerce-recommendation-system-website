@@ -88,7 +88,7 @@ export default {
         address_add(this.addForm).then( res => {
             this.$message({message: 'Add Address Sucess!',type: 'success'});
             if (sessionStorage.getItem('from') == 1) {
-              sessionStorage.setItem('from', 0);
+              sessionStorage.removeItem('from');
               this.$router.push('order');
             } else {
                this.$router.push('address');

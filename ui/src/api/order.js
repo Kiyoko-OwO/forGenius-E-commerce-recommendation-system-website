@@ -47,3 +47,11 @@ export const cart_create = data => {
     data
   })
 }
+
+export const ord_pay = data => {
+  return request({
+    method: 'POST',
+    url: '/order/pay/',
+    data
+  })
+}

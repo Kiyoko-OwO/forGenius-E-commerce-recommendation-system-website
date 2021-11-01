@@ -40,11 +40,10 @@ export default {
     methods: {
         orderFn() {
             if (this.payStat === "Fail") {
-                // this.$message.error('Failed');
-                // this.$router.push('order/payment');
-                this.dialogFormVisible = true
+                this.$router.push('/payment');
+                sessionStorage.setItem('order', this.ordId);
             } else {
-                
+                this.dialogFormVisible = true
             }
            
         }

@@ -160,7 +160,7 @@ export default {
             cart_qua(this.qua_form).then( res => {
 
             }).catch( error => {
-                this.$message.error('Failed2');
+                this.$message.error('Failed');
             })
         },
         sub(index) {
@@ -169,7 +169,7 @@ export default {
             this.qua_form.product_id = this.cart[index].product_id;
             cart_qua(this.qua_form).then( res => {
             }).catch( error => {
-                this.$message.error('Failed3');
+                this.$message.error('Failed');
             })
         },
         del(index) {

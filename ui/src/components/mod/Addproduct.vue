@@ -12,20 +12,20 @@
             <el-input type="textarea" v-model="addForm.description" autocomplete="off">
             </el-input>
           </el-form-item>
-          <el-form-item label="WARRANTY" class="change" prop="warranty">
-            <el-input v-model="addForm.warranty" autocomplete="off">
+          <el-form-item label="WARRANTY" class="change" prop="warranty" >
+            <el-input v-model="addForm.warranty" autocomplete="off" placeholder="The warranty time">
             </el-input>
           </el-form-item>
           <el-form-item label="DELIVERY DATE" class="change" prop="delivery_date">
-            <el-input v-model="addForm.delivery_date" autocomplete="off">
+            <el-input v-model="addForm.delivery_date" autocomplete="off" placeholder="The number of days it takes for delivery">
             </el-input>
           </el-form-item>
           <el-form-item label="PRICE" class="change" prop="price">
             <el-input v-model="addForm.price" autocomplete="off">
             </el-input>
           </el-form-item>
-          <el-form-item label="PICTURE" class="change" prop="picture">
-            <el-input v-model="addForm.picture" autocomplete="off">
+          <el-form-item label="PICTURE" class="change" prop="picture" >
+            <el-input v-model="addForm.picture" autocomplete="off" placeholder="Please input the url of picture">
             </el-input>
           </el-form-item>
           <div class="block"></div>

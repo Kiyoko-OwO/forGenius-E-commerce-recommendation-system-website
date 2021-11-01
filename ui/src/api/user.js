@@ -14,6 +14,15 @@ export const signup = data => {
       data
     })
 }
+
+export const signup_code = data => {
+  return request({
+    method: 'POST',
+    url: 'user/register/send_code',
+    data
+  })
+}
+
 export const change_password = data => {
   return request({
     method: 'POST',

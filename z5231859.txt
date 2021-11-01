@@ -5,7 +5,7 @@ Week2
 Week3
 
 
-Week4 front end
+Week 4 front end
 Home basic base and functional code done
 Vue build done
 User log in, sing on, log out base functional code done
@@ -19,7 +19,7 @@ Reset password base and functional code done
 Optimize router push
 Forgot password base code done
 
-week5 front end
+Week 5 front end
 Optimize user log in and log out experience
 Interest functional code done
 Admin draft page done
@@ -27,3 +27,17 @@ Address done
 Product view page done
 Add to cart done
 Forgot password functional code done
+
+Week 6
+
+
+Week 7
+Admin add product done
+Admin manage product done
+User order hisotry done
+Address select function of order page done
+Address modified
+Cart page modified
+
+Week 8
+Sign up code connected with api

@@ -12,12 +12,12 @@
     <span class="demonstration">{{ fit }}</span>
     <el-image
       style="width: 100px; height: 100px"
-      :src="url"
+      :src="editForm.picture"
       :fit="fit"></el-image>
   </div>
 </div>  
     <el-button type="primary" icon="el-icon-edit" @click="dialogFormVisible = true"></el-button>
-    <el-dialog title="Product Ma    nagement" :visible.sync="dialogFormVisible">
+    <el-dialog title="Product Management" :visible.sync="dialogFormVisible">
       <el-form :model="editForm">
         <el-form-item label="Product Id" >
           <el-input v-model="editForm.product_id" autocomplete="off"></el-input>
@@ -40,6 +40,9 @@
         <el-form-item label="Price" >
           <el-input v-model="editForm.price" autocomplete="off"></el-input>
         </el-form-item>
+        <el-form-item label="Picture" >
+          <el-input v-model="editForm.picture" autocomplete="off"></el-input>
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">Cancel</el-button>
@@ -57,11 +60,11 @@
 import { product_edit } from '../../api/admin'
 export default {
     inject:['reload'],
-    props: ['index', 'id', 'name', 'warr', 'description', 'delivery', 'sales', 'price'],
+    props: ['index', 'id', 'name', 'warr', 'description', 'delivery', 'sales', 'price','pic'],
     data () {
       return {
         fits: [''],
-        url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+        // url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
         dialogFormVisible: false,
         editForm: {
           product_id: this.id,
@@ -71,6 +74,7 @@ export default {
           sales_data: this.sales,
           price: this.price,
           warranty: this.warr,
+          picture: this.pic
         },
       }
     },

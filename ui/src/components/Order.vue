@@ -17,7 +17,7 @@
             <div v-for="(item,ind) in addressbook" :key="ind">
                    <div class="block1"></div>
                    <p>Recipient's name: {{item.name}} </p> 
-                   <p>Address: {{item.address}} </p> 
+                   <p>Address List: {{item.address}} </p> 
                    <p>Phone Number: {{item.phone_number}} </p> 
                    <el-button @click="chooseAdd(ind)" class="choose_in">Choose</el-button>
                    <div class="block"></div>

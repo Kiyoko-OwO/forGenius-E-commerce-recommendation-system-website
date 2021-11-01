@@ -8,12 +8,12 @@
             <el-input v-model="addForm.name" autocomplete="off">
             </el-input>
           </el-form-item>
-          <el-form-item label="WARRANTY" class="change" prop="warranty">
-            <el-input v-model="addForm.warranty" autocomplete="off">
-            </el-input>
-          </el-form-item>
           <el-form-item label="DESCRIPTION" class="change_description" prop="description">
             <el-input type="textarea" v-model="addForm.description" autocomplete="off">
+            </el-input>
+          </el-form-item>
+          <el-form-item label="WARRANTY" class="change" prop="warranty">
+            <el-input v-model="addForm.warranty" autocomplete="off">
             </el-input>
           </el-form-item>
           <el-form-item label="DELIVERY DATE" class="change" prop="delivery">
@@ -162,11 +162,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
 .block{
     height: 60px;
 }
-
 h1{
     position: absolute;
     left: 50%;
@@ -191,10 +189,10 @@ h1{
     transform: translate(-50%,-50%);
 }
 .logo{
-    height: 90%;
+    height: 70%;
     position: absolute;
     right: 64%;
-    top:-63%;
+    top:-53%;
     cursor: pointer;
 }
 .add_form{
@@ -204,7 +202,6 @@ h1{
     top: 25%;
     left: 15%;
 }
-
 .change /deep/ .el-form-item__label{
     font-family: 'segUi';
     letter-spacing:.1em;
@@ -239,7 +236,6 @@ h1{
   right: 25% !important;
   left: unset;
 }
-
 </style>
 
 <style lang="less" scoped>

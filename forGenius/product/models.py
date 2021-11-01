@@ -13,6 +13,7 @@ class Product(models.Model):
     sales_data = models.IntegerField(validators=[MinValueValidator(0)], default=0)
     admin_email = models.ForeignKey(Admin, on_delete=CASCADE)
     price = models.IntegerField(validators=[MinValueValidator(0)], default=0)
+    picture = models.CharField(max_length=255, blank=True)
 
 class Features(models.Model):
     product_id = models.ForeignKey(Product, on_delete=CASCADE)

@@ -73,6 +73,7 @@ def admin_add_product(request):
             warranty = data['warranty']
             delivery_date = data['delivery_date']
             price = data['price']
+            picture = data['picture']
             if not isFloat(price):
                 response.status_code = 443
                 response.content = 'price is not float'
@@ -86,7 +87,7 @@ def admin_add_product(request):
             response.content = e
             return response
         try:
-            data = products.admin_add_product(name, description, warranty, delivery_date, price)
+            data = products.admin_add_product(name, description, warranty, delivery_date, price, picture)
         except ProductIdError as e:
             response.status_code = 400
             response.content = e
@@ -114,6 +115,7 @@ def admin_edit_product(request):
             delivery_date = data['delivery_date']
             price = data['price']
             product_id = data['product_id']
+            picture = data['picture']
             if not isFloat(price):
                 response.status_code = 443
                 response.content = 'price is not float'
@@ -127,7 +129,7 @@ def admin_edit_product(request):
             response.content = e
             return response
         try:
-            data = products.admin_edit_product(product_id, name, description, warranty, delivery_date, price)
+            data = products.admin_edit_product(product_id, name, description, warranty, delivery_date, price, picture)
         except ProductIdError as e:
             response.status_code = 400
             response.content = e

@@ -6,7 +6,13 @@
     </header>
     
     <div class="product_box">
-        <img class="picture" src=../assets/2.png alt="product image" />
+        <div class="block" v-for="fit in fits" :key="fit">
+          <span class="demonstration">{{ fit }}</span>
+          <el-image
+            style="width: 100px; height: 100px"
+            :src="product.picture"
+            :fit="fit"></el-image>
+        </div>
         <h2>Name: {{product.name}}</h2>
         <h3>Description: {{product.description}}</h3>
         <h3>Warranty: {{product.warranty}}</h3>
@@ -40,6 +46,7 @@ import { product_view } from '../api/product'
 export default {
     data () {
         return {
+            fits: [''],
             product: {},
             numberValidateForm: {
               token: '',
@@ -47,7 +54,7 @@ export default {
               quantity: 1
             },
             product_id_form:{
-              product_id: 3
+              product_id: 5
             }
         }
     },

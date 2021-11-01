@@ -24,6 +24,10 @@
             <el-input v-model="addForm.price" autocomplete="off">
             </el-input>
           </el-form-item>
+          <el-form-item label="PICTURE" class="change" prop="picture">
+            <el-input v-model="addForm.picture" autocomplete="off">
+            </el-input>
+          </el-form-item>
           <div class="block"></div>
           <el-form-item>
           <el-button type="primary" @click="submitAdd" class="submit">CONFIRM</el-button>
@@ -66,7 +70,7 @@ export default {
       }, 100)
     }
     var checkDelivery= (rule, value, callback) => {
-      const mailReg = /\d{4}-\d{2}-\d{2}/
+      const mailReg = /^\d+$/
       if (!value) {
         return callback(new Error('number of day cannot be empty'))
       }
@@ -111,6 +115,7 @@ export default {
         warranty: '',
         delivery_date:'',
         price:'',
+        picture: ''
       },
       addRules: {
         name: [

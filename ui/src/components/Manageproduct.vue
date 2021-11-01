@@ -14,6 +14,7 @@
       :sales="obj.sales_data"
       :price="obj.price"
       :pic="obj.picture"
+      :delivery="obj.delivery_date"
       :index = "ind"
       @delPro = "del"
       >

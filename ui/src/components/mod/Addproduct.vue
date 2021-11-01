@@ -70,7 +70,7 @@ export default {
       }, 100)
     }
     var checkDelivery= (rule, value, callback) => {
-      const mailReg = /\d{4}-\d{2}-\d{2}/
+      const mailReg = /^\d+$/
       if (!value) {
         return callback(new Error('number of day cannot be empty'))
       }

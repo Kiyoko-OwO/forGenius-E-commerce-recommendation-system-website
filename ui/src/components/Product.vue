@@ -54,7 +54,7 @@ export default {
               quantity: 1
             },
             product_id_form:{
-              product_id: 6
+              product_id: 5
             }
         }
     },

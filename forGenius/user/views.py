@@ -24,12 +24,13 @@ def register(request):
             email = data["email"]
             name = data["name"]
             password = data["password"]
+            code = data["code"]
         except KeyError:
             response.status_code = 442
             response.content = 'KeyError'
             return response
         try:
-            token = auth.auth_register(email, name, password)
+            token = auth.auth_register(email, name, password, code)
             username = auth.token_to_username(token)
         except InputError as e:
             response.status_code = 400
@@ -42,6 +43,34 @@ def register(request):
         return HttpResponse(json.dumps(data), content_type="application/json")
     response.status_code = 405
     return response
+
+def register_send(request):
+    response = HttpResponse()
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            response.status_code = 441
+            response.content = 'json.JSONDecodeError'
+            return response
+        try:
+            email = data["email"]
+            name = data["name"]
+        except KeyError:
+            response.status_code = 442
+            response.content = 'KeyError'
+            return response
+        try:
+            auth.auth_register_send(name, email)
+        except InputError as e:
+            response.status_code = 400
+            response.content = e
+            return response
+        response.status_code = 200
+        return response
+    response.status_code = 405
+    return response
+
 
 def login(request):
     response = HttpResponse()

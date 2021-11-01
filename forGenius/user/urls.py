@@ -4,6 +4,7 @@ from user.views import *
 app_name = 'user'
 
 urlpatterns = [
+    path('register/send_code', register_send, name='auth_register_send'),
     path('register/', register, name='register'),
     path('login/', login, name='login'),
     path('logout/', logout, name='logout'),

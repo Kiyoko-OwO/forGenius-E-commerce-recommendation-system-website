@@ -35,7 +35,7 @@ def auth_logout(token):
     return True
 
 # already debugged
-def auth_register(email, name, password):
+def auth_register(email, name, password, code):
     """ 
     auth_register(email, name, password)
     register the account in the database 
@@ -49,10 +49,24 @@ def auth_register(email, name, password):
             raise InputError('Invalid username')
         if not validate_password(password):
             raise InputError('Invalid password')
+        if RESETCODE_DB[email] != code:
+            raise InputError('Invalid Code')
+
         reg = User(user_email=email, user_name=name, password=password)
         reg.save()
         return auth_login(email, password)
     raise InputError('Already registered, please log in')
+
+def auth_register_send(username, email):
+
+    if not validate_email(email):
+        raise InputError('Invalid Email')
+
+    reset_code = generate_reset_code()
+    RESETCODE_DB[email] = reset_code
+    email_robot.send_email_register(username, email, reset_code)
+    
+
 
 def auth_change_password(token, old_password, new_password):
     email = token_to_email(token)

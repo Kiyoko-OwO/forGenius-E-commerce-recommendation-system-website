@@ -24,6 +24,10 @@
             <el-input v-model="addForm.price" autocomplete="off">
             </el-input>
           </el-form-item>
+          <el-form-item label="PICTURE" class="change" prop="picture">
+            <el-input v-model="addForm.picture" autocomplete="off">
+            </el-input>
+          </el-form-item>
           <div class="block"></div>
           <el-form-item>
           <el-button type="primary" @click="submitAdd" class="submit">CONFIRM</el-button>
@@ -111,6 +115,7 @@ export default {
         warranty: '',
         delivery_date:'',
         price:'',
+        picture: ''
       },
       addRules: {
         name: [

@@ -70,7 +70,7 @@ export default {
 header{
     height: 100px;
     width: 100%;
-    position: fixed;
+    position: absolute;
     left:0;
     top:0;
     z-index: 999;

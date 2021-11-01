@@ -36,8 +36,11 @@ Admin add product done
 Admin manage product done
 User order hisotry done
 Address select function of order page done
+Order page done
+Payment page done
 Address modified
 Cart page modified
+Product page modified
 
 Week 8
 Sign up code connected with api

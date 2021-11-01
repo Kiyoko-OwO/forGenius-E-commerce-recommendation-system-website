@@ -15,3 +15,19 @@ import request from '../utils/request'
       data
     })
   }
+
+  export const product_edit = data => {
+    return request({
+      method: 'POST',
+      url: '/product/edit/',
+      data
+    })
+  }
+
+  export const product_delete = data => {
+    return request({
+      method: 'DELETE',
+      url: '/product/delete/',
+      data
+    })
+  }

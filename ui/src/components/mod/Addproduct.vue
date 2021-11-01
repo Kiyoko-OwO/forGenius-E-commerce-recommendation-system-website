@@ -16,8 +16,8 @@
             <el-input v-model="addForm.warranty" autocomplete="off">
             </el-input>
           </el-form-item>
-          <el-form-item label="DELIVERY DATE" class="change" prop="delivery">
-            <el-input v-model="addForm.delivery" autocomplete="off">
+          <el-form-item label="DELIVERY DATE" class="change" prop="delivery_date">
+            <el-input v-model="addForm.delivery_date" autocomplete="off">
             </el-input>
           </el-form-item>
           <el-form-item label="PRICE" class="change" prop="price">
@@ -66,7 +66,7 @@ export default {
       }, 100)
     }
     var checkDelivery= (rule, value, callback) => {
-      const mailReg = /^\d+$/
+      const mailReg = /\d{4}-\d{2}-\d{2}/
       if (!value) {
         return callback(new Error('number of day cannot be empty'))
       }
@@ -106,12 +106,10 @@ export default {
     }
     return {
       addForm: {
-        token: '',
         name: '',
-        warranty: '',
         description:'',
-        delivery:'',
-        sales:'',
+        warranty: '',
+        delivery_date:'',
         price:'',
       },
       addRules: {
@@ -121,7 +119,7 @@ export default {
         warranty:[
           { validator: checkWarranty, trigger: 'blur'}
         ],
-        delivery:[
+        delivery_date:[
           { validator: checkDelivery, trigger: 'blur'}
         ],
         sales:[
@@ -142,7 +140,7 @@ export default {
     },
     submitAdd () {
         this.$refs.add_FormRef.validate(async (valid) => {
-          if (valid) {
+        if (valid) {
         this.addForm.token = sessionStorage.getItem('token');
         console.log(this.addForm);
         product_add(this.addForm).then( res => {

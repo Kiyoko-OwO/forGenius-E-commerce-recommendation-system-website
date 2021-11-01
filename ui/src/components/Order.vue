@@ -134,6 +134,10 @@ export default {
             }).catch( error => {
                 this.$message.error('Failed');
             })
+            if(this.cart.length == 0) {
+                this.$message.error('Nothing in Cart');
+                this.$router.push('/cart');
+            }
         },
         async loadAddressBook() {
             // this.tokenForm.token = sessionStorage.getItem('token');
@@ -194,6 +198,7 @@ export default {
         jumpPay () {
             cart_create(this.create_form).then( res => {
                 this.$message({message: 'Order Placed',type: 'success'});
+                sessionStorage.setItem('order', res.data.order_id);
                 this.$router.push('/payment');
             }).catch( error => {
                 this.$message.error('Failed');

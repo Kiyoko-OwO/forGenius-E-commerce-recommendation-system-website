@@ -19,15 +19,16 @@ def product_userView(product_id):
             "description" : product_query.description,
             "warranty" : product_query.warranty,
             "delivery_date" : product_query.delivery_date,
-            "price" : product_query.price
+            "price" : product_query.price,
+            "picture" : product_query.picture
         } 
     return info
 
-def admin_add_product(name, description, warranty, delivery_date, price):    
-    reg = Product(admin_email=get_Admin(), name=name, description=description, warranty=warranty, delivery_date=delivery_date, price=price)
+def admin_add_product(name, description, warranty, delivery_date, price, picture):    
+    reg = Product(admin_email=get_Admin(), name=name, description=description, warranty=warranty, delivery_date=delivery_date, price=price, picture=picture)
     reg.save()
 
-def admin_edit_product(product_id, name, description, warranty, delivery_date, price):    
+def admin_edit_product(product_id, name, description, warranty, delivery_date, price, picture):    
     try:
         reg = Product.objects.get(product_id=product_id)
     except Product.DoesNotExist:
@@ -36,7 +37,8 @@ def admin_edit_product(product_id, name, description, warranty, delivery_date, p
     reg.description = description
     reg.warranty = warranty
     reg.delivery_date = delivery_date
-    reg.price = price    
+    reg.price = price
+    reg.picture = picture
     reg.save()
 
 def admin_delete_product(product_id):    
@@ -62,6 +64,7 @@ def admin_products_all():
             "delivery_date" : book.delivery_date,
             "sales_data" : book.sales_data,
             "price" : book.price,
+            "picture" : book.picture
         } 
         data[info_str].append(info)
     return data

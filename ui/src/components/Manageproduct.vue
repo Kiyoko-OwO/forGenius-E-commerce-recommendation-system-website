@@ -13,6 +13,9 @@
       :description="obj.description"
       :sales="obj.sales_data"
       :price="obj.price"
+      :delivery="obj.delivery_date"
+      :index = "ind"
+      @delPro = 'del'
       >
 
       </Manage>
@@ -23,12 +26,17 @@
 <script>
 import Manage from './mod/Manageproductpro.vue'
 import { admin_view } from '../api/admin'
+import { product_delete } from '../api/admin'
 
 export default {
+    inject:['reload'],
     data () {
       return {
         view_form: {},
-        product: []
+        product: [],
+        deleteForm : {
+          product_id: ''
+        }
       }
     },
     created () {
@@ -42,6 +50,9 @@ export default {
         admin_view(this.view_form).then( res => {
           console.log(res.data.data.product_details);
           this.product = res.data.data.product_details;
+          if (this.product.length == 0) {
+            this.$message.error('No Product Yet');
+          }
         }).catch( error => {
             this.$message.error('Failed');
         })
@@ -51,7 +62,16 @@ export default {
       },
       jumpAdmin () {
         this.$router.push('/admin')
-      }
+      },
+      del(index) {
+        this.deleteForm.product_id = this.product[index].product_id;
+        product_delete(this.deleteForm).then( res => {
+            this.$message({message: 'Delete Sucess!',type: 'success'});
+            this.reload();
+        }).catch( error => {
+            this.$message.error('Failed');
+        })
+      },
     }
 }
 </script>

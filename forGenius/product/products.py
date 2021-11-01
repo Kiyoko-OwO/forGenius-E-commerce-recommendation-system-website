@@ -59,14 +59,12 @@ def admin_products_all():
     info_str = "product_details"
     data = { info_str : []}
     for book in books:
-        delivery_date = datetime.now() + timedelta(days=book.delivery_date)
-
         info = {
             "product_id" : book.product_id,
             "name" : book.name,
             "warranty" : book.warranty,
             "description" : book.description,
-            "delivery_date" : delivery_date.strftime("%Y-%m-%d"),
+            "delivery_date" : book.delivery_date,
             "sales_data" : book.sales_data,
             "price" : book.price,
             "picture" : book.picture

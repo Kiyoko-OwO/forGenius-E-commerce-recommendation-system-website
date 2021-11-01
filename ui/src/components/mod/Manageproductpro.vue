@@ -7,8 +7,17 @@
     <p> Delivery Date: {{delivery}}</p>
     <p> Sales Data: {{sales}}</p>
     <p> Price: {{price}}</p>
+    <div class="demo-image">
+  <div class="block" v-for="fit in fits" :key="fit">
+    <span class="demonstration">{{ fit }}</span>
+    <el-image
+      style="width: 100px; height: 100px"
+      :src="url"
+      :fit="fit"></el-image>
+  </div>
+</div>  
     <el-button type="primary" icon="el-icon-edit" @click="dialogFormVisible = true"></el-button>
-    <el-dialog title="Product Management" :visible.sync="dialogFormVisible">
+    <el-dialog title="Product Ma    nagement" :visible.sync="dialogFormVisible">
       <el-form :model="editForm">
         <el-form-item label="Product Id" >
           <el-input v-model="editForm.product_id" autocomplete="off"></el-input>
@@ -51,6 +60,8 @@ export default {
     props: ['index', 'id', 'name', 'warr', 'description', 'delivery', 'sales', 'price'],
     data () {
       return {
+        fits: [''],
+        url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
         dialogFormVisible: false,
         editForm: {
           product_id: this.id,

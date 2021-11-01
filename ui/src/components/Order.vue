@@ -134,10 +134,6 @@ export default {
             }).catch( error => {
                 this.$message.error('Failed');
             })
-            if(this.cart.length == 0) {
-                this.$message.error('Nothing in Cart');
-                this.$router.push('/cart');
-            }
         },
         async loadAddressBook() {
             // this.tokenForm.token = sessionStorage.getItem('token');

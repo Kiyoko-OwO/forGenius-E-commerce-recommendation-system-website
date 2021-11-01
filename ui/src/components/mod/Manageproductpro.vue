@@ -3,21 +3,22 @@
     <p> Product ID: {{id}} </p> 
     <p> Product Name: {{name}} </p> 
     <p> Product Warranty: {{warr}} </p> 
-    <p> Description: {{description}}</p>
+    <p> Description: </p>
+    <p>{{description}}</p>
     <p> Delivery Date: {{delivery}}</p>
     <p> Sales Data: {{sales}}</p>
     <p> Price: {{price}}</p>
     <div class="demo-image">
-  <div class="block" v-for="fit in fits" :key="fit">
+  <div class="img" v-for="fit in fits" :key="fit">
     <span class="demonstration">{{ fit }}</span>
     <el-image
-      style="width: 100px; height: 100px"
+      style="width: 200px; height: 200px"
       :src="editForm.picture"
       :fit="fit"></el-image>
   </div>
 </div>  
-    <el-button type="primary" icon="el-icon-edit" @click="dialogFormVisible = true"></el-button>
-    <el-dialog title="Product Management" :visible.sync="dialogFormVisible" width="100%">
+    <el-button type="primary" icon="el-icon-edit" @click="dialogFormVisible = true" class="edit"></el-button>
+    <el-dialog title="Product Management" :visible.sync="dialogFormVisible" width="100%" fullscreen="true" modal="false">
       <el-form :model="editForm">
         <el-form-item label="Product Id" >
           <el-input v-model="editForm.product_id" autocomplete="off"></el-input>
@@ -50,7 +51,7 @@
       </div>
     </el-dialog>
     
-    <el-button type="primary" icon="el-icon-delete" @click="delFn"></el-button>
+    <el-button type="primary" icon="el-icon-delete" @click="delFn" class="edit"></el-button>
   </div>
   
 
@@ -131,5 +132,22 @@ export default {
   border-radius: 5px;
   margin: 10px;
   font-family: 'segUi';
+  word-break:break-all;
 }
+.img{
+  position: relative;
+  top:50%;
+}
+.des{
+  width: 100px;
+}
+.edit{
+  position: relative;
+  left:80%;
+}
+
+</style>
+
+<style >
+
 </style>

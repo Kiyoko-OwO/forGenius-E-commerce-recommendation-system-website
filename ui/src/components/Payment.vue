@@ -5,7 +5,7 @@
        <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpHome">
     </header>
     <div class="payment-container">
-      <el-select v-model="value" clearable placeholder="Choose payment method">
+      <el-select v-model="value" clearable placeholder="Choose payment method" class="choose">
         <el-option
           v-for="item in options"
           :key="item.value"
@@ -72,7 +72,7 @@ export default {
 <style lang="less" scoped>
 .payment-container {
     position: absolute;
-    top:100px;
+    top:200px;
     left:50%;
     transform: translate(-50%,0%);
 }
@@ -80,7 +80,7 @@ export default {
 header{
     height: 100px;
     width: 100%;
-    position: fixed;
+    position: absolute;
     left:0;
     top:0;
     z-index: 999;
@@ -115,5 +115,8 @@ header{
     border-color:#786662;
     cursor: pointer;
 }
-
+.choose{
+  top:-20px;
+  width:200px;
+}
 </style>

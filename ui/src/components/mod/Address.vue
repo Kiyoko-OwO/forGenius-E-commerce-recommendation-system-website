@@ -1,7 +1,8 @@
 <template>
   <div class="my-address">
     <p> Name: {{userName}} </p> 
-    <p> Address: {{addressDe}}</p>
+    <p> Address: </p>
+    <p> {{addressDe}}</p>
     <p> Phone Number: {{phoneNumber}}</p>
     <!-- Form -->
     <el-button type="primary" icon="el-icon-edit" @click="dialogFormVisible = true"></el-button>
@@ -88,5 +89,6 @@ export default {
   border: 2px solid #000;
   border-radius: 5px;
   margin: 10px;
+  word-break:break-all;
 }
 </style>

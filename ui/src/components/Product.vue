@@ -14,7 +14,8 @@
             :fit="fit"></el-image>
         </div>
         <h2>Name: {{product.name}}</h2>
-        <h3>Description: {{product.description}}</h3>
+        <h3>Description:</h3>
+        <p>{{product.description}}</p>
         <h3>Warranty: {{product.warranty}}</h3>
         <h3>Delivery date: {{product.delivery_date}}</h3>
         <h3>Price: $ {{product.price}}</h3>
@@ -127,7 +128,7 @@ export default {
 header{
     height: 100px;
     width: 100%;
-    position: fixed;
+    position: absolute;
     left:0;
     top:0;
     z-index: 999;
@@ -155,5 +156,6 @@ header{
     top:200px;
     border: 1px solid black;
     width:25%;
+    word-break:break-all;
 }
 </style>

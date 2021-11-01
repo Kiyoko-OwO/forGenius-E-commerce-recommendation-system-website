@@ -38,7 +38,7 @@
 
 <script>
 import { signup } from '../api/user'
-
+import { signup_code } from '../api/user'
 export default {
   data () {
     var checkEmail = (rule, value, callback) => {
@@ -97,6 +97,10 @@ export default {
 	      password: "",
         code: ""
       },
+      code_form: {
+        name: "",
+        email: ""
+      },
       signupRules: {
         email: [
           { validator: checkEmail, trigger: 'blur' }
@@ -151,6 +155,15 @@ export default {
           console.log('error submit!!');
           return false;
         }
+      })
+    },
+    send() {
+      this.code_form.name = this.signupForm.name;
+      this.code_form.email = this.signupForm.email;
+      signup_code(this.code_form).then ( res => {
+        this.$message({message: 'Code Send Sucessfully!',type: 'success'});
+      }).catch( error => {
+        this.$message.error('Failed');
       })
     },
     jumpHome () {

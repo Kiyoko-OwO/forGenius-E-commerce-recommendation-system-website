@@ -9,10 +9,11 @@ class Product(models.Model):
     name = models.CharField(max_length=255, null=False, blank=False)
     description = models.CharField(max_length=10000000)
     warranty = models.IntegerField(validators=[MinValueValidator(0)], default=0)
-    delivery_date = models.DateField(blank = True, auto_now=False, auto_now_add=False)
+    delivery_date = models.IntegerField(validators=[MinValueValidator(0)], default=0)
     sales_data = models.IntegerField(validators=[MinValueValidator(0)], default=0)
     admin_email = models.ForeignKey(Admin, on_delete=CASCADE)
     price = models.IntegerField(validators=[MinValueValidator(0)], default=0)
+    picture = models.CharField(max_length=255, blank=True)
 
 class Features(models.Model):
     product_id = models.ForeignKey(Product, on_delete=CASCADE)

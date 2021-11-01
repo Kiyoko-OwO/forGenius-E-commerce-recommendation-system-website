@@ -32,3 +32,21 @@ Week 4
 5. I finished the backend part of the function "user add the product to cart".
 
 Week5
+1. We had a meeting to connect the backend and frontend, and improve something imperfect.
+2. Before the Demo A, we had a meeting to check everything is alright and have a rehearse for demo A.
+3. We discussed and finished the Retrospective A.
+4. We discussed the feedback from Yu, improve the points that Yu mentioned. 
+5. Then we assigned the new tasks (included the improvement and sprint2) to everyone. 
+
+Week 6
+1. Kevin (Kaiyu Chen) wanted to rebuild the order part of database, but he met some issues and asked me about that. 
+   Then I fixed the database and rebuild the part.
+2. I finished the backend part of the function "view all order".
+3. I finished the backend part of the function "view cart". (cart management)
+4. I finished the backend part of the function "edit cart product quantity".(cart management)
+5. I finished the backend part of the function "remove cart product".(cart management)
+
+Week7
+1. We had a meeting to connect the backend and frontend and discussed about our plan for the sprint3 and final report.
+
+

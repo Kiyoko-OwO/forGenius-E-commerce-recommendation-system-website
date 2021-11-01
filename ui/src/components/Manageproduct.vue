@@ -6,26 +6,53 @@
        <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpAdmin">
     </header>
     <div class="manage-container">
-      <manage />
-      <manage />
+      <Manage v-for="(obj,ind) in product" :key="ind"
+      :id="obj.product_id"
+      :name="obj.name"
+      :warr="obj.warranty"
+      :description="obj.description"
+      :sales="obj.sales_data"
+      :price="obj.price"
+      >
+
+      </Manage>
     </div>
   </div>
 </template>
 
 <script>
-import manage from './mod/Manageproductpro.vue'
+import Manage from './mod/Manageproductpro.vue'
+import { admin_view } from '../api/admin'
+
 export default {
+    data () {
+      return {
+        view_form: {},
+        product: []
+      }
+    },
+    created () {
+      this.loadPro()
+    },
     components: {
-        manage
+        Manage
     },
-  methods: {
-    jumpAddproduct () {
-      this.$router.push('/addproduct')
-    },
-    jumpAdmin () {
-      this.$router.push('/admin')
+    methods: {
+      async loadPro() {
+        admin_view(this.view_form).then( res => {
+          console.log(res.data.data.product_details);
+          this.product = res.data.data.product_details;
+        }).catch( error => {
+            this.$message.error('Failed');
+        })
+      },
+      jumpAddproduct () {
+        this.$router.push('/addproduct')
+      },
+      jumpAdmin () {
+        this.$router.push('/admin')
+      }
     }
-  }
 }
 </script>
 

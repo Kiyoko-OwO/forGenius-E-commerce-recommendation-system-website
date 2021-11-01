@@ -1,29 +1,20 @@
 <template>
   <div class="manage_container">
     <header>
-        MANAGE&nbsp;PRODUCT
-       <el-button class="addProduct" v-on:click="jumpAddproduct">ADD PROCDUCT</el-button>
-       <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpAdmin">
+        PAYMENT
+       <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpHome">
     </header>
-    <div class="manage-container">
-      <manage />
-      <manage />
+    <div class="payment-container">
+    <el-button class="Pay">Pay</el-button>
     </div>
   </div>
 </template>
 
 <script>
-import manage from './mod/Manageproductpro.vue'
 export default {
-    components: {
-        manage
-    },
   methods: {
-    jumpAddproduct () {
-      this.$router.push('/addproduct')
-    },
-    jumpAdmin () {
-      this.$router.push('/admin')
+    jumpHome () {
+      this.$router.push('/home')
     }
   }
 }
@@ -31,17 +22,13 @@ export default {
 
 
 <style lang="less" scoped>
-.manage-container {
+.payment-container {
     position: absolute;
     top:100px;
     left:50%;
     transform: translate(-50%,0%);
 }
 
-.manage_container{
-    background-color: #d1dbda;
-    height: 100%;
-}
 header{
     height: 100px;
     width: 100%;
@@ -66,12 +53,13 @@ header{
     z-index: 100;
 }
 
-.addProduct{
-    height: 40%;
+.Pay{
+    height: 45px;
+    width: 100px;
     position: absolute;
     border-radius: 4px;
     padding: 2px 20px;
-    margin-left: 300px;
+    margin-left: -50px;
     margin-top: 40px;
     background: #786662;
     border-radius: 10px;

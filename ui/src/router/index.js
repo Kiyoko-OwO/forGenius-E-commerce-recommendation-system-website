@@ -17,6 +17,7 @@ import Addproduct from '../components/mod/Addproduct'
 import Manageproduct from '../components/Manageproduct'
 import OrderHistory from '../components/OrderHistory'
 import Order from '../components/Order'
+import Payment from '../components/Payment'
 Vue.use(VueRouter)
 
 const originalPush = VueRouter.prototype.push
@@ -87,6 +88,9 @@ const routes = [
   },{
     path: '/order',
     component: Order
+  },{
+    path: '/payment',
+    component: Payment
   }
 ]
 

@@ -1,29 +1,35 @@
 <template>
-  <div>
-      <h1>Real Order Page</h1>
-      <el-button @click="jumpCart">Return</el-button>
-      <el-input v-model="share_form.email" placeholder="input email address"></el-input>
-      <el-button @click="share">Share</el-button>
+  <div >
+    <header>
+        ORDER&nbsp;
+        <el-button @click="jumpCart" class='return' type="primary">Return Cart</el-button>
+        <img class="logo" src=../assets/2.png alt="logo">
+    </header>
+    <div class="order_contain">
       <div v-show="isEmpty">
           <h2>Address</h2>
           <p> Name: {{create_form.name}} </p> 
           <p> Address: {{create_form.address}}</p>
           <p> Phone Number: {{create_form.phone_number}}</p>
-          <el-button @click="chooseDialogFormVisible = true">Choose</el-button>
-          <el-dialog title="Address Book" :visible.sync="chooseDialogFormVisible">
+          <el-button @click="chooseDialogFormVisible = true" align="left" style="float:left">Choose</el-button>
+          <el-button @click="jumpAdd" align="right">Add</el-button>
+          <el-dialog title="Address Book" :visible.sync="chooseDialogFormVisible" width="40%">
             <div v-for="(item,ind) in addressbook" :key="ind">
-                  Recipient's name: {{item.name}} ===
-                  Address: {{item.address}} ===
-                  Phone Number: {{item.phone_number}} ===
-                  <el-button @click="chooseAdd(ind)">Choose</el-button>
+                   <div class="block1"></div>
+                   <p>Recipient's name: {{item.name}} </p> 
+                   <p>Address: {{item.address}} </p> 
+                   <p>Phone Number: {{item.phone_number}} </p> 
+                   <el-button @click="chooseAdd(ind)" class="choose_in">Choose</el-button>
+                   <div class="block"></div>
+                   <div class="link-in"></div>
               </div>
             <div slot="footer" class="dialog-footer">
               <el-button @click="chooseDialogFormVisible = false">Cancel</el-button>
             </div>
           </el-dialog>
       </div>
-      <el-button @click="jumpAdd">Add</el-button>
       <div class="cart-container">
+        <h2 class="infor">Product information</h2>
         <Product v-for="(obj,ind) in cart" :key="obj.id"
         :proName="obj.name"
         :proPrice="obj.price"
@@ -33,10 +39,22 @@
         @subQua = 'sub'
         @delPro = 'del'>
         </Product>
+        <div class="price">
         <p>Total Price: $</p>
         <p>{{total_price}}</p>
+        </div>
     </div>
-      <el-button type="primary" @click="jumpPay">Submit Order</el-button>
+    <div class="share">
+      <h2 class="share_ti">Share Your Order</h2>
+      <el-form ref='share_form' :model="share_form" :rules="share_formRules" class="share_form" label-position="left" label-width="90px" >
+      <el-form-item label="EMAIL" class="email_change" prop="email">
+      <el-input v-model="share_form.email" placeholder="input email address" ></el-input>
+      </el-form-item>
+      <el-button @click="share" align="right">Share Order</el-button>
+      </el-form>
+      <el-button type="primary" @click="jumpPay" class="submit">Submit Order</el-button>
+    </div>
+  </div>
   </div>
 </template>
 
@@ -49,6 +67,19 @@ import { cart_del } from '../api/order'
 import { cart_create } from '../api/order'
 export default {
     data () {
+        var checkEmail = (rule, value, callback) => {
+        const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+.com/
+        if (!value) {
+            return callback(new Error('email address cannot be empty'))
+        }
+        setTimeout(() => {
+            if (mailReg.test(value)) {
+            callback()
+            } else {
+            callback(new Error('Please enter the correct email format'))
+            }
+        }, 100)
+        }
         return {
             cart : [],
             addressbook : [],
@@ -76,6 +107,11 @@ export default {
             share_form: {
                 token: '',
                 email: ''
+            },
+            share_formRules:{
+               email: [
+                    { validator: checkEmail, trigger: 'blur' }
+                ]
             }
         }
     },
@@ -168,15 +204,112 @@ export default {
             this.$router.push('/addressadd');
         },
         share() {
+            this.$refs.share_form.validate(async (valid) =>{
+            if(!valid) return;
+            else{
             this.$message({message: 'Shared',type: 'success'});
             this.share_form.email = "";
-        }
+            }
+            });
     }
-    
-    
+    }  
 }
 </script>
 
-<style>
+<style lang="less" scoped>
+header{
+    height: 100px;
+    width: 100%;
+    position: absolute;
+    left:0;
+    top:-10px;
+    z-index: 999;
+    border-bottom:3px solid #ccc;
+    text-align: center;
+    line-height: 130px;
+    font-weight:normal;
+    font-family: 'segUi';
+    font-size: 50px;
+}
+.order_contain{
+    position: absolute;
+    top:100px;
+    left:38%;
+}
+.logo{
+    height: 200%;    
+    position: absolute;
+    right: 80%;
+    top:-56%;
+    cursor: pointer;
+}
+.share_form{
+    width:300px;
+}
+.return{
+    position: relative;
+    height:40px;
+    left:500px;
+    top:-10px;
+    background: #786662;
+    color: #fefefe;
+    border-color: #786662;
+}
+.submit{
+    position: relative;
+    left:70%;
+    width:130px;
+    font-size: 16px;
+    height:50px;
+    margin-top: 70px;
+    margin-left: 80px;
+    transform: translate(-50%,-50%);
+    border-radius: 10px;
+    background: #786662;
+    color: #fefefe;
+    padding-left: 19px;
+    padding-top: 11px;
+    border-color: #786662;
+}
+.cart-container{
+    position: relative;
+    left: -12px;
+}
+.price{
+    position: relative;
+    left: 75%;
+}
+.infor{
+    position: relative;
+    left: 15px;
+}
+.email_change{
+    position: relative;
+    width:500px;
+}
+.email_change /deep/ .el-form-item__label{
+    font-family: 'segUi';
+    position: relative;
+    letter-spacing:.1em;
+    top:2px;
+    font-size: 18px;
+}
 
+    .link-in {
+        position: relative;
+        width: 100%;
+        height: 1px;
+        border-top: solid #0b0b0f 1px;
+     }
+     .block {
+  height: 20px;
+}
+     .block1 {
+  height: 10px;
+}
+.choose_in{
+    position: relative;
+    left:80%;
+}
 </style>
+

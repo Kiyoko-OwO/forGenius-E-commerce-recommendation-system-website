@@ -17,7 +17,7 @@
   </div>
 </div>  
     <el-button type="primary" icon="el-icon-edit" @click="dialogFormVisible = true"></el-button>
-    <el-dialog title="Product Management" :visible.sync="dialogFormVisible">
+    <el-dialog title="Product Management" :visible.sync="dialogFormVisible" width="100%">
       <el-form :model="editForm">
         <el-form-item label="Product Id" >
           <el-input v-model="editForm.product_id" autocomplete="off"></el-input>

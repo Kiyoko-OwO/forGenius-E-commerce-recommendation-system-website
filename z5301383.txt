@@ -25,11 +25,19 @@ Finished Address and forgotpassword base code
 Optimize router push
 Improve user experience
 
-WEEK5
+WEEK 5
 Interest functional code done.
 Address add functional code done.
 Require users to double input passwords when users signup.
 Add check for data validation.
+Improve web page aesthetics.
+
+WEEK 7
+Manageproduct functional code done.
+Order functional code down.
+css code down.
+Add email check for sign up.
+Add picture for product.
 Improve web page aesthetics.
 
 

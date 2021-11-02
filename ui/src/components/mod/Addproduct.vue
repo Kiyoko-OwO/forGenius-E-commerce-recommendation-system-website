@@ -96,7 +96,7 @@ export default {
       }, 100)
     }
     var checkPrice= (rule, value, callback) => {
-      const mailReg = /^[1-9]\d*$/
+      const mailReg =  /^(?:[1-9][0-9]*\.[0-9]+|0\.(?!0+$)[0-9]+)$/
       if (!value) {
         return callback(new Error('Price cannot be empty'))
       }

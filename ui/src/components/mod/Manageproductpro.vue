@@ -18,7 +18,7 @@
   </div>
 </div>  
     <el-button type="primary" icon="el-icon-edit" @click="dialogFormVisible = true" class="edit"></el-button>
-    <el-dialog title="Product Management" :visible.sync="dialogFormVisible" width="100%">
+    <el-dialog title="Product Management" :visible.sync="dialogFormVisible" width="100%" @close="closeDialog">
       <el-form :model="editForm" ref="edit_FormRef" :rules="editRules">
         <p>Product ID: {{id}}</p>
         <el-form-item label="Name" prop="name">
@@ -27,7 +27,7 @@
         <el-form-item label="Description" prop="description">
           <el-input type="textarea" v-model="editForm.description" autocomplete="off" ></el-input>
         </el-form-item>
-        <el-form-item label="Delivery data" prop="delivery_date">
+        <el-form-item label="Delivery date" prop="delivery_date">
           <el-input v-model="editForm.delivery_date" autocomplete="off" placeholder="The number of days it takes for delivery"></el-input>
         </el-form-item>
         <el-form-item label="Warranty" prop="warranty">
@@ -74,27 +74,22 @@ export default {
     }
     var checkWarranty = (rule, value, callback) => {
       const mailReg = /^\d+$/
-      if (!value) {
-        return callback(new Error('warranty cannot be empty'))
-      }
       setTimeout(() => {
         if (mailReg.test(value)) {
           callback()
         } else {
-          callback(new Error('the warranty should be number'))
+          callback(new Error('The warranty should be number'))
         }
       }, 100)
     }
     var checkDelivery= (rule, value, callback) => {
+      value = this.editForm.delivery_date
       const mailReg = /^\d+$/
-      if (!value) {
-        return callback(new Error('number of day cannot be empty'))
-      }
       setTimeout(() => {
         if (mailReg.test(value)) {
           callback()
         } else {
-          callback(new Error('the data should be number of day'))
+          callback(new Error('The date should be number of day'))
         }
       }, 100)
     }
@@ -112,15 +107,12 @@ export default {
       }, 100)
     }
     var checkPrice= (rule, value, callback) => {
-      const mailReg = /^[1-9]\d*$/
-      if (!value) {
-        return callback(new Error('Price cannot be empty'))
-      }
+      const mailReg = /^[0-9]+\.[0-9]{2}$/
       setTimeout(() => {
         if (mailReg.test(value)) {
           callback()
         } else {
-          callback(new Error('the price should be number'))
+          callback(new Error('The price should be number'))
         }
       }, 100)
     }
@@ -190,7 +182,12 @@ export default {
       editFn(){
         this.$emit("editAdd", this.index)
       },
+             closeDialog(){
+      this.$refs['edit_FormRef'].resetFields();
+    },
       submitEdit() {
+      this.$refs.edit_FormRef.validate(async (valid) =>{
+        if(valid){
         console.log(this.editForm);
         product_edit(this.editForm).then( res => {
             this.$message({message: 'Sucess!',type: 'success'});
@@ -199,9 +196,14 @@ export default {
         }).catch( error => {
             this.$message.error('Failed');
         })
-      }
+        }
+        else{
+            console.log('error submit!!');
+            return false;
+        }
+      })
     }
-}
+}}
 </script>
 
 <style lang="less" scoped>

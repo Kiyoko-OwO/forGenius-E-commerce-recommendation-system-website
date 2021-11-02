@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.utils.datastructures import MultiValueDictKeyError
 from django.http.response import JsonResponse
 from product.errors import ProductIdError
+from product.models import Features
 from user.errors import InputError
 import product.products as products
 import user.auth as auth
@@ -74,6 +75,7 @@ def admin_add_product(request):
             delivery_date = data['delivery_date']
             price = data['price']
             picture = data['picture']
+            features = data['features']
             if not isFloat(price) or float(price) <= 0:
                 response.status_code = 443
                 response.content = 'price is not float'
@@ -87,7 +89,7 @@ def admin_add_product(request):
             response.content = e
             return response
         try:
-            data = products.admin_add_product(name, description, warranty, delivery_date, price, picture)
+            data = products.admin_add_product(name, description, warranty, delivery_date, price, picture, features)
         except ProductIdError as e:
             response.status_code = 400
             response.content = e
@@ -116,6 +118,7 @@ def admin_edit_product(request):
             price = data['price']
             product_id = data['product_id']
             picture = data['picture']
+            features = data['features']
             if not isFloat(price) or float(price) <= 0:
                 response.status_code = 443
                 response.content = 'price is not float or price <= 0'
@@ -129,7 +132,7 @@ def admin_edit_product(request):
             response.content = e
             return response
         try:
-            data = products.admin_edit_product(product_id, name, description, warranty, delivery_date, price, picture)
+            data = products.admin_edit_product(product_id, name, description, warranty, delivery_date, price, picture, features)
         except ProductIdError as e:
             response.status_code = 400
             response.content = e

@@ -9,7 +9,7 @@
             </el-input>
           </el-form-item>
           <el-form-item label="FEATURE" class="change" prop="features" >
-            <el-input v-model="addForm.features" autocomplete="off">
+            <el-input v-model="addForm.features" autocomplete="off" placeholder="Separate with space eg. phone computer">
             </el-input>
           </el-form-item>
           <el-form-item label="DESCRIPTION" class="change_description" prop="description">
@@ -25,7 +25,7 @@
             </el-input>
           </el-form-item>
           <el-form-item label="PRICE" class="change" prop="price">
-            <el-input v-model="addForm.price" autocomplete="off">
+            <el-input v-model="addForm.price" autocomplete="off" placeholder="more than 0 and at most two decimal">
             </el-input>
           </el-form-item>
           <el-form-item label="PICTURE" class="change" prop="picture" >
@@ -116,7 +116,7 @@ export default {
         if (mailReg.test(value) & value != 0) {
           callback()
         } else {
-          callback(new Error('the price should be number'))
+          callback(new Error('Should more than 0 and at most two decimal'))
         }
       }, 100)
     }

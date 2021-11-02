@@ -20,7 +20,7 @@
   </div>
 </div>  
     <el-button type="primary" icon="el-icon-edit" @click="dialogFormVisible = true" class="edit"></el-button>
-    <el-dialog title="Product Management" :visible.sync="dialogFormVisible" width="100%" @close="closeDialog">
+    <el-dialog title="Product Management" :visible.sync="dialogFormVisible" width="40%" @close="closeDialog" class="editf" append-to-body>
       <el-form :model="editForm" ref="edit_FormRef" :rules="editRules">
         <p>Product ID: {{id}}</p>
         <el-form-item label="Name" prop="name">
@@ -39,7 +39,7 @@
           <el-input v-model="editForm.warranty" autocomplete="off" placeholder="The warranty time"></el-input>
         </el-form-item>
         <el-form-item label="Price" prop="price">
-          <el-input v-model="editForm.price" autocomplete="off" ></el-input>
+          <el-input v-model="editForm.price" autocomplete="off" placeholder="More than 0 and at most two decimal places"></el-input>
         </el-form-item>
         <el-form-item label="Picture" prop="picture">
           <el-input v-model="editForm.picture" autocomplete="off" placeholder="Please input the url of picture"></el-input>
@@ -120,14 +120,11 @@ export default {
     }
     var checkPrice= (rule, value, callback) => {
       const mailReg =  /^((0{1}\.\d{1,2})|([1-9]\d*\.{1}\d{1,2})|([1-9]+\d*))$/
-      if (!value) {
-        return callback(new Error('Price cannot be empty'))
-      }
       setTimeout(() => {
         if (mailReg.test(value) & value != 0) {
           callback()
         } else {
-          callback(new Error('the price should be number'))
+          callback(new Error('Should more than 0 and at most two decimal places'))
         }
       }, 100)
     }
@@ -251,8 +248,11 @@ export default {
   left:80%;
 }
 
+
 </style>
 
 <style >
-
+.editf{
+  position: fixed;
+}
 </style>

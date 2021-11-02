@@ -10,33 +10,36 @@
     <p> Phone Number: {{phoneNumber}}</p>
     <!-- Form -->
     <el-button type="primary" icon="el-icon-edit" @click="dialogFormVisible = true"></el-button>
-    <el-dialog title="Address Book" :visible.sync="dialogFormVisible">
-      <el-form :model="editForm">
-        <el-form-item label="Name" >
-          <el-input v-model="editForm.name" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="Address" >
-          <el-input v-model="editForm.address_line" autocomplete="off"></el-input>
-        </el-form-item>
-           <el-form-item label="COUNTRY" prop="country">
+    <el-dialog title="Address Book" :visible.sync="dialogFormVisible" class="editf" width="30%">
+      <el-form :model="editForm" ref="edit_FormRef" :rules="editRules">
+           <el-form-item label="NAME" class="username_change" prop="name">
+            <el-input v-model="editForm.name" autocomplete="off">
+            </el-input>
+          </el-form-item>
+          <el-form-item label="ADDRESS" class="username_change" prop="address_line">
+            <el-input v-model="editForm.address_line" autocomplete="off">
+            </el-input>
+          </el-form-item>
+           <el-form-item label="COUNTRY" class="username_change" prop="country">
             <el-input v-model="editForm.country" autocomplete="off">
             </el-input>
           </el-form-item>
-          <el-form-item label="STATE" prop="state">
+          <el-form-item label="STATE" class="username_change" prop="state">
             <el-input v-model="editForm.state" autocomplete="off">
             </el-input>
           </el-form-item>
-          <el-form-item label="SUBURB"  prop="suburb">
+          <el-form-item label="SUBURB" class="username_change" prop="suburb">
             <el-input v-model="editForm.suburb" autocomplete="off">
             </el-input>
           </el-form-item>
-          <el-form-item label="POSTAL CODE" prop="post_code">
+          <el-form-item label="POSTAL CODE" class="username_change" prop="post_code">
             <el-input v-model="editForm.post_code" autocomplete="off">
             </el-input>
           </el-form-item>
-        <el-form-item label="Phone Number">
-          <el-input v-model="editForm.phone_number" autocomplete="off"></el-input>
-        </el-form-item>
+          <el-form-item label="PHONE NUMBER" class="username_change" prop="phone_number">
+            <el-input v-model="editForm.phone_number" autocomplete="off">
+            </el-input>
+          </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">Cancel</el-button>
@@ -54,6 +57,61 @@ export default {
     inject:['reload'],
     props: ['index', 'userName', 'addressId', 'addressDe', 'phoneNumber', 'suburb', 'post_code', 'state', 'country'],
     data () {
+          var checkName = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('username cannot be empty'))
+      } else {
+        callback()
+      }
+    }
+    var checkAddress = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('address cannot be empty'))
+      } else {
+        callback()
+      }
+    }
+    var checkPhone = (rule, value, callback) => {
+      const mailReg = /^\d+$/
+      setTimeout(() => {
+        if (mailReg.test(value)) {
+          callback()
+        } else {
+          callback(new Error('Phonenumber should be number'))
+        }
+      }, 100)
+    }
+    var checkState = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('State cannot be empty'))
+      } else {
+        callback()
+      }
+    }
+    var checkSuburb = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('Suburb cannot be empty'))
+      } else {
+        callback()
+      }
+    }
+    var checkCountry = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('Country cannot be empty'))
+      } else {
+        callback()
+      }
+    }
+    var checkCode = (rule, value, callback) => {
+      const mailReg = /^\d+$/
+      setTimeout(() => {
+        if (mailReg.test(value)) {
+          callback()
+        } else {
+          callback(new Error('Postal code should be number'))
+        }
+      }, 100)
+    }
       return {
         dialogFormVisible: false,
         editForm: {
@@ -67,7 +125,34 @@ export default {
           state: this.state,
           suburb: this.suburb
         },
+      editRules: {        
+        name: [
+          { validator: checkName, trigger: 'blur' }
+        ],        
+        address_line: [
+          { validator: checkAddress, trigger: 'blur' }
+        ],
+        phone_number: [
+          { validator: checkPhone, trigger: 'blur'  }
+        ],
+        post_code: [
+          { validator: checkCode, trigger: 'blur'  }
+        ],
+                suburb: [
+          { validator: checkSuburb, trigger: 'blur'  }
+        ],
+                state: [
+          { validator: checkState, trigger: 'blur'  }
+        ],
+                country: [
+          { validator: checkCountry, trigger: 'blur'  }
+        ]
+
+      
+       }
+    
       }
+
     },
     watch: {
       userName:function(newVal,oldVal){
@@ -90,7 +175,9 @@ export default {
       editFn(){
         this.$emit("editAdd", this.index)
       },
-      submitEdit() {
+      submitEdit() {  
+        this.$refs.edit_FormRef.validate(async (valid) =>{
+        if(valid){
         this.editForm.token = sessionStorage.getItem('token');
         console.log(this.editForm);
         this.editForm.phone_number = this.editForm.phone_number.toString();
@@ -101,9 +188,13 @@ export default {
         }).catch( error => {
             this.$message.error('Failed');
         })
+        }
+                else{
+            console.log('error submit!!');
+            return false;
       }
-    }
-}
+    })
+}}}
 </script>
 
 <style lang="less" scoped>
@@ -114,5 +205,8 @@ export default {
   border-radius: 5px;
   margin: 10px;
   word-break:break-all;
+}
+.editf{
+  position: fixed;
 }
 </style>

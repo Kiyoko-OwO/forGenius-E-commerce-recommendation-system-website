@@ -2,7 +2,7 @@
   <div class="order_item">
       <div class="block"></div>
       Order id: {{ordId}}
-      <el-dialog :title="order_id" :visible.sync="dialogFormVisible" class="order_id">
+      <el-dialog :title="order_id" :visible.sync="dialogFormVisible" class="order_id" width="30%">
         <div class="item" v-for="item in ordItem" :key="item.product_id">
         <p>Name: {{item.name}} </p>
         <p>Price: {{item.price}} </p>
@@ -23,7 +23,7 @@
       <p>Order Date: {{orderDate}}</p>
       <el-button @click="orderFn" class="detail">Detail</el-button>
       <el-button @click="orderShare" class="detail">Share</el-button>
-      <el-dialog title="Share Order" :visible.sync="sharedialogFormVisible">
+      <el-dialog title="Share Order" :visible.sync="sharedialogFormVisible" class="editf">
       </el-dialog>
       <div class="block"></div>
       <div class="link-top"></div>
@@ -85,12 +85,11 @@ export default {
     left:100%;
 
 }
+.editf{
+  position: fixed;
+}   
 </style>
 
 <style>
-.order_id{
-    position: absolute;
-    width: 1700px;
-    left:400px;
-}
+
 </style>

@@ -69,7 +69,7 @@ def view_order(email, order_id):
             "name" : item.product_name,
             "price" : round(float(item.price), 2),
             "quantity" : item.quantity,
-            "total_price": item.price * item.quantity
+            "total_price": round(float(item.price), 2) * item.quantity
         } 
         total += round(float(item.price), 2) * item.quantity
         data["item"].append(info)

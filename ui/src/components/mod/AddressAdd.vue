@@ -8,8 +8,24 @@
             <el-input v-model="addForm.name" autocomplete="off">
             </el-input>
           </el-form-item>
-          <el-form-item label="ADDRESS" class="username_change" prop="address">
-            <el-input v-model="addForm.address" autocomplete="off">
+          <el-form-item label="ADDRESS" class="username_change" prop="address_line">
+            <el-input v-model="addForm.address_line" autocomplete="off">
+            </el-input>
+          </el-form-item>
+           <el-form-item label="COUNTRY" class="username_change" prop="country">
+            <el-input v-model="addForm.country" autocomplete="off">
+            </el-input>
+          </el-form-item>
+          <el-form-item label="STATE" class="username_change" prop="state">
+            <el-input v-model="addForm.state" autocomplete="off">
+            </el-input>
+          </el-form-item>
+          <el-form-item label="SUBURB" class="username_change" prop="suburb">
+            <el-input v-model="addForm.suburb" autocomplete="off">
+            </el-input>
+          </el-form-item>
+          <el-form-item label="POSTAL CODE" class="username_change" prop="post_code">
+            <el-input v-model="addForm.post_code" autocomplete="off">
             </el-input>
           </el-form-item>
           <el-form-item label="PHONE NUMBER" class="username_change" prop="phone_number">
@@ -52,7 +68,41 @@ export default {
         if (mailReg.test(value)) {
           callback()
         } else {
-          callback(new Error('the phonenumber should be number'))
+          callback(new Error('Phonenumber should be number'))
+        }
+      }, 100)
+    }
+    var checkState = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('State cannot be empty'))
+      } else {
+        callback()
+      }
+    }
+    var checkSuburb = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('Suburb cannot be empty'))
+      } else {
+        callback()
+      }
+    }
+    var checkCountry = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('Country cannot be empty'))
+      } else {
+        callback()
+      }
+    }
+    var checkCode = (rule, value, callback) => {
+      const mailReg = /^\d+$/
+      if (!value) {
+        return callback(new Error('Postal code cannot be empty'))
+      }
+      setTimeout(() => {
+        if (mailReg.test(value)) {
+          callback()
+        } else {
+          callback(new Error('Postal code should be number'))
         }
       }, 100)
     }
@@ -60,18 +110,34 @@ export default {
       addForm: {
         token: '',
         name: '',
-        address: '',
-        phone_number: ''
+        address_line: '',
+        phone_number: '',
+        country:'',
+        state:'',
+        suburb:'',
+        post_code:''
       },
       addRules: {
         name: [
           { validator: checkName, trigger: 'blur' }
         ],
-        address: [
+        address_line: [
           { validator: checkAddress, trigger: 'blur' }
         ],
         phone_number: [
           { validator: checkPhone, trigger: 'blur'  }
+        ],
+        post_code: [
+          { validator: checkCode, trigger: 'blur'  }
+        ],
+                suburb: [
+          { validator: checkSuburb, trigger: 'blur'  }
+        ],
+                state: [
+          { validator: checkState, trigger: 'blur'  }
+        ],
+                country: [
+          { validator: checkCountry, trigger: 'blur'  }
         ]
       }
     }
@@ -128,7 +194,7 @@ h1{
 }
 .add_box{
     background-color:#e7eae8;
-    height: 425px;
+    height: 620px;
     width: 750px;
     position: absolute;
     border-radius: 30px;
@@ -141,14 +207,14 @@ h1{
     width: 40;
     position: absolute;
     right: 55%;
-    top:-7.5%;
+    top:-10.5%;
     cursor: pointer;
 }
 .add_form{
     width: 530px;
     position: absolute;
     border-radius: 80px;
-    top: 30%;
+    top: 20%;
     left: 15%;
 }
 

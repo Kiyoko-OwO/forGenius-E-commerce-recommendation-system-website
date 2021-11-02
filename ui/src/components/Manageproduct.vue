@@ -15,6 +15,7 @@
       :price="obj.price"
       :pic="obj.picture"
       :delivery="obj.delivery_date"
+      :features="obj.features"
       :index = "ind"
       @delPro = "del"
       >

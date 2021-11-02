@@ -19,6 +19,9 @@
       <p>Paid: {{payStat}}</p>
       <p>Order Date: {{orderDate}}</p>
       <el-button @click="orderFn" class="detail">Detail</el-button>
+      <el-button @click="orderShare" class="detail">Share</el-button>
+      <el-dialog title="Share Order" :visible.sync="sharedialogFormVisible">
+      </el-dialog>
       <div class="block"></div>
       <div class="link-top"></div>
   </div>
@@ -30,7 +33,9 @@ export default {
     data () {
         return {
             dialogFormVisible: false,
-            order_id: '###'
+            sharedialogFormVisible: false,
+            order_id: '###',
+            
         }
     },
     created () {
@@ -41,11 +46,15 @@ export default {
         orderFn() {
             if (this.payStat === "Fail") {
                 this.$router.push('/payment');
+                console.log(this.ordId);
                 sessionStorage.setItem('order', this.ordId);
             } else {
                 this.dialogFormVisible = true
             }
            
+        },
+        orderShare() {
+            this.sharedialogFormVisible = true
         }
     }
 }

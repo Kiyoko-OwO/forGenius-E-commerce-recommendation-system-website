@@ -8,6 +8,10 @@
             <el-input v-model="addForm.name" autocomplete="off">
             </el-input>
           </el-form-item>
+          <el-form-item label="FEATURE" class="change" prop="features" >
+            <el-input v-model="addForm.features" autocomplete="off">
+            </el-input>
+          </el-form-item>
           <el-form-item label="DESCRIPTION" class="change_description" prop="description">
             <el-input type="textarea" v-model="addForm.description" autocomplete="off">
             </el-input>
@@ -30,7 +34,8 @@
           </el-form-item>
           <div class="block"></div>
           <el-form-item>
-          <el-button type="primary" @click="submitAdd" class="submit">CONFIRM</el-button>
+          <el-button type="primary" @click="submitAdd" class="submit" >CONFIRM</el-button>
+          <el-button type="primary" @click="jumpManage" class="cancel">CANCEL</el-button>
           </el-form-item>
 
       </el-form>
@@ -52,6 +57,13 @@ export default {
     var checkDes = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('name cannot be empty'))
+      } else {
+        callback()
+      }
+    }
+    var checkFeature= (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('feature cannot be empty'))
       } else {
         callback()
       }
@@ -96,12 +108,12 @@ export default {
       }, 100)
     }
     var checkPrice= (rule, value, callback) => {
-      const mailReg = /^\d+$/
+      const mailReg =  /^((0{1}\.\d{1,2})|([1-9]\d*\.{1}\d{1,2})|([1-9]+\d*))$/
       if (!value) {
         return callback(new Error('Price cannot be empty'))
       }
       setTimeout(() => {
-        if (mailReg.test(value)) {
+        if (mailReg.test(value) & value != 0) {
           callback()
         } else {
           callback(new Error('the price should be number'))
@@ -111,11 +123,12 @@ export default {
     return {
       addForm: {
         name: '',
+        features:'',
         description:'',
         warranty: '',
         delivery_date:'',
         price:'',
-        picture: ''
+        picture: '',
       },
       addRules: {
         name: [
@@ -131,10 +144,14 @@ export default {
           { validator: checkSales, trigger: 'blur'}
         ],
         price:[
+
           { validator: checkPrice, trigger: 'blur'}
         ],
         description:[
           { validator: checkDes, trigger: 'blur'}
+        ],
+        features:[
+          { validator: checkFeature, trigger: 'blur'}
         ]
       }
     }
@@ -146,7 +163,6 @@ export default {
     submitAdd () {
         this.$refs.add_FormRef.validate(async (valid) => {
         if (valid) {
-        this.addForm.token = sessionStorage.getItem('token');
         console.log(this.addForm);
         product_add(this.addForm).then( res => {
             this.$message({message: 'Add product Sucess!',type: 'success'});
@@ -183,7 +199,7 @@ h1{
 }
 .add_box{
     background-color:#e7eae8;
-    height: 600px;
+    height: 630px;
     width: 750px;
     position: absolute;
     border-radius: 30px;
@@ -192,17 +208,17 @@ h1{
     transform: translate(-50%,-50%);
 }
 .logo{
-    height: 70%;
+    height: 50%;
     position: absolute;
     right: 64%;
-    top:-53%;
+    top:-36%;
     cursor: pointer;
 }
 .add_form{
     width: 500px;
     position: absolute;
     border-radius: 80px;
-    top: 25%;
+    top: 20%;
     left: 15%;
 }
 .change /deep/ .el-form-item__label{
@@ -223,7 +239,7 @@ h1{
 }
 .submit{
     position: relative;
-    left:17%;
+    left:70%;
     height:50px;
     width:200px;
     transform: translate(-50%,-50%);
@@ -238,6 +254,20 @@ h1{
   top: 30%;
   right: 25% !important;
   left: unset;
+}
+.cancel{
+    position: relative;
+    top:-50px;
+    left:-50%;
+    height:50px;
+    width:200px;
+    transform: translate(-50%,-50%);
+    border-radius: 10px;
+    background: #786662;
+    border-color: #786662;
+    color: #fefefe;
+    letter-spacing:10px;
+    padding-left: 30px;
 }
 </style>
 

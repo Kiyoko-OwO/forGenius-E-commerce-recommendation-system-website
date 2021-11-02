@@ -6,28 +6,37 @@
         <img class="logo" src=../assets/2.png alt="logo">
     </header>
     <div class="order_contain">
+    <h2>Address</h2>
       <div v-show="isEmpty">
-          <h2>Address</h2>
           <p> Name: {{create_form.name}} </p> 
-          <p> Address: {{create_form.address}}</p>
+          <p> Address: {{create_form.address_line}}</p>
+          <!-- <p> Country: {{create_form.country}}</p>
+          <p> State: {{create_form.state}}</p>
+          <p> Suburb: {{create_form.suburb}}</p>
+          <p> Postal Code:{{create_form.post_code}}</p> -->
           <p> Phone Number: {{create_form.phone_number}}</p>
           <el-button @click="chooseDialogFormVisible = true" align="left" style="float:left">Choose</el-button>
-          <el-button @click="jumpAdd" align="right">Add</el-button>
           <el-dialog title="Address Book" :visible.sync="chooseDialogFormVisible" width="40%">
             <div v-for="(item,ind) in addressbook" :key="ind">
-                   <div class="block1"></div>
-                   <p>Recipient's name: {{item.name}} </p> 
-                   <p>Address List: {{item.address}} </p> 
-                   <p>Phone Number: {{item.phone_number}} </p> 
-                   <el-button @click="chooseAdd(ind)" class="choose_in">Choose</el-button>
-                   <div class="block"></div>
-                   <div class="link-in"></div>
+                    <div class="block1"></div>
+                    <p>Recipient's name: {{item.name}} </p> 
+                    <p> Address: </p>
+                    <p> {{item.address_line}}</p>
+                    <p> Country: {{item.country}}</p>
+                    <p> State: {{item.state}}</p>
+                    <p> Suburb: {{item.suburb}}</p>
+                    <p> Postal Code:{{item.post_code}}</p>
+                    <p>Phone Number: {{item.phone_number}} </p> 
+                    <el-button @click="chooseAdd(ind)" class="choose_in">Choose</el-button>
+                    <div class="block"></div>
+                    <div class="link-in"></div>
               </div>
             <div slot="footer" class="dialog-footer">
               <el-button @click="chooseDialogFormVisible = false">Cancel</el-button>
             </div>
           </el-dialog>
       </div>
+      <el-button @click="jumpAdd" align="right">Add</el-button>
       <div class="cart-container">
         <h2 class="infor">Product information</h2>
         <Product v-for="(obj,ind) in cart" :key="obj.id"
@@ -44,7 +53,7 @@
         <p>{{total_price}}</p>
         </div>
     </div>
-    <div class="share">
+    <!-- <div class="share">
       <h2 class="share_ti">Share Your Order</h2>
       <el-form ref='share_form' :model="share_form" :rules="share_formRules" class="share_form" label-position="left" label-width="90px" >
       <el-form-item label="EMAIL" class="email_change" prop="email">
@@ -52,8 +61,9 @@
       </el-form-item>
       <el-button @click="share" align="right">Share Order</el-button>
       </el-form>
-      <el-button type="primary" @click="jumpPay" class="submit">Submit Order</el-button>
-    </div>
+      
+    </div> -->
+    <el-button type="primary" @click="jumpPay" class="submit">Submit Order</el-button>
   </div>
   </div>
 </template>
@@ -66,6 +76,7 @@ import { cart_qua } from '../api/order'
 import { cart_del } from '../api/order'
 import { cart_create } from '../api/order'
 export default {
+    inject:['reload'],
     data () {
         var checkEmail = (rule, value, callback) => {
         const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+.com/
@@ -89,8 +100,12 @@ export default {
             create_form: {
                 token: '',
                 name: '',
-                address: '',
-                phone_number: ''
+                address_line: '',
+                phone_number: '',
+                post_code: '',
+                suburb: '',
+                state: '',
+                country: ''
             },
             total_price: '',
             qua_form: {
@@ -140,11 +155,16 @@ export default {
             address_view(this.tokenForm).then( res => {
                 if (res.data.data.address_book.length > 0) {
                     this.isEmpty = true;
+                    console.log(res);
                     this.addressbook = res.data.data.address_book;
                     this.addressbook = this.addressbook.slice().reverse()
                     this.create_form.name = this.addressbook[0].name;
-                    this.create_form.address = this.addressbook[0].address;
+                    this.create_form.address_line = this.addressbook[0].address_line;
                     this.create_form.phone_number = this.addressbook[0].phone_number;
+                    this.create_form.post_code = this.addressbook[0].post_code;
+                    this.create_form.suburb = this.addressbook[0].suburb;
+                    this.create_form.state = this.addressbook[0].state;
+                    this.create_form.country = this.addressbook[0].country;
                 } else {
                     this.isEmpty = false;
                 }
@@ -154,7 +174,10 @@ export default {
         },
         add(index) {
             this.cart[index].quantity += 1;
+            this.total_price = parseFloat(this.total_price);
+            this.cart[index].price = parseFloat(this.cart[index].price);
             this.total_price = this.total_price + this.cart[index].price;
+            this.total_price = this.total_price.toFixed(2)
             this.qua_form.quantity = this.cart[index].quantity;
             this.qua_form.product_id = this.cart[index].product_id
             cart_qua(this.qua_form).then( res => {
@@ -164,7 +187,10 @@ export default {
             })
         },
         sub(index) {
+            this.total_price = parseFloat(this.total_price);
+            this.cart[index].price = parseFloat(this.cart[index].price);
             this.cart[index].quantity > 1 && (this.cart[index].quantity -= 1) && (this.total_price = this.total_price - this.cart[index].price);
+            this.total_price = this.total_price.toFixed(2)
             this.qua_form.quantity = this.cart[index].quantity;
             this.qua_form.product_id = this.cart[index].product_id;
             cart_qua(this.qua_form).then( res => {
@@ -173,12 +199,15 @@ export default {
             })
         },
         del(index) {
+            this.total_price = parseFloat(this.total_price);
+            this.cart[index].price = parseFloat(this.cart[index].price);
             this.del_form.product_id = this.cart[index].product_id;
             cart_del(this.del_form).then( res => {
             }).catch( error => {
                 this.$message.error('Failed');
             })
             this.total_price = this.total_price - (this.cart[index].quantity * this.cart[index].price)
+            this.total_price = this.total_price.toFixed(2);
             this.cart.splice(index, 1);
             console.log(this.cart);
         },
@@ -204,15 +233,15 @@ export default {
             sessionStorage.setItem('from', 1);
             this.$router.push('/addressadd');
         },
-        share() {
-            this.$refs.share_form.validate(async (valid) =>{
-            if(!valid) return;
-            else{
-            this.$message({message: 'Shared',type: 'success'});
-            this.share_form.email = "";
-            }
-            });
-    }
+        // share() {
+        //     this.$refs.share_form.validate(async (valid) =>{
+        //     if(!valid) return;
+        //     else{
+        //     this.$message({message: 'Shared',type: 'success'});
+        //     this.share_form.email = "";
+        //     }
+        //     });
+        //    }
     }  
 }
 </script>
@@ -236,6 +265,7 @@ header{
     position: absolute;
     top:100px;
     left:38%;
+  word-break:break-all;
 }
 .logo{
     height: 200%;    

@@ -50,6 +50,7 @@ export default {
     loadOrder() {
       this.pay_from.token = sessionStorage.getItem('token');
       this.pay_from.order_id = sessionStorage.getItem('order');
+      this.pay_from.order_id = parseInt(this.pay_from.order_id);
       sessionStorage.removeItem('order');
     },
     jumpHome () {

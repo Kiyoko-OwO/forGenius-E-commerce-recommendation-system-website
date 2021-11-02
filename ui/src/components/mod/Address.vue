@@ -16,7 +16,7 @@
           <el-input v-model="editForm.name" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="Address" >
-          <el-input v-model="editForm.address" autocomplete="off"></el-input>
+          <el-input v-model="editForm.address_line" autocomplete="off"></el-input>
         </el-form-item>
            <el-form-item label="COUNTRY" prop="country">
             <el-input v-model="editForm.country" autocomplete="off">
@@ -52,16 +52,20 @@
 import { address_edit } from '../../api/user'
 export default {
     inject:['reload'],
-    props: ['index', 'userName', 'addressId', 'addressDe', 'phoneNumber'],
+    props: ['index', 'userName', 'addressId', 'addressDe', 'phoneNumber', 'suburb', 'post_code', 'state', 'country'],
     data () {
       return {
         dialogFormVisible: false,
         editForm: {
           token: '',
+          address_id: this.addressId,
+          address_line: this.addressDe,
+          country: this.country,
           name: this.userName,
-          address: this.addressDe,
           phone_number: this.phoneNumber,
-          address_id: this.addressId
+          post_code: this.post_code,
+          state: this.state,
+          suburb: this.suburb
         },
       }
     },

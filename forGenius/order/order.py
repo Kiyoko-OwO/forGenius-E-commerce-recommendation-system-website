@@ -50,7 +50,11 @@ def view_order(email, order_id):
                 "item" : [], 
                 "total": 0,
                 "name": temp.name,
-                "address": temp.address,
+                "address_line" : temp.address_line,
+                "post_code": temp.post_code,
+                "suburb": temp.suburb,
+                "state": temp.state,
+                "country": temp.country,
                 "phone_number": temp.phone_number,
                 "order_date": temp.date_time.strftime("%Y-%m-%d"),
                 "paid": temp.paid,
@@ -119,7 +123,11 @@ def view_all_order(email):
                 "item" : [], 
                 "total": 0,
                 "name": "",
-                "address": "",
+                "address_line" : "",
+                "post_code": "",
+                "suburb": "",
+                "state": "",
+                "country": "",
                 "phone_number": "",
                 "order_date": "",
                 "paid": "",
@@ -136,10 +144,13 @@ def view_all_order(email):
             } 
             if total == 0:
                 data['name'] = item.name
-                data['address'] = item.address
+                data['address_line'] = item.address_line
+                data['post_code'] = item.post_code
+                data['suburb'] = item.suburb
+                data['state'] = item.state
+                data['country'] = item.country
                 data['phone_number'] = item.phone_number
                 data['order_date'] = item.date_time.strftime("%Y-%m-%d")
-
                 data['paid'] = item.paid
 
             total += item.price * item.quantity

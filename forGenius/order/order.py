@@ -74,7 +74,7 @@ def view_order(email, order_id):
         total += round(float(item.price), 2) * item.quantity
         data["item"].append(info)
     
-    data["total"] = total
+    data["total"] = round(total,2)
     return data
 
 def pay_order(email, order_id):
@@ -142,7 +142,7 @@ def view_all_order(email):
                 "name" : item.product_name,
                 "price" : round(float(item.price), 2),
                 "quantity" : item.quantity,
-                "total_price": item.price * item.quantity
+                "total_price": round(float(item.price), 2) * item.quantity
             } 
             if total == 0:
                 data['name'] = item.name
@@ -158,6 +158,6 @@ def view_all_order(email):
             total += round(float(item.price), 2) * item.quantity
             data["item"].append(info)
     
-        data["total"] = total
+        data["total"] = round(total,2)
         order_list["order_list"].append(data)
     return order_list

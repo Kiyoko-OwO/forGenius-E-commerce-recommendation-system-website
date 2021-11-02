@@ -8,8 +8,8 @@
             <el-input v-model="addForm.name" autocomplete="off">
             </el-input>
           </el-form-item>
-          <el-form-item label="ADDRESS" class="username_change" prop="address">
-            <el-input v-model="addForm.address" autocomplete="off">
+          <el-form-item label="ADDRESS" class="username_change" prop="address_line">
+            <el-input v-model="addForm.address_line" autocomplete="off">
             </el-input>
           </el-form-item>
            <el-form-item label="COUNTRY" class="username_change" prop="country">
@@ -110,7 +110,7 @@ export default {
       addForm: {
         token: '',
         name: '',
-        address: '',
+        address_line: '',
         phone_number: '',
         country:'',
         state:'',
@@ -121,7 +121,7 @@ export default {
         name: [
           { validator: checkName, trigger: 'blur' }
         ],
-        address: [
+        address_line: [
           { validator: checkAddress, trigger: 'blur' }
         ],
         phone_number: [

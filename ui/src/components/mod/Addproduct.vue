@@ -8,8 +8,8 @@
             <el-input v-model="addForm.name" autocomplete="off">
             </el-input>
           </el-form-item>
-          <el-form-item label="FEATURE" class="change" prop="feature" >
-            <el-input v-model="addForm.feature" autocomplete="off">
+          <el-form-item label="FEATURE" class="change" prop="features" >
+            <el-input v-model="addForm.features" autocomplete="off">
             </el-input>
           </el-form-item>
           <el-form-item label="DESCRIPTION" class="change_description" prop="description">
@@ -123,7 +123,7 @@ export default {
     return {
       addForm: {
         name: '',
-        feature:'',
+        features:'',
         description:'',
         warranty: '',
         delivery_date:'',
@@ -150,7 +150,7 @@ export default {
         description:[
           { validator: checkDes, trigger: 'blur'}
         ],
-        feature:[
+        features:[
           { validator: checkFeature, trigger: 'blur'}
         ]
       }
@@ -163,7 +163,6 @@ export default {
     submitAdd () {
         this.$refs.add_FormRef.validate(async (valid) => {
         if (valid) {
-        this.addForm.token = sessionStorage.getItem('token');
         console.log(this.addForm);
         product_add(this.addForm).then( res => {
             this.$message({message: 'Add product Sucess!',type: 'success'});

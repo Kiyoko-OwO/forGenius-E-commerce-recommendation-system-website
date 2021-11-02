@@ -16,8 +16,8 @@
         <h2>Name: {{product.name}}</h2>
         <h3>Description:</h3>
         <p>{{product.description}}</p>
-        <h3>Feature:</h3>
-        <p>{{product.feature}}</p>
+        <!-- <h3>Feature:</h3>
+        <p>{{product.feature}}</p> -->
         <h3>Warranty: {{product.warranty}}</h3>
         <h3>Delivery date: {{product.delivery_date}}</h3>
         <h3>Price: $ {{product.price}}</h3>
@@ -58,7 +58,7 @@ export default {
               quantity: 1
             },
             product_id_form:{
-              product_id: 6
+              product_id: 1
             }
         }
     },

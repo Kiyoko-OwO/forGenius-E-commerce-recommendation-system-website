@@ -4,7 +4,7 @@
     <p> Product Name: {{name}} </p> 
     <p> Product Warranty: {{warr}} </p> 
     <p> Feature: </p>  
-    <p> {{feature}} </p> 
+    <p> {{features}} </p> 
     <p> Description: </p>
     <p>{{description}}</p>
     <p> Delivery Date: {{delivery}}</p>
@@ -26,8 +26,8 @@
         <el-form-item label="Name" prop="name">
           <el-input v-model="editForm.name" autocomplete="off" ></el-input>
         </el-form-item>
-        <el-form-item label="Feature" prop="feature">
-          <el-input v-model="editForm.feature" autocomplete="off" ></el-input>
+        <el-form-item label="Feature" prop="features">
+          <el-input v-model="editForm.features" autocomplete="off" ></el-input>
         </el-form-item>
         <el-form-item label="Description" prop="description">
           <el-input type="textarea" v-model="editForm.description" autocomplete="off" ></el-input>
@@ -61,7 +61,7 @@
 import { product_edit } from '../../api/admin'
 export default {
     inject:['reload'],
-    props: ['index', 'id', 'name', 'warr', 'description', 'delivery', 'sales', 'price','pic'],
+    props: ['index', 'id', 'name', 'warr', 'description', 'delivery', 'sales', 'price','pic','features'],
     data () {
       var checkName = (rule, value, callback) => {
       if (!value) {
@@ -144,7 +144,7 @@ export default {
           price: this.price,
           warranty: this.warr,
           picture: this.pic,
-          feature:this.feature
+          features:this.features
         },
         editRules: {
         name: [
@@ -165,7 +165,7 @@ export default {
         description:[
           { validator: checkDes, trigger: 'blur'}
         ],
-        feature:[
+        features:[
           { validator: checkFeature, trigger: 'blur'}
         ]
       }

@@ -7,7 +7,7 @@ from user.errors import InputError
 import time
 import datetime
 
-def create_order(email, name, address, phone_number):
+def create_order(email, name, address_line, post_code, suburb, state, country, phone_number):
     try:
         user_email = User.objects.get(pk=email)
     except User.DoesNotExist:
@@ -29,7 +29,8 @@ def create_order(email, name, address, phone_number):
               product_id=item.product_id.product_id, 
               product_name=item.product_id.name,
               quantity=item.quantity, price=item.product_id.price,
-              name=name, address=address, phone_number=phone_number).save()
+              name=name, address_line=address_line, post_code=post_code, 
+              suburb=suburb, state=state, country=country, phone_number=phone_number).save()
     cart.delete()
     return order_id
 
@@ -50,7 +51,11 @@ def view_order(email, order_id):
                 "item" : [], 
                 "total": 0,
                 "name": temp.name,
-                "address": temp.address,
+                "address_line" : temp.address_line,
+                "post_code": temp.post_code,
+                "suburb": temp.suburb,
+                "state": temp.state,
+                "country": temp.country,
                 "phone_number": temp.phone_number,
                 "order_date": temp.date_time.strftime("%Y-%m-%d"),
                 "paid": temp.paid,
@@ -85,8 +90,13 @@ def pay_order(email, order_id):
         raise EmptyOrderError("No order exists")
 
     for item in order:
-        item.paid = True
-        item.save()
+        if item.paid == False:
+            products = Product.objects.filter(product_id=item.product_id)
+            if len(product) != 0:
+                for product in products:
+                    product.sales_data += item.quantity
+            item.paid = True
+            item.save()
 
 def view_all_order(email):
     # check user authorization (potential attack: one user view another user's order)
@@ -114,7 +124,11 @@ def view_all_order(email):
                 "item" : [], 
                 "total": 0,
                 "name": "",
-                "address": "",
+                "address_line" : "",
+                "post_code": "",
+                "suburb": "",
+                "state": "",
+                "country": "",
                 "phone_number": "",
                 "order_date": "",
                 "paid": "",
@@ -131,10 +145,13 @@ def view_all_order(email):
             } 
             if total == 0:
                 data['name'] = item.name
-                data['address'] = item.address
+                data['address_line'] = item.address_line
+                data['post_code'] = item.post_code
+                data['suburb'] = item.suburb
+                data['state'] = item.state
+                data['country'] = item.country
                 data['phone_number'] = item.phone_number
                 data['order_date'] = item.date_time.strftime("%Y-%m-%d")
-
                 data['paid'] = item.paid
 
             total += item.price * item.quantity

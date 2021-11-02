@@ -7,7 +7,7 @@ from user.errors import InputError
 import time
 import datetime
 
-def create_order(email, name, address, phone_number):
+def create_order(email, name, address_line, post_code, suburb, state, country, phone_number):
     try:
         user_email = User.objects.get(pk=email)
     except User.DoesNotExist:
@@ -29,7 +29,8 @@ def create_order(email, name, address, phone_number):
               product_id=item.product_id.product_id, 
               product_name=item.product_id.name,
               quantity=item.quantity, price=item.product_id.price,
-              name=name, address=address, phone_number=phone_number).save()
+              name=name, address_line=address_line, post_code=post_code, 
+              suburb=suburb, state=state, country=country, phone_number=phone_number).save()
     cart.delete()
     return order_id
 

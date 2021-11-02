@@ -46,12 +46,14 @@ def edit_address_book(email, name, address_line, post_code, suburb, state, count
     info.save()
     # return view_address_book(email)
 
-def add_address_book(email, name, address_line, post_code, suburb, state, country, phone_number, address_id):
+def add_address_book(email, name, address_line, post_code, suburb, state, country, phone_number):
     try:
         user_email = User.objects.get(pk=email)
     except User.DoesNotExist:
         raise InputError('User not exist')
-    reg = Address_book(user_email=user_email, name=name, address_line=address_line, post_code=post_code, suburb=suburb, state=state, country=country, phone_number= phone_number)
+    reg = Address_book(user_email=user_email, name=name, address_line=address_line, 
+                        post_code=post_code, suburb=suburb, state=state, country=country, 
+                        phone_number= phone_number)
     reg.save()        
     # return view_address_book(email)
 

@@ -215,7 +215,11 @@ def create_order(request):
         try:
             token = data['token']
             name = data['name']
-            address = data['address']
+            address_line = data['address_line']
+            post_code = data['post_code']
+            suburb = data['suburb']
+            state = data['state']
+            country = data['country']
             phone_number = data['phone_number']
         except KeyError:
             response.status_code = 442
@@ -234,7 +238,7 @@ def create_order(request):
             return response
 
         try:
-            order_id = order.create_order(email, name, address, phone_number)
+            order_id = order.create_order(email, name, address_line, post_code, suburb, state, country, phone_number)
         except InputError as e:
             response.status_code = 400
             response.content = e

@@ -1,7 +1,12 @@
 <template>
   <div class="my-address">
     <p> Name: {{userName}} </p> 
-    <p> Address: {{addressDe}}</p>
+    <p> Address: </p>
+    <p> {{addressDe}}</p>
+    <p> Country: {{country}}</p>
+    <p> State: {{state}}</p>
+    <p> Suburb: {{suburb}}</p>
+    <p> Postal Code:{{post_code}}</p>
     <p> Phone Number: {{phoneNumber}}</p>
     <!-- Form -->
     <el-button type="primary" icon="el-icon-edit" @click="dialogFormVisible = true"></el-button>
@@ -13,6 +18,22 @@
         <el-form-item label="Address" >
           <el-input v-model="editForm.address" autocomplete="off"></el-input>
         </el-form-item>
+           <el-form-item label="COUNTRY" prop="country">
+            <el-input v-model="editForm.country" autocomplete="off">
+            </el-input>
+          </el-form-item>
+          <el-form-item label="STATE" prop="state">
+            <el-input v-model="editForm.state" autocomplete="off">
+            </el-input>
+          </el-form-item>
+          <el-form-item label="SUBURB"  prop="suburb">
+            <el-input v-model="editForm.suburb" autocomplete="off">
+            </el-input>
+          </el-form-item>
+          <el-form-item label="POSTAL CODE" prop="post_code">
+            <el-input v-model="editForm.post_code" autocomplete="off">
+            </el-input>
+          </el-form-item>
         <el-form-item label="Phone Number">
           <el-input v-model="editForm.phone_number" autocomplete="off"></el-input>
         </el-form-item>
@@ -88,5 +109,6 @@ export default {
   border: 2px solid #000;
   border-radius: 5px;
   margin: 10px;
+  word-break:break-all;
 }
 </style>

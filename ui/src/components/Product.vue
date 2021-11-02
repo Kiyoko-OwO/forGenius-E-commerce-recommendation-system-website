@@ -6,18 +6,22 @@
     </header>
     
     <div class="product_box">
-        <div class="block" v-for="fit in fits" :key="fit">
+        <div class="img" v-for="fit in fits" :key="fit">
           <span class="demonstration">{{ fit }}</span>
           <el-image
-            style="width: 100px; height: 100px"
+            style="width: 200px; height: 200px"
             :src="product.picture"
             :fit="fit"></el-image>
         </div>
         <h2>Name: {{product.name}}</h2>
-        <h3>Description: {{product.description}}</h3>
+        <h3>Description:</h3>
+        <p>{{product.description}}</p>
+        <h3>Feature:</h3>
+        <p>{{product.feature}}</p>
         <h3>Warranty: {{product.warranty}}</h3>
         <h3>Delivery date: {{product.delivery_date}}</h3>
         <h3>Price: $ {{product.price}}</h3>
+
         <el-form :model="numberValidateForm" ref="numberValidateForm" label-width="100px" class="demo-ruleForm">
           <el-form-item
             label="Quantity"
@@ -127,7 +131,7 @@ export default {
 header{
     height: 100px;
     width: 100%;
-    position: fixed;
+    position: absolute;
     left:0;
     top:0;
     z-index: 999;
@@ -152,8 +156,14 @@ header{
 }
 .product_box{
     position: relative;
+    left:37%;
     top:200px;
-    border: 1px solid black;
+
     width:25%;
+    word-break:break-all;
+}
+.img{
+  position: relative;
+  left: 30%;
 }
 </style>

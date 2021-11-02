@@ -6,9 +6,12 @@
         <div class="item" v-for="item in ordItem" :key="item.product_id">
         <p>Name: {{item.name}} </p>
         <p>Price: {{item.price}} </p>
-         <p>Quantity: {{item.quantity}} </p>
+        <p>Quantity: {{item.quantity}} </p>
         <div class="link-in"></div>
         </div>
+        <p> Buyer Name: {{name}}</p>
+        <p> Address: {{address_line}}</p>
+        <p> Phone Number: {{phone_number}}</p>
         <div class="block"></div>
         Order Date: {{orderDate}}
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total Price: {{ordTotal}}
@@ -20,6 +23,8 @@
       <p>Order Date: {{orderDate}}</p>
       <el-button @click="orderFn" class="detail">Detail</el-button>
       <el-button @click="orderShare" class="detail">Share</el-button>
+      <el-dialog title="Share Order" :visible.sync="sharedialogFormVisible">
+      </el-dialog>
       <div class="block"></div>
       <div class="link-top"></div>
   </div>
@@ -27,11 +32,13 @@
 
 <script>
 export default {
-    props: ['index', 'ordId', 'payStat', 'ordItem','ordTotal','orderDate'],
+    props: ['index', 'ordId', 'payStat', 'ordItem','ordTotal','orderDate','name','address_line','phone_number'],
     data () {
         return {
             dialogFormVisible: false,
-            order_id: '###'
+            sharedialogFormVisible: false,
+            order_id: '###',
+            
         }
     },
     created () {
@@ -42,11 +49,15 @@ export default {
         orderFn() {
             if (this.payStat === "Fail") {
                 this.$router.push('/payment');
+                console.log(this.ordId);
                 sessionStorage.setItem('order', this.ordId);
             } else {
                 this.dialogFormVisible = true
             }
            
+        },
+        orderShare() {
+            this.sharedialogFormVisible = true
         }
     }
 }

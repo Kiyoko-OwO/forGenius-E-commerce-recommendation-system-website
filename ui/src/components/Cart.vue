@@ -24,7 +24,6 @@
 
 <script>
 import Product from './mod/CartPro.vue'
-import imgObj from '../assets/2.png'
 import { cart_view } from '../api/order'
 import { cart_qua } from '../api/order'
 import { cart_del } from '../api/order'
@@ -79,7 +78,10 @@ export default {
         },
         add(index) {
             this.cart[index].quantity += 1;
+            this.total_price = parseFloat(this.total_price);
+            this.cart[index].price = parseFloat(this.cart[index].price);
             this.total_price = this.total_price + this.cart[index].price;
+            this.total_price = this.total_price.toFixed(2);
             this.qua_form.quantity = this.cart[index].quantity;
             this.qua_form.product_id = this.cart[index].product_id
             cart_qua(this.qua_form).then( res => {
@@ -89,7 +91,10 @@ export default {
             })
         },
         sub(index) {
+            this.total_price = parseFloat(this.total_price);
+            this.cart[index].price = parseFloat(this.cart[index].price);
             this.cart[index].quantity > 1 && (this.cart[index].quantity -= 1) && (this.total_price = this.total_price - this.cart[index].price);
+            this.total_price = this.total_price.toFixed(2);
             this.qua_form.quantity = this.cart[index].quantity;
             this.qua_form.product_id = this.cart[index].product_id;
             cart_qua(this.qua_form).then( res => {
@@ -98,12 +103,15 @@ export default {
             })
         },
         del(index) {
+            this.total_price = parseFloat(this.total_price);
+            this.cart[index].price = parseFloat(this.cart[index].price);
             this.del_form.product_id = this.cart[index].product_id;
             cart_del(this.del_form).then( res => {
             }).catch( error => {
                 this.$message.error('Failed');
             })
             this.total_price = this.total_price - (this.cart[index].quantity * this.cart[index].price)
+            this.total_price = this.total_price.toFixed(2);
             this.cart.splice(index, 1);
             console.log(this.cart);
         },

@@ -220,7 +220,11 @@ def add_address_book(request):
             token = data["token"]
             email = auth.token_to_email(token)
             name = data['name']
-            address_name = data['address']
+            address_line = data['address_line']
+            post_code = data['post_code']
+            suburb = data['suburb']
+            state = data['state']
+            country = data['country']
             phone_number = data['phone_number']
             if not str.isdigit(phone_number):
                 response.status_code = 443
@@ -235,7 +239,7 @@ def add_address_book(request):
             response.content = e
             return response
         try:
-            address.add_address_book(email, name, address_name, phone_number)
+            address.add_address_book(email, name, address_line, post_code, suburb, state, country, phone_number)
         except InputError as e:
             response.status_code = 400
             response.content = e
@@ -327,7 +331,11 @@ def edit_address_book(request):
             token = data["token"]
             email = auth.token_to_email(token)
             name = data['name']
-            address_name = data['address']
+            address_line = data['address_line']
+            post_code = data['post_code']
+            suburb = data['suburb']
+            state = data['state']
+            country = data['country']
             phone_number = data['phone_number']
             address_id = data['address_id']
             if not str.isdigit(phone_number):
@@ -343,7 +351,7 @@ def edit_address_book(request):
             response.content = e
             return response
         try:
-            data = address.edit_address_book(email, name, address_name, phone_number, address_id)
+            data = address.edit_address_book(email, name, address_line, post_code, suburb, state, country, phone_number, address_id)
         except InputError as e:
             response.status_code = 400
             response.content = e

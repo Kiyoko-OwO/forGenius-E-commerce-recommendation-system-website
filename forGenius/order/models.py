@@ -12,12 +12,16 @@ class Order(models.Model):
     paid = models.BooleanField(default=False)
     # product details
     product_name = models.CharField(max_length=255, null=False, blank=False)
-    price = models.IntegerField(validators=[MinValueValidator(0)], default=0)
+    price = models.DecimalField(validators=[MinValueValidator(0)], default=0.01, max_digits=20, decimal_places=2)
     product_id = models.IntegerField(null = False, blank = False)
     quantity = models.IntegerField(validators=[MinValueValidator(1)])
     # address detail
     name = models.CharField(max_length=255)
-    address = models.CharField(max_length=255)
+    address_line = models.CharField(max_length=255)
+    post_code = models.IntegerField(validators=[MinValueValidator(1)])
+    suburb = models.CharField(max_length=255)
+    state = models.CharField(max_length=255)
+    country = models.CharField(max_length=255)
     phone_number = models.IntegerField(validators=[MinValueValidator(1)])
     
 

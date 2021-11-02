@@ -92,7 +92,7 @@ def pay_order(email, order_id):
     for item in order:
         if item.paid == False:
             products = Product.objects.filter(product_id=item.product_id)
-            if len(product) != 0:
+            if len(products) != 0:
                 for product in products:
                     product.sales_data += item.quantity
             item.paid = True

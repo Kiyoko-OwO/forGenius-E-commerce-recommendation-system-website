@@ -67,11 +67,11 @@ def view_order(email, order_id):
         info = {
             "product_id" : item.product_id,
             "name" : item.product_name,
-            "price" : item.price,
+            "price" : round(float(item.price), 2),
             "quantity" : item.quantity,
             "total_price": item.price * item.quantity
         } 
-        total += item.price * item.quantity
+        total += round(float(item.price), 2) * item.quantity
         data["item"].append(info)
     
     data["total"] = total
@@ -139,7 +139,7 @@ def view_all_order(email):
             info = {
                 "product_id" : item.product_id,
                 "name" : item.product_name,
-                "price" : item.price,
+                "price" : round(float(item.price), 2),
                 "quantity" : item.quantity,
                 "total_price": item.price * item.quantity
             } 
@@ -154,7 +154,7 @@ def view_all_order(email):
                 data['order_date'] = item.date_time.strftime("%Y-%m-%d")
                 data['paid'] = item.paid
 
-            total += item.price * item.quantity
+            total += round(float(item.price), 2) * item.quantity
             data["item"].append(info)
     
         data["total"] = total

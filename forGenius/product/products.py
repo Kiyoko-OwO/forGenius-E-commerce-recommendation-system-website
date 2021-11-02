@@ -22,7 +22,7 @@ def product_userView(product_id):
             "description" : product_query.description,
             "warranty" : product_query.warranty,
             "delivery_date" : delivery_date.strftime("%Y-%m-%d"),
-            "price" : product_query.price,
+            "price" : round(float(product_query.price), 2),
             "picture" : product_query.picture,
             "features" : get_product_features(product_id)
         } 
@@ -79,7 +79,7 @@ def admin_products_all():
             "description" : book.description,
             "delivery_date" : book.delivery_date,
             "sales_data" : book.sales_data,
-            "price" : book.price,
+            "price" : round(float(book.price), 2),
             "picture" : book.picture,
             "features" : get_product_features(book.product_id)
         } 

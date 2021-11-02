@@ -3,6 +3,7 @@
     <header>
         <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpUser">
         ADDRESS&nbsp;BOOK
+        <el-button type="primary" class="add" @click="add()">Add</el-button>
     </header>
     
     <div id="address-container">
@@ -19,7 +20,6 @@
         @delAdd = 'del'
         >
         </Address>
-        <el-button type="primary" class="add" @click="add()">Add</el-button>
     </div>
   </div>
 </template>
@@ -30,6 +30,79 @@ import { address_view } from '../api/user'
 import { address_delete } from '../api/user'
 export default {
     data () {
+            var checkName = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('name cannot be empty'))
+      } else {
+        callback()
+      }
+    }
+    var checkDes = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('name cannot be empty'))
+      } else {
+        callback()
+      }
+    }
+    var checkFeature= (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('feature cannot be empty'))
+      } else {
+        callback()
+      }
+    }
+    var checkWarranty = (rule, value, callback) => {
+      const mailReg = /^\d+$/
+      if (!value) {
+        return callback(new Error('warranty cannot be empty'))
+      }
+      setTimeout(() => {
+        if (mailReg.test(value)) {
+          callback()
+        } else {
+          callback(new Error('the warranty should be number'))
+        }
+      }, 100)
+    }
+    var checkDelivery= (rule, value, callback) => {
+      const mailReg = /^\d+$/
+      if (!value) {
+        return callback(new Error('number of day cannot be empty'))
+      }
+      setTimeout(() => {
+        if (mailReg.test(value)) {
+          callback()
+        } else {
+          callback(new Error('the data should be number of day'))
+        }
+      }, 100)
+    }
+    var checkSales= (rule, value, callback) => {
+      const mailReg = /^\d+$/
+      if (!value) {
+        return callback(new Error('Sales cannot be empty'))
+      }
+      setTimeout(() => {
+        if (mailReg.test(value)) {
+          callback()
+        } else {
+          callback(new Error('the sales should be number'))
+        }
+      }, 100)
+    }
+    var checkPrice= (rule, value, callback) => {
+      const mailReg =  /^((0{1}\.\d{1,2})|([1-9]\d*\.{1}\d{1,2})|([1-9]+\d*))$/
+      if (!value) {
+        return callback(new Error('Price cannot be empty'))
+      }
+      setTimeout(() => {
+        if (mailReg.test(value) & value != 0) {
+          callback()
+        } else {
+          callback(new Error('the price should be number'))
+        }
+      }, 100)
+    }
         return {
             addressbook : [],
             tokenForm: {
@@ -107,15 +180,17 @@ header{
     cursor: pointer;
 }
 .add{
-    position: relative;
-    left:70%;
-    top: 30px;
-    width: 130px;
+   height: 40%;
+    position: absolute;
+    border-radius: 4px;
+    padding: 2px 20px;
+    margin-left: 300px;
+    margin-top: 40px;
     background: #786662;
     border-radius: 10px;
     color: #fefefe;
-    letter-spacing:2px;
-    padding-left: 25px;
-    border-color: #786662;
+    border-color:#786662;
+    cursor: pointer;
 }
+
 </style>

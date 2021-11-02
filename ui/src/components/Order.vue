@@ -6,18 +6,28 @@
         <img class="logo" src=../assets/2.png alt="logo">
     </header>
     <div class="order_contain">
+    <h2>Address</h2>
       <div v-show="isEmpty">
-          <h2>Address</h2>
           <p> Name: {{create_form.name}} </p> 
-          <p> Address: {{create_form.address}}</p>
+          <p> Address: </p>
+          <p> {{create_form.address}}</p>
+          <p> Country: {{create_form.country}}</p>
+          <p> State: {{create_form.state}}</p>
+          <p> Suburb: {{create_form.suburb}}</p>
+          <p> Postal Code:{{create_form.post_code}}</p>
           <p> Phone Number: {{create_form.phone_number}}</p>
           <el-button @click="chooseDialogFormVisible = true" align="left" style="float:left">Choose</el-button>
-          <el-button @click="jumpAdd" align="right">Add</el-button>
           <el-dialog title="Address Book" :visible.sync="chooseDialogFormVisible" width="40%">
             <div v-for="(item,ind) in addressbook" :key="ind">
                    <div class="block1"></div>
                    <p>Recipient's name: {{item.name}} </p> 
-                   <p>Address List: {{item.address}} </p> 
+                   <p>Address List: {{item.address}} </p>
+          <p> Address: </p>
+          <p> {{item.address}}</p>
+          <p> Country: {{item.country}}</p>
+          <p> State: {{item.state}}</p>
+          <p> Suburb: {{item.suburb}}</p>
+          <p> Postal Code:{{item.post_code}}</p>
                    <p>Phone Number: {{item.phone_number}} </p> 
                    <el-button @click="chooseAdd(ind)" class="choose_in">Choose</el-button>
                    <div class="block"></div>
@@ -28,6 +38,7 @@
             </div>
           </el-dialog>
       </div>
+      <el-button @click="jumpAdd" align="right">Add</el-button>
       <div class="cart-container">
         <h2 class="infor">Product information</h2>
         <Product v-for="(obj,ind) in cart" :key="obj.id"
@@ -236,6 +247,7 @@ header{
     position: absolute;
     top:100px;
     left:38%;
+  word-break:break-all;
 }
 .logo{
     height: 200%;    

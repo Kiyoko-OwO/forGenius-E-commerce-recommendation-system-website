@@ -19,6 +19,7 @@
       <p>Paid: {{payStat}}</p>
       <p>Order Date: {{orderDate}}</p>
       <el-button @click="orderFn" class="detail">Detail</el-button>
+      <el-button @click="orderShare" class="detail">Share</el-button>
       <div class="block"></div>
       <div class="link-top"></div>
   </div>

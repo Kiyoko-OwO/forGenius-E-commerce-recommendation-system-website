@@ -3,6 +3,8 @@
     <p> Product ID: {{id}} </p> 
     <p> Product Name: {{name}} </p> 
     <p> Product Warranty: {{warr}} </p> 
+    <p> Feature: </p>  
+    <p> {{feature}} </p> 
     <p> Description: </p>
     <p>{{description}}</p>
     <p> Delivery Date: {{delivery}}</p>
@@ -23,6 +25,9 @@
         <p>Product ID: {{id}}</p>
         <el-form-item label="Name" prop="name">
           <el-input v-model="editForm.name" autocomplete="off" ></el-input>
+        </el-form-item>
+        <el-form-item label="Feature" prop="feature">
+          <el-input v-model="editForm.feature" autocomplete="off" ></el-input>
         </el-form-item>
         <el-form-item label="Description" prop="description">
           <el-input type="textarea" v-model="editForm.description" autocomplete="off" ></el-input>
@@ -61,6 +66,13 @@ export default {
       var checkName = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('name cannot be empty'))
+      } else {
+        callback()
+      }
+    }
+      var checkFeature = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('Feature cannot be empty'))
       } else {
         callback()
       }
@@ -107,12 +119,15 @@ export default {
       }, 100)
     }
     var checkPrice= (rule, value, callback) => {
-      const mailReg = /^[0-9]+\.[0-9]{2}$/
+      const mailReg =  /^((0{1}\.\d{1,2})|([1-9]\d*\.{1}\d{1,2})|([1-9]+\d*))$/
+      if (!value) {
+        return callback(new Error('Price cannot be empty'))
+      }
       setTimeout(() => {
-        if (mailReg.test(value)) {
+        if (mailReg.test(value) & value != 0) {
           callback()
         } else {
-          callback(new Error('The price should be number'))
+          callback(new Error('the price should be number'))
         }
       }, 100)
     }
@@ -128,7 +143,8 @@ export default {
           sales_data: this.sales,
           price: this.price,
           warranty: this.warr,
-          picture: this.pic
+          picture: this.pic,
+          feature:this.feature
         },
         editRules: {
         name: [
@@ -148,6 +164,9 @@ export default {
         ],
         description:[
           { validator: checkDes, trigger: 'blur'}
+        ],
+        feature:[
+          { validator: checkFeature, trigger: 'blur'}
         ]
       }
       }
@@ -173,6 +192,9 @@ export default {
       },
       price:function(newVal,oldVal){
         this.price = newVal;
+      },
+      price:function(newVal,oldVal){
+        this.feature = newVal;
       }
     },
     methods: {

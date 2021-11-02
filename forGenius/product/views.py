@@ -74,7 +74,7 @@ def admin_add_product(request):
             delivery_date = data['delivery_date']
             price = data['price']
             picture = data['picture']
-            if not isFloat(price):
+            if not isFloat(price) or float(price) <= 0:
                 response.status_code = 443
                 response.content = 'price is not float'
                 return response
@@ -116,9 +116,9 @@ def admin_edit_product(request):
             price = data['price']
             product_id = data['product_id']
             picture = data['picture']
-            if not isFloat(price):
+            if not isFloat(price) or float(price) <= 0:
                 response.status_code = 443
-                response.content = 'price is not float'
+                response.content = 'price is not float or price <= 0'
                 return response
         except KeyError:
             response.status_code = 442

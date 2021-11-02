@@ -85,8 +85,13 @@ def pay_order(email, order_id):
         raise EmptyOrderError("No order exists")
 
     for item in order:
-        item.paid = True
-        item.save()
+        if item.paid == False:
+            products = Product.objects.filter(product_id=item.product_id)
+            if len(product) != 0:
+                for product in products:
+                    product.sales_data += item.quantity
+            item.paid = True
+            item.save()
 
 def view_all_order(email):
     # check user authorization (potential attack: one user view another user's order)

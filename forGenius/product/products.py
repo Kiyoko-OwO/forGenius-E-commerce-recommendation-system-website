@@ -23,15 +23,20 @@ def product_userView(product_id):
             "warranty" : product_query.warranty,
             "delivery_date" : delivery_date.strftime("%Y-%m-%d"),
             "price" : product_query.price,
-            "picture" : product_query.picture
+            "picture" : product_query.picture,
+            "features" : get_product_features(product_id)
         } 
     return info
 
-def admin_add_product(name, description, warranty, delivery_date, price, picture):    
+def admin_add_product(name, description, warranty, delivery_date, price, picture, features):    
     reg = Product(admin_email=get_Admin(), name=name, description=description, warranty=warranty, delivery_date=delivery_date, price=price, picture=picture)
     reg.save()
+    for feature in features.split():
+        fe = Features(product_id = reg, feature = feature)
+        fe.save()
 
-def admin_edit_product(product_id, name, description, warranty, delivery_date, price, picture):    
+
+def admin_edit_product(product_id, name, description, warranty, delivery_date, price, picture, features):    
     try:
         reg = Product.objects.get(product_id=product_id)
     except Product.DoesNotExist:
@@ -42,13 +47,21 @@ def admin_edit_product(product_id, name, description, warranty, delivery_date, p
     reg.delivery_date = delivery_date
     reg.price = price
     reg.picture = picture
-    reg.save()
+    reg.save()    
+    for fe in Features.objects.filter(product_id = product_id):
+        fe.delete()
+
+    for feature in features.split():
+        fe = Features(product_id = reg, feature = feature)
+        fe.save()
 
 def admin_delete_product(product_id):    
     try:
         reg = Product.objects.get(product_id=product_id)
     except Product.DoesNotExist:
         raise ProductIdError("This product does not exist")
+    for fe in Features.objects.filter(product_id = product_id):
+        fe.delete()
     reg.delete()
     
 def admin_products_all():
@@ -67,7 +80,14 @@ def admin_products_all():
             "delivery_date" : book.delivery_date,
             "sales_data" : book.sales_data,
             "price" : book.price,
-            "picture" : book.picture
+            "picture" : book.picture,
+            "features" : get_product_features(book.product_id)
         } 
         data[info_str].append(info)
     return data
+
+def get_product_features(product_id):
+    arr = []
+    for fe in Features.objects.filter(product_id = product_id):
+        arr.append(fe.feature)
+    return ' '.join(arr)

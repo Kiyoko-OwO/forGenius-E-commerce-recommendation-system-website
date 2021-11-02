@@ -6,9 +6,12 @@
         <div class="item" v-for="item in ordItem" :key="item.product_id">
         <p>Name: {{item.name}} </p>
         <p>Price: {{item.price}} </p>
-         <p>Quantity: {{item.quantity}} </p>
+        <p>Quantity: {{item.quantity}} </p>
         <div class="link-in"></div>
         </div>
+        <p> Buyer Name: {{name}}</p>
+        <p> Address: {{address_line}}</p>
+        <p> Phone Number: {{phone_number}}</p>
         <div class="block"></div>
         Order Date: {{orderDate}}
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total Price: {{ordTotal}}
@@ -29,7 +32,7 @@
 
 <script>
 export default {
-    props: ['index', 'ordId', 'payStat', 'ordItem','ordTotal','orderDate'],
+    props: ['index', 'ordId', 'payStat', 'ordItem','ordTotal','orderDate','name','address_line','phone_number'],
     data () {
         return {
             dialogFormVisible: false,

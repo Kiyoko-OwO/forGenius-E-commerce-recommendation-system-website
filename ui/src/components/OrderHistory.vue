@@ -11,6 +11,9 @@
       :ordItem="obj.item"
       :ordTotal="obj.total"
       :orderDate ="obj.order_date"
+      :name="obj.name"
+      :address_line="obj.address_line"
+      :phone_number="obj.phone_number"
       :index = "ind"
       @checker = 'check'
       @jump = 'jumpToOrd'

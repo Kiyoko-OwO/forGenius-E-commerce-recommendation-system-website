@@ -95,6 +95,7 @@ def pay_order(email, order_id):
             if len(products) != 0:
                 for product in products:
                     product.sales_data += item.quantity
+                    product.save()
             item.paid = True
             item.save()
 

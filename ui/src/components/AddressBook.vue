@@ -8,9 +8,13 @@
     <div id="address-container">
         <Address v-for="(obj,ind) in addressbook.slice().reverse()" :key="obj.address_id"
         :userName="obj.name"
-        :addressDe="obj.address"
+        :addressDe="obj.address_line"
         :phoneNumber="obj.phone_number"
         :addressId="obj.address_id"
+        :country="obj.country"
+        :state="obj.state"
+        :suburb="obj.suburb"
+        :post_code="obj.post_code"
         :index = "ind"
         @delAdd = 'del'
         >

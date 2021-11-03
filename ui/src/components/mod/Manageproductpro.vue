@@ -51,7 +51,13 @@
       </div>
     </el-dialog>
     
-    <el-button type="primary" icon="el-icon-delete" @click="delFn" class="edit"></el-button>
+    <el-button type="primary" @click="deldialogFormVisible = true" icon="el-icon-delete" class="edit"></el-button>
+    <el-dialog :visible.sync="deldialogFormVisible" width="40%" @close="closeDialog" append-to-body>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="deldialogFormVisible = false">Cancel</el-button>
+        <el-button type="primary" @click="delFn">Confim</el-button>
+      </div>
+    </el-dialog>
   </div>
   
 
@@ -132,6 +138,7 @@ export default {
         fits: [''],
         // url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
         dialogFormVisible: false,
+        deldialogFormVisible: false,
         editForm: {
           product_id: this.id,
           name: this.name,
@@ -196,7 +203,8 @@ export default {
     },
     methods: {
       delFn(){
-        this.$emit("delPro", this.index)
+        this.$emit("delPro", this.index);
+        this.deldialogFormVisible =  false;
       },
       editFn(){
         this.$emit("editAdd", this.index)

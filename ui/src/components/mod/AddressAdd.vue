@@ -1,7 +1,7 @@
 <template>
     <div class="add_container">
-      <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpAddress">
       <div class="add_box">
+            <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpAddress">
             <h1>ADD&nbsp;ADDRESS</h1>
       <el-form ref="add_FormRef" :rules="addRules" :model="addForm" class="add_form" label-position="left" label-width="225px">
           <el-form-item label="NAME" class="username_change" prop="name">
@@ -181,6 +181,7 @@ export default {
 
 h1{
     position: absolute;
+    top:2%;
     left: 50%;
     font-size: 40px;
     transform: translate(-50%,20%);
@@ -203,11 +204,11 @@ h1{
     transform: translate(-50%,-50%);
 }
 .logo{
-    height: 35%;
+    height: 50%;
     width: 40;
-    position: absolute;
-    right: 55%;
-    top:-10.5%;
+    position: relative;
+    top:-35%;
+
     cursor: pointer;
 }
 .add_form{

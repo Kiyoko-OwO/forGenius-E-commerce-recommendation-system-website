@@ -12,4 +12,5 @@ urlpatterns = [
     path('view/', view_order, name='view_order'),
     path('pay/', pay_order, name='pay_order'),
     path('view/all/', view_all_order, name='view_all_order'),
+    path('share/', share_order, name='share_order'),
 ]

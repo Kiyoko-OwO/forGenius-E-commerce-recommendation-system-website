@@ -486,3 +486,45 @@ def add_user_interests(request):
         return response
     response.status_code = 405
     return response
+
+
+def change_username(request):
+    response = HttpResponse()
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            response.status_code = 441
+            response.content = 'json.JSONDecodeError'
+            return response
+        try:
+            token = data["token"]
+            new_name = data['newname']
+        except KeyError:
+            response.status_code = 442
+            response.content = 'KeyError'
+            return response
+        
+        try:
+            email = auth.token_to_email(token)
+        except InputError as e:
+            response.status_code = 400
+            response.content = e
+            return response
+        except jwt.InvalidSignatureError:
+            response.status_code = 400
+            response.content = "token is wrong"
+            return response
+
+        try:
+            auth.change_username(email, new_name)
+        except InputError as e:
+            response.status_code = 400
+            response.content = e
+            return response
+
+        response.status_code = 200
+        return response
+    response.status_code = 405
+    return response
+

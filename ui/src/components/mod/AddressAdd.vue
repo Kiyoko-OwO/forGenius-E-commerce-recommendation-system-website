@@ -1,7 +1,8 @@
 <template>
     <div class="add_container">
+     <div class="fix">
+      <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpAddress">
       <div class="add_box">
-            <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpAddress">
             <h1>ADD&nbsp;ADDRESS</h1>
       <el-form ref="add_FormRef" :rules="addRules" :model="addForm" class="add_form" label-position="left" label-width="225px">
           <el-form-item label="NAME" class="username_change" prop="name">
@@ -38,6 +39,7 @@
           </el-form-item>
       </el-form>
       </div>
+     </div>
     </div>
 </template>
 
@@ -180,11 +182,10 @@ export default {
 }
 
 h1{
-    position: absolute;
-    top:2%;
-    left: 50%;
+    position: relative;
+    left: 27%;
+    top:50px;
     font-size: 40px;
-    transform: translate(-50%,20%);
     font-weight:normal;
     font-family: 'segUi';
     letter-spacing:.2em;
@@ -195,28 +196,23 @@ h1{
 }
 .add_box{
     background-color:#e7eae8;
-    height: 620px;
+    height: 630 px;
     width: 750px;
-    position: absolute;
+    margin:0 auto;
     border-radius: 30px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
+    left:40px;
+    margin-top:-60px;
 }
 .logo{
-    height: 50%;
-    width: 40;
-    position: relative;
-    top:-35%;
-
+    height: 300px;
+    left: 1500px;
     cursor: pointer;
 }
 .add_form{
     width: 530px;
-    position: absolute;
+    margin:0 100px;
     border-radius: 80px;
-    top: 20%;
-    left: 15%;
+    padding-top: 50px;
 }
 
 .username_change /deep/ .el-form-item__label{
@@ -229,21 +225,26 @@ h1{
 }
 .submit{
     position: relative;
-    left:17%;
+    left:21%;
     height:50px;
     width:200px;
     transform: translate(-50%,-50%);
     border-radius: 10px;
     background: #786662;
     color: #fefefe;
-    border-color: #786662;
     letter-spacing:10px;
     padding-left: 30px;
+    border-color: #786662;
 }
 .add_form /deep/.timr.el-form .el-form-item__error {
   top: 30%;
   right: 25% !important;
   left: unset;
+}
+.fix{
+  margin:0 auto;
+  margin-top:-50px;
+  width:800px;
 }
 </style>
 

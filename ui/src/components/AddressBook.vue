@@ -1,8 +1,11 @@
 <template class="ad">
   <div class="address_container">
+    <div class="fix">
     <header>
         <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpUser">
+        <div class="title">
         ADDRESS&nbsp;BOOK
+        </div>
         <el-button type="primary" class="add" @click="add()">Add</el-button>
     </header>
     
@@ -21,6 +24,7 @@
         >
         </Address>
     </div>
+  </div>
   </div>
 </template>
 
@@ -156,7 +160,7 @@ export default {
 header{
     height: 100px;
     width: 100%;
-    position: absolute;
+    position: relative;
     left:0;
     top:0;
     z-index: 999;
@@ -168,29 +172,41 @@ header{
     font-size: 50px;
 }
 #address-container {
-    position: absolute;
-    top:100px;
-    left:38%;
+    position: relative;
+    top:10px;
+    left:34%;
+    width:300px;
 }
 .logo{
-    height: 200%;    
-    position: absolute;
-    right: 80%;
-    top:-56%;
+    height: 200%;
+    position: relative;
     cursor: pointer;
+    top:-60px;
+    left:-600px;
+}
+.title{
+    position: relative;
+    top:-260px;
+    height:100px;
+    left:-3%;
+
 }
 .add{
-   height: 40%;
-    position: absolute;
+    height: 40%;
+    position: relative;
     border-radius: 4px;
     padding: 2px 20px;
-    margin-left: 300px;
-    margin-top: 40px;
+    left:480px;
+    top:-370px;
     background: #786662;
     border-radius: 10px;
     color: #fefefe;
     border-color:#786662;
     cursor: pointer;
+}
+.fix{
+    margin:0 auto;
+    width:1750px;
 }
 
 </style>

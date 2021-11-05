@@ -249,7 +249,9 @@ export default {
   top:50%;
 }
 .des{
+  position: relative;
   width: 100px;
+  left: 400px;
 }
 .edit{
   position: relative;

@@ -1,8 +1,11 @@
 <template>
   <div class="manage_container">
+    <div class="fix">
     <header>
-        PAYMENT
        <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpHome">
+        <div class="title">
+        PAYMENT
+        </div>
     </header>
     <div class="payment-container">
       <el-select v-model="value" clearable placeholder="Choose payment method" class="choose">
@@ -13,8 +16,9 @@
           :value="item.value">
         </el-option>
       </el-select>
-      <el-button class="Pay" @click="submitForm()">Pay</el-button>
     </div>
+      <el-button class="Pay" @click="submitForm()">Pay</el-button>
+   </div>
   </div>
 </template>
 
@@ -72,16 +76,17 @@ export default {
 
 <style lang="less" scoped>
 .payment-container {
-    position: absolute;
-    top:200px;
+    position: relative;
+    top: 100px;
     left:50%;
-    transform: translate(-50%,0%);
+    transform: translate(-50%);
+    width:500px;
 }
 
 header{
     height: 100px;
     width: 100%;
-    position: absolute;
+    position: relative;
     left:0;
     top:0;
     z-index: 999;
@@ -91,33 +96,49 @@ header{
     font-weight:normal;
     font-family: 'segUi';
     font-size: 50px;
-    z-index: 50;
+    overflow: hidden;
 }
 .logo{
-    height: 300%;    
-    position: absolute;
-    right: 81%;
-    top:-120.5%;
+    height: 200%;
+    position: relative;
     cursor: pointer;
-    z-index: 100;
+    top:-60px;
+    left:-600px;
+    z-index:100;
 }
 
 .Pay{
-    height: 45px;
-    width: 100px;
-    position: absolute;
-    border-radius: 4px;
-    padding: 2px 20px;
-    margin-left: -50px;
-    margin-top: 40px;
-    background: #786662;
+    position: relative;
+    width:130px;
+    font-size: 16px;
+    height:40px;
+    left:55%;
+    top:200px;
     border-radius: 10px;
+    background: #786662;
     color: #fefefe;
-    border-color:#786662;
-    cursor: pointer;
+    padding-left: 19px;
+    padding-top: 11px;
+    border-color: #786662;
+    transform: translate(-50%);
 }
 .choose{
-  top:-20px;
-  width:200px;
+  position: relative;
+  left:50%;
+  width:300px;
+  transform: translate(-50%);
+}
+.fix{
+    margin:0 auto;
+    width:1750px;
+}
+.title{
+    position: relative;
+    top:-260px;
+    height:100px;
+    width:200x;
+    left:49%;
+    transform: translate(-50%);
+    text-align: center;
 }
 </style>

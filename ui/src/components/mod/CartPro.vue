@@ -28,8 +28,7 @@ export default {
 
 <style>
 .my-cartpro {
-  width: 500px;
-  height: 200 px;
+  width: 450px;
   padding: 20px;
   border: 2px solid #000;
   border-radius: 5px;

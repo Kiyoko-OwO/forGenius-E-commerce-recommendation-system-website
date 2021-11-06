@@ -106,6 +106,7 @@ header{
     font-weight:normal;
     font-family: 'segUi';
     font-size: 50px;
+    overflow: hidden;
 }
 .logo{
     height: 200%;
@@ -113,6 +114,7 @@ header{
     cursor: pointer;
     top:-60px;
     left:-600px;
+    z-index:100;
 }
 .addProduct{
     height: 40%;

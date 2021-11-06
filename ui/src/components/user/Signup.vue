@@ -44,7 +44,7 @@ import { signup_code } from '../../api/user'
 export default {
   data () {
     var checkEmail = (rule, value, callback) => {
-      const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+.com/
+      const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+\.com/
       if (!value) {
         return callback(new Error('email address cannot be empty'))
       }
@@ -211,10 +211,10 @@ h1{
 }
 .submit{
     position: relative;
-    left:10%;
+    left:13%;
     height:50px;
     width:200px;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%,-75%);
     border-radius: 10px;
     background: #786662;
     color: #fefefe;

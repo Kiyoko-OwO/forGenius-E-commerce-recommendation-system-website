@@ -32,7 +32,7 @@ import { login } from '../../api/user'
 export default {
   data () {
     var checkEmail = (rule, value, callback) => {
-      const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+.com/
+      const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+\.com/
       if (!value) {
         return callback(new Error('email address cannot be empty'))
       }
@@ -120,7 +120,7 @@ h1{
 .forget{
     position: relative;
     left: 47%;
-    bottom:36%;
+    bottom:32%;
     color:black;
     transform: translate(-50%,0%);
     font-size: 15px;
@@ -146,7 +146,7 @@ h1{
 }
 .submit{
     position: relative;
-    left:10%;
+    left:18%;
     height:50px;
     width:200px;
     transform: translate(-50%,-50%);

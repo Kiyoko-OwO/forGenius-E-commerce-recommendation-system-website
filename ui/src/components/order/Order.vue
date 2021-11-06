@@ -1,9 +1,12 @@
 <template>
   <div >
+    <div class="fix">
     <header>
-        ORDER&nbsp;
-        <el-button @click="jumpCart" class='return' type="primary">Return Cart</el-button>
         <img class="logo" src=../../assets/2.png alt="logo">
+        <div class="title">
+        ORDER&nbsp;
+        </div>
+        <el-button @click="jumpCart" class='return' type="primary">Return Cart</el-button>
     </header>
     <div class="order_contain">
     <h2>Address</h2>
@@ -16,7 +19,7 @@
           <p> Postal Code:{{create_form.post_code}}</p> -->
           <p> Phone Number: {{create_form.phone_number}}</p>
           <el-button @click="chooseDialogFormVisible = true" align="left" style="float:left">Choose</el-button>
-          <el-dialog title="Address Book" :visible.sync="chooseDialogFormVisible" width="40%">
+          <el-dialog title="Address Book" :visible.sync="chooseDialogFormVisible" width="40%" class="editf" append-to-body>
             <div v-for="(item,ind) in addressbook" :key="ind">
                     <div class="block1"></div>
                     <p>Recipient's name: {{item.name}} </p> 
@@ -52,6 +55,7 @@
         <p>Total Price: $</p>
         <p>{{total_price}}</p>
         </div>
+      </div>
     </div>
     <!-- <div class="share">
       <h2 class="share_ti">Share Your Order</h2>
@@ -250,9 +254,9 @@ export default {
 header{
     height: 100px;
     width: 100%;
-    position: absolute;
+    position: relative;
     left:0;
-    top:-10px;
+    top:0;
     z-index: 999;
     border-bottom:3px solid #ccc;
     text-align: center;
@@ -260,41 +264,47 @@ header{
     font-weight:normal;
     font-family: 'segUi';
     font-size: 50px;
+    overflow: hidden;
 }
 .order_contain{
-    position: absolute;
-    top:100px;
-    left:38%;
-  word-break:break-all;
+    position: relative;
+    left:50%;
+    transform: translate(-50%);
+    width:500px;
 }
 .logo{
-    height: 200%;    
-    position: absolute;
-    right: 80%;
-    top:-56%;
+    height: 200%;
+    position: relative;
     cursor: pointer;
+    top:-60px;
+    left:-600px;
+    z-index:100;
 }
 .share_form{
     width:300px;
 }
 .return{
+    height: 40%;
     position: relative;
-    height:40px;
-    left:500px;
-    top:-10px;
+    border-radius: 4px;
+    padding: 2px 20px;
+    left:480px;
+    top:-370px;
     background: #786662;
+    border-radius: 10px;
     color: #fefefe;
-    border-color: #786662;
+    border-color:#786662;
+    cursor: pointer;
+
 }
 .submit{
     position: relative;
-    left:70%;
+    left:52%;
     width:130px;
     font-size: 16px;
-    height:50px;
-    margin-top: 70px;
+    height:40px;
+    margin-top: 50px;
     margin-left: 80px;
-    transform: translate(-50%,-50%);
     border-radius: 10px;
     background: #786662;
     color: #fefefe;
@@ -304,7 +314,9 @@ header{
 }
 .cart-container{
     position: relative;
-    left: -12px;
+    left:47%;
+    transform: translate(-50%);
+    width:500px;
 }
 .price{
     position: relative;
@@ -326,21 +338,35 @@ header{
     font-size: 18px;
 }
 
-    .link-in {
-        position: relative;
-        width: 100%;
-        height: 1px;
-        border-top: solid #0b0b0f 1px;
-     }
-     .block {
-  height: 20px;
+.link-in {
+    position: relative;
+    width: 100%;
+    height: 1px;
+    border-top: solid #0b0b0f 1px;
 }
-     .block1 {
-  height: 10px;
+.block {
+    height: 20px;
+}
+.block1 {
+    height: 10px;
 }
 .choose_in{
     position: relative;
     left:80%;
+}
+.fix{
+    margin:0 auto;
+    width:1750px;
+}
+.title{
+    position: relative;
+    top:-260px;
+    height:100px;
+    width:200x;
+    left:49%;
+    transform: translate(-50%);
+    text-align: center;
+
 }
 </style>
 

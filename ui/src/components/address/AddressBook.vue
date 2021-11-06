@@ -170,12 +170,13 @@ header{
     font-weight:normal;
     font-family: 'segUi';
     font-size: 50px;
+    overflow: hidden;
 }
 #address-container {
-position: relative;
-left:50%;
-transform: translate(-50%);
-width:500px;
+    position: relative;
+    left:50%;
+    transform: translate(-50%);
+    width:500px;
 
 }
 .logo{
@@ -184,6 +185,7 @@ width:500px;
     cursor: pointer;
     top:-60px;
     left:-600px;
+    z-index:100;
 }
 .title{
     position: relative;

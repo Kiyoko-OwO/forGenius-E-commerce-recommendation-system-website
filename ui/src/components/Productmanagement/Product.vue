@@ -1,8 +1,11 @@
 <template>
   <div class="address_container">
+    <div class="fix">
     <header>
-        PRODUCT&nbsp;DETAIL
         <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpHome">
+        <div class="title">
+        PRODUCT&nbsp;DETAIL
+       </div>
     </header>
     
     <div class="product_box">
@@ -41,6 +44,7 @@
           </el-form-item>
         </el-form>
     </div>
+   </div>
   </div>
 </template>
 
@@ -58,7 +62,7 @@ export default {
               quantity: 1
             },
             product_id_form:{
-              product_id: 2
+              product_id: 1
             }
         }
     },
@@ -131,7 +135,7 @@ export default {
 header{
     height: 100px;
     width: 100%;
-    position: absolute;
+    position: relative;
     left:0;
     top:0;
     z-index: 999;
@@ -141,14 +145,15 @@ header{
     font-weight:normal;
     font-family: 'segUi';
     font-size: 50px;
+    overflow: hidden;
 }
 .logo{
-    height: 300%;    
-    position: absolute;
-    right: 81%;
-    top:-120.5%;
+    height: 200%;
+    position: relative;
     cursor: pointer;
-    z-index: 100;
+    top:-60px;
+    left:-600px;
+    z-index:100;
 }
 
 .save{
@@ -156,14 +161,26 @@ header{
 }
 .product_box{
     position: relative;
-    left:37%;
-    top:200px;
-
-    width:25%;
+    top: 50px;
+    left:53%;
+    transform: translate(-50%);
+    width:500px;
     word-break:break-all;
 }
 .img{
   position: relative;
-  left: 30%;
+}
+.fix{
+    margin:0 auto;
+    width:1750px;
+}
+.title{
+    position: relative;
+    top:-260px;
+    height:100px;
+    width:200x;
+    left:49%;
+    transform: translate(-50%);
+    text-align: center;
 }
 </style>

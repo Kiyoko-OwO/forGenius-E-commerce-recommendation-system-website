@@ -2,7 +2,7 @@
   <div class="address_container">
     <header>
         PRODUCT&nbsp;DETAIL
-        <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpHome">
+        <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpHome">
     </header>
     
     <div class="product_box">
@@ -45,8 +45,8 @@
 </template>
 
 <script>
-import { cart_add } from '../api/order'
-import { product_view } from '../api/product'
+import { cart_add } from '../../api/order'
+import { product_view } from '../../api/product'
 export default {
     data () {
         return {

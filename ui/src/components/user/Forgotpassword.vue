@@ -1,7 +1,7 @@
 <template>
     <div class="fogot_container">
       <div class="fix">
-        <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpProfile"> 
+        <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpProfile"> 
         <div class="fogot_box">
             <h1>FORGOT&nbsp;PASSWORD</h1>
         <el-form ref="forgotFormRef" :model="forgotForm" :rules="forgotRules" label-position="left" label-width="225px" class="forgot_form">

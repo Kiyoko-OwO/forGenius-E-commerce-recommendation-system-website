@@ -2,7 +2,7 @@
   <div class="cart_container">
     <header>
         MY&nbsp;CART
-    <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpHome">
+    <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpHome">
     </header>
     
     <div class="cart-container">
@@ -23,10 +23,10 @@
 </template>
 
 <script>
-import Product from './mod/CartPro.vue'
-import { cart_view } from '../api/order'
-import { cart_qua } from '../api/order'
-import { cart_del } from '../api/order'
+import Product from '../mod/CartPro.vue'
+import { cart_view } from '../../api/order'
+import { cart_qua } from '../../api/order'
+import { cart_del } from '../../api/order'
 
 
 export default {

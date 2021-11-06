@@ -1,7 +1,7 @@
 <template>
     <div class="login_container">
       <div class="fix">
-        <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpHome">
+        <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpHome">
         <div class="login_box">
             <h1>LOGIN</h1>
         <el-form ref="loginForm" :model="loginForm" :rules="loginRules" label-position="left" label-width="225px" class="login_form">
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { login } from '../api/user'
+import { login } from '../../api/user'
 
 export default {
   data () {

@@ -3,7 +3,7 @@
     <header>
         PLEASE CHOOSE YOUR INTEREST FIELD
     </header>
-    <img class="logo" src=../assets/2.png alt="logo">
+    <img class="logo" src=../../assets/2.png alt="logo">
     <div>
       <el-checkbox-group v-model="interestForm.interest" class="checkbox">
         <el-checkbox-button v-for="int in tags" :label="int" :key="int">{{int}}</el-checkbox-button>
@@ -18,7 +18,7 @@
 
 </template>
 <script>
-import { interest_add } from '../api/user'
+import { interest_add } from '../../api/user'
 const tagOptions = ['Fastion', 'Toys', 'Hobby', 'DIY', 'Electronics', 'Media', 'Furniture', 'Appliance', 'Food', 'Personal Care']
 export default {
   data () {

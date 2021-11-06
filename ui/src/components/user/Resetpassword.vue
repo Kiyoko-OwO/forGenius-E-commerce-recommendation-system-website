@@ -1,12 +1,12 @@
 <template>
     <div class="reset_container">
       <div class="fix">
-        <img class="logo" src=../assets/2.png alt="logo">
+      <img class="logo" src=../../assets/2.png alt="logo">
         <div class="reset_box">
             <h1>RESET&nbsp;PASSWORD</h1>
-        <el-form ref="resetFormRef" :model="resetForm" :rules="resetpasswordRules" label-position="left" label-width="225px" class="reset_form">
-            <el-form-item label="CODE"  class="code_change" prop="reset_code">
-              <el-input v-model="resetForm.reset_code">
+        <el-form ref="resetFormRef" :model="resetForm" :rules="resetpasswordRule" label-position="left" label-width="225px" class="reset_form">
+            <el-form-item label="OLD PASSWORD"  class="oldpassword_change" prop="old_password">
+              <el-input v-model="resetForm.old_password">
               </el-input>
         </el-form-item>
             <el-form-item label="NEW PASSWORD" class="newpassword_change" prop="new_password">
@@ -25,15 +25,14 @@
 </template>
 
 <script>
-import { reset_password } from '../api/user'
-
+import { change_password } from '../../api/user'
 export default {
   data () {
-    var checkCode = (rule, value, callback) => {
+    var checkOldpassword = (rule, value, callback) => {
       if (!value) {
-        return callback(new Error('Code cannot be empty'))
+        return callback(new Error('password cannot be empty'))
       } else {
-        callback()
+         callback()
       }
     }
     var checkPassword = (rule, value, callback) => {
@@ -60,12 +59,14 @@ export default {
     }
     return {
       resetForm: {
-        reset_code: '',
+        token: '',
+        old_password: '',
         new_password: ''
       },
-      resetpasswordRules: {
-        reset_code: [
-          { validator: checkCode, trigger: 'blur' }
+      resetpasswordRule: {
+        old_password: [
+          { min: 6, max: 12, message: 'the password should be 6-12 characters', trigger: 'blur' },
+          { validator: checkOldpassword, trigger: 'blur' }
         ],
         new_password: [
           { min: 6, max: 12, message: 'the password should be 6-12 characters', trigger: 'blur' },
@@ -79,16 +80,17 @@ export default {
   },
   methods: {
     reset () {
-      this.$refs.resetFormRef.validate(valid => {
+      this.$refs.resetFormRef.validate(async valid => {
         console.log(valid);
-        console.log(this.resetForm);
-        reset_password(this.resetForm).then ( res => {
-          this.$message({message: 'Sucess!',type: 'success'});
-          console.log(res.data);
-          this.$router.push('/login');
-        }).catch( error => {
-            this.$message.error('Failed');
-        })
+        this.resetForm.token = sessionStorage.getItem('token');
+        if (valid) {
+          change_password(this.resetForm).then( res => {
+            this.$message({message: 'Updated Successfully!',type: 'success'});
+            this.$router.push('userprofile');
+          }).catch( error => {
+             this.$message.error('Incorrect old password or new password invalid');
+          })
+        }
       })
     }
   }
@@ -151,7 +153,7 @@ h1{
   right: 25% !important;
   left: unset;
 }
-.code_change /deep/ .el-form-item__label{
+.oldpassword_change /deep/ .el-form-item__label{
     font-family: 'segUi';
     letter-spacing:.1em;
     font-size: 18px;
@@ -161,6 +163,7 @@ h1{
     letter-spacing:.1em;
     font-size: 18px;
 }
+
 .password_change /deep/ .el-form-item__label{
     font-family: 'segUi';
     letter-spacing:.1em;
@@ -171,7 +174,5 @@ h1{
   margin-top:-80px;
   width:800px;
 }
+
 </style>
-
-
-

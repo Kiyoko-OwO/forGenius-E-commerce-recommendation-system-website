@@ -2,7 +2,7 @@
   <div >
     <header>
         ORDER&nbsp;HISTORY
-        <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpUser">
+        <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpUser">
     </header>
   <div class="order_container">
       <Order v-for="(obj,ind) in order_list.slice().reverse()" :key="obj.order_id"
@@ -25,8 +25,8 @@
 </template>
 
 <script>
-import Order from './mod/OrdHisCom.vue'
-import { ord_view } from '../api/order'
+import Order from '../mod/OrdHisCom.vue'
+import { ord_view } from '../../api/order'
 export default {
     data () {
         return {

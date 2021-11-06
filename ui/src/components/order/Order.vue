@@ -3,7 +3,7 @@
     <header>
         ORDER&nbsp;
         <el-button @click="jumpCart" class='return' type="primary">Return Cart</el-button>
-        <img class="logo" src=../assets/2.png alt="logo">
+        <img class="logo" src=../../assets/2.png alt="logo">
     </header>
     <div class="order_contain">
     <h2>Address</h2>
@@ -69,12 +69,12 @@
 </template>
 
 <script>
-import { address_view } from '../api/user'
-import { cart_view } from '../api/order'
-import Product from './mod/CartPro.vue'
-import { cart_qua } from '../api/order'
-import { cart_del } from '../api/order'
-import { cart_create } from '../api/order'
+import { address_view } from '../../api/user'
+import { cart_view } from '../../api/order'
+import Product from '../mod/CartPro.vue'
+import { cart_qua } from '../../api/order'
+import { cart_del } from '../../api/order'
+import { cart_create } from '../../api/order'
 export default {
     inject:['reload'],
     data () {

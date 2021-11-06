@@ -2,7 +2,7 @@
   <div class="manage_container">
     <div class="fix">
     <header>
-       <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpAdmin">
+       <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpAdmin">
        <div class="title">
         MANAGE&nbsp;PRODUCT
         </div>
@@ -30,9 +30,9 @@
 </template>
 
 <script>
-import Manage from './mod/Manageproductpro.vue'
-import { admin_view } from '../api/admin'
-import { product_delete } from '../api/admin'
+import Manage from '../mod/Manageproductpro.vue'
+import { admin_view } from '../../api/admin'
+import { product_delete } from '../../api/admin'
 export default {
     inject:['reload'],
     data () {

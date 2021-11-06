@@ -2,7 +2,7 @@
   <div class="manage_container">
     <header>
         PAYMENT
-       <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpHome">
+       <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpHome">
     </header>
     <div class="payment-container">
       <el-select v-model="value" clearable placeholder="Choose payment method" class="choose">
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { ord_pay } from '../api/order'
+import { ord_pay } from '../../api/order'
 export default {
   data () {
     return {

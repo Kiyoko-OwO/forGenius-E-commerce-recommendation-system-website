@@ -2,7 +2,7 @@
   <div class="address_container">
     <div class="fix">
     <header>
-        <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpUser">
+        <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpUser">
         <div class="title">
         ADDRESS&nbsp;BOOK
         </div>
@@ -29,9 +29,9 @@
 </template>
 
 <script>
-import Address from './mod/Address.vue'
-import { address_view } from '../api/user'
-import { address_delete } from '../api/user'
+import Address from '../mod/Address.vue'
+import { address_view } from '../../api/user'
+import { address_delete } from '../../api/user'
 export default {
     data () {
             var checkName = (rule, value, callback) => {

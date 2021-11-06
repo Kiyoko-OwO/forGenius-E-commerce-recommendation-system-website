@@ -135,7 +135,11 @@ header{
     position: relative;
     top:-260px;
     height:100px;
-    left:-3%;
+    width:200x;
+    left:49%;
+    transform: translate(-50%);
+    text-align: center;
+
 
 }
 </style>

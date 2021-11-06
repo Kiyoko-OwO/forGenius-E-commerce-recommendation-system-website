@@ -6,7 +6,7 @@
         <div class="title">
         ADDRESS&nbsp;BOOK
         </div>
-        <el-button type="primary" class="add" @click="add()">Add</el-button>
+        <el-button type="primary" class="add" @click="add()">ADD ADDRESS</el-button>
     </header>
     
     <div id="address-container">
@@ -172,10 +172,11 @@ header{
     font-size: 50px;
 }
 #address-container {
-    position: relative;
-    top:10px;
-    left:34%;
-    width:300px;
+position: relative;
+left:50%;
+transform: translate(-50%);
+width:500px;
+
 }
 .logo{
     height: 200%;
@@ -188,7 +189,10 @@ header{
     position: relative;
     top:-260px;
     height:100px;
-    left:-3%;
+    width:200x;
+    left:49%;
+    transform: translate(-50%);
+    text-align: center;
 
 }
 .add{

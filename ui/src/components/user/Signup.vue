@@ -1,7 +1,7 @@
 <template>
     <div class="signup_container">
       <div class="fix">
-      <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpHome">
+      <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpHome">
         <div class="signup_box">
             <h1>REGISTER</h1>
         <el-form ref="signupFormRef" :model="signupForm" :rules="signupRules" label-position="left" label-width="225px" class="signup_form">
@@ -39,12 +39,12 @@
 </template>
 
 <script>
-import { signup } from '../api/user'
-import { signup_code } from '../api/user'
+import { signup } from '../../api/user'
+import { signup_code } from '../../api/user'
 export default {
   data () {
     var checkEmail = (rule, value, callback) => {
-      const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+.com/
+      const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+\.com/
       if (!value) {
         return callback(new Error('email address cannot be empty'))
       }
@@ -211,10 +211,10 @@ h1{
 }
 .submit{
     position: relative;
-    left:10%;
+    left:13%;
     height:50px;
     width:200px;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%,-75%);
     border-radius: 10px;
     background: #786662;
     color: #fefefe;

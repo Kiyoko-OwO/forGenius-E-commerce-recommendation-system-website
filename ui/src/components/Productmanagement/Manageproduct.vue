@@ -2,7 +2,7 @@
   <div class="manage_container">
     <div class="fix">
     <header>
-       <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpAdmin">
+       <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpAdmin">
        <div class="title">
         MANAGE&nbsp;PRODUCT
         </div>
@@ -30,9 +30,9 @@
 </template>
 
 <script>
-import Manage from './mod/Manageproductpro.vue'
-import { admin_view } from '../api/admin'
-import { product_delete } from '../api/admin'
+import Manage from '../mod/Manageproductpro.vue'
+import { admin_view } from '../../api/admin'
+import { product_delete } from '../../api/admin'
 export default {
     inject:['reload'],
     data () {
@@ -106,6 +106,7 @@ header{
     font-weight:normal;
     font-family: 'segUi';
     font-size: 50px;
+    overflow: hidden;
 }
 .logo{
     height: 200%;
@@ -113,6 +114,7 @@ header{
     cursor: pointer;
     top:-60px;
     left:-600px;
+    z-index:100;
 }
 .addProduct{
     height: 40%;
@@ -135,7 +137,11 @@ header{
     position: relative;
     top:-260px;
     height:100px;
-    left:-3%;
+    width:200x;
+    left:49%;
+    transform: translate(-50%);
+    text-align: center;
+
 
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <div class="fogot_container">
       <div class="fix">
-        <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpProfile"> 
+        <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpProfile"> 
         <div class="fogot_box">
             <h1>FORGOT&nbsp;PASSWORD</h1>
         <el-form ref="forgotFormRef" :model="forgotForm" :rules="forgotRules" label-position="left" label-width="225px" class="forgot_form">
@@ -20,7 +20,7 @@
 export default {
   data () {
     var checkEmail = (rule, value, callback) => {
-      const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+.com/
+      const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+\.com/
       if (!value) {
         return callback(new Error('email address cannot be empty'))
       }

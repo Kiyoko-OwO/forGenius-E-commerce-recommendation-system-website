@@ -2,11 +2,11 @@
   <div class="address_container">
     <div class="fix">
     <header>
-        <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpUser">
+        <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpUser">
         <div class="title">
         ADDRESS&nbsp;BOOK
         </div>
-        <el-button type="primary" class="add" @click="add()">Add</el-button>
+        <el-button type="primary" class="add" @click="add()">ADD ADDRESS</el-button>
     </header>
     
     <div id="address-container">
@@ -29,9 +29,9 @@
 </template>
 
 <script>
-import Address from './mod/Address.vue'
-import { address_view } from '../api/user'
-import { address_delete } from '../api/user'
+import Address from '../mod/Address.vue'
+import { address_view } from '../../api/user'
+import { address_delete } from '../../api/user'
 export default {
     data () {
             var checkName = (rule, value, callback) => {
@@ -170,12 +170,14 @@ header{
     font-weight:normal;
     font-family: 'segUi';
     font-size: 50px;
+    overflow: hidden;
 }
 #address-container {
     position: relative;
-    top:10px;
-    left:34%;
-    width:300px;
+    left:50%;
+    transform: translate(-50%);
+    width:500px;
+
 }
 .logo{
     height: 200%;
@@ -183,12 +185,16 @@ header{
     cursor: pointer;
     top:-60px;
     left:-600px;
+    z-index:100;
 }
 .title{
     position: relative;
     top:-260px;
     height:100px;
-    left:-3%;
+    width:200x;
+    left:49%;
+    transform: translate(-50%);
+    text-align: center;
 
 }
 .add{

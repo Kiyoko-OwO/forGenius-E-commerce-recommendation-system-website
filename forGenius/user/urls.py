@@ -17,4 +17,5 @@ urlpatterns = [
     path('address/edit/', edit_address_book, name='edit_address_book'),
     path('interests/add/', add_user_interests, name='add_user_interests'),
     path('address/detail/', address_book_detail, name='address_book_detail'),
+    path('change_username/', change_username, name='change_username'),
 ]

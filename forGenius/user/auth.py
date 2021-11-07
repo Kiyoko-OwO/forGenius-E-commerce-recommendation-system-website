@@ -166,3 +166,10 @@ def reset_code_to_email(reset_code):
         raise InputError('Invalid reset code')
     RESETCODE_DB.pop(email)
     return email
+
+def change_username(email, new_name):
+    if not validate_name(new_name):
+        raise InputError('Invalid username')
+    email_query = User.objects.get(pk=email)
+    email_query.user_name = new_name
+    email_query.save()

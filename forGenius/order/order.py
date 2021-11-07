@@ -6,6 +6,7 @@ from user.models import User
 from user.errors import InputError
 import time
 import datetime
+import user.email_robot as email_robot
 
 def create_order(email, name, address_line, post_code, suburb, state, country, phone_number):
     try:
@@ -161,3 +162,28 @@ def view_all_order(email):
         data["total"] = round(total,2)
         order_list["order_list"].append(data)
     return order_list
+
+def share_order(email, order_id, to_email, receiver):
+    data = view_order(email, order_id)
+    email_query = User.objects.get(pk=email)
+    message = "order id" + " : " + str(data["order_id"]) + "\n" + "items" + " :\n"
+    for i in data["item"]:
+        message = message + "       " + "product id" + " : " + str(i["product_id"]) + "\n" 
+        message = message + "       " + "name" + " : " + str(i["name"]) + "\n"
+        message = message + "       " + "unit price" + " : " + str(i["price"]) + "\n"
+        message = message + "       " + "quantity" + " : " + str(i["quantity"]) + "\n"
+        message = message + "       " + "price" + " : " + str(i["total_price"]) + "\n\n"
+
+    message = message + "total price" + " : " + str(data["total"]) + "\n"
+    message = message + "recipient" + " : " + str(data["name"]) + "\n"
+    message = message + "address" + " : " + str(data["address_line"]) + "\n"
+    message = message + "post code" + " : " + str(data["post_code"]) + "\n"
+    message = message + "suburb" + " : " + str(data["suburb"]) + "\n"
+    message = message + "state" + " : " + str(data["state"]) + "\n"
+    message = message + "country" + " : " + str(data["country"]) + "\n"
+    message = message + "phone number" + " : " + str(data["phone_number"]) + "\n"
+    message = message + "order date" + " : " + str(data["order_date"]) + "\n"
+    message = message + "paid" + " : " + str(data["paid"]) + "\n"
+
+
+    email_robot.send_email_share(email_query.user_name, to_email, message, receiver)

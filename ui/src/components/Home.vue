@@ -2,10 +2,12 @@
     <div id="home_container">
         <header>
             <img id="logo" src=../assets/logoThin.png alt="logo" v-on:click="addFn">
-            <button class="signUp" v-on:click="jumpSign" v-show="isGuest">Sign up</button>
+            <div class="button_position">
+            <button class="signUp" v-on:click="jumpSign" v-show="isGuest" >Sign up</button>
             <button class="logIn" v-on:click="jumpLog" v-show="isGuest">Log in</button>
             <button v-on:click="jumpHome" @click="logOut" v-show="isUser">Log out</button>
             <button id="usern" v-show="isUser" @click="jumpProfile">{{ username }}</button>
+            </div>
             <a href="http://127.0.0.1:8000/admin/login/?next=/admin/">
             <button class="logIn" v-show="isOk">Admin Log in</button>
             </a>
@@ -21,9 +23,27 @@
               <input type="submit" v-on:click="jumpResult" value="SEARCH">
             </form>
           </div>
-          <button v-on:click="jumpProduct">Product example</button>
+          <button v-on:click="jumpProduct" class="example">Product example</button>
         </main>
-        <footer></footer>
+        <div class="recommendation_container">
+          <div>
+            <div class="tittle_container">
+              <div class="tittle">
+              <p>RECOMMENDATION</p>
+              </div>
+              <div class="l_tittle">
+              <p>THE PRODUCTS</p>
+              <div class="line">
+              </div>
+              </div>  
+            </div>
+            <div class="product_container">
+            </div>
+          </div>
+        </div>
+        <footer>
+          <div></div>
+        </footer>
     </div>
 </template>
 
@@ -113,13 +133,18 @@ export default {
 }
 header {
     height: 100px;
-    width: 1000px;
+    width: 1800px;
     margin: 0 auto;
 }
 header #logo {
     height: 50px;
     float: left;
     margin-top: 25px;
+    margin-left:400px;
+}
+.button_position{
+  float: right;
+  margin-right:400px;
 }
 button {
     float: right;
@@ -186,5 +211,49 @@ main #logo {
     border-radius: 20px;
     border-color: #786662;
     cursor: pointer;
+}
+.recommendation_container{
+  background-color: white;
+  margin:0 auto;
+  height:600px;
+  width:1700px;
+
+}
+.tittle_container{
+  float: left;
+  width:500px;
+  height:600px;
+}
+.product_container{
+  float: right;
+  background-color:black;
+  width:1200px;
+  height:600px;
+}
+.tittle{
+  position: relative;
+  left:30%;
+  top:40%;
+  transform:translate(0,-50%) ;
+  font-size: 25px;
+}
+.example{
+  margin-top:-300px;
+}
+.l_tittle{
+  font-size: 5px;
+  position: relative;
+  left:34%;
+  top:40%;
+  transform:translate(0,-50%) ;
+}
+.line{
+  height:2px;
+  width:89px;
+  position: relative;
+  left:-1%;
+  top:40%;
+  transform:translate(0,-50%) ;
+  background-color:rgb(0, 217, 255);
 }
 </style>

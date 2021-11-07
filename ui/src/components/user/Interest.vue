@@ -1,9 +1,12 @@
 <template>
   <div class="interest_container">
+    <div class="fix">
     <header>
+    <img class="logo" src=../../assets/2.png alt="logo">
+    <div class="title">
         PLEASE CHOOSE YOUR INTEREST FIELD
+    </div>
     </header>
-    <img class="logo" src=../assets/2.png alt="logo">
     <div>
       <el-checkbox-group v-model="interestForm.interest" class="checkbox">
         <el-checkbox-button v-for="int in tags" :label="int" :key="int">{{int}}</el-checkbox-button>
@@ -13,12 +16,13 @@
           <span>{{ item }}</span>
       </li>
       </div>
+   </div>
   </div>
 
 
 </template>
 <script>
-import { interest_add } from '../api/user'
+import { interest_add } from '../../api/user'
 const tagOptions = ['Fastion', 'Toys', 'Hobby', 'DIY', 'Electronics', 'Media', 'Furniture', 'Appliance', 'Food', 'Personal Care']
 export default {
   data () {
@@ -47,9 +51,9 @@ export default {
 
 <style lang="less" scoped>
 .submit{
-    position: absolute;
+    position: relative;
+    margin-top:200px;
     left:50%;
-    bottom:12%;
     height:50px;
     width:200px;
     transform: translate(-50%,-50%);
@@ -66,7 +70,7 @@ export default {
 header{
     height: 100px;
     width: 100%;
-    position: fixed;
+    position: relative;
     left:0;
     top:0;
     z-index: 999;
@@ -76,21 +80,35 @@ header{
     font-weight:normal;
     font-family: 'segUi';
     font-size: 50px;
+    overflow: hidden;
 }
 .logo{
-    height: 35%;    
-    position: absolute;
-    right: 80%;
-    top:-13.5%;
+    height: 200%;
+    position: relative;
     cursor: pointer;
+    top:-60px;
+    left:-600px;
+    z-index:100;
 }
 .checkbox{
   position: relative;
-  top:100px;
 }
 .choose{
   position: relative;
   top:160px;
   background-color:#e7eae8;
+}
+.fix{
+    margin:0 auto;
+    width:1750px;
+}
+.title{
+    position: relative;
+    top:-260px;
+    height:100px;
+    width:200x;
+    left:49%;
+    transform: translate(-50%);
+    text-align: center;
 }
 </style>

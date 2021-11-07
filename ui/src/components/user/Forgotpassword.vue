@@ -1,7 +1,8 @@
 <template>
     <div class="fogot_container">
+      <div class="fix">
+        <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpProfile"> 
         <div class="fogot_box">
-            <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpProfile"> 
             <h1>FORGOT&nbsp;PASSWORD</h1>
         <el-form ref="forgotFormRef" :model="forgotForm" :rules="forgotRules" label-position="left" label-width="225px" class="forgot_form">
             <el-form-item label="EMAIL ADDRESS"  class="email_change" prop="email">
@@ -11,6 +12,7 @@
         </el-form>
         <el-button class='send' @click="forgot">SEND CODE</el-button>
         </div>
+      </div>
     </div>
 </template>
 
@@ -18,7 +20,7 @@
 export default {
   data () {
     var checkEmail = (rule, value, callback) => {
-      const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+.com/
+      const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+\.com/
       if (!value) {
         return callback(new Error('email address cannot be empty'))
       }
@@ -57,27 +59,28 @@ export default {
 <style lang="less" scoped>
 
 h1{
-    position: absolute;
-    left: 50%;
+    position: relative;
+    left: 20%;
+    top:50px;
     font-size: 40px;
-    transform: translate(-50%,20%);
     font-weight:normal;
     font-family: 'segUi';
     letter-spacing:.2em;
 }
 
 .send{
-    position: absolute;
+    position: relative;
     left:50%;
-    bottom:12%;
+    bottom:-15%;
     height:50px;
-    width:240px;
+    width:200px;
     transform: translate(-50%,-50%);
     border-radius: 10px;
     background: #786662;
     color: #fefefe;
     letter-spacing:10px;
-    padding-left: 30px;
+    padding-left: 20px;
+    border-color: #786662;
 }
 .fogot_container {
     background-color: #d1dbda;
@@ -85,27 +88,23 @@ h1{
 }
 .fogot_box{
     background-color:#e7eae8;
-    height: 425px;
+    height: 300px;
     width: 750px;
-    position: absolute;
+    margin:0 auto;
     border-radius: 30px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
+    left:40px;
+    margin-top:-30px;
 }
 .logo{
-    height: 90%;
-    position: absolute;
-    right: 64%;
-    top:-83%;
+    height: 300px;
+    left: 1500px;
     cursor: pointer;
 }
 .forgot_form{
     width: 530px;
-    position: absolute;
+    margin:0 100px;
     border-radius: 80px;
-    top: 37%;
-    left: 15%;
+    padding-top: 50px;
 }
 .username{
       border-radius: 40px;
@@ -127,6 +126,11 @@ h1{
 .el-form-item{
    margin-bottom:15px
 }
+.fix{
+  margin:0 auto;
+  margin-top:-30px;
+  width:800px;
+}
 </style>
 
 <style>
@@ -135,3 +139,4 @@ input.el-input__inner {
     height:30px;
 }
 </style>
+

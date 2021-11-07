@@ -1,8 +1,11 @@
 <template>
   <div class="cart_container">
+    <div class="fix">
     <header>
+    <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpHome">
+    <div class="title">
         MY&nbsp;CART
-    <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpHome">
+    </div>
     </header>
     
     <div class="cart-container">
@@ -15,18 +18,19 @@
         @subQua = 'sub'
         @delPro = 'del'>
         </Product>
-        <p>Total Price: $</p>
-        <p>{{total_price}}</p>
+        <p>&nbsp;&nbsp;Total Price: $</p>
+        <p>&nbsp;&nbsp;{{total_price}}</p>
         <el-button type="primary" class="checkout" @click="submitForm()">Check Out</el-button>
     </div>
+  </div>
   </div>
 </template>
 
 <script>
-import Product from './mod/CartPro.vue'
-import { cart_view } from '../api/order'
-import { cart_qua } from '../api/order'
-import { cart_del } from '../api/order'
+import Product from '../mod/CartPro.vue'
+import { cart_view } from '../../api/order'
+import { cart_qua } from '../../api/order'
+import { cart_del } from '../../api/order'
 
 
 export default {
@@ -126,10 +130,10 @@ export default {
 
 <style lang="less" scoped>
 .cart-container {
-    position: absolute;
-    top:100px;
+    position: relative;
     left:50%;
-    transform: translate(-50%,0%);
+    transform: translate(-50%);
+    width:500px;
 }
 
 .cart_container{
@@ -139,7 +143,7 @@ export default {
 header{
     height: 100px;
     width: 100%;
-    position: fixed;
+    position: relative;
     left:0;
     top:0;
     z-index: 999;
@@ -149,18 +153,19 @@ header{
     font-weight:normal;
     font-family: 'segUi';
     font-size: 50px;
-    z-index: 50;
+    overflow: hidden;
 }
 .logo{
-    height: 300%;    
-    position: absolute;
-    right: 81%;
-    top:-120.5%;
+    height: 200%;
+    position: relative;
     cursor: pointer;
-    z-index: 100;
+    top:-60px;
+    left:-600px;
+    z-index:100;
 }
 .checkout{
     position: relative;
+    top:20px;
     left:75%;
     width: 130px;
     background: #786662;
@@ -169,5 +174,19 @@ header{
     letter-spacing:2px;
     padding-left: 25px;
     border-color: #786662;
+    z-index: 200;
+}
+.title{
+    position: relative;
+    top:-260px;
+    height:100px;
+    width:200x;
+    left:50%;
+    transform: translate(-50%);
+    text-align: center;
+}
+.fix{
+    margin:0 auto;
+    width:1750px;
 }
 </style>

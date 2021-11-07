@@ -1,7 +1,8 @@
 <template>
     <div class="reset_container">
+      <div class="fix">
+        <img class="logo" src=../../assets/2.png alt="logo">
         <div class="reset_box">
-            <img class="logo" src=../assets/2.png alt="logo">
             <h1>RESET&nbsp;PASSWORD</h1>
         <el-form ref="resetFormRef" :model="resetForm" :rules="resetpasswordRules" label-position="left" label-width="225px" class="reset_form">
             <el-form-item label="CODE"  class="code_change" prop="reset_code">
@@ -19,11 +20,12 @@
         </el-form>
         <el-button class='submit' @click="reset">SUBMIT</el-button>
         </div>
+      </div>
     </div>
 </template>
 
 <script>
-import { reset_password } from '../api/user'
+import { reset_password } from '../../api/user'
 
 export default {
   data () {
@@ -96,19 +98,18 @@ export default {
 <style lang="less" scoped>
 
 h1{
-    position: absolute;
-    left: 52%;
+    position: relative;
+    left: 23%;
+    top:50px;
     font-size: 40px;
-    transform: translate(-50%,20%);
     font-weight:normal;
     font-family: 'segUi';
     letter-spacing:.2em;
 }
 
 .submit{
-    position: absolute;
+    position: relative;
     left:50%;
-    bottom:4%;
     height:50px;
     width:200px;
     transform: translate(-50%,-50%);
@@ -117,6 +118,8 @@ h1{
     color: #fefefe;
     letter-spacing:10px;
     padding-left: 30px;
+    border-color: #786662;
+    top:30px;
 }
 .reset_container {
     background-color: #d1dbda;
@@ -126,25 +129,21 @@ h1{
     background-color:#e7eae8;
     height: 425px;
     width: 750px;
-    position: absolute;
+    margin:0 auto;
     border-radius: 30px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
+    left:40px;
+    margin-top:-60px;
 }
 .logo{
-    height: 90%;
-    position: absolute;
-    right: 64%;
-    top:-83%;
+    height: 300px;
+    left: 1500px;
     cursor: pointer;
 }
 .reset_form{
     width: 530px;
-    position: absolute;
+    margin:0 100px;
     border-radius: 80px;
-    top: 30%;
-    left: 15%;
+    padding-top: 50px;
 }
 
 .reset_form /deep/.timr.el-form .el-form-item__error {
@@ -167,5 +166,12 @@ h1{
     letter-spacing:.1em;
     font-size: 18px;
 }
+.fix{
+  margin:0 auto;
+  margin-top:-80px;
+  width:800px;
+}
 </style>
+
+
 

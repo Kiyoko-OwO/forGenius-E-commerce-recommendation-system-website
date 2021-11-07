@@ -2,7 +2,7 @@
   <div class="order_item">
       <div class="block"></div>
       Order id: {{ordId}}
-      <el-dialog :title="order_id" :visible.sync="dialogFormVisible" class="order_id" width="30%">
+      <el-dialog :title="order_id" :visible.sync="dialogFormVisible" class="editf" width="30%" append-to-body>
         <div class="item" v-for="item in ordItem" :key="item.product_id">
         <p>Name: {{item.name}} </p>
         <p>Price: {{item.price}} </p>
@@ -23,7 +23,7 @@
       <p>Order Date: {{orderDate}}</p>
       <el-button @click="orderFn" class="detail">Detail</el-button>
       <el-button @click="orderShare" class="detail">Share</el-button>
-      <el-dialog title="Share Order" :visible.sync="sharedialogFormVisible" class="editf">
+      <el-dialog title="Share Order" :visible.sync="sharedialogFormVisible" class="editf"  width="30%" append-to-body>
       </el-dialog>
       <div class="block"></div>
       <div class="link-top"></div>
@@ -64,29 +64,30 @@ export default {
 </script>
 
 <style lang="less" scoped>
-    .link-top {
-        position: relative;
-        width: 400%;
-        height: 1px;
-        left:-130%;
-        border-top: solid #0b0b0f 1px;
-     }
-    .link-in {
-        position: relative;
-        width: 100%;
-        height: 1px;
-        border-top: solid #0b0b0f 1px;
-     }
-     .block {
-  height: 20px;
+.link-top {
+    position: relative;
+    width: 300%;
+    height: 1px;
+    left:50%;
+    transform: translate(-50%);
+    border-top: solid #0b0b0f 1px;
+}
+.link-in {
+    position: relative;
+    width: 100%;
+    height: 1px;
+    border-top: solid #0b0b0f 1px;
+}
+.block {
+   height: 20px;
 }
 .detail{
-    position: relative;
-    left:100%;
+   position: relative;
+   left:100%;
 
 }
 .editf{
-  position: fixed;
+   position: fixed;
 }   
 </style>
 

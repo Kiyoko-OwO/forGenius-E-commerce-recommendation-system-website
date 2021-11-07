@@ -1,7 +1,8 @@
 <template>
     <div class="login_container">
+      <div class="fix">
+        <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpHome">
         <div class="login_box">
-          <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpHome">
             <h1>LOGIN</h1>
         <el-form ref="loginForm" :model="loginForm" :rules="loginRules" label-position="left" label-width="225px" class="login_form">
             <el-form-item label="EMAIL ADDRESS"  class="email_change" prop="email">
@@ -21,16 +22,17 @@
         <a href="#/signup" text-decoration:underline class="signup">SIGN UP</a>
         <a text-decoration:underline class="signup_1">DON'T HAVE AN ACCOUNT YET? PLEASE</a>
         </div>
+      </div>
     </div>
 </template>
 
 <script>
-import { login } from '../api/user'
+import { login } from '../../api/user'
 
 export default {
   data () {
     var checkEmail = (rule, value, callback) => {
-      const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+.com/
+      const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+\.com/
       if (!value) {
         return callback(new Error('email address cannot be empty'))
       }
@@ -103,10 +105,10 @@ export default {
 <style lang="less" scoped>
 
 h1{
-    position: absolute;
-    left: 50%;
+    position: relative;
+    left: 40%;
+    top:50px;
     font-size: 40px;
-    transform: translate(-50%,20%);
     font-weight:normal;
     font-family: 'segUi';
     letter-spacing:.2em;
@@ -116,35 +118,35 @@ h1{
   height: 65px;
 }
 .forget{
-    position: absolute;
-    left: 66%;
-    bottom:37%;
+    position: relative;
+    left: 47%;
+    bottom:32%;
     color:black;
     transform: translate(-50%,0%);
     font-size: 15px;
     letter-spacing:.2em;
 }
 .signup{
-    position: absolute;
-    left: 77.5%;
-    bottom:10%;
+    position: relative;
+    left: 42%;
+    bottom:0%;
     color:black;
     transform: translate(-50%,0%);
     font-size: 15px;
     letter-spacing:.2em;
 }
 .signup_1{
-    position: absolute;
-    left: 45%;
-    bottom:10%;
+    position: relative;
+    left: -23%;
+    bottom:0%;
     color:black;
     transform: translate(-50%,0%);
     font-size: 15px;
     letter-spacing:.2em;
 }
 .submit{
-    position: absolute;
-    left:7%;
+    position: relative;
+    left:18%;
     height:50px;
     width:200px;
     transform: translate(-50%,-50%);
@@ -163,25 +165,21 @@ h1{
     background-color:#e7eae8;
     height: 425px;
     width: 750px;
-    position: absolute;
+    margin:0 auto;
     border-radius: 30px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
+    left:40px;
+    margin-top:-30px;
 }
 .logo{
-    height: 90%;
-    position: absolute;
-    right: 64%;
-    top:-83%;
+    height: 300px;
+    left: 1500px;
     cursor: pointer;
 }
 .login_form{
     width: 530px;
-    position: absolute;
+    margin:0 100px;
     border-radius: 80px;
-    top: 30%;
-    left: 15%;
+    padding-top: 50px;
 }
 .username{
       border-radius: 40px;
@@ -199,6 +197,11 @@ h1{
     letter-spacing:.1em;
     font-size: 18px;
 }
+.fix{
+  margin:0 auto;
+  margin-top:-30px;
+  width:800px;
+}
 </style>
 
 <style>
@@ -207,3 +210,4 @@ input.el-input__inner {
     height:30px;
 }
 </style>
+

@@ -5,7 +5,7 @@
             <button id="usern">{{ username }}</button>
         </header>
         <main>
-            <img id="logo" src=../assets/logoThin.png alt="logo">
+            <img id="logo" src=../../assets/logoThin.png alt="logo">
             <button class="manageProduct" v-on:click="jumpManageproduct">MANAGE PRODUCT</button>
         </main>
         <footer></footer>
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { logout } from '../api/user'
+import { logout } from '../../api/user'
 export default {
     data () {
         return {

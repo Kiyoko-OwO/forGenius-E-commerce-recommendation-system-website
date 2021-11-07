@@ -10,7 +10,7 @@
     <p> Phone Number: {{phoneNumber}}</p>
     <!-- Form -->
     <el-button type="primary" icon="el-icon-edit" @click="dialogFormVisible = true"></el-button>
-    <el-dialog title="Address Book" :visible.sync="dialogFormVisible" class="editf" width="30%">
+    <el-dialog title="Address Book" :visible.sync="dialogFormVisible" class="editf" width="30%" append-to-body>
       <el-form :model="editForm" ref="edit_FormRef" :rules="editRules">
            <el-form-item label="NAME" class="username_change" prop="name">
             <el-input v-model="editForm.name" autocomplete="off">

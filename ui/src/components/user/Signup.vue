@@ -1,7 +1,8 @@
 <template>
     <div class="signup_container">
+      <div class="fix">
+      <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpHome">
         <div class="signup_box">
-            <img class="logo" src=../assets/2.png alt="logo" v-on:click="jumpHome">
             <h1>REGISTER</h1>
         <el-form ref="signupFormRef" :model="signupForm" :rules="signupRules" label-position="left" label-width="225px" class="signup_form">
             <el-form-item label="USERNAME"  class="username_change" prop="name">
@@ -33,16 +34,17 @@
         <a href="#/login" text-decoration:underline class="login">LOG IN</a>
         <a text-decoration:underline class="login_1">ALREADY REGISTERED, PLEASE</a>
         </div>
+      </div>
     </div>
 </template>
 
 <script>
-import { signup } from '../api/user'
-import { signup_code } from '../api/user'
+import { signup } from '../../api/user'
+import { signup_code } from '../../api/user'
 export default {
   data () {
     var checkEmail = (rule, value, callback) => {
-      const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+.com/
+      const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+\.com/
       if (!value) {
         return callback(new Error('email address cannot be empty'))
       }
@@ -176,55 +178,55 @@ export default {
 <style lang="less" scoped>
 
 h1{
-    position: absolute;
-    left: 50%;
+    position: relative;
+    left: 34%;
+    top:50px;
     font-size: 40px;
-    transform: translate(-50%,20%);
     font-weight:normal;
     font-family: 'segUi';
     letter-spacing:.2em;
 }
 
 .block{
-    height: 80px;
+    height: 50px;
 }
 
 .login{
-    position: absolute;
-    left: 73%;
-    bottom:10%;
-    color:rgb(0, 0, 0);
+    position: relative;
+    left: 65%;
+    bottom:3%;
+    color:black;
     transform: translate(-50%,0%);
     font-size: 15px;
     letter-spacing:.2em;
 }
 .login_1{
-    position: absolute;
-    left: 47%;
-    bottom:10%;
+    position: relative;
+    left: 14%;
+    bottom:3%;
     color:black;
     transform: translate(-50%,0%);
     font-size: 15px;
     letter-spacing:.2em;
 }
 .submit{
-    position: absolute;
-    left:15%;
-    bottom:12%;
+    position: relative;
+    left:13%;
     height:50px;
     width:200px;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%,-75%);
     border-radius: 10px;
     background: #786662;
     color: #fefefe;
     letter-spacing:10px;
     padding-left: 30px;
+    border-color: #786662;
 }
 .send{
     position: absolute;
     left:80%;
     height:30px;
-    top:-115px;
+    top:-86px;
     width:100px;
     transform: translate(-50%,-50%);
     border-radius: 10px;
@@ -244,25 +246,21 @@ h1{
     background-color:#e7eae8;
     height: 550px;
     width: 750px;
-    position: absolute;
+    margin:0 auto;
     border-radius: 30px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
+    left:40px;
+    margin-top:-60px;
 }
 .logo{
-    height: 90%;
-    position: absolute;
-    right: 64%;
-    top:-66%;
+    height: 300px;
+    left: 1500px;
     cursor: pointer;
 }
 .signup_form{
     width: 530px;
-    position: absolute;
+    margin:0 100px;
     border-radius: 80px;
-    top: 20%;
-    left: 15%;
+    padding-top: 50px;
 }
 .username{
       border-radius: 40px;
@@ -299,10 +297,15 @@ h1{
 .code_change{
   width: 400px
 }
-
+.fix{
+  margin:0 auto;
+  margin-top:-80px;
+  width:800px;
+}
 
 
 .el-form-item{
    margin-bottom:15px
 }
 </style>
+

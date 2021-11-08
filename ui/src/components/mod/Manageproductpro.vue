@@ -52,7 +52,7 @@
     </el-dialog>
     
     <el-button type="primary" @click="deldialogFormVisible = true" icon="el-icon-delete" class="edit"></el-button>
-    <el-dialog :visible.sync="deldialogFormVisible" width="40%" @close="closeDialog" append-to-body>
+    <el-dialog :visible.sync="deldialogFormVisible" width="13%" @close="closeDialog" append-to-body>
       <div slot="footer" class="dialog-footer">
         <el-button @click="deldialogFormVisible = false">Cancel</el-button>
         <el-button type="primary" @click="delFn">Confim</el-button>

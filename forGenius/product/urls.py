@@ -10,4 +10,5 @@ urlpatterns = [
     path('delete/', admin_delete_product, name='admin_delete_product'),
     path('all/', admin_products_all, name='admin_products_all'),
     path('recommendation/public/', public_recommendation, name='public_recommendation'),
+    path('recommendation/private/', private_recommendation, name='private_recommendation'),
 ]

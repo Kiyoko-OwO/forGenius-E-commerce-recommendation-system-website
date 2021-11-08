@@ -227,3 +227,17 @@ def public_recommendation(request):
         return HttpResponse(json.dumps(data), content_type="application/json")
     response.status_code = 405
     return response
+
+def private_recommendation(request):
+    response = HttpResponse()
+    if request.method == "GET":
+        try:
+            data = recommendation.private_recommendation()
+        except ProductIdError as e:
+            response.status_code = 400
+            response.content = e
+            return response
+        response.status_code = 200
+        return HttpResponse(json.dumps(data), content_type="application/json")
+    response.status_code = 405
+    return response

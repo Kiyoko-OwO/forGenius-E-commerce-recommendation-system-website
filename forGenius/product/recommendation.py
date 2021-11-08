@@ -23,3 +23,24 @@ def public_recommendation():
         product_number += 1
     data["product_number"] = product_number
     return data
+
+def private_recommendation():
+    # top_selling_products = Product.objects.order_by('sales_data')
+    # data = {
+    #     "product_number": 0,
+    #     "products": [],
+    # }
+    # product_number = 0
+    # for product in top_selling_products:
+    #     info = {
+    #             "name" : product.name,
+    #             "description" : product.description,
+    #             "price" : round(float(product.price), 2),
+    #             "picture" : product.picture,
+    #             "features" : get_product_features(product.product_id)
+    #         }
+    #     data["products"].append(info)
+    #     product_number += 1
+    # data["product_number"] = product_number
+    # return data
+    return 42

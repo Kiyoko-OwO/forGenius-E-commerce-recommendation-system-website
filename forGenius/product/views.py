@@ -219,7 +219,7 @@ def public_recommendation(request):
     if request.method == "GET":
         try:
             data = recommendation.public_recommendation()
-        except ProductIdError as e:
+        except InputError as e:
             response.status_code = 400
             response.content = e
             return response
@@ -234,7 +234,7 @@ def private_recommendation(request):
         email = request.GET.get("email")
         try:
             data = recommendation.private_recommendation(email)
-        except ProductIdError as e:
+        except InputError as e:
             response.status_code = 400
             response.content = e
             return response

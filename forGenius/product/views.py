@@ -6,6 +6,7 @@ from product.errors import ProductIdError
 from product.models import Features
 from user.errors import InputError
 import product.products as products
+import product.recommendation as recommendation
 import user.auth as auth
 import json
 
@@ -209,5 +210,20 @@ def admin_products_all(request):
             'meta' : meta
         }
         return JsonResponse(jsons)
+    response.status_code = 405
+    return response
+
+def public_recommendation(request):
+ 
+    response = HttpResponse()
+    if request.method == "GET":
+        try:
+            data = recommendation.public_recommendation()
+        except ProductIdError as e:
+            response.status_code = 400
+            response.content = e
+            return response
+        response.status_code = 200
+        return HttpResponse(json.dumps(data), content_type="application/json")
     response.status_code = 405
     return response

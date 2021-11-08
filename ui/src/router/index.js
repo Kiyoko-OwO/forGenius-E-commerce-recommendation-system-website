@@ -19,6 +19,7 @@ import OrderHistory from '../components/order/OrderHistory'
 import Order from '../components/order/Order'
 import Payment from '../components/order/Payment'
 import Usernamechange from '../components/user/UsernameChange.vue'
+import Search from '../components/Productmanagement/Search.vue'
 Vue.use(VueRouter)
 
 const originalPush = VueRouter.prototype.push
@@ -95,6 +96,10 @@ const routes = [
   },{
     path: '/usernamechange',
     component: Usernamechange
+  }
+  ,{
+    path: '/search',
+    component: Search
   }
 ]
 

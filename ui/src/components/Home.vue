@@ -38,19 +38,23 @@
               </div>  
             </div>
             <div class="product_container">
+              <home /> <home /> <home /> <home /> <home /> <home />
             </div>
           </div>
         </div>
         <footer>
-          <div></div>
+         <img class="foot" src=../assets/home_foot.jpeg alt="foot">
         </footer>
     </div>
 </template>
 
 <script>
 import { logout } from '../api/user'
-
+import home from './mod/Homepro.vue'
 export default {
+   components: {
+        home
+    },
   inject:['reload'],
   data () {
     return {
@@ -215,7 +219,7 @@ main #logo {
 .recommendation_container{
   background-color: white;
   margin:0 auto;
-  height:600px;
+  height:650px;
   width:1700px;
 
 }
@@ -226,9 +230,9 @@ main #logo {
 }
 .product_container{
   float: right;
-  background-color:black;
   width:1200px;
-  height:600px;
+  display: flex;
+  flex-wrap: wrap;
 }
 .tittle{
   position: relative;
@@ -255,5 +259,13 @@ main #logo {
   top:40%;
   transform:translate(0,-50%) ;
   background-color:rgb(0, 217, 255);
+}
+footer{
+  padding-top:20px;
+  width:1800px;
+  margin:0 auto;
+  img{
+    width:100%;
+  }
 }
 </style>

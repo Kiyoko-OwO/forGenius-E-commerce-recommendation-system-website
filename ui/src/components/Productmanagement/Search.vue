@@ -1,0 +1,135 @@
+<template>
+  <div class="search_container">
+    <div class="fix">
+    <header>
+       <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpAdmin">
+       <div class="title">
+        SEARCH&nbsp;RESULT
+        </div>
+    </header>
+      <el-select v-model="value" clearable placeholder="Select sort method" class="choose">
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </el-option>
+      </el-select>
+    <div class="search-container">
+        <search /> <search /> <search /> <search /> <search /> <search />
+    </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import search from '../mod/Searchpro.vue'
+import { admin_view } from '../../api/admin'
+import { product_delete } from '../../api/admin'
+export default {
+    inject:['reload'],
+    data () {
+      return {
+        view_form: {},
+        product: [],
+        product_id: '',
+      options: [{
+          value: 'sale data',
+          label: 'Sale data'
+        }, {
+          value: 'recommend',
+          label: 'Recommend product'
+        }],
+        value: 'recommend'
+        }
+    },
+    created () {
+      this.loadPro()
+    },
+    components: {
+        search
+    },
+    methods: {
+      async loadPro() {
+        admin_view(this.view_form).then( res => {
+          console.log(res.data.data.product_details);
+          this.product = res.data.data.product_details;
+        }).catch( error => {
+            this.$message.error('Failed');
+        })
+      },
+      jumpAddproduct () {
+        this.$router.push('/addproduct')
+      },
+      jumpAdmin () {
+        this.$router.push('/admin')
+      },
+      del(index) {
+        this.deleteForm.product_id = this.product[index].product_id;
+        this.product.splice(index, 1);
+        product_delete(this.deleteForm).then( res => {
+            this.$message({message: 'Delete Sucess!',type: 'success'});
+            this.reload();
+        }).catch( error => {
+            this.$message.error('Failed');
+        })
+      },
+    }
+}
+</script>
+
+
+<style lang="less" scoped>
+.search-container {
+    position: relative;
+    top:10px;
+    left:8%;
+    width:1500px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.search_container{
+    background-color: #d1dbda;
+    height: 100%;
+}
+header{
+    height: 100px;
+    width: 100%;
+    position: relative;
+    left:0;
+    top:0;
+    z-index: 999;
+    border-bottom:3px solid #ccc;
+    text-align: center;
+    line-height: 130px;
+    font-weight:normal;
+    font-family: 'segUi';
+    font-size: 50px;
+    overflow: hidden;
+}
+.logo{
+    height: 200%;
+    position: relative;
+    cursor: pointer;
+    top:-60px;
+    left:-600px;
+    z-index:100;
+}
+.fix{
+    margin:0 auto;
+    width:1750px;
+}
+.title{
+    position: relative;
+    top:-260px;
+    height:100px;
+    width:200x;
+    left:49%;
+    transform: translate(-50%);
+    text-align: center;
+}
+.choose{
+    position: relative;
+    left: 1400px;
+}
+</style>

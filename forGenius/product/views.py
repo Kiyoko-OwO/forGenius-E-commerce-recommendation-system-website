@@ -231,7 +231,8 @@ def public_recommendation(request):
 def private_recommendation(request):
     response = HttpResponse()
     if request.method == "GET":        
-        email = request.GET.get("email")
+        token = request.GET.get("token")
+        email = auth.token_to_email(token)
         try:
             data = recommendation.private_recommendation(email)
         except InputError as e:

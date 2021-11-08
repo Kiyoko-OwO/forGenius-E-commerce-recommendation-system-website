@@ -230,9 +230,10 @@ def public_recommendation(request):
 
 def private_recommendation(request):
     response = HttpResponse()
-    if request.method == "GET":
+    if request.method == "GET":        
+        email = request.GET.get("email")
         try:
-            data = recommendation.private_recommendation()
+            data = recommendation.private_recommendation(email)
         except ProductIdError as e:
             response.status_code = 400
             response.content = e

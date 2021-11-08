@@ -44,6 +44,7 @@ def view_cart(email):
             "name" : item.product_id.name,
             "price" : item.product_id.price,
             "quantity" : item.quantity,
+            "picture": item.product_id.picture,
             "total_price": item.quantity * item.product_id.price
         } 
         total += item.quantity * item.product_id.price

@@ -32,7 +32,7 @@ def get_search_result(email, search, sorting):
         item = {
             "product_id" : product.product_id,
             "name" : product.name,
-            "description" : product.description,
+            "description" : product.description[:30],
             "sales_data" : product.sales_data,
             "price" : round(float(product.price), 2),
             "picture" : product.picture,

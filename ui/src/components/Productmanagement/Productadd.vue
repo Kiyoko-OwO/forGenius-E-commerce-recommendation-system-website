@@ -272,11 +272,10 @@ h1{
   margin-top:-100px;
   width:800px;
 }
-</style>
 
-<style lang="less" scoped>
-input.el-input__inner {
+.el-input /deep/ .el-input__inner {
     border-radius:50px;
     height:30px;
 }
 </style>
+

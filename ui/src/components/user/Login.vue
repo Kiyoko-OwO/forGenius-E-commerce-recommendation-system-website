@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import '../../assets/css/form.css'
 import { login } from '../../api/user'
 
 export default {
@@ -101,6 +102,7 @@ export default {
   }
 }
 </script>
+
 
 <style lang="less" scoped>
 
@@ -202,12 +204,10 @@ h1{
   margin-top:-30px;
   width:800px;
 }
-</style>
-
-<style>
-input.el-input__inner {
+.el-input /deep/ .el-input__inner {
     border-radius:50px;
     height:30px;
 }
+
 </style>
 

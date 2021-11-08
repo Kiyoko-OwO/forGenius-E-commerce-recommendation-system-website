@@ -1,5 +1,12 @@
 <template>
   <div class="my-cartpro">
+    <div class="img" v-for="fit in fits" :key="fit">
+     <span class="demonstration">{{ fit }}</span>
+        <el-image
+          style="width: 100px; height: 100px"
+          :src="123"
+          :fit="fit"></el-image>
+    </div>
     <p> Product Name: {{proName}} </p> 
     <p> Price: {{proPrice}}</p>
     <p> Quantity: {{qua}}</p>
@@ -11,6 +18,11 @@
 
 <script>
 export default {
+    data() {
+      return{
+          fits: [''],
+      }
+    },
     props: ['index', 'proName', 'proPrice', 'qua'],
     methods: {
       addFn(){
@@ -26,7 +38,8 @@ export default {
 }
 </script>
 
-<style>
+
+<style lang="less" scoped>
 .my-cartpro {
   width: 450px;
   padding: 20px;
@@ -34,5 +47,9 @@ export default {
   border-radius: 5px;
   margin: 10px;
   font-family: 'segUi';
+  word-break:break-all;
+}
+.img{
+  float: right;
 }
 </style>

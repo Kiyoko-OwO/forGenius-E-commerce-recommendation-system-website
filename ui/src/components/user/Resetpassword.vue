@@ -174,5 +174,10 @@ h1{
   margin-top:-80px;
   width:800px;
 }
+.el-input /deep/ .el-input__inner {
+    border-radius:50px;
+    height:30px;
+}
+
 
 </style>

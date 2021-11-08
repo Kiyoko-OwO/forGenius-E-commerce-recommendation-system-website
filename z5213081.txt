@@ -50,6 +50,16 @@ Week7
 5. We planned to have the meeting on Week8 Monday and finished all thing in sprint2. And we also planned to start the final repornt on Week9.
 
 Week8
-1. We had a meeting to connect the backend and frontend.
+1. We had a meeting to connect the backend and frontend, and improve something imperfect.
+2. Before the Demo B, we had a meeting to check everything is alright and have a rehearse for demo B.
+3. We discussed and finished the Retrospective B.
+4. We discussed the feedback of Retrospective A from Yu, improve the points that Yu mentioned in Retrospective B. 
+5. Then we assigned the new tasks (included the improvement and sprint3) to everyone. 
+6. I finished the backend part of the function "change_username". (user information)
+7. I finished the backend part of the function "share_order". (Novel functionality)
 
+Week9
+1. I wrote the description of the share order function.
+2. I finished the backend part of the function "get_search_reslut". (Search & search result)
+3. I improved some issues that Yu mentioned in demoB, improved the backend code to return product's picture in view order and cart function.
 

@@ -4,10 +4,13 @@ from django.utils.datastructures import MultiValueDictKeyError
 from django.http.response import JsonResponse
 from product.errors import ProductIdError
 from product.models import Features
+from user.auth import token_to_email
 from user.errors import InputError
 import product.products as products
 import product.recommendation as recommendation
+import product.search as search
 import user.auth as auth
+import jwt as jwt
 import json
 
 # Create your views here.
@@ -239,6 +242,50 @@ def private_recommendation(request):
             response.status_code = 400
             response.content = e
             return response
+        response.status_code = 200
+        return HttpResponse(json.dumps(data), content_type="application/json")
+    response.status_code = 405
+    return response
+
+def get_search_result(request):
+    response = HttpResponse()
+    if request.method == "GET":
+        token = request.GET.get("token")
+        if token is None:
+            response.status_code = 442
+            response.content = "KeyError"
+            return response
+
+        search = request.GET.get("search")
+        if search is None:
+            response.status_code = 442
+            response.content = "KeyError"
+            return response
+
+        sorting = request.GET.get("sorting")
+        if search is None:
+            response.status_code = 442
+            response.content = "KeyError"
+            return response
+
+        try:
+            email = auth.token_to_email(token)
+        except InputError as e:
+            response.status_code = 400
+            response.content = e
+            return response
+        except jwt.InvalidSignatureError:
+            response.status_code = 400
+            response.content = "token is wrong"
+            return response
+
+        try:
+            data = search.get_search_result(email, search, sorting)
+        except InputError as e:
+            response.status_code = 400
+            response.content = e
+            return response
+        
         response.status_code = 200
         return HttpResponse(json.dumps(data), content_type="application/json")
     response.status_code = 405

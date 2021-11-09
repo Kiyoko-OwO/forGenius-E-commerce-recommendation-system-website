@@ -11,6 +11,8 @@ import jwt as jwt
 ADMIN_EMAIL = '3900forgenius@gmail.com'
 
 # Create your views here.
+
+
 def register(request):
     response = HttpResponse()
     if request.method == "POST":
@@ -37,12 +39,13 @@ def register(request):
             response.content = e
             return response
         data = {
-            'token':token,
-            'username':username,
+            'token': token,
+            'username': username,
         }
         return HttpResponse(json.dumps(data), content_type="application/json")
     response.status_code = 405
     return response
+
 
 def register_send(request):
     response = HttpResponse()
@@ -96,14 +99,15 @@ def login(request):
             response.content = e
             return response
         data = {
-            'token':token,
-            'username':username,
+            'token': token,
+            'username': username,
         }
         if email == ADMIN_EMAIL:
             return HttpResponse(json.dumps(data), content_type="application/json", status=255)
         return HttpResponse(json.dumps(data), content_type="application/json")
     response.status_code = 405
     return response
+
 
 def logout(request):
     response = HttpResponse()
@@ -125,6 +129,7 @@ def logout(request):
         return response
     response.status_code = 405
     return response
+
 
 def change_password(request):
     response = HttpResponse()
@@ -154,6 +159,7 @@ def change_password(request):
     response.status_code = 405
     return response
 
+
 def send_reset_code(request):
     response = HttpResponse()
     if request.method == "POST":
@@ -179,6 +185,7 @@ def send_reset_code(request):
         return response
     response.status_code = 405
     return response
+
 
 def reset_password(request):
     response = HttpResponse()
@@ -206,6 +213,7 @@ def reset_password(request):
         return response
     response.status_code = 405
     return response
+
 
 def add_address_book(request):
     response = HttpResponse()
@@ -239,7 +247,8 @@ def add_address_book(request):
             response.content = e
             return response
         try:
-            address.add_address_book(email, name, address_line, post_code, suburb, state, country, phone_number)
+            address.add_address_book(
+                email, name, address_line, post_code, suburb, state, country, phone_number)
         except InputError as e:
             response.status_code = 400
             response.content = e
@@ -248,6 +257,7 @@ def add_address_book(request):
         return response
     response.status_code = 405
     return response
+
 
 def view_address_book(request):
     response = HttpResponse()
@@ -276,10 +286,10 @@ def view_address_book(request):
             response.content = e
             return response
         response.status_code = 200
-        meta = {'msg' : 'OK', 'status': 200}
+        meta = {'msg': 'OK', 'status': 200}
         jsons = {
-            'data' : data,
-            'meta' : meta
+            'data': data,
+            'meta': meta
         }
         return JsonResponse(jsons)
     response.status_code = 405
@@ -318,6 +328,7 @@ def delete_address_book(request):
     response.status_code = 405
     return response
 
+
 def edit_address_book(request):
     response = HttpResponse()
     if request.method == "POST":
@@ -351,7 +362,8 @@ def edit_address_book(request):
             response.content = e
             return response
         try:
-            data = address.edit_address_book(email, name, address_line, post_code, suburb, state, country, phone_number, address_id)
+            data = address.edit_address_book(
+                email, name, address_line, post_code, suburb, state, country, phone_number, address_id)
         except InputError as e:
             response.status_code = 400
             response.content = e
@@ -360,6 +372,7 @@ def edit_address_book(request):
         return HttpResponse(json.dumps(data), content_type="application/json")
     response.status_code = 405
     return response
+
 
 def address_book_detail(request):
     response = HttpResponse()
@@ -404,7 +417,6 @@ def address_book_detail(request):
 #     return JsonResponse(meta)
 
 
-
 def add_user_interests(request):
     response = HttpResponse()
     if request.method == "POST":
@@ -421,7 +433,7 @@ def add_user_interests(request):
             response.status_code = 442
             response.content = 'KeyError'
             return response
-        
+
         try:
             email = auth.token_to_email(token)
         except InputError as e:
@@ -446,7 +458,6 @@ def add_user_interests(request):
     return response
 
 
-
 def add_user_interests(request):
     response = HttpResponse()
     if request.method == "POST":
@@ -463,7 +474,7 @@ def add_user_interests(request):
             response.status_code = 442
             response.content = 'KeyError'
             return response
-        
+
         try:
             email = auth.token_to_email(token)
         except InputError as e:
@@ -504,7 +515,7 @@ def change_username(request):
             response.status_code = 442
             response.content = 'KeyError'
             return response
-        
+
         try:
             email = auth.token_to_email(token)
         except InputError as e:

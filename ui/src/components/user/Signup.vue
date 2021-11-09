@@ -5,11 +5,11 @@
         <div class="signup_box">
             <h1>REGISTER</h1>
         <el-form ref="signupFormRef" :model="signupForm" :rules="signupRules" label-position="left" label-width="225px" class="signup_form">
-            <el-form-item label="USERNAME"  class="change" prop="name">
+            <el-form-item label="USERNAME"  class="change" prop="name" >
               <el-input v-model="signupForm.name" placeholder="6-12 characters">
               </el-input>
         </el-form-item>
-            <el-form-item label="EMAIL ADDRESS"  class="change" prop="email">
+            <el-form-item label="EMAIL ADDRESS"  class="change" prop="email" ref="email">
               <el-input v-model="signupForm.email" placeholder="contains “@” and end with “.com”">
               </el-input>
         </el-form-item>
@@ -160,6 +160,8 @@ export default {
       })
     },
     send() {
+      this.$refs.signupFormRef.validateField('email',(async valid => {
+        if (valid) {
       this.code_form.name = this.signupForm.name;
       this.code_form.email = this.signupForm.email;
       signup_code(this.code_form).then ( res => {
@@ -167,6 +169,7 @@ export default {
       }).catch( error => {
         this.$message.error('Failed');
       })
+      }}))
     },
     jumpHome () {
       this.$router.push('Home');

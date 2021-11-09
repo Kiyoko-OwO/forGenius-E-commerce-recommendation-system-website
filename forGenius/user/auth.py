@@ -227,7 +227,7 @@ def check_login(token):
     # # if token exists, return True
     # if token in TOKEN_DB:
     #     return True
-    # 
+    #
     # # if token does not exist, return False
     # return False
 
@@ -240,10 +240,10 @@ def token_to_email(token):
     # check if token is valid
     if not check_login(token):
         raise InputError('Invalid token')
-    
+
     # decode JWT token
     data = jwt.decode(token, PRIVATE_KEY, algorithms=["HS256"])
-    
+
     # return email
     return data['email']
 
@@ -258,7 +258,7 @@ def token_to_username(token):
 
     # search user database
     email_query = User.objects.get(pk=email)
-    
+
     # return username
     return email_query.user_name
 
@@ -289,7 +289,7 @@ def reset_code_to_email(reset_code):
             list(RESETCODE_DB.values()).index(reset_code)]
     except ValueError:
         raise InputError('Invalid reset code')
-    
+
     # delete reset code from RESETCODE_DB
     RESETCODE_DB.pop(email)
 

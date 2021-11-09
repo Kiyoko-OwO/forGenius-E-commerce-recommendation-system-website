@@ -1,5 +1,4 @@
 from product.models import Product, Features
-from product.errors import ProductIdError
 from user.errors import InputError
 from user.models import Admin
 from product.products import get_product_features
@@ -65,5 +64,3 @@ def sort_help(sorting, list):
         result.append(list[first])
         
     return result
-            
-        

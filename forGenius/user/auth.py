@@ -65,8 +65,6 @@ def auth_register_send(username, email):
     reset_code = generate_reset_code()
     RESETCODE_DB[email] = reset_code
     email_robot.send_email_register(username, email, reset_code)
-    
-
 
 def auth_change_password(token, old_password, new_password):
     email = token_to_email(token)

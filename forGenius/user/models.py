@@ -11,7 +11,6 @@ class User(models.Model):
 class Admin(models.Model):
     admin_email = models.EmailField(unique=True, primary_key=True)
     password = models.CharField(max_length=255)
-    
 
 class Interest(models.Model):
     user_email = models.ForeignKey(User, on_delete=CASCADE)

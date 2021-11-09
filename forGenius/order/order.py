@@ -60,7 +60,7 @@ def view_order(email, order_id):
                 "phone_number": temp.phone_number,
                 "order_date": temp.date_time.strftime("%Y-%m-%d"),
                 "paid": temp.paid,
-                }
+            }
         break
     
     total = 0

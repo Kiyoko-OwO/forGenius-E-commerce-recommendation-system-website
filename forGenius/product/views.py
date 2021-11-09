@@ -21,7 +21,6 @@ def isFloat(str):
     except ValueError:
         return False
 
-
 def view_product_user(request):
  
     response = HttpResponse()

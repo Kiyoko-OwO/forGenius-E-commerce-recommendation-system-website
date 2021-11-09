@@ -2,7 +2,6 @@ from user.models import User, Interest
 from user.errors import InputError
 
 
-
 def user_interest(email, interest_list):
     try:
         user_email = User.objects.get(pk=email)
@@ -17,7 +16,6 @@ def user_interest(email, interest_list):
             interest_save = Interest(user_email=user_email, interests=interest)
             interest_save.save()
 
-        
         continue
 
     return

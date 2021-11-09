@@ -1,9 +1,8 @@
 from product.models import Product, Features
-from product.errors import ProductIdError
 from product.products import get_product_features
-import random
 from user.models import User, Interest
 from user.errors import InputError
+import random
 
 def public_recommendation():
     top_selling_products = Product.objects.order_by('-sales_data')
@@ -12,6 +11,7 @@ def public_recommendation():
         "products": [],
     }
     product_number = 0
+
     for product in top_selling_products:
         info = {
                 "product_id" : product.product_id,
@@ -24,6 +24,7 @@ def public_recommendation():
             }
         data["products"].append(info)
         product_number += 1
+    
     data["product_number"] = product_number
     return pick_products(data, 6)
 

@@ -1,8 +1,7 @@
 from django.contrib import admin
-
-# Register your models here.
 from .models import User, Admin, Address_book, Interest
 
+# Register your models here.
 admin.site.register(User)
 admin.site.register(Admin)
 admin.site.register(Address_book)

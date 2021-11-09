@@ -24,14 +24,11 @@ class Order(models.Model):
     country = models.CharField(max_length=255)
     phone_number = models.IntegerField(validators=[MinValueValidator(1)])
     
-
     class Meta:
 
         db_table = 'order'
 
         unique_together = ("order_id", "product_id", "user_email")
-
-
 
 class Cart(models.Model):
     user_email = models.ForeignKey(User, on_delete=CASCADE)

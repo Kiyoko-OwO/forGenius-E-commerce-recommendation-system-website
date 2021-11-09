@@ -38,7 +38,14 @@
               </div>  
             </div>
             <div class="product_container">
-              <home /> <home /> <home /> <home /> <home /> <home />
+              <Home v-for="(obj,ind) in products" :key="obj.product_id"
+              :proName="obj.name"
+              :proDescription="obj.description"
+              :proPrice="obj.price"
+              :proPic="obj.picture"
+              :proId="obj.product_id"
+              :index="ind"
+              > </Home>
             </div>
           </div>
         </div>
@@ -50,10 +57,12 @@
 
 <script>
 import { logout } from '../api/user'
-import home from './mod/Homepro.vue'
+import { rec_guest } from '../api/product'
+import { rec_user } from '../api/product'
+import Home from './mod/Homepro.vue'
 export default {
    components: {
-        home
+        Home
     },
   inject:['reload'],
   data () {
@@ -66,11 +75,13 @@ export default {
       isOk: false,
       isUser: false,
       isGuest: false,
-      username: ''
+      username: '',
+      products: []
     }
   },
   created () {
-    this.checkStat()
+    this.checkStat(),
+    this.loadRec()
   },
   methods: {
     async checkStat () {
@@ -88,20 +99,40 @@ export default {
         return this.isUser;
       }
     },
+    async loadRec () {
+      if (this.isGuest == true) {
+        rec_guest(this.tokenForm).then ( res => {
+          this.products = res.data.products;
+        }).catch( error => {
+        })
+      }
+      else if (this.isUser == true) {
+        this.tokenForm.token = sessionStorage.getItem('token');
+        rec_user(this.tokenForm).then ( res => {
+          this.products = res.data.products;
+        }).catch( error => {
+        })
+      }
+    },
     jumpSign () {
-      this.$router.push('signup')
+      this.$router.push('/signup')
     },
     jumpLog () {
-      this.$router.push('login')
+      this.$router.push('/login')
     },
     jumpResult () {
-      console.log('jump to result')
-    },
+    if(!this.keywords){
+      alert("Please input search keywords")
+      return
+    }else{
+      sessionStorage.setItem('word',this.keywords);
+      this.$router.push('/search')
+    }},
     jumpProfile () {
-      this.$router.push('userprofile')
+      this.$router.push('/userprofile')
     },
     jumpProduct () {
-      this.$router.push('product')
+      this.$router.push('/product')
     },
     addFn(){
       if (this.counter == 5) {
@@ -114,10 +145,10 @@ export default {
       this.$router.push('home')
     },
     async logOut () {
-      this.tokenForm.token = sessionStorage.getItem('token');
       logout(this.tokenForm).then ( res => {
           this.$message({message: 'Log out Sucess!',type: 'success'});
           sessionStorage.clear();
+          this.tokenForm.token = "";
           this.reload();
       }).catch( error => {
           this.$message.error('Log out Failed');

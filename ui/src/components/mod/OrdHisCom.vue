@@ -37,12 +37,12 @@
         <el-form-item label="Receiver Name" prop="receiver_name">
           <el-input v-model="shareForm.receiver_name" autocomplete="off" ></el-input>
         </el-form-item>
-        <el-form-item label="Email" prop="email">
-          <el-input v-model="shareForm.email" autocomplete="off" ></el-input>
+        <el-form-item label="Email" prop="to_email">
+          <el-input v-model="shareForm.to_email" autocomplete="off" ></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">Cancel</el-button>
+        <el-button @click="resetShare">Cancel</el-button>
         <el-button type="primary" @click="submit">Confim</el-button>
       </div>
       </el-dialog>
@@ -52,6 +52,7 @@
 </template>
 
 <script>
+import { ord_share } from '../../api/order'
 export default {
     props: ['index', 'ordId', 'payStat', 'ordItem','ordTotal','orderDate','name','address_line','phone_number'],
     data () {
@@ -78,11 +79,13 @@ export default {
             sharedialogFormVisible: false,
             order_id: '###',
         shareForm: {
-          receiver_name:"",
-           email:""
+          token: "",
+	        order_id: "",
+	        to_email: "",
+	        receiver_name: ""
         },
         shareRules: {
-        email: [
+        to_email: [
           { validator: checkEmail, trigger: 'blur' }
         ],
         receiver_name:[
@@ -105,14 +108,38 @@ export default {
             } else {
                 this.dialogFormVisible = true
             }
-           
         },
         orderShare() {
             this.sharedialogFormVisible = true
         },
         closeDialog(){
             this.$refs['share_FormRef'].resetFields();
-      },
+        },
+        resetShare () {
+          this.shareForm.to_email = "";
+          this.shareForm.receiver_name = "";
+          this.sharedialogFormVisible = false;
+        },
+        submit () {
+          this.$refs.share_FormRef.validate(async (valid) => {
+          if (valid) {
+          this.shareForm.order_id = this.ordId;
+          this.shareForm.token = sessionStorage.getItem('token');
+          console.log(this.shareForm);
+          ord_share(this.shareForm).then ( res => {
+          this.$message({message: 'Share Sucess!',type: 'success'});
+              this.sharedialogFormVisible = false;
+              this.shareForm.to_email = "";
+              this.shareForm.receiver_name = "";
+          }).catch( error => {
+              this.$message.error('Share Failed');
+          })}
+          else {
+            console.log('error submit!!');
+            return false;
+          }
+          })
+        }
     }
 }
 </script>

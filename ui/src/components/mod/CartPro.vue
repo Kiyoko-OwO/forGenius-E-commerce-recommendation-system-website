@@ -4,10 +4,10 @@
      <span class="demonstration">{{ fit }}</span>
         <el-image
           style="width: 100px; height: 100px"
-          :src="123"
+          :src="proPic"
           :fit="fit"></el-image>
     </div>
-    <p> Product Name: {{proName}} </p> 
+    <p class="plink" @click="goProduct"> Product Name: {{proName}} </p> 
     <p> Price: {{proPrice}}</p>
     <p> Quantity: {{qua}}</p>
     <el-button class="el-icon-minus" circle @click="subFn"></el-button>
@@ -23,7 +23,7 @@ export default {
           fits: [''],
       }
     },
-    props: ['index', 'proName', 'proPrice', 'qua'],
+    props: ['index', 'proName', 'proPrice', 'qua', 'proPic', 'proId'],
     methods: {
       addFn(){
         this.$emit("addQua", this.index)
@@ -33,8 +33,13 @@ export default {
       },
       delFn(){
         this.$emit("delPro", this.index)
+      },
+      goProduct () {
+        sessionStorage.setItem('product',this.proId);
+        this.$router.push('/product')
       }
-    }
+    },
+
 }
 </script>
 
@@ -51,5 +56,8 @@ export default {
 }
 .img{
   float: right;
+}
+.plink {
+  cursor: pointer;
 }
 </style>

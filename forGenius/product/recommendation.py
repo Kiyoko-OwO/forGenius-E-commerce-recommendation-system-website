@@ -4,8 +4,10 @@ from user.models import User, Interest
 from user.errors import InputError
 import random
 
-
+# return the recommendation if the user is logout(guest mode)
 def public_recommendation():
+
+    # sort the product with selling data
     top_selling_products = Product.objects.order_by('-sales_data')
     data = {
         "product_number": 0,
@@ -13,6 +15,7 @@ def public_recommendation():
     }
     product_number = 0
 
+    # output the relevant selling products
     for product in top_selling_products:
         info = {
             "product_id": product.product_id,
@@ -27,15 +30,19 @@ def public_recommendation():
         product_number += 1
 
     data["product_number"] = product_number
+    # output the products with ordered number
     return pick_products(data, 6)
 
-
+# return the recommendation if the user is logged (user mode)
 def private_recommendation(email):
+    # search the user email to find its interest
     try:
         user_email = User.objects.get(pk=email)
     except User.DoesNotExist:
         raise InputError('User not exist')
     data = public_recommendation()
+
+    # put relevent products with interests in the recommendation array
     interests = Interest.objects.filter(user_email=user_email)
     for interest in interests:
         for feature in Features.objects.filter(feature=interest.interests):
@@ -52,13 +59,15 @@ def private_recommendation(email):
             if info not in data["products"]:
                 data["products"].append(info)
                 data["product_number"] += 1
+    # sort the products with selling datas
     data["products"] = sorted(data["products"], key=lambda x: -x["sales_data"])
     return pick_products(data, 6)
 
-
+# pick selected number of the products from the recommendation lists
 def pick_products(product_list, num):
     if product_list["product_number"] <= num:
         return product_list
+    # use random algorithms to select
     samples = random.sample(product_list["products"], num)
     data = {
         "product_number": num,

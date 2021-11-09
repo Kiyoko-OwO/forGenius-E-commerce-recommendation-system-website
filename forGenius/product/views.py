@@ -14,7 +14,7 @@ import json
 
 # Create your views here.
 
-
+# check if the str can be converted to float
 def isFloat(str):
     try:
         float(str)
@@ -22,7 +22,7 @@ def isFloat(str):
     except ValueError:
         return False
 
-
+# request for viewing the product
 def view_product_user(request):
 
     response = HttpResponse()
@@ -62,6 +62,7 @@ def view_product_user(request):
     return response
 
 
+# request for adding new product
 def admin_add_product(request):
     response = HttpResponse()
     if request.method == "POST":
@@ -106,6 +107,7 @@ def admin_add_product(request):
     return response
 
 
+# request for editing the chosen product
 def admin_edit_product(request):
     response = HttpResponse()
     if request.method == "POST":
@@ -150,7 +152,7 @@ def admin_edit_product(request):
     response.status_code = 405
     return response
 
-
+# request for deleting the chosen product
 def admin_delete_product(request):
     response = HttpResponse()
     if request.method == "DELETE":
@@ -184,6 +186,7 @@ def admin_delete_product(request):
     return response
 
 
+# request for the recommendation list for guests
 def admin_products_all(request):
     response = HttpResponse()
     if request.method == "POST":
@@ -221,9 +224,9 @@ def admin_products_all(request):
     response.status_code = 405
     return response
 
-
+# request for the recommendation list for guests
 def public_recommendation(request):
-
+    
     response = HttpResponse()
     if request.method == "GET":
         try:
@@ -238,6 +241,7 @@ def public_recommendation(request):
     return response
 
 
+# request for the recommendation list for users
 def private_recommendation(request):
     response = HttpResponse()
     if request.method == "GET":

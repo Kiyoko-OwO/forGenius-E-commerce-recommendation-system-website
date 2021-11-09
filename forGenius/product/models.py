@@ -24,4 +24,3 @@ class Features(models.Model):
         db_table = 'features'
 
         unique_together = ("product_id", "feature")
-

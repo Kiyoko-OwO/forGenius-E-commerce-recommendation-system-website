@@ -527,4 +527,3 @@ def change_username(request):
         return response
     response.status_code = 405
     return response
-

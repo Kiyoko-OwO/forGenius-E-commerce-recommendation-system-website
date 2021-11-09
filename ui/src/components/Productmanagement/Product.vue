@@ -71,6 +71,8 @@ export default {
     },
     methods: {
       async loadProduct () {
+          this.product_id_form.product_id = sessionStorage.getItem('product');
+          
           console.log(this.product_id_form);
           product_view(this.product_id_form).then ( res => {
             console.log(res.data);
@@ -107,7 +109,8 @@ export default {
         this.numberValidateForm.quantity += 1;
       },
       jumpHome () {
-            this.$router.push('Home');
+        sessionStorage.removeItem('product');
+        this.$router.push('Home');
       }
     }
 }

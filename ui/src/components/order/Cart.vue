@@ -9,10 +9,12 @@
     </header>
     
     <div class="cart-container">
-        <Product v-for="(obj,ind) in cart" :key="obj.id"
+        <Product v-for="(obj,ind) in cart.slice().reverse()" :key="ind"
         :proName="obj.name"
         :proPrice="obj.price"
         :qua="obj.quantity"
+        :proPic="obj.picture"
+        :proId="obj.product_id"
         :index = "ind"
         @addQua = 'add'
         @subQua = 'sub'

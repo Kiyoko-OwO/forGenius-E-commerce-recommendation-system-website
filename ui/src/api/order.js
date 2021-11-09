@@ -55,3 +55,11 @@ export const ord_pay = data => {
     data
   })
 }
+
+export const ord_share = data => {
+  return request({
+    method: 'POST',
+    url: '/order/share/',
+    data
+  })
+}

@@ -4,21 +4,25 @@
     <span class="demonstration">{{ fit }}</span>
         <el-image
         style="width: 150px; height: 150px"
-        :src="123"
+        :src="proPic"
         :fit="fit"></el-image>
     </div>
-    <p> Product Name: {{proName}} </p>
+    <p class="plink" @click="goProduct"> Product Name: {{proName}} </p>
     <p> Description:</p>
     <p>{{proDescription}}</p>
     <p> Price: {{proPrice}}</p>
-    <p> Sales Data: {{proSales_data}}</p>
   </div>
 </template>
 
 <script>
 export default {
-    props: ['index', 'proName', 'proDescription', 'proSales_data', 'proPrice'],
+    props: ['index', 'proName', 'proDescription', 'proSales_data', 'proPrice', 'proPic','proId'],
     methods: {
+      goProduct () {
+        sessionStorage.setItem('product',this.proId);
+        this.$router.push('/product')
+        sessionStorage.removeItem('sort');
+      }
     },
     data(){
         return {
@@ -39,5 +43,7 @@ export default {
   font-family: 'segUi';
   word-break:break-all;
 }
-
+.plink {
+  cursor: pointer;
+}
 </style>

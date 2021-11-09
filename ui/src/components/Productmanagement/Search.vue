@@ -2,11 +2,18 @@
   <div class="search_container">
     <div class="fix">
     <header>
-       <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpAdmin">
+       <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpHome">
        <div class="title">
         SEARCH&nbsp;RESULT
         </div>
     </header>
+    <div class="search">
+      <form action="" class="parent">
+        <input type="text" v-model="keywords" placeholder="search keywords">
+        <input type="submit" v-on:click="jumpResult" value="SEARCH">
+      </form>
+    </div>
+    <div>
       <el-select v-model="value" clearable placeholder="Select sort method" class="choose">
         <el-option
           v-for="item in options"
@@ -15,64 +22,95 @@
           :value="item.value">
         </el-option>
       </el-select>
+      <el-button class="apply" type="primary" v-on:click="reload()"> Apply</el-button>
+    </div>
+      
     <div class="search-container">
-        <search /> <search /> <search /> <search /> <search /> <search />
+        <Search v-for="(obj,ind) in product" :key="obj.product_id"
+        :proName="obj.name"
+        :proDescription="obj.description"
+        :proPrice="obj.price"
+        :proPic="obj.picture"
+        :proId="obj.product_id"
+        :index="ind"
+        >
+        </Search>
     </div>
     </div>
   </div>
 </template>
 
 <script>
-import search from '../mod/Searchpro.vue'
-import { admin_view } from '../../api/admin'
-import { product_delete } from '../../api/admin'
+import Search from '../mod/Searchpro.vue'
+import { ser_res } from '../../api/product' 
 export default {
     inject:['reload'],
     data () {
       return {
-        view_form: {},
+        view_form: {
+          token: '',
+          search: '',
+          sorting: ''
+        },
         product: [],
         product_id: '',
-      options: [{
-          value: 'sale data',
-          label: 'Sale data'
-        }, {
-          value: 'recommend',
-          label: 'Recommend product'
-        }],
-        value: 'recommend'
+        options: [{
+            value: 'price_low',
+            label: 'Price Low'
+          },{
+            value: 'price_high',
+            label: 'Price High'
+          },{
+            value: 'best_sell',
+            label: 'Best Sales'
+          },{
+            value: 'a_to_z',
+            label: 'From A to Z'
+          },{
+            value: 'z_to_a',
+            label: 'From Z to A'
+          }],
+        value: '',
+        keywords: '',
         }
     },
     created () {
-      this.loadPro()
+      this.loadRes()
     },
     components: {
-        search
+        Search
+    },
+    watch: {
+      value(newVal, oldVal) {
+        console.log(newVal);
+        sessionStorage.setItem('sort',newVal);
+      }
     },
     methods: {
-      async loadPro() {
-        admin_view(this.view_form).then( res => {
-          console.log(res.data.data.product_details);
-          this.product = res.data.data.product_details;
+      async loadRes() {
+        this.keywords = sessionStorage.getItem('word');
+        this.view_form.token = sessionStorage.getItem('token');
+        this.view_form.search = sessionStorage.getItem('word');
+        if (sessionStorage.getItem('sort') != null) {
+          this.view_form.sorting = sessionStorage.getItem('sort');
+          this.value = sessionStorage.getItem('sort');
+        } else {
+          this.view_form.sorting = 'best_sell';
+          this.value = 'best_sell';
+        }
+        ser_res(this.view_form).then( res => {
+          console.log(res.data);
+          this.product = res.data;
         }).catch( error => {
-            this.$message.error('Failed');
+          this.$message.error('Failed');
         })
       },
-      jumpAddproduct () {
-        this.$router.push('/addproduct')
+      jumpHome () {
+        this.$router.push('/home')
       },
-      jumpAdmin () {
-        this.$router.push('/admin')
-      },
-      del(index) {
-        this.deleteForm.product_id = this.product[index].product_id;
-        this.product.splice(index, 1);
-        product_delete(this.deleteForm).then( res => {
-            this.$message({message: 'Delete Sucess!',type: 'success'});
-            this.reload();
-        }).catch( error => {
-            this.$message.error('Failed');
-        })
+      jumpResult () {
+        sessionStorage.setItem('word',this.keywords);
+        this.reload();
       },
     }
 }
@@ -131,5 +169,52 @@ header{
 .choose{
     position: relative;
     left: 1400px;
+}
+
+.search {
+    width: 1000px;
+    height: 50px;
+    margin: 50px auto;
+}
+
+.parent {
+    width: 100%;
+    height: 50px;
+    top: 4px;
+    position: relative;
+}
+
+.parent>input:first-of-type {
+    width: 550px;
+    height: 40px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    outline: none;
+    border-radius: 20px;
+    margin-left: 150px;
+    background-color:rgb(238, 238, 236);
+    padding-left: 10px;
+    margin-right: 5px;
+}
+
+.parent>input:first-of-type:focus {
+    border: 1px solid #786662;
+}
+
+.parent>input:last-of-type {
+    width: 100px;
+    height: 40px;
+    position: absolute;
+    background:#786662;
+    color: #fff;
+    font-size: 16px;
+    outline: none;
+    border-radius: 20px;
+    border-color: #786662;
+    cursor: pointer;
+}
+
+.apply {
+  float: right;
 }
 </style>

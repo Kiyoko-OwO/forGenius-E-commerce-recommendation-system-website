@@ -121,9 +121,13 @@ export default {
       this.$router.push('/login')
     },
     jumpResult () {
+    if(!this.keywords){
+      alert("Please input search keywords")
+      return
+    }else{
       sessionStorage.setItem('word',this.keywords);
       this.$router.push('/search')
-    },
+    }},
     jumpProfile () {
       this.$router.push('/userprofile')
     },

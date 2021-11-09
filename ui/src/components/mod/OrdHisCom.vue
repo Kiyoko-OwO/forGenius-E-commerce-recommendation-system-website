@@ -85,7 +85,7 @@ export default {
 	        receiver_name: ""
         },
         shareRules: {
-        email: [
+        to_email: [
           { validator: checkEmail, trigger: 'blur' }
         ],
         receiver_name:[
@@ -121,6 +121,8 @@ export default {
           this.sharedialogFormVisible = false;
         },
         submit () {
+          this.$refs.share_FormRef.validate(async (valid) => {
+          if (valid) {
           this.shareForm.order_id = this.ordId;
           this.shareForm.token = sessionStorage.getItem('token');
           console.log(this.shareForm);
@@ -131,6 +133,11 @@ export default {
               this.shareForm.receiver_name = "";
           }).catch( error => {
               this.$message.error('Share Failed');
+          })}
+          else {
+            console.log('error submit!!');
+            return false;
+          }
           })
         }
     }

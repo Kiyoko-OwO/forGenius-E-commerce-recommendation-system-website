@@ -14,7 +14,7 @@
   <div class="img" v-for="fit in fits" :key="fit">
     <span class="demonstration">{{ fit }}</span>
     <el-image
-      style="width: 200px; height: 200px"
+      style="width: 150px; height: 150px"
       :src="editForm.picture"
       :fit="fit"></el-image>
   </div>
@@ -235,7 +235,7 @@ export default {
 
 <style lang="less" scoped>
 .my-cartpro {
-  width: 500px;
+  width: 400px;
   height: 200 px;
   padding: 20px;
   border: 2px solid #000;
@@ -255,7 +255,7 @@ export default {
 }
 .edit{
   position: relative;
-  left:80%;
+  left:70%;
 }
 
 

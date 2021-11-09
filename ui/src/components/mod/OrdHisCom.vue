@@ -4,9 +4,18 @@
       Order id: {{ordId}}
       <el-dialog :title="order_id" :visible.sync="dialogFormVisible" class="editf" width="30%" append-to-body>
         <div class="item" v-for="item in ordItem" :key="item.product_id">
+        <div class="img" v-for="fit in fits" :key="fit">
+        <span class="demonstration">{{ fit }}</span>
+          <el-image
+            style="width: 100px; height: 100px"
+            :src="123"
+            :fit="fit"></el-image>
+        </div>
+        <div class="item1">
         <p>Name: {{item.name}} </p>
         <p>Price: {{item.price}} </p>
         <p>Quantity: {{item.quantity}} </p>
+        </div>
         <div class="link-in"></div>
         </div>
         <p> Buyer Name: {{name}}</p>
@@ -24,6 +33,18 @@
       <el-button @click="orderFn" class="detail">Detail</el-button>
       <el-button @click="orderShare" class="detail">Share</el-button>
       <el-dialog title="Share Order" :visible.sync="sharedialogFormVisible" class="editf"  width="30%" append-to-body>
+      <el-form :model="shareForm" ref="share_FormRef" :rules="shareRules">
+        <el-form-item label="Receiver Name" prop="receiver_name">
+          <el-input v-model="shareForm.receiver_name" autocomplete="off" ></el-input>
+        </el-form-item>
+        <el-form-item label="Email" prop="email">
+          <el-input v-model="shareForm.email" autocomplete="off" ></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">Cancel</el-button>
+        <el-button type="primary" @click="submit">Confim</el-button>
+      </div>
       </el-dialog>
       <div class="block"></div>
       <div class="link-top"></div>
@@ -34,10 +55,40 @@
 export default {
     props: ['index', 'ordId', 'payStat', 'ordItem','ordTotal','orderDate','name','address_line','phone_number'],
     data () {
+    var checkEmail = (rule, value, callback) => {
+      const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+\.com/
+      setTimeout(() => {
+        if (mailReg.test(value)) {
+          callback()
+        } else {
+          callback(new Error('Please enter the correct email format'))
+        }
+      }, 100)
+    }
+    var checkUsername = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('username cannot be empty'));
+      } else {
+        callback()
+      }
+    }
         return {
+            fits: [''],
             dialogFormVisible: false,
             sharedialogFormVisible: false,
             order_id: '###',
+        shareForm: {
+          receiver_name:"",
+           email:""
+        },
+        shareRules: {
+        email: [
+          { validator: checkEmail, trigger: 'blur' }
+        ],
+        receiver_name:[
+          { validator: checkUsername, trigger: 'blur'}
+        ]
+        }
             
         }
     },
@@ -58,7 +109,10 @@ export default {
         },
         orderShare() {
             this.sharedialogFormVisible = true
-        }
+        },
+        closeDialog(){
+            this.$refs['share_FormRef'].resetFields();
+      },
     }
 }
 </script>
@@ -88,7 +142,12 @@ export default {
 }
 .editf{
    position: fixed;
-}   
+} 
+.img{
+   float:right;
+   margin-right:20px;
+   margin-top:-5px;
+}
 </style>
 
 <style>

@@ -131,12 +131,10 @@ h1{
   margin-top:-30px;
   width:800px;
 }
-</style>
-
-<style>
-input.el-input__inner {
+.el-input /deep/ .el-input__inner {
     border-radius:50px;
     height:30px;
 }
+
 </style>
 

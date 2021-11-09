@@ -52,7 +52,7 @@
     </el-dialog>
     
     <el-button type="primary" @click="deldialogFormVisible = true" icon="el-icon-delete" class="edit"></el-button>
-    <el-dialog :visible.sync="deldialogFormVisible" width="40%" @close="closeDialog" append-to-body>
+    <el-dialog :visible.sync="deldialogFormVisible" width="13%" @close="closeDialog" append-to-body>
       <div slot="footer" class="dialog-footer">
         <el-button @click="deldialogFormVisible = false">Cancel</el-button>
         <el-button type="primary" @click="delFn">Confim</el-button>
@@ -69,14 +69,14 @@ export default {
     inject:['reload'],
     props: ['index', 'id', 'name', 'warr', 'description', 'delivery', 'sales', 'price','pic','features'],
     data () {
-      var checkName = (rule, value, callback) => {
+    var checkName = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('name cannot be empty'))
       } else {
         callback()
       }
     }
-      var checkFeature = (rule, value, callback) => {
+    var checkFeature = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('Feature cannot be empty'))
       } else {
@@ -209,9 +209,9 @@ export default {
       editFn(){
         this.$emit("editAdd", this.index)
       },
-             closeDialog(){
+      closeDialog(){
       this.$refs['edit_FormRef'].resetFields();
-    },
+      },
       submitEdit() {
       this.$refs.edit_FormRef.validate(async (valid) =>{
         if(valid){

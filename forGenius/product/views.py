@@ -8,7 +8,7 @@ from user.auth import token_to_email
 from user.errors import InputError
 import product.products as products
 import product.recommendation as recommendation
-import product.search as search
+import product.search as search_result
 import user.auth as auth
 import jwt as jwt
 import json
@@ -279,7 +279,7 @@ def get_search_result(request):
             return response
 
         try:
-            data = search.get_search_result(email, search, sorting)
+            data = search_result.get_search_result(email, search, sorting)
         except InputError as e:
             response.status_code = 400
             response.content = e

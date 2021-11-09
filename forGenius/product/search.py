@@ -10,18 +10,20 @@ def get_search_result(email, search, sorting):
     if search == "":
         raise InputError("The search word in empty")
     
-    data = Product.objects.all()
+    data = Product.objects.filter()
     result = []
     for product in data:
         # if the search word in the product name or desription
         if search in product.name or search in product.description:
             result.append(product)
             continue
+
         # if the search word in the product feature
         features = Features.objects.filter(product_id = product.product_id)
         for feature in features:
             if search in feature.feature:
                 result.append(product)
+                break
     
     result_list = sort_help(sorting, result)
     return_list = []
@@ -29,7 +31,7 @@ def get_search_result(email, search, sorting):
         item = {
             "product_id" : product.product_id,
             "name" : product.name,
-            "description" : product.description,
+            "description" : product.description[:30],
             "sales_data" : product.sales_data,
             "price" : round(float(product.price), 2),
             "picture" : product.picture,
@@ -41,26 +43,30 @@ def get_search_result(email, search, sorting):
     
 def sort_help(sorting, list):
     result = []
-    n = len(list)
-    for i in range(n - 1):
-        first = i
-        for j in range(i+1, n):
-            if (sorting == "price_low"):
-                if list[j].price < list[first].price:
-                    first = j
-            if (sorting == "price_high"):
-                if list[j].price > list[first].price:
-                    first = j
-            if (sorting == "best_sell"):
-                if list[j].sales_data > list[first].sales_data:
-                    first = j
-            if (sorting == "a_to_z"):
-                if list[j].name < list[first].name:
-                    first = j
-            if (sorting == "z_to_a"):
-                if list[j].name > list[first].name:
-                    first = j
-        list[i], list[first] = list[first], list[i] 
-        result.append(list[first])
-        
-    return result
+    return recursion_help(result, list, sorting)
+            
+def recursion_help(result, list, sorting):
+    if len(list) == 0:
+        return result
+    first = 0
+    for j in range(0, len(list)):
+        if (sorting == "price_low"):
+            if list[j].price < list[first].price:
+                first = j
+        if (sorting == "price_high"):
+            if list[j].price > list[first].price:
+                print(11)
+                first = j
+        if (sorting == "best_sell"):
+            if list[j].sales_data > list[first].sales_data:
+                first = j
+        if (sorting == "a_to_z"):
+            if list[j].name < list[first].name:
+                first = j
+        if (sorting == "z_to_a"):
+            if list[j].name > list[first].name:
+                first = j
+
+    result.append(list[first])
+    list.remove(list[first])
+    return recursion_help(result, list, sorting)

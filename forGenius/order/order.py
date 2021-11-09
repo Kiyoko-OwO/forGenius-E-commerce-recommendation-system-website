@@ -65,11 +65,18 @@ def view_order(email, order_id):
     
     total = 0
     for item in order:
+        product_pic = ""
+        try:
+            product_pic = Product.objects.get(pk=item.product_id).picture
+        except:
+            product_pic = ""
+            
         info = {
             "product_id" : item.product_id,
             "name" : item.product_name,
             "price" : round(float(item.price), 2),
             "quantity" : item.quantity,
+            "picture" : product_pic,
             "total_price": round(float(item.price), 2) * item.quantity
         } 
         total += round(float(item.price), 2) * item.quantity

@@ -5,19 +5,19 @@
         <div class="signup_box">
             <h1>REGISTER</h1>
         <el-form ref="signupFormRef" :model="signupForm" :rules="signupRules" label-position="left" label-width="225px" class="signup_form">
-            <el-form-item label="USERNAME"  class="username_change" prop="name">
+            <el-form-item label="USERNAME"  class="change" prop="name">
               <el-input v-model="signupForm.name" placeholder="6-12 characters">
               </el-input>
         </el-form-item>
-            <el-form-item label="EMAIL ADDRESS"  class="email_change" prop="email">
+            <el-form-item label="EMAIL ADDRESS"  class="change" prop="email">
               <el-input v-model="signupForm.email" placeholder="contains “@” and end with “.com”">
               </el-input>
         </el-form-item>
-            <el-form-item label="PASSWORD" class="password_change" prop="password">
+            <el-form-item label="PASSWORD" class="change" prop="password">
               <el-input v-model="signupForm.password" type = "password" placeholder="6-12 characters contain uc,lc and number">
               </el-input>
         </el-form-item>
-            <el-form-item label="CONFIRM PASSWORD" class="password_change" prop="confirm_password">
+            <el-form-item label="CONFIRM PASSWORD" class="change" prop="confirm_password">
               <el-input v-model="signupForm.confirm_password" type = "password" placeholder="input password again">
               </el-input>
         </el-form-item>
@@ -274,17 +274,7 @@ h1{
   right: 25% !important;
   left: unset;
 }
-.email_change /deep/ .el-form-item__label{
-    font-family: 'segUi';
-    letter-spacing:.1em;
-    font-size: 18px;
-}
-.username_change /deep/ .el-form-item__label{
-    font-family: 'segUi';
-    letter-spacing:.1em;
-    font-size: 18px;
-}
-.password_change /deep/ .el-form-item__label{
+.change /deep/ .el-form-item__label{
     font-family: 'segUi';
     letter-spacing:.1em;
     font-size: 18px;
@@ -302,6 +292,11 @@ h1{
   margin-top:-80px;
   width:800px;
 }
+.el-input /deep/ .el-input__inner {
+    border-radius:50px;
+    height:30px;
+}
+
 
 
 .el-form-item{

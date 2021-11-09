@@ -15,3 +15,9 @@ On Tuesday, we had a meeting to complete the frontend and backend connections fo
 
 Week 7
 On Tuesday, I implemented the order placement and payment functionality. But there was a database migration issue and the new data model could not be recognized. I left this problem to Hanqing to solve. On Wednesday, the updated data model was available. I fully tested the API for order placement and payment, and also completed the API documentation and sent it to the frontend team members for collaboration. On Wednesday, we also had a meeting about the next steps to do. The backend team is almost done with the Sprint 2 user stories and is waiting for the frontend to progress. However, there are still a few minor issues regarding the user experience that need attention in our ongoing implementation. We plan to have the Spint 2 frontend and backend completed on time for Progressive Demo B next Wednesday.
+
+Week 8
+We had a meeting on Tuesday to finish the frontend and backend connections for Sprint 2. We did Progressive Demo B with our mentor on Wednesday. We found an issue with salesdata that was not identified in the previous tests and I fixed it. Following Progressive Demo B, we held Retrospective A, which allowed us to highlight Sprint 2 user stories that had not yet been demonstrated, as well as how well we had developed functionality to support these. Our team worked together to complete the retrospective report, which I then turned in. We also began Sprint 3 by assigning tasks to each team member. We intend to address the issues raised in Progressive Demo B and Retrospective B before beginning work on Sprint 3 function implementations.
+
+Week 9
+We wrote the recommendation system with Tianchen, and also wrote the relevance sorting strategy for the search function. On Tuesday, I improved the code style of part of the backend project. We plan to finish the frontend and backend of Spint 3 on time for the Final Demo next Wednesday.

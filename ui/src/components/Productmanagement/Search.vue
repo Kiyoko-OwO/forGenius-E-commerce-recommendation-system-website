@@ -35,6 +35,7 @@
         :index="ind"
         >
         </Search>
+        <h2 v-show="isRes">NO RESULT</h2>
     </div>
     </div>
   </div>
@@ -72,6 +73,7 @@ export default {
           }],
         value: '',
         keywords: '',
+        isRes: false
         }
     },
     created () {
@@ -82,7 +84,6 @@ export default {
     },
     watch: {
       value(newVal, oldVal) {
-        console.log(newVal);
         sessionStorage.setItem('sort',newVal);
       }
     },
@@ -99,8 +100,12 @@ export default {
           this.value = 'best_sell';
         }
         ser_res(this.view_form).then( res => {
-          console.log(res.data);
           this.product = res.data;
+          if (this.product.length == 0) {
+            this.isRes = true;
+          } else {
+            this.isRes = false;
+          }
         }).catch( error => {
           this.$message.error('Failed');
         })

@@ -21,7 +21,7 @@
         <p>{{product.description}}</p>
         <!-- <h3>Feature:</h3>
         <p>{{product.feature}}</p> -->
-        <h3>Warranty: {{product.warranty}}</h3>
+        <h3>Warranty: {{product.warranty}} year(s)</h3>
         <h3>Delivery date: {{product.delivery_date}}</h3>
         <h3>Price: $ {{product.price}}</h3>
 

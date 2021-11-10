@@ -7,7 +7,7 @@ import random
 recommendationDB = {}
 # return the recommendation if the user is logout(guest mode)
 def public_recommendation():
-    products = recomment_by_sales()
+    products = recomment_by_sales() 
     # output the products with ordered number
     products = pick_products(products, 6)
     data = {
@@ -22,19 +22,17 @@ def private_recommendation(email):
     try:
         user_email = User.objects.get(pk=email)
     except User.DoesNotExist:
-        raise InputError('User not exist')
-        
+        raise InputError('User not exist')        
+    # don't check the repetation
+    products = recomment_by_sales() + recomment_by_interest(email)
+    # output the products with ordered number
+    products = pick_products(products, 6)    
+    data = {
+        "product_number": len(products),
+        "products": products,
+    }
+    return data
 
-    return pick_products(data, 6)
-
-
-# pick selected number of the products from the recommendation lists
-def pick_products(product_list, num):
-    if len(product_list) <= num:
-        return product_list
-    # use random algorithms to select
-    samples = random.sample(product_list, num)
-    return product_list
 
 def recomment_by_sales():    
     # sort the product with selling data
@@ -101,3 +99,11 @@ def balance_products(product_list, num):
     # use random algorithms to select
     to_delete = random.sample(range(product_list), len(product_list) - num)
     return [x for i, x in enumerate(product_list) if not i in to_delete]
+
+# pick selected number of the products from the recommendation lists
+def pick_products(product_list, num):
+    if len(product_list) <= num:
+        return product_list
+    # use random algorithms to select
+    samples = random.sample(product_list, num)
+    return product_list

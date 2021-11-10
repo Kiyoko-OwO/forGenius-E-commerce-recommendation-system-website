@@ -6,6 +6,7 @@ from django.core.validators import MinValueValidator
 
 # Create your models here.
 class Order(models.Model):
+    # order details
     order_id = models.IntegerField(null = False, blank = False)
     user_email = models.ForeignKey(User, on_delete=CASCADE)
     date_time = models.DateTimeField(auto_now_add=True)

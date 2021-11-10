@@ -8,20 +8,25 @@ import time
 import datetime
 import user.email_robot as email_robot
 
-
+# the function to create order from the cart
 def create_order(email, name, address_line, post_code, suburb, state, country, phone_number):
+    # if the user does not exist, raise error
     try:
         user_email = User.objects.get(pk=email)
     except User.DoesNotExist:
         raise InputError('User not exist')
 
+    # get user's cart, if it is empty, raise error
     cart = Cart.objects.filter(user_email=user_email)
     if len(cart) == 0:
         raise EmptyCartError("Cart is empty")
 
+    # create the order id based the time
     order_id = int(round(time.time() * 1000))
 
+    # get all items fron the cart
     for item in cart:
+        # if the product does not exist, raise error
         try:
             product_id = Product.objects.get(pk=item.product_id.product_id)
         except Product.DoesNotExist:
@@ -149,11 +154,17 @@ def view_all_order(email):
 
         total = 0
         for item in order:
+            product_pic = ""
+            try:
+                product_pic = Product.objects.get(pk=item.product_id).picture
+            except:
+                product_pic = ""
             info = {
                 "product_id": item.product_id,
                 "name": item.product_name,
                 "price": round(float(item.price), 2),
                 "quantity": item.quantity,
+                "picture": product_pic,
                 "total_price": round(float(item.price), 2) * item.quantity
             }
             if total == 0:

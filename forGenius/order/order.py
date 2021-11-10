@@ -76,7 +76,7 @@ def view_order(email, order_id):
         try:
             product_pic = Product.objects.get(pk=item.product_id).picture
         except:
-            product_pic = ""
+            product_pic = "https://i.imgur.com/xzuy857.png"
 
         info = {
             "product_id": item.product_id,
@@ -158,7 +158,7 @@ def view_all_order(email):
             try:
                 product_pic = Product.objects.get(pk=item.product_id).picture
             except:
-                product_pic = ""
+                product_pic = "https://i.imgur.com/xzuy857.png"
             info = {
                 "product_id": item.product_id,
                 "name": item.product_name,

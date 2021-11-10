@@ -5,8 +5,8 @@
         <div class="usernamechange_box">
             <h1>USERNAME&nbsp;CHANGE</h1>
         <el-form ref="usernamechangeFormRef" :model="usernamechangeForm" :rules="usernamechangeRules" label-position="left" label-width="225px" class="usernamechange_form">
-            <el-form-item label="NEW USER NAME"  class="username_change" prop="username">
-              <el-input v-model="usernamechangeForm.username" placeholder="6-12 characters">
+            <el-form-item label="NEW USER NAME"  class="username_change" prop="newname">
+              <el-input v-model="usernamechangeForm.newname" placeholder="6-12 characters">
               </el-input>
         </el-form-item>
         </el-form>
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { change_username } from '../../api/user'
 export default {
   data () {
     var checkUsername = (rule, value, callback) => {
@@ -28,10 +29,11 @@ export default {
     }
     return {
       usernamechangeForm: {
-        username: '123'
+        token: '',
+        newname: ''
       },
       usernamechangeRules: {
-        username: [
+        newname: [
           { min: 6, max: 12, message: 'the username should be 6-12 characters', trigger: 'blur' },
           { validator: checkUsername, trigger: 'blur' }
         ]
@@ -41,7 +43,17 @@ export default {
   methods: {
     usernamechange () {
       this.$refs.usernamechangeFormRef.validate(valid => {
-        console.log(valid)
+        if (valid) {
+          this.usernamechangeForm.token = sessionStorage.getItem('token');
+          console.log(this.usernamechangeForm);
+          change_username(this.usernamechangeForm).then( res => {
+            this.$message({message: 'User Name Changed',type: 'success'});
+            sessionStorage.setItem('username',this.usernamechangeForm.newname);
+            this.$router.push('/userprofile')
+          }).catch( error => {
+              this.$message.error('Failed');
+      })
+        }
       })
     },
     jumpProfile () {

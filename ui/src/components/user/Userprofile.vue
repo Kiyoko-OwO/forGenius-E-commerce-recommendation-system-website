@@ -13,6 +13,7 @@
             <button class="cart" v-on:click="jumpMycart">MY CART</button>
             <button class="address" v-on:click="jumpAddressbook">ADDRESS BOOK</button>
             <button class="order" v-on:click="jumpOrdHis">ORDER HISTORY</button>
+            <button class="order" v-on:click="jumpUsernameChange">USERNAME CHANGE</button>
         </main>
         <footer></footer>
     </div>
@@ -71,6 +72,9 @@ export default {
     },
     jumpOrdHis () {
       this.$router.push('user/order')
+    },
+    jumpUsernameChange(){
+      this.$router.push('/usernamechange')
     },
     async logOut () {
       this.tokenForm.token = sessionStorage.getItem('token');

@@ -84,7 +84,7 @@ export default {
 .manage-container {
     position: relative;
     top:10px;
-    left:17%;
+    left:10%;
     width:1500px;
     display: flex;
     flex-wrap: wrap;

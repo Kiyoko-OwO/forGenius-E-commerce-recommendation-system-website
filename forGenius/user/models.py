@@ -21,7 +21,11 @@ class Interest(models.Model):
         db_table = 'interest'
 
         unique_together = ("user_email", "interests")
-
+        
+class Search_history(models.Model):
+    user_email = models.ForeignKey(User, on_delete=CASCADE)
+    search = models.CharField(max_length=255)
+    
 class Address_book(models.Model):
     user_email = models.ForeignKey(User, on_delete=CASCADE)
     address_id = models.AutoField(primary_key=True)

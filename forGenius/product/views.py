@@ -281,7 +281,9 @@ def get_search_result(request):
             return response
 
         try:
-            email = auth.token_to_email(token)
+            email = ""
+            if token != "":
+                email = auth.token_to_email(token)
         except InputError as e:
             response.status_code = 400
             response.content = e

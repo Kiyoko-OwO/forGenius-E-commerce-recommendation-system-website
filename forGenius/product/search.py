@@ -12,20 +12,20 @@ def get_search_result(email, search, sorting):
     # check if the search word is valid
     if search == "":
         raise InputError("The search word in empty")
-    
+    search = search.lower()
     data = Product.objects.filter()
     result = []
     # choose the relevant products from the database
     for product in data:
         # if the search word in the product name or desription
-        if search in product.name or search in product.description:
+        if search in product.name.lower() or search in product.description.lower():
             result.append(product)
             continue
 
         # if the search word in the product feature
         features = Features.objects.filter(product_id = product.product_id)
         for feature in features:
-            if search in feature.feature:
+            if search in feature.feature.lower():
                 result.append(product)
                 break
     

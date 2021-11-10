@@ -31,6 +31,14 @@ export const change_password = data => {
   })
 } 
 
+export const change_username = data => {
+  return request({
+    method: 'POST',
+    url: 'user/change_username/',
+    data
+  })
+} 
+
 export const address_view = data => {
   return request({
     method: 'POST',

@@ -77,12 +77,8 @@ def pick_products(product_list, num):
 
 # balance recommendation lists to selected number of the products
 def balance_products(product_list, num):
-    if product_list["product_number"] <= num:
+    if len(product_list) <= num:
         return product_list
     # use random algorithms to select
-    to_delete = random.sample(range(product_list["products"]), product_list["product_number"] - num)
-    data = {
-        "product_number": num,
-        "products": [x for i, x in enumerate(product_list["products"]) if not i in to_delete],
-    }
-    return data
+    to_delete = random.sample(range(product_list), len(product_list) - num)
+    return [x for i, x in enumerate(product_list) if not i in to_delete]

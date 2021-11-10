@@ -44,3 +44,9 @@ Product page modified
 
 Week 8
 Sign up code connected with api
+
+Week 9
+Go product done
+Search result done
+Order share done
+All picture related done

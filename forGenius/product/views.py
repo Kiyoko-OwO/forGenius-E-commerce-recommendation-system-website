@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.http import HttpResponse
 from django.utils.datastructures import MultiValueDictKeyError
 from django.http.response import JsonResponse
@@ -14,6 +13,8 @@ import jwt as jwt
 import json
 
 # Create your views here.
+
+# check if the str can be converted to float
 def isFloat(str):
     try:
         float(str)
@@ -21,8 +22,9 @@ def isFloat(str):
     except ValueError:
         return False
 
+# request for viewing the product
 def view_product_user(request):
- 
+
     response = HttpResponse()
     if request.method == "GET":
         # try:
@@ -31,8 +33,7 @@ def view_product_user(request):
         #     response.status_code = 441
         #     response.content = 'json.JSONDecodeErro'
         #     return response
-        
-        
+
         product_id = request.GET.get("product_id")
         # except KeyError:
         #     response.status_code = 442
@@ -51,15 +52,17 @@ def view_product_user(request):
             response.content = e
             return response
         response.status_code = 200
-        meta = {'msg' : 'OK', 'status': 200}
+        meta = {'msg': 'OK', 'status': 200}
         jsons = {
-            'data' : data,
-            'meta' : meta
+            'data': data,
+            'meta': meta
         }
         return JsonResponse(jsons)
     response.status_code = 405
     return response
 
+
+# request for adding new product
 def admin_add_product(request):
     response = HttpResponse()
     if request.method == "POST":
@@ -92,7 +95,8 @@ def admin_add_product(request):
             response.content = e
             return response
         try:
-            data = products.admin_add_product(name, description, warranty, delivery_date, price, picture, features)
+            data = products.admin_add_product(
+                name, description, warranty, delivery_date, price, picture, features)
         except ProductIdError as e:
             response.status_code = 400
             response.content = e
@@ -102,6 +106,8 @@ def admin_add_product(request):
     response.status_code = 405
     return response
 
+
+# request for editing the chosen product
 def admin_edit_product(request):
     response = HttpResponse()
     if request.method == "POST":
@@ -135,7 +141,8 @@ def admin_edit_product(request):
             response.content = e
             return response
         try:
-            data = products.admin_edit_product(product_id, name, description, warranty, delivery_date, price, picture, features)
+            data = products.admin_edit_product(
+                product_id, name, description, warranty, delivery_date, price, picture, features)
         except ProductIdError as e:
             response.status_code = 400
             response.content = e
@@ -144,7 +151,8 @@ def admin_edit_product(request):
         return response
     response.status_code = 405
     return response
-        
+
+# request for deleting the chosen product
 def admin_delete_product(request):
     response = HttpResponse()
     if request.method == "DELETE":
@@ -176,8 +184,9 @@ def admin_delete_product(request):
         return response
     response.status_code = 405
     return response
-        
 
+
+# request for the recommendation list for guests
 def admin_products_all(request):
     response = HttpResponse()
     if request.method == "POST":
@@ -206,17 +215,18 @@ def admin_products_all(request):
             response.content = e
             return response
         response.status_code = 200
-        meta = {'msg' : 'OK', 'status': 200}
+        meta = {'msg': 'OK', 'status': 200}
         jsons = {
-            'data' : data,
-            'meta' : meta
+            'data': data,
+            'meta': meta
         }
         return JsonResponse(jsons)
     response.status_code = 405
     return response
 
+# request for the recommendation list for guests
 def public_recommendation(request):
- 
+    
     response = HttpResponse()
     if request.method == "GET":
         try:
@@ -230,9 +240,11 @@ def public_recommendation(request):
     response.status_code = 405
     return response
 
+
+# request for the recommendation list for users
 def private_recommendation(request):
     response = HttpResponse()
-    if request.method == "GET":        
+    if request.method == "GET":
         token = request.GET.get("token")
         email = auth.token_to_email(token)
         try:
@@ -245,6 +257,7 @@ def private_recommendation(request):
         return HttpResponse(json.dumps(data), content_type="application/json")
     response.status_code = 405
     return response
+
 
 def get_search_result(request):
     response = HttpResponse()
@@ -284,7 +297,7 @@ def get_search_result(request):
             response.status_code = 400
             response.content = e
             return response
-        
+
         response.status_code = 200
         return HttpResponse(json.dumps(data), content_type="application/json")
     response.status_code = 405

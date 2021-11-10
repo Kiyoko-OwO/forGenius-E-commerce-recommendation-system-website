@@ -3,12 +3,12 @@
       <div class="block"></div>
       Order id: {{ordId}}
       <el-dialog :title="order_id" :visible.sync="dialogFormVisible" class="editf" width="30%" append-to-body>
-        <div class="item" v-for="item in ordItem" :key="item.product_id">
+        <div class="item" v-for="item in items" :key="item.product_id">
         <div class="img" v-for="fit in fits" :key="fit">
         <span class="demonstration">{{ fit }}</span>
           <el-image
             style="width: 100px; height: 100px"
-            :src="123"
+            :src="item.picture"
             :fit="fit"></el-image>
         </div>
         <div class="item1">
@@ -53,6 +53,7 @@
 
 <script>
 import { ord_share } from '../../api/order'
+import { ord_sin_view } from '../../api/order'
 export default {
     props: ['index', 'ordId', 'payStat', 'ordItem','ordTotal','orderDate','name','address_line','phone_number'],
     data () {
@@ -78,28 +79,43 @@ export default {
             dialogFormVisible: false,
             sharedialogFormVisible: false,
             order_id: '###',
-        shareForm: {
-          token: "",
-	        order_id: "",
-	        to_email: "",
-	        receiver_name: ""
-        },
-        shareRules: {
-        to_email: [
-          { validator: checkEmail, trigger: 'blur' }
-        ],
-        receiver_name:[
-          { validator: checkUsername, trigger: 'blur'}
-        ]
-        }
-            
+            viewForm: {
+              token: "",
+              order_id: ""
+            },
+            shareForm: {
+              token: "",
+              order_id: "",
+              to_email: "",
+              receiver_name: ""
+            },
+            shareRules: {
+            to_email: [
+              { validator: checkEmail, trigger: 'blur' }
+            ],
+            receiver_name:[
+              { validator: checkUsername, trigger: 'blur'}
+            ]
+            },
+            items: []  
         }
     },
     created () {
         this.$emit('checker',this.index);
         this.order_id =  "Order Number: " + this.ordId.toString();
+        this.getPro();
     },
     methods: {
+        async getPro() {
+          this.viewForm.token = sessionStorage.getItem('token');
+          this.viewForm.order_id = this.ordId;
+          ord_sin_view(this.viewForm).then( res => {
+              console.log(res.data.item);
+              this.items = res.data.item;
+          }).catch( error => {
+              this.$message.error('Failed');
+          })
+        },
         orderFn() {
             if (this.payStat === "Fail") {
                 this.$router.push('/payment');

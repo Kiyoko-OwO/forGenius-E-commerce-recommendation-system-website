@@ -24,6 +24,14 @@ export const ord_view = parameter => {
   })
 }
 
+export const ord_sin_view = parameter => {
+  return request({
+    method: 'GET',
+    url: '/order/view/',
+    params: parameter
+  })
+}
+
 export const cart_qua = data => {
   return request({
     method: 'POST',

@@ -128,11 +128,6 @@ export default {
     signup () {
       this.$refs.signupFormRef.validate(async valid => {
         if (valid) {
-          // signup(this.signupForm).then ( res => {
-
-          // }).catch( error => {
-
-          // })
           signup(this.signupForm).then ( res => {
             this.$message({message: 'Sign up Sucess!',type: 'success'});
             sessionStorage.clear();
@@ -143,16 +138,6 @@ export default {
           }).catch( error => {
             this.$message.error('Already registered, please log in');
           })
-          // console.log(this.signupForm);
-          // const res = await signup(this.signupForm);
-          // console.log(res);
-          // if (res.status == 200) {
-          //   alert ("Sucess");
-          //   console.log(res.data.token);
-          //   sessionStorage.clear();
-          //   sessionStorage.setItem('token',res.data.token);
-          //   this.$router.push('userprofile');
-          // }
         } else {
           console.log('error submit!!');
           return false;
@@ -160,13 +145,22 @@ export default {
       })
     },
     send() {
-      this.code_form.name = this.signupForm.name;
-      this.code_form.email = this.signupForm.email;
-      signup_code(this.code_form).then ( res => {
-        this.$message({message: 'Code Send Sucessfully!',type: 'success'});
-      }).catch( error => {
-        this.$message.error('Failed');
-      })
+      const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+\.com/;
+      if (this.signupForm.email == "") {
+        this.$message.error('Email cannot be null');
+      } else {
+        if (mailReg.test(this.signupForm.email)) {
+          this.code_form.name = this.signupForm.name;
+          this.code_form.email = this.signupForm.email;
+          signup_code(this.code_form).then ( res => {
+            this.$message({message: 'Code Send Sucessfully!',type: 'success'});
+          }).catch( error => {
+            this.$message.error('Failed');
+        })
+        } else {
+            this.$message.error('Email form is not right');
+        }
+      }
     },
     jumpHome () {
       this.$router.push('Home');

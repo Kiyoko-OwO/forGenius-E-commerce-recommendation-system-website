@@ -7,8 +7,10 @@ import random
 recommendationDB = {}
 lastDB = {}
 # return the recommendation if the user is logout(guest mode)
+
+
 def public_recommendation():
-    products = recomment_by_sales() 
+    products = recomment_by_sales()
     # output the products with ordered number
     products = pick_products(products, 6)
     data = {
@@ -18,20 +20,23 @@ def public_recommendation():
     return data
 
 # return the recommendation if the user is logged (user mode)
+
+
 def private_recommendation(email):
     # search the user email to find its interest
     try:
         user_email = User.objects.get(pk=email)
     except User.DoesNotExist:
         raise InputError('User not exist')
-    if email not in lastDB:        
-    # don't check the repetation
-        listA = pick_products(recomment_by_sales(),6)
-        listB = pick_products(recomment_by_interest(email),14)
+    if email not in lastDB:
+        # don't check the repetation
+        listA = pick_products(recomment_by_sales(), 6)
+        listB = pick_products(recomment_by_interest(email), 14)
         lastDB[email] = combine_list(listA, listB)
-    lastDB[email] = pick_products(combine_list(lastDB[email], pick_products(recomment_by_search(email),20)), 20)
+    lastDB[email] = pick_products(combine_list(
+        lastDB[email], pick_products(recomment_by_search(email), 20)), 20)
     # output the products with ordered number
-    products = pick_products(lastDB[email], 6) 
+    products = pick_products(lastDB[email], 6)
     data = {
         "product_number": len(products),
         "products": products,
@@ -39,7 +44,7 @@ def private_recommendation(email):
     return data
 
 
-def recomment_by_sales():    
+def recomment_by_sales():
     # sort the product with selling data
     top_selling_products = Product.objects.order_by('-sales_data')
     data = []
@@ -56,6 +61,7 @@ def recomment_by_sales():
         }
         data.append(info)
     return data
+
 
 def recomment_by_interest(user_email):
     data = []
@@ -79,6 +85,7 @@ def recomment_by_interest(user_email):
     data = sorted(data, key=lambda x: -x["sales_data"])
     return data
 
+
 def recomment_by_search(user_email):
     if user_email in recommendationDB:
         return recommendationDB[user_email]
@@ -86,6 +93,8 @@ def recomment_by_search(user_email):
         return []
 
 # balance recommendation lists to selected number of the products
+
+
 def balance_products(product_list, num):
     if len(product_list) <= num:
         return product_list
@@ -94,13 +103,16 @@ def balance_products(product_list, num):
     return [x for i, x in enumerate(product_list) if not i in to_delete]
 
 # pick selected number of the products from the recommendation lists
+
+
 def pick_products(product_list, num):
     if len(product_list) <= num:
         return product_list
     # use random algorithms to select
     samples = random.sample(product_list, num)
     return samples
-    
+
+
 def combine_list(a_str, b_str):
     for b in b_str:
         if b not in a_str:

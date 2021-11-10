@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { send_code } from '../../api/user'
 export default {
   data () {
     var checkEmail = (rule, value, callback) => {
@@ -46,11 +47,19 @@ export default {
   methods: {
     forgot () {
       this.$refs.forgotFormRef.validate(valid => {
-        console.log(valid)
+        console.log(valid);
+        if (valid) {
+          send_code(this.forgotForm).then( res => {
+          this.$message({message: 'Code sent',type: 'success'});
+          this.$router.push('/resetpassword/forgot')
+          }).catch( error => {
+            this.$message.error('Failed');
+          })
+        }
       })
     },
     jumpProfile () {
-      this.$router.push('/userprofile')
+      this.$router.push('/login')
     }
   }
 }

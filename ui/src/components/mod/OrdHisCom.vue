@@ -31,7 +31,7 @@
       <p>Paid: {{payStat}}</p>
       <p>Order Date: {{orderDate}}</p>
       <el-button @click="orderFn" class="detail">Detail</el-button>
-      <el-button @click="orderShare" class="detail">Share</el-button>
+      <el-button @click="orderShare" class="detail" icon="el-icon-message">Share</el-button>
       <el-dialog title="Share Order" :visible.sync="sharedialogFormVisible" class="editf"  width="30%" append-to-body>
       <el-form :model="shareForm" ref="share_FormRef" :rules="shareRules">
         <el-form-item label="Receiver Name" prop="receiver_name">

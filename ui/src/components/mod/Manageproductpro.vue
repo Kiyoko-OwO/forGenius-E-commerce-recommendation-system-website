@@ -2,7 +2,7 @@
   <div class="my-cartpro">
     <p> Product ID: {{id}} </p> 
     <p> Product Name: {{name}} </p> 
-    <p> Product Warranty: {{warr}} </p> 
+    <p> Product Warranty: {{warr}} year(s)</p> 
     <p> Feature: </p>  
     <p> {{features}} </p> 
     <p> Description: </p>

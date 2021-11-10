@@ -5,6 +5,7 @@ from user.errors import InputError
 import random
 
 recommendationDB = {}
+lastDB = {}
 # return the recommendation if the user is logout(guest mode)
 def public_recommendation():
     products = recomment_by_sales() 
@@ -22,11 +23,15 @@ def private_recommendation(email):
     try:
         user_email = User.objects.get(pk=email)
     except User.DoesNotExist:
-        raise InputError('User not exist')        
+        raise InputError('User not exist')
+    if email not in lastDB:        
     # don't check the repetation
-    products = recomment_by_sales() + recomment_by_interest(email)
+        listA = pick_products(recomment_by_sales(),6)
+        listB = pick_products(recomment_by_interest(email),14)
+        lastDB[email] = combine_list(listA, listB)
+    lastDB[email] = pick_products(combine_list(lastDB[email], pick_products(recomment_by_search(email),20)), 20)
     # output the products with ordered number
-    products = pick_products(products, 6)    
+    products = pick_products(lastDB[email], 6) 
     data = {
         "product_number": len(products),
         "products": products,
@@ -75,22 +80,10 @@ def recomment_by_interest(user_email):
     return data
 
 def recomment_by_search(user_email):
-    data = []
     if user_email in recommendationDB:
-        for product_id in recommendationDB[user_email]:
-            product =  Product.objects.get(product_id = product_id)
-            info = {
-                "product_id": product.product_id,
-                "name": product.name,
-                "description": product.description,
-                "price": round(float(product.price), 2),
-                "picture": product.picture,
-                "features": get_product_features(product.product_id),
-                "sales_data": product.sales_data
-            }
-            if info not in data:
-                data.append(info)
-    return data
+        return recommendationDB[user_email]
+    else:
+        return []
 
 # balance recommendation lists to selected number of the products
 def balance_products(product_list, num):
@@ -108,3 +101,8 @@ def pick_products(product_list, num):
     samples = random.sample(product_list, num)
     return samples
     
+def combine_list(a_str, b_str):
+    for b in b_str:
+        if b not in a_str:
+            a_str.append(b)
+    return a_str

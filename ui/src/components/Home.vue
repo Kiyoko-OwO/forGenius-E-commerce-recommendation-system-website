@@ -23,7 +23,6 @@
               <input type="submit" v-on:click="jumpResult" value="SEARCH">
             </form>
           </div>
-          <button v-on:click="jumpProduct" class="example">Product example</button>
         </main>
         <div class="recommendation_container">
           <div>
@@ -122,11 +121,14 @@ export default {
     },
     jumpResult () {
     if(!this.keywords){
-      alert("Please input search keywords")
-      return
+      this.$message.error("Please input search keywords");
     }else{
-      sessionStorage.setItem('word',this.keywords);
+      if (this.isGuest == true) {
+        this.$message.error("Please log in first");
+      } else {
+        sessionStorage.setItem('word',this.keywords);
       this.$router.push('/search')
+      }
     }},
     jumpProfile () {
       this.$router.push('/userprofile')

@@ -106,4 +106,5 @@ def pick_products(product_list, num):
         return product_list
     # use random algorithms to select
     samples = random.sample(product_list, num)
-    return product_list
+    return samples
+    

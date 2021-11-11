@@ -41,7 +41,7 @@ def create_order(email, name, address_line, post_code, suburb, state, country, p
     cart.delete()
     return order_id
 
-
+# the function to view the order detail information 
 def view_order(email, order_id):
     # check user authorization (potential attack: one user view another user's order)
     try:
@@ -49,11 +49,13 @@ def view_order(email, order_id):
     except User.DoesNotExist:
         raise InputError('User not exist')
 
+    # get the order with this user email and order id 
     order = Order.objects.filter(order_id=order_id, user_email=user_email)
 
     if len(order) == 0:
         raise EmptyOrderError("No order exists")
 
+    # Put all of the detail information of this order to data
     for temp in order:
         data = {"order_id": order_id,
                 "item": [],
@@ -71,6 +73,8 @@ def view_order(email, order_id):
         break
 
     total = 0
+    
+    # put the items in order to data
     for item in order:
         product_pic = ""
         try:
@@ -92,19 +96,21 @@ def view_order(email, order_id):
     data["total"] = round(total, 2)
     return data
 
-
+# the function to pay for the order
 def pay_order(email, order_id):
     # check user authorization (potential attack: one user pay another user's order)
     try:
         user_email = User.objects.get(pk=email)
     except User.DoesNotExist:
         raise InputError('User not exist')
-
+    
+    # get the order with this user email and order id 
     order = Order.objects.filter(order_id=order_id, user_email=user_email)
 
     if len(order) == 0:
         raise EmptyOrderError("No order exists")
 
+    # pay the order and add product sales data
     for item in order:
         if item.paid == False:
             products = Product.objects.filter(product_id=item.product_id)
@@ -115,7 +121,7 @@ def pay_order(email, order_id):
             item.paid = True
             item.save()
 
-
+# the function to view all of the user's order history
 def view_all_order(email):
     # check user authorization (potential attack: one user view another user's order)
     try:
@@ -123,18 +129,21 @@ def view_all_order(email):
     except User.DoesNotExist:
         raise InputError('User not exist')
 
+     # get the order with this user email 
     user_order = Order.objects.filter(user_email=user_email)
     if len(user_order) == 0:
         raise EmptyOrderError("No order exists")
 
     order_ids = []
-
+    
+    # get all order id from dababase
     for temp in user_order:
         if order_ids.count(temp.order_id) == 0:
             order_ids.append(temp.order_id)
 
     order_list = {"order_list": []}
 
+    # get all details of the order ids
     for curr_id in order_ids:
         order = Order.objects.filter(order_id=curr_id, user_email=user_email)
 
@@ -153,6 +162,8 @@ def view_all_order(email):
                 }
 
         total = 0
+        
+        # put the items in order to order's data
         for item in order:
             product_pic = ""
             try:
@@ -185,10 +196,13 @@ def view_all_order(email):
         order_list["order_list"].append(data)
     return order_list
 
-
+# the function to share the order details to the to email
 def share_order(email, order_id, to_email, receiver):
+    # get order's detail
     data = view_order(email, order_id)
     email_query = User.objects.get(pk=email)
+    
+    # get the order's detail data to text message
     message = "order id" + " : " + \
         str(data["order_id"]) + "\n" + "items" + " :\n"
     for i in data["item"]:
@@ -214,5 +228,6 @@ def share_order(email, order_id, to_email, receiver):
     message = message + "order date" + " : " + str(data["order_date"]) + "\n"
     message = message + "paid" + " : " + str(data["paid"]) + "\n"
 
+    # send the text message to receiver's email
     email_robot.send_email_share(
         email_query.user_name, to_email, message, receiver)

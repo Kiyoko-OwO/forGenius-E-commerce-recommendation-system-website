@@ -96,7 +96,7 @@ def register(request):
 
 def login(request):
     """
-    url: http://127.0.0.1:8000/login/
+    url: http://127.0.0.1:8000/user/login/
     method: POST
     """
     response = HttpResponse()
@@ -142,7 +142,7 @@ def login(request):
 
 def logout(request):
     """
-    url: http://127.0.0.1:8000/logout/
+    url: http://127.0.0.1:8000/user/logout/
     method: POST
     """
     response = HttpResponse()
@@ -172,7 +172,7 @@ def logout(request):
 
 def change_password(request):
     """
-    url: http://127.0.0.1:8000/change_password/
+    url: http://127.0.0.1:8000/user/change_password/
     method: POST
     """
     response = HttpResponse()
@@ -211,7 +211,7 @@ def change_password(request):
 
 def send_reset_code(request):
     """
-    url: http://127.0.0.1:8000/send_reset_code/
+    url: http://127.0.0.1:8000/user/send_reset_code/
     method: POST
     """
     response = HttpResponse()
@@ -248,7 +248,7 @@ def send_reset_code(request):
 
 def reset_password(request):
     """
-    url: http://127.0.0.1:8000/reset_password/
+    url: http://127.0.0.1:8000/user/reset_password/
     method: POST
     """
     response = HttpResponse()
@@ -286,7 +286,7 @@ def reset_password(request):
 
 def add_address_book(request):
     """
-    url: http://127.0.0.1:8000/address/add/
+    url: http://127.0.0.1:8000/user/address/add/
     method: POST
     """
     response = HttpResponse()
@@ -340,7 +340,7 @@ def add_address_book(request):
 
 def view_address_book(request):
     """
-    url: http://127.0.0.1:8000/address/view/
+    url: http://127.0.0.1:8000/user/address/view/
     method: POST
     """
     response = HttpResponse()
@@ -387,7 +387,7 @@ def view_address_book(request):
 
 def delete_address_book(request):
     """
-    url: http://127.0.0.1:8000/address/delete/
+    url: http://127.0.0.1:8000/user/address/delete/
     method: DELETE
     """
     response = HttpResponse()
@@ -430,7 +430,7 @@ def delete_address_book(request):
 
 def edit_address_book(request):
     """
-    url: http://127.0.0.1:8000/address/edit/
+    url: http://127.0.0.1:8000/user/address/edit/
     method: POST
     """
     response = HttpResponse()
@@ -485,7 +485,7 @@ def edit_address_book(request):
 
 def address_book_detail(request):
     """
-    url: http://127.0.0.1:8000/address/detail/
+    url: http://127.0.0.1:8000/user/address/detail/
     method: POST
     """
     response = HttpResponse()
@@ -528,7 +528,7 @@ def address_book_detail(request):
 
 def add_user_interests(request):
     """
-    url: http://127.0.0.1:8000/address/detail/
+    url: http://127.0.0.1:8000/user/address/detail/
     method: POST
     """
     response = HttpResponse()
@@ -577,7 +577,7 @@ def add_user_interests(request):
 
 def change_username(request):
     """
-    url: http://127.0.0.1:8000/change_username/
+    url: http://127.0.0.1:8000/user/change_username/
     method: POST
     """
     response = HttpResponse()

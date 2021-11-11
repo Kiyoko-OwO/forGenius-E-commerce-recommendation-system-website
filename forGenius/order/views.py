@@ -13,8 +13,13 @@ import jwt as jwt
 
 
 def add_to_cart(request):
+    """
+    url: http://127.0.0.1:8000/order/cart/add/
+    method: POST
+    """
     response = HttpResponse()
     if request.method == "POST":
+        # get json data
         try:
             data = json.loads(request.body)
         except json.JSONDecodeError:
@@ -30,6 +35,7 @@ def add_to_cart(request):
             response.content = 'KeyError'
             return response
 
+        # get email via token given
         try:
             email = token_to_email(token)
         except InputError as e:
@@ -41,6 +47,7 @@ def add_to_cart(request):
             response.content = "token is wrong"
             return response
 
+        # call the function to add product to cart
         try:
             cart.add_to_cart(email, product_id, quantity)
         except InputError as e:
@@ -51,6 +58,7 @@ def add_to_cart(request):
             response.status_code = 400
             response.content = e
             return response
+        
         response.status_code = 200
         return response
     response.status_code = 405
@@ -58,26 +66,21 @@ def add_to_cart(request):
 
 
 def view_cart(request):
+    """
+    url: http://127.0.0.1:8000/order/cart/view/
+    method: GET
+    """
     response = HttpResponse()
     if request.method == "GET":
-        # try:
-        #     data = json.loads(request.body)
-        # except json.JSONDecodeError:
-        #     response.status_code = 441
-        #     response.content = 'json.JSONDecodeError'
-        #     return response
-        # try:
+        # get GET data
         token = request.GET.get("token")
-        # except KeyError:
-        #     response.status_code = 442
-        #     response.content = 'KeyError'
-        #     return response
 
         if token is None:
             response.status_code = 442
             response.content = "KeyError"
             return response
 
+        # get email via token given
         try:
             email = token_to_email(token)
         except InputError as e:
@@ -89,12 +92,14 @@ def view_cart(request):
             response.content = "token is wrong"
             return response
 
+        # call the function to get cart view data
         try:
             data = cart.view_cart(email)
         except InputError as e:
             response.status_code = 400
             response.content = e
             return response
+        
         response.status_code = 200
         meta = {'msg': 'OK', 'status': 200}
         jsons = {
@@ -107,8 +112,13 @@ def view_cart(request):
 
 
 def edit_cart_product_quantity(request):
+    """
+    url: http://127.0.0.1:8000/order/cart/product_quantity/edit/
+    method: POST
+    """
     response = HttpResponse()
     if request.method == "POST":
+        # get json data
         try:
             data = json.loads(request.body)
         except json.JSONDecodeError:
@@ -124,6 +134,7 @@ def edit_cart_product_quantity(request):
             response.content = 'KeyError'
             return response
 
+        # get email via token given
         try:
             email = token_to_email(token)
         except InputError as e:
@@ -135,6 +146,7 @@ def edit_cart_product_quantity(request):
             response.content = "token is wrong"
             return response
 
+        # call the function to edit product's quantity in cart
         try:
             cart.edit_cart_product_quantity(email, product_id, quantity)
         except InputError as e:
@@ -157,8 +169,13 @@ def edit_cart_product_quantity(request):
 
 
 def remove_cart_product(request):
+    """
+    url: http://127.0.0.1:8000/order/cart/remove/
+    method: DELETE
+    """
     response = HttpResponse()
     if request.method == "DELETE":
+        # get json data
         try:
             data = json.loads(request.body)
         except json.JSONDecodeError:
@@ -173,6 +190,7 @@ def remove_cart_product(request):
             response.content = 'KeyError'
             return response
 
+        # get email via token given
         try:
             email = token_to_email(token)
         except InputError as e:
@@ -184,6 +202,7 @@ def remove_cart_product(request):
             response.content = "token is wrong"
             return response
 
+        # call the function to remove the product from the user's cart
         try:
             cart.remove_cart_product(email, product_id)
         except InputError as e:
@@ -206,8 +225,13 @@ def remove_cart_product(request):
 
 
 def create_order(request):
+    """
+    url: http://127.0.0.1:8000/order/create/
+    method: POST
+    """
     response = HttpResponse()
     if request.method == "POST":
+        # get json data
         try:
             data = json.loads(request.body)
         except json.JSONDecodeError:
@@ -228,6 +252,7 @@ def create_order(request):
             response.content = 'KeyError'
             return response
 
+        # get email via token given
         try:
             email = token_to_email(token)
         except InputError as e:
@@ -239,6 +264,7 @@ def create_order(request):
             response.content = "token is wrong"
             return response
 
+        # call the function to carete order according to given data
         try:
             order_id = order.create_order(
                 email, name, address_line, post_code, suburb, state, country, phone_number)
@@ -263,8 +289,13 @@ def create_order(request):
 
 
 def view_order(request):
+    """
+    url: http://127.0.0.1:8000/order/view/
+    method: GET
+    """
     response = HttpResponse()
     if request.method == "GET":
+        # get GET data
         token = request.GET.get("token")
         if token is None:
             response.status_code = 442
@@ -277,6 +308,7 @@ def view_order(request):
             response.content = "KeyError"
             return response
 
+        # get email via token given
         try:
             email = token_to_email(token)
         except InputError as e:
@@ -288,6 +320,7 @@ def view_order(request):
             response.content = "token is wrong"
             return response
 
+        # call the function to get the order view data
         try:
             data = order.view_order(email, order_id)
         except InputError as e:
@@ -306,8 +339,13 @@ def view_order(request):
 
 
 def pay_order(request):
+    """
+    url: http://127.0.0.1:8000/order/pay/
+    method: POST
+    """
     response = HttpResponse()
     if request.method == "POST":
+        # get json data
         try:
             data = json.loads(request.body)
         except json.JSONDecodeError:
@@ -322,6 +360,7 @@ def pay_order(request):
             response.content = 'KeyError'
             return response
 
+        # get email via token given
         try:
             email = token_to_email(token)
         except InputError as e:
@@ -332,7 +371,8 @@ def pay_order(request):
             response.status_code = 400
             response.content = "token is wrong"
             return response
-
+        
+        # call the function to pay the order
         try:
             order.pay_order(email, order_id)
         except InputError as e:
@@ -351,8 +391,13 @@ def pay_order(request):
 
 
 def view_all_order(request):
+    """
+    url: http://127.0.0.1:8000/order/view/all/
+    method: GET
+    """
     response = HttpResponse()
     if request.method == "GET":
+         # get GET data
         token = request.GET.get("token")
 
         if token is None:
@@ -360,6 +405,7 @@ def view_all_order(request):
             response.content = "KeyError"
             return response
 
+        # get email via token given
         try:
             email = token_to_email(token)
         except InputError as e:
@@ -371,6 +417,7 @@ def view_all_order(request):
             response.content = "token is wrong"
             return response
 
+        # call the function to get the order history view data
         try:
             data = order.view_all_order(email)
         except InputError as e:
@@ -394,8 +441,13 @@ def view_all_order(request):
 
 
 def share_order(request):
+    """
+    url: http://127.0.0.1:8000/order/share/
+    method: POST
+    """
     response = HttpResponse()
     if request.method == "POST":
+        # get json data
         try:
             data = json.loads(request.body)
         except json.JSONDecodeError:
@@ -412,6 +464,7 @@ def share_order(request):
             response.content = 'KeyError'
             return response
 
+        # get email via token given
         try:
             email = token_to_email(token)
         except InputError as e:
@@ -423,6 +476,7 @@ def share_order(request):
             response.content = "token is wrong"
             return response
 
+        # call the function to share order to receiver's email
         try:
             order.share_order(email, order_id, to_email, receiver_name)
         except InputError as e:

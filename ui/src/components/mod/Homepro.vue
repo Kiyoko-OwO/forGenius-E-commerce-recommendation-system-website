@@ -48,9 +48,9 @@ p {
   font-weight: 20px;
 }
 span{
-  color:red;
+  color:rgb(255, 115, 0);
   font-size: 20px ;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .img{
   position: relative;

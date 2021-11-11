@@ -202,31 +202,37 @@ def share_order(email, order_id, to_email, receiver):
     data = view_order(email, order_id)
     email_query = User.objects.get(pk=email)
     
-    # get the order's detail data to text message
-    message = "order id" + " : " + \
-        str(data["order_id"]) + "\n" + "items" + " :\n"
+    # get the order's detail data to text message(html format)
+    message = "<html><body><p>order id" + " : " + \
+        str(data["order_id"]) + "</p>\n<p>" + "items" + " :</p>\n<p>"
     for i in data["item"]:
-        message = message + "       " + "product id" + \
-            " : " + str(i["product_id"]) + "\n"
-        message = message + "       " + "name" + " : " + str(i["name"]) + "\n"
-        message = message + "       " + "unit price" + \
-            " : " + str(i["price"]) + "\n"
-        message = message + "       " + "quantity" + \
-            " : " + str(i["quantity"]) + "\n"
-        message = message + "       " + "price" + \
-            " : " + str(i["total_price"]) + "\n\n"
+        message = message + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "product id" + \
+            " : " + str(i["product_id"]) + "</p>\n<p>"
+        message = message + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "name" + " : " + str(i["name"]) + "</p>\n<p>"
+        message = message + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "unit price" + \
+            " : $" + str(i["price"]) + "</p>\n<p>"
+        message = message + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "quantity" + \
+            " : " + str(i["quantity"]) + "</p>\n<p>"
+        message = message + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "price" + \
+            " : $" + str(i["total_price"]) + "</p>\n<p>"
+        product_pic = ""
+        try:
+            product_pic = Product.objects.get(pk=i["product_id"]).picture
+        except:
+            product_pic = "https://i.imgur.com/xzuy857.png"
+        message = message + "<img src=\"" + product_pic +"\"  height=" + str(200) + " width="+ str(200) + "></p>\n<p>"
 
-    message = message + "total price" + " : " + str(data["total"]) + "\n"
-    message = message + "recipient" + " : " + str(data["name"]) + "\n"
-    message = message + "address" + " : " + str(data["address_line"]) + "\n"
-    message = message + "post code" + " : " + str(data["post_code"]) + "\n"
-    message = message + "suburb" + " : " + str(data["suburb"]) + "\n"
-    message = message + "state" + " : " + str(data["state"]) + "\n"
-    message = message + "country" + " : " + str(data["country"]) + "\n"
+    message = message + "total price" + " : $" + str(data["total"]) + "</p>\n<p>"
+    message = message + "recipient" + " : " + str(data["name"]) + "</p>\n<p>"
+    message = message + "address" + " : " + str(data["address_line"]) + "</p>\n<p>"
+    message = message + "post code" + " : " + str(data["post_code"]) + "</p>\n<p>"
+    message = message + "suburb" + " : " + str(data["suburb"]) + "</p>\n<p>"
+    message = message + "state" + " : " + str(data["state"]) + "</p>\n<p>"
+    message = message + "country" + " : " + str(data["country"]) + "</p>\n<p>"
     message = message + "phone number" + \
-        " : " + str(data["phone_number"]) + "\n"
-    message = message + "order date" + " : " + str(data["order_date"]) + "\n"
-    message = message + "paid" + " : " + str(data["paid"]) + "\n"
+        " : " + str(data["phone_number"]) + "</p>\n<p>"
+    message = message + "order date" + " : " + str(data["order_date"]) + "</p>\n<p>"
+    message = message + "paid" + " : " + str(data["paid"]) + "</p></body></html>"
 
     # send the text message to receiver's email
     email_robot.send_email_share(

@@ -2,7 +2,7 @@
   <div class="my-cartpro">
     <p> Product ID: {{id}} </p> 
     <p> Product Name: {{name}} </p> 
-    <p> Product Warranty: {{warr}} year(s)</p> 
+    <p> Product Warranty: {{warr}} </p> 
     <p> Feature: </p>  
     <p> {{features}} </p> 
     <p> Description: </p>
@@ -14,7 +14,7 @@
   <div class="img" v-for="fit in fits" :key="fit">
     <span class="demonstration">{{ fit }}</span>
     <el-image
-      style="width: 150px; height: 150px"
+      style="width: 200px; height: 200px"
       :src="editForm.picture"
       :fit="fit"></el-image>
   </div>
@@ -236,13 +236,14 @@ export default {
 <style lang="less" scoped>
 .my-cartpro {
   width: 400px;
-  height: 200 px;
+  height:  100%;
   padding: 20px;
   border: 2px solid #000;
   border-radius: 5px;
   margin: 10px;
   font-family: 'segUi';
   word-break:break-all;
+  
 }
 .img{
   position: relative;

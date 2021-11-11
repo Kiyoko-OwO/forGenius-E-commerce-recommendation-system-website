@@ -27,8 +27,8 @@
         </el-form-item>
         <div class="block"></div>
         <el-form-item>
-        <el-button class='send' @click="send">SEND</el-button>
-        <el-button class='submit' @click="signup">SUBMIT</el-button>
+        <el-button class='send' @click="send" type="brown">SEND</el-button>
+        <el-button class='submit' @click="signup" type="brown">SUBMIT</el-button>
         </el-form-item>
         </el-form>
         <a href="#/login" text-decoration:underline class="login">LOG IN</a>

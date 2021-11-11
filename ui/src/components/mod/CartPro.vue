@@ -7,12 +7,12 @@
           :src="proPic"
           :fit="fit"></el-image>
     </div>
-    <p class="plink" @click="goProduct"> Product Name: {{proName}} </p> 
-    <p> Price: {{proPrice}}</p>
+    <p class="plink" @click="goProduct"> {{proName}} </p> 
+    <p> $ {{proPrice}}</p>
     <p> Quantity: {{qua}}</p>
-    <el-button class="el-icon-minus" circle @click="subFn"></el-button>
-    <el-button class="el-icon-plus" circle @click="addFn"></el-button>
-    <el-button class="el-icon-close" circle @click="delFn"></el-button>
+    <el-button class="el-icon-minus" circle @click="subFn" type="white"></el-button>
+    <el-button class="el-icon-plus" circle @click="addFn" type="white"></el-button>
+    <el-button class="el-icon-close" circle @click="delFn" type="white"></el-button>
   </div>
 </template>
 
@@ -59,5 +59,8 @@ export default {
 }
 .plink {
   cursor: pointer;
+}
+p{
+  letter-spacing: 1.5px;
 }
 </style>

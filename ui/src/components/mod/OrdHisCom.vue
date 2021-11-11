@@ -12,20 +12,22 @@
             :fit="fit"></el-image>
         </div>
         <div class="item1">
-        <p>Name: {{item.name}} </p>
-        <p>Price: {{item.price}} </p>
+        <p>{{item.name}} </p>
+        <p>${{item.price}} </p>
         <p>Quantity: {{item.quantity}} </p>
         </div>
         <div class="link-in"></div>
         </div>
+        <div class="item1">
         <p> Buyer Name: {{name}}</p>
         <p> Address: {{address_line}}</p>
         <p> Phone Number: {{phone_number}}</p>
+        </div>
         <div class="block"></div>
         Order Date: {{orderDate}}
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total Price: {{ordTotal}}
         <div slot="footer" class="dialog-footer">
-            <el-button @click="dialogFormVisible = false">Close</el-button>
+            <el-button type="white" @click="dialogFormVisible = false" icon="el-icon-error">Close</el-button>
         </div>
       </el-dialog>
       <p>Paid: {{payStat}}</p>
@@ -36,8 +38,8 @@
             :src="item.picture"
             :fit="fit"></el-image>
       </div>
-      <el-button @click="orderFn" class="detail">Detail</el-button>
-      <el-button @click="orderShare" class="detail" icon="el-icon-message">Share</el-button>
+      <el-button type="white" @click="orderFn" class="detail" icon="el-icon-reading">Detail</el-button>
+      <el-button type="white" @click="orderShare" class="detail" icon="el-icon-message">Share</el-button>
       <el-dialog title="Share Order" :visible.sync="sharedialogFormVisible" class="editf"  width="30%" append-to-body>
       <el-form :model="shareForm" ref="share_FormRef" :rules="shareRules">
         <el-form-item label="Receiver Name" prop="receiver_name">
@@ -48,8 +50,8 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="resetShare">Cancel</el-button>
-        <el-button type="primary" @click="submit">Confim</el-button>
+        <el-button type="white" @click="resetShare" icon="el-icon-error">Cancel</el-button>
+        <el-button type="white" @click="submit" icon="el-icon-success">Confim</el-button>
       </div>
       </el-dialog>
       <div class="block"></div>
@@ -197,6 +199,9 @@ export default {
    float:right;
    margin-right:20px;
    margin-top:-5px;
+}
+.item1{
+  letter-spacing: 1.5px;
 }
 </style>
 

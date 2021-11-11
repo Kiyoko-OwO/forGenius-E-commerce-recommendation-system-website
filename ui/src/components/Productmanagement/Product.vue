@@ -255,6 +255,7 @@ span{
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .addcart{
+  margin-top:20px;
   position: relative;
   left:10px;
   width:480px;

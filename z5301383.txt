@@ -40,4 +40,11 @@ Add email check for sign up.
 Add picture for product.
 Improve web page aesthetics.
 
+WEEK8
+Home recommendation system done.
+Search functional code done.
+Finished userchange function.
+Finished Data cheak and validation.
+Improve user experience.
+
 

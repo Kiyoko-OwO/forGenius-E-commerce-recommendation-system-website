@@ -3,12 +3,12 @@
     <div class="img" v-for="fit in fits" :key="fit">
     <span class="demonstration">{{ fit }}</span>
         <el-image
-        style="width: 150px; height: 150px"
+        style="width: 175px; height: 175px"
         :src="proPic"
         :fit="fit" @click="goProduct"></el-image>
     </div>
-    <p @click="goProduct"> Product Name: {{proName}} </p>
-    <p @click="goProduct"> Price: {{proPrice}}</p>
+    <p @click="goProduct"> {{proName}}</p>
+    <p @click="goProduct"> <span>${{proPrice}}</span></p>
   </div>
 </template>
 
@@ -39,8 +39,16 @@ export default {
   margin: 10px;
   font-family: 'segUi';
   word-break:break-all;
+  border: 2px solid bisque;
 }
 p {
   cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 20px;
+}
+span{
+  color:red;
+  font-size: 20px ;
+  font-family: 'Courier New', Courier, monospace;
 }
 </style>

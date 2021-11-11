@@ -3,10 +3,10 @@
         <header>
             <img id="logo" src=../assets/logoThin.png alt="logo" v-on:click="addFn">
             <div class="button_position">
-            <button class="signUp" v-on:click="jumpSign" v-show="isGuest" >Sign up</button>
-            <button class="logIn" v-on:click="jumpLog" v-show="isGuest">Log in</button>
-            <button v-on:click="jumpHome" @click="logOut" v-show="isUser">Log out</button>
-            <button id="usern" v-show="isUser" @click="jumpProfile">{{ username }}</button>
+            <el-button icon="el-icon-user" class="signUp" v-on:click="jumpSign" v-show="isGuest" >Sign up</el-button>
+            <el-button icon= "el-icon-user-solid" class="logIn" v-on:click="jumpLog" v-show="isGuest" >Log in</el-button>
+            <el-button v-on:click="jumpHome" @click="logOut" v-show="isUser">Log out</el-button>
+            <el-button id="usern" v-show="isUser" @click="jumpProfile" icon="el-icon-user-solid">{{ username }}</el-button>
             </div>
             <a href="http://127.0.0.1:8000/admin/login/?next=/admin/">
             <button class="logIn" v-show="isOk">Admin Log in</button>
@@ -160,6 +160,7 @@ export default {
 }
 </script>
 
+<!--CSS with scoped and less this parameter is valid only for the current page-->
 <style lang="less" scoped>
 *{
     font-family: 'segUi';
@@ -252,7 +253,7 @@ main #logo {
 .recommendation_container{
   background-color: white;
   margin:0 auto;
-  height:650px;
+  height:700px;
   width:1700px;
 
 }

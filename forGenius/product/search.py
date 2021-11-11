@@ -2,6 +2,8 @@ from product.models import Product, Features
 from user.errors import InputError
 from user.models import Admin
 from product.products import get_product_features
+from user.models import User, Search_history
+from user.errors import InputError
 
 # return the search list from the chosen search key and sorting algothirms
 def get_search_result(email, search, sorting):
@@ -9,23 +11,34 @@ def get_search_result(email, search, sorting):
     if sorting != "price_low" and sorting != "price_high" and sorting != "best_sell" and sorting != "a_to_z" and sorting != "z_to_a" and sorting != "relevance":
         raise InputError("The sorting is invalid")
     
+    # add the search to user's search history
+    if email != "":
+        try:
+            user_email = User.objects.get(pk=email)
+        except User.DoesNotExist:
+            raise InputError('User not exist')
+
+
+        search_save = Search_history(user_email=user_email, search=search)
+        search_save.save()
+    
     # check if the search word is valid
     if search == "":
         raise InputError("The search word in empty")
-    
+    search = search.lower()
     data = Product.objects.filter()
     result = []
     # choose the relevant products from the database
     for product in data:
         # if the search word in the product name or desription
-        if search in product.name or search in product.description:
+        if search in product.name.lower() or search in product.description.lower():
             result.append(product)
             continue
 
         # if the search word in the product feature
         features = Features.objects.filter(product_id = product.product_id)
         for feature in features:
-            if search in feature.feature:
+            if search in feature.feature.lower():
                 result.append(product)
                 break
     

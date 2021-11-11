@@ -84,12 +84,17 @@
 import Home from '.././mod/Homepro.vue'
 import { cart_add } from '../../api/order'
 import { product_view } from '../../api/product'
+import { rec_guest } from '../../api/product'
+import { rec_user } from '../../api/product'
 export default {
      components: {
         Home
     },
     data () {
         return {
+            tokenForm: {
+              token: ''
+            },
             fits: [''],
             product: {},
             numberValidateForm: {
@@ -100,11 +105,13 @@ export default {
             product_id_form:{
               product_id: 1
             },
-            features: []
+            features: [],
+            products: []
         }
     },
     created () {
-        this.loadProduct()
+        this.loadProduct(),
+        this.loadRec()
     },
     methods: {
       async loadProduct () {
@@ -116,6 +123,23 @@ export default {
             console.log(error);
           })
       },
+      async loadRec () {
+      if (sessionStorage.getItem('token' != null)) {
+        this.tokenForm.token = sessionStorage.getItem('token');
+        rec_user(this.tokenForm).then ( res => {
+          this.products = res.data.products;
+          this.products = this.products.slice(0, 3);
+        }).catch( error => {
+        })
+      }
+      else {
+        rec_guest(this.tokenForm).then ( res => {
+          this.products = res.data.products;
+          this.products = this.products.slice(0, 3);
+        }).catch( error => {
+        })
+      }
+    },
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {

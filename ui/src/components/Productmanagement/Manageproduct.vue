@@ -86,8 +86,6 @@ export default {
     top:10px;
     left:10%;
     width:1500px;
-    display: flex;
-    flex-wrap: wrap;
 }
 .manage_container{
     background-color: #d1dbda;

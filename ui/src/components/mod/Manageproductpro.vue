@@ -1,5 +1,6 @@
 <template>
   <div class="my-cartpro">
+  <div class="detail">
     <p> Product ID: {{id}} </p> 
     <p> Product Name: {{name}} </p> 
     <p> Product Warranty: {{warr}} </p> 
@@ -10,16 +11,18 @@
     <p> Delivery Date: {{delivery}}</p>
     <p> Sales Data: {{sales}}</p>
     <p> Price: {{price}}</p>
+  </div>
     <div class="demo-image">
   <div class="img" v-for="fit in fits" :key="fit">
     <span class="demonstration">{{ fit }}</span>
     <el-image
-      style="width: 200px; height: 200px"
+      style="width: 400px; height: 400px"
       :src="editForm.picture"
       :fit="fit"></el-image>
   </div>
-</div>  
-    <el-button type="primary" icon="el-icon-edit" @click="dialogFormVisible = true" class="edit"></el-button>
+</div>
+<div class="b"> 
+    <el-button type="white" icon="el-icon-edit" @click="dialogFormVisible = true" class="edit">Edit</el-button>
     <el-dialog title="Product Management" :visible.sync="dialogFormVisible" width="40%" @close="closeDialog" class="editf" append-to-body>
       <el-form :model="editForm" ref="edit_FormRef" :rules="editRules">
         <p>Product ID: {{id}}</p>
@@ -51,13 +54,14 @@
       </div>
     </el-dialog>
     
-    <el-button type="primary" @click="deldialogFormVisible = true" icon="el-icon-delete" class="edit"></el-button>
+    <el-button type="black" @click="deldialogFormVisible = true" icon="el-icon-delete" class="edit">Delete</el-button>
     <el-dialog :visible.sync="deldialogFormVisible" width="13%" @close="closeDialog" append-to-body>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="deldialogFormVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="delFn">Confim</el-button>
+        <el-button type="white" @click="deldialogFormVisible = false">Cancel</el-button>
+        <el-button type="white" @click="delFn">Confim</el-button>
       </div>
     </el-dialog>
+  </div> 
   </div>
   
 
@@ -235,8 +239,7 @@ export default {
 
 <style lang="less" scoped>
 .my-cartpro {
-  width: 400px;
-  height:  100%;
+  width: 1400px;
   padding: 20px;
   border: 2px solid #000;
   border-radius: 5px;
@@ -246,8 +249,7 @@ export default {
   
 }
 .img{
-  position: relative;
-  top:50%;
+  float:right;
 }
 .des{
   position: relative;
@@ -255,10 +257,16 @@ export default {
   left: 400px;
 }
 .edit{
-  position: relative;
-  left:70%;
+position:relative;
+left:40%;
 }
-
+.detail{
+  float:left;
+  width: 700px;
+}
+.b{
+  clear:both;
+}
 
 </style>
 

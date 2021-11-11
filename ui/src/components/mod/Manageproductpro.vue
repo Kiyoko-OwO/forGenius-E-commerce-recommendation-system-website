@@ -1,25 +1,29 @@
 <template>
   <div class="my-cartpro">
-    <p> Product ID: {{id}} </p> 
-    <p> Product Name: {{name}} </p> 
-    <p> Product Warranty: {{warr}} year(s)</p> 
-    <p> Feature: </p>  
+  <div class="detail">
+    <p> <span>Product ID:</span>   {{id}} </p> 
+    <p> <span>Product Name:</span> </p> 
+    {{name}}
+    <p> <span>Product Warranty:</span> {{warr}} year(s)</p> 
+    <p> <span>Feature:</span> </p>  
     <p> {{features}} </p> 
-    <p> Description: </p>
+    <p> <span>Description:</span> </p>
     <p>{{description}}</p>
-    <p> Delivery Date: {{delivery}}</p>
-    <p> Sales Data: {{sales}}</p>
-    <p> Price: {{price}}</p>
+    <p> <span>Delivery Date: </span>{{delivery}}</p>
+    <p> <span>Sales Data: </span>{{sales}}</p>
+    <p> <span>Price: </span>{{price}}</p>
+  </div>
     <div class="demo-image">
   <div class="img" v-for="fit in fits" :key="fit">
     <span class="demonstration">{{ fit }}</span>
     <el-image
-      style="width: 150px; height: 150px"
+      style="width: 400px; height: 400px"
       :src="editForm.picture"
       :fit="fit"></el-image>
   </div>
-</div>  
-    <el-button type="primary" icon="el-icon-edit" @click="dialogFormVisible = true" class="edit"></el-button>
+</div>
+<div class="b"> 
+    <el-button type="white" icon="el-icon-edit" @click="dialogFormVisible = true" class="edit">Edit</el-button>
     <el-dialog title="Product Management" :visible.sync="dialogFormVisible" width="40%" @close="closeDialog" class="editf" append-to-body>
       <el-form :model="editForm" ref="edit_FormRef" :rules="editRules">
         <p>Product ID: {{id}}</p>
@@ -51,13 +55,14 @@
       </div>
     </el-dialog>
     
-    <el-button type="primary" @click="deldialogFormVisible = true" icon="el-icon-delete" class="edit"></el-button>
-    <el-dialog :visible.sync="deldialogFormVisible" width="13%" @close="closeDialog" append-to-body>
+    <el-button type="black" @click="deldialogFormVisible = true" icon="el-icon-delete" class="edit">Delete</el-button>
+    <el-dialog :visible.sync="deldialogFormVisible" width="16%" @close="closeDialog" append-to-body>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="deldialogFormVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="delFn">Confim</el-button>
+        <el-button type="white" @click="deldialogFormVisible = false" icon="el-icon-circle-close">Cancel</el-button>
+        <el-button type="white" @click="delFn" icon="el-icon-circle-check">Confim</el-button>
       </div>
     </el-dialog>
+  </div> 
   </div>
   
 
@@ -235,18 +240,17 @@ export default {
 
 <style lang="less" scoped>
 .my-cartpro {
-  width: 400px;
-  height: 200 px;
+  width: 1400px;
   padding: 20px;
   border: 2px solid #000;
   border-radius: 5px;
   margin: 10px;
   font-family: 'segUi';
   word-break:break-all;
+  
 }
 .img{
-  position: relative;
-  top:50%;
+  float:right;
 }
 .des{
   position: relative;
@@ -254,10 +258,23 @@ export default {
   left: 400px;
 }
 .edit{
-  position: relative;
-  left:70%;
+position:relative;
+left:40%;
 }
-
+.detail{
+  float:left;
+  width: 700px;
+}
+.b{
+  clear:both;
+}
+span{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size:17px;
+}
+p{
+    white-space:pre-wrap;
+}
 
 </style>
 

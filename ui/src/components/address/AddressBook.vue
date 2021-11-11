@@ -6,7 +6,7 @@
         <div class="title">
         ADDRESS&nbsp;BOOK
         </div>
-        <el-button type="primary" class="add" @click="add()">ADD ADDRESS</el-button>
+        <el-button type="brown" class="add" @click="add()" >ADD ADDRESS</el-button>
     </header>
     
     <div id="address-container">

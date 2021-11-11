@@ -20,9 +20,9 @@
         @subQua = 'sub'
         @delPro = 'del'>
         </Product>
-        <p>&nbsp;&nbsp;Total Price: $</p>
-        <p>&nbsp;&nbsp;{{total_price}}</p>
-        <el-button type="primary" class="checkout" @click="submitForm()">Check Out</el-button>
+        <p>&nbsp;&nbsp;Total Price: </p>
+        <p>&nbsp;&nbsp;${{total_price}}</p>
+        <el-button type="brown" class="checkout" @click="submitForm()" icon="el-icon-check">Check Out</el-button>
     </div>
   </div>
   </div>
@@ -168,13 +168,13 @@ header{
 .checkout{
     position: relative;
     top:20px;
-    left:75%;
+    left:83%;
     width: 130px;
     background: #786662;
     border-radius: 10px;
     color: #fefefe;
     letter-spacing:2px;
-    padding-left: 25px;
+    padding-left: 10px;
     border-color: #786662;
     z-index: 200;
 }
@@ -190,5 +190,8 @@ header{
 .fix{
     margin:0 auto;
     width:1750px;
+}
+p{
+    letter-spacing: 1.5px;
 }
 </style>

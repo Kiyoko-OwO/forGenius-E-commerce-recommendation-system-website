@@ -15,7 +15,7 @@
             </el-form-item>
             <div class="block"></div>
             <el-form-item>
-              <el-button type="primary" class='submit' @click="submitForm('loginForm')">SUBMIT</el-button>
+              <el-button class='submit' @click="submitForm('loginForm')" type="brown">SUBMIT</el-button>
             </el-form-item>
         </el-form>
         <a  text-decoration:underline href="#/forgotpassword" class="forget">FORGET MY PASSWORD</a>

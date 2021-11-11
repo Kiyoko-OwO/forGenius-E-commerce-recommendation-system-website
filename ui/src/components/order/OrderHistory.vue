@@ -50,7 +50,6 @@ export default {
         async loadOrd() {
             this.tokenForm.token = sessionStorage.getItem('token');
             ord_view(this.tokenForm).then( res => {
-                console.log(res.data.data);
                 this.order_list = res.data.data.order_list;
             }).catch( error => {
                 this.$message.error('No order exists');

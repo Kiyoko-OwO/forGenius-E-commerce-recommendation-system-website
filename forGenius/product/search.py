@@ -2,12 +2,26 @@ from product.models import Product, Features
 from user.errors import InputError
 from user.models import Admin
 from product.products import get_product_features
+from user.models import User, Search_history
+from user.errors import InputError
+from product.recommendation import recommendationDB as DB
 
 # return the search list from the chosen search key and sorting algothirms
 def get_search_result(email, search, sorting):
     # check is the sorting algothirms are invalid
     if sorting != "price_low" and sorting != "price_high" and sorting != "best_sell" and sorting != "a_to_z" and sorting != "z_to_a" and sorting != "relevance":
         raise InputError("The sorting is invalid")
+    
+    # add the search to user's search history
+    if email != "":
+        try:
+            user_email = User.objects.get(pk=email)
+        except User.DoesNotExist:
+            raise InputError('User not exist')
+
+
+        search_save = Search_history(user_email=user_email, search=search)
+        search_save.save()
     
     # check if the search word is valid
     if search == "":
@@ -44,7 +58,7 @@ def get_search_result(email, search, sorting):
             "features" : get_product_features(product.product_id) 
         }
         return_list.append(item)
-        
+    DB[email] = return_list
     return return_list
     
 # the helper function for sorting

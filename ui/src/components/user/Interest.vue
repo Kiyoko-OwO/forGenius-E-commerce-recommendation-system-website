@@ -7,14 +7,11 @@
         PLEASE CHOOSE YOUR INTEREST FIELD
     </div>
     </header>
-    <div>
+    <div class="checkBox">
       <el-checkbox-group v-model="interestForm.interest" class="checkbox">
         <el-checkbox-button v-for="int in tags" :label="int" :key="int">{{int}}</el-checkbox-button>
       </el-checkbox-group>
       <el-button class='submit' @click="submitForm()">SUBMIT</el-button>
-      <li v-for="item in interestForm.interest" :key="item" class="choose">
-          <span>{{ item }}</span>
-      </li>
       </div>
    </div>
   </div>
@@ -23,7 +20,7 @@
 </template>
 <script>
 import { interest_add } from '../../api/user'
-const tagOptions = ['Fastion', 'Toys', 'Hobby', 'DIY', 'Electronics', 'Media', 'Furniture', 'Appliance', 'Food', 'Personal Care']
+const tagOptions = ['Fashion', 'Toys', 'Hobby', 'DIY', 'Electronics', 'Media', 'Furniture', 'Appliance', 'Food', 'Personal Care']
 export default {
   data () {
     return {
@@ -52,7 +49,6 @@ export default {
 <style lang="less" scoped>
 .submit{
     position: relative;
-    margin-top:200px;
     left:50%;
     height:50px;
     width:200px;
@@ -85,7 +81,6 @@ header{
 .logo{
     height: 200%;
     position: relative;
-    cursor: pointer;
     top:-60px;
     left:-600px;
     z-index:100;
@@ -110,5 +105,11 @@ header{
     left:49%;
     transform: translate(-50%);
     text-align: center;
+}
+.checkbox {
+  height: 200px;
+  position: relative;
+  left:23%;
+  margin-top: 100px;
 }
 </style>

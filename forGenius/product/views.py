@@ -27,18 +27,8 @@ def view_product_user(request):
 
     response = HttpResponse()
     if request.method == "GET":
-        # try:
-        #     data = json.loads(request.body)
-        # except json.JSONDecodeError:
-        #     response.status_code = 441
-        #     response.content = 'json.JSONDecodeErro'
-        #     return response
 
         product_id = request.GET.get("product_id")
-        # except KeyError:
-        #     response.status_code = 442
-        #     response.content = "format is wrong"
-        #     return response
 
         if product_id is None:
             response.status_code = 442

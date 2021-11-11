@@ -18,7 +18,7 @@
               </el-input>
         </el-form-item>
         </el-form>
-        <el-button class='submit' @click="reset">SUBMIT</el-button>
+        <el-button class='submit' @click="reset" type="brown">SUBMIT</el-button>
         </div>
       </div>
     </div>

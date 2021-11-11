@@ -7,12 +7,13 @@
           :src="proPic"
           :fit="fit"></el-image>
     </div>
-    <p class="plink" @click="goProduct"> Product Name: {{proName}} </p> 
-    <p> Price: {{proPrice}}</p>
+    <p class="plink" @click="goProduct"> {{proName}} </p> 
+    <p> $ {{proPrice}}</p>
     <p> Quantity: {{qua}}</p>
-    <el-button class="el-icon-minus" circle @click="subFn"></el-button>
-    <el-button class="el-icon-plus" circle @click="addFn"></el-button>
-    <el-button class="el-icon-close" circle @click="delFn"></el-button>
+    <el-button class="el-icon-minus" circle @click="subFn" type="white"></el-button>
+    <el-button class="el-icon-plus" circle @click="addFn" type="white"></el-button>
+    <el-button class="el-icon-close" circle @click="delFn" type="white"></el-button>
+    <div class="line"></div>
   </div>
 </template>
 
@@ -46,9 +47,8 @@ export default {
 
 <style lang="less" scoped>
 .my-cartpro {
-  width: 450px;
+  width: 475px;
   padding: 20px;
-  border: 2px solid #000;
   border-radius: 5px;
   margin: 10px;
   font-family: 'segUi';
@@ -56,8 +56,21 @@ export default {
 }
 .img{
   float: right;
+  margin-right:-20px;
 }
 .plink {
   cursor: pointer;
+}
+p{
+  letter-spacing: 1.5px;
+  
+}
+.line{
+  margin-top: 20px;
+  position: relative;
+  left:-145px;
+  width: 750px;
+  height:2px;
+  background-color: black;
 }
 </style>

@@ -9,7 +9,7 @@
     <p> Postal Code:{{post_code}}</p>
     <p> Phone Number: {{phoneNumber}}</p>
     <!-- Form -->
-    <el-button type="primary" icon="el-icon-edit" @click="dialogFormVisible = true"></el-button>
+    <el-button type="white" icon="el-icon-edit" @click="dialogFormVisible = true">Edit</el-button>
     <el-dialog title="Address Book" :visible.sync="dialogFormVisible" class="editf" width="30%" append-to-body>
       <el-form :model="editForm" ref="edit_FormRef" :rules="editRules">
            <el-form-item label="NAME" class="username_change" prop="name">
@@ -42,12 +42,12 @@
           </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="submitEdit">Confim</el-button>
+        <el-button type="white" @click="dialogFormVisible = false" icon="el-icon-circle-close">Cancel</el-button>
+        <el-button type="white" @click="submitEdit" icon="el-icon-circle-check">Confim</el-button>
       </div>
     </el-dialog>
     
-    <el-button type="primary" icon="el-icon-delete" @click="delFn"></el-button>
+    <el-button type="white" icon="el-icon-delete" @click="delFn">Delete</el-button>
   </div>
 </template>
 

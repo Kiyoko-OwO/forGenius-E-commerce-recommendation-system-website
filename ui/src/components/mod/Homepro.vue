@@ -3,7 +3,7 @@
     <div class="img" v-for="fit in fits" :key="fit">
     <span class="demonstration">{{ fit }}</span>
         <el-image
-        style="width: 175px; height: 175px"
+        style="width: 250px; height: 250px"
         :src="proPic"
         :fit="fit" @click="goProduct"></el-image>
     </div>
@@ -39,7 +39,8 @@ export default {
   margin: 10px;
   font-family: 'segUi';
   word-break:break-all;
-  border: 2px solid bisque;
+  border: 4px solid bisque;
+  border-style:groove;
 }
 p {
   cursor: pointer;
@@ -50,5 +51,9 @@ span{
   color:red;
   font-size: 20px ;
   font-family: 'Courier New', Courier, monospace;
+}
+.img{
+  position: relative;
+  left:9%;
 }
 </style>

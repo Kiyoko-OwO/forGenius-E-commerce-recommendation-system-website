@@ -10,7 +10,7 @@
               </el-input>
         </el-form-item>
         </el-form>
-        <el-button class='send' @click="forgot">SEND CODE</el-button>
+        <el-button class='send' @click="forgot" type="brown">SEND CODE</el-button>
         </div>
       </div>
     </div>

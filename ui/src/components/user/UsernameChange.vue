@@ -10,7 +10,7 @@
               </el-input>
         </el-form-item>
         </el-form>
-        <el-button class='send' @click="usernamechange">CONFIRM</el-button>
+        <el-button class='send' @click="usernamechange" type="brown">CONFIRM</el-button>
         </div>
       </div>
     </div>

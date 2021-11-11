@@ -1,5 +1,4 @@
 <template>
-  <div class="address_container">
     <div class="fix">
     <header>
         <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpHome">
@@ -7,25 +6,25 @@
         PRODUCT&nbsp;DETAIL
        </div>
     </header>
-    
+    <main>
     <div class="product_box">
         <div class="img" v-for="fit in fits" :key="fit">
           <span class="demonstration">{{ fit }}</span>
           <el-image
-            style="width: 200px; height: 200px"
+            style="width: 550px; height: 550px"
             :src="product.picture"
             :fit="fit"></el-image>
         </div>
-        <h2>Name: {{product.name}}</h2>
-        <h3>Description:</h3>
-        <p>{{product.description}}</p>
+        <div class="inf_box">
+        <div class="inf">
+        <h2>{{product.name}}</h2>
         <!-- <h3>Feature:</h3>
         <p>{{product.feature}}</p> -->
-        <h3>Warranty: {{product.warranty}} year(s)</h3>
-        <h3>Delivery date: {{product.delivery_date}}</h3>
-        <h3>Price: $ {{product.price}}</h3>
+        <h3>Warranty: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span> {{product.warranty}} year(s)</span></h3>
+        <h3>Delivery date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{product.delivery_date}}</span></h3>
+        <p class="price">$ {{product.price}}</p>
         <h3>Feature: 
-          <el-button v-for="feature in features" :key="feature" @click='searchFe(feature)'>
+          <el-button class="feature" v-for="feature in features" :key="feature" @click='searchFe(feature)' type="white">
           {{feature}}
           </el-button>
         </h3>
@@ -38,26 +37,65 @@
             { type: 'number', message: 'Quantity need to be number'}
             ]"
           >
-          <el-button class="el-icon-remove-outline" @click='deleteOne' circle></el-button>
+          <el-button class="el-icon-remove-outline" @click='deleteOne' circle type="white"></el-button>
           <el-input class="quaBox" type="quantity" v-model.number="numberValidateForm.quantity" autocomplete="off"></el-input>
-          <el-button class="el-icon-circle-plus-outline" @click='addOne' circle></el-button>
+          <el-button class="el-icon-circle-plus-outline" @click='addOne' circle type="white"></el-button>
           </el-form-item>
-          <el-form-item class="save">
-            <el-button type="primary" @click="submitForm('numberValidateForm')">Add Cart</el-button>
-            <el-button @click="resetForm('numberValidateForm')">Reset</el-button>
-          </el-form-item>
+            <el-button icon="el-icon-s-goods" class="addcart" @click="submitForm('numberValidateForm')" type="black">Add Cart</el-button>
+            <el-button icon="el-icon-refresh-right" class="reset" @click="resetForm('numberValidateForm')" type="white">Reset </el-button>
         </el-form>
+      </div>
     </div>
+    </div>
+    </main>
+    <div class="block"></div>
+    <div class="description">
+      <h2>Description</h2>
+      <p>{{product.description}}</p></div>
+    <div class="block"></div>
+    <div class="line"></div>
+    <footer>
+ <div class="recommendation_container">
+          <div>
+            <div class="tittle_container">
+              <div class="tittle2">
+              <p>RECOMMENDATION</p>
+              </div>
+            </div>
+            <div class="product_container">
+              <Home v-for="(obj,ind) in products" :key="obj.product_id"
+              :proName="obj.name"
+              :proDescription="obj.description"
+              :proPrice="obj.price"
+              :proPic="obj.picture"
+              :proId="obj.product_id"
+              :index="ind"
+              > </Home>
+            </div>
+            <div class="blockk">
+            </div>
+          </div>
+        </div>
+    </footer>
    </div>
-  </div>
+   
 </template>
 
 <script>
+import Home from '.././mod/Homepro.vue'
 import { cart_add } from '../../api/order'
 import { product_view } from '../../api/product'
+import { rec_guest } from '../../api/product'
+import { rec_user } from '../../api/product'
 export default {
+     components: {
+        Home
+    },
     data () {
         return {
+            tokenForm: {
+              token: ''
+            },
             fits: [''],
             product: {},
             numberValidateForm: {
@@ -68,11 +106,13 @@ export default {
             product_id_form:{
               product_id: 1
             },
-            features: []
+            features: [],
+            products: []
         }
     },
     created () {
-        this.loadProduct()
+        this.loadProduct(),
+        this.loadRec()
     },
     methods: {
       async loadProduct () {
@@ -84,6 +124,23 @@ export default {
             console.log(error);
           })
       },
+      async loadRec () {
+      if (sessionStorage.getItem('token' != null)) {
+        this.tokenForm.token = sessionStorage.getItem('token');
+        rec_user(this.tokenForm).then ( res => {
+          this.products = res.data.products;
+          this.products = this.products.slice(0, 3);
+        }).catch( error => {
+        })
+      }
+      else {
+        rec_guest(this.tokenForm).then ( res => {
+          this.products = res.data.products;
+          this.products = this.products.slice(0, 3);
+        }).catch( error => {
+        })
+      }
+    },
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
@@ -134,11 +191,9 @@ export default {
   cursor: pointer;
 }
 .quaBox {
-  width: 100px;
-}
-.address_container{
-    background-color: #d1dbda;
-    height: 100%;
+  margin-left: 20px;
+  margin-right:20px;
+  width: 260px;
 }
 header{
     height: 100px;
@@ -164,19 +219,20 @@ header{
     z-index:100;
 }
 
-.save{
-  position: relative;
-}
 .product_box{
-    position: relative;
-    top: 50px;
-    left:53%;
-    transform: translate(-50%);
-    width:500px;
+    margin-top:20px;
+    width:1700px;
     word-break:break-all;
 }
 .img{
-  position: relative;
+  float:left;
+  margin-left:200px;
+}
+.inf{
+  margin:0 auto;
+  word-break:break-all;
+  width:500px;
+  padding-bottom: 30px;
 }
 .fix{
     margin:0 auto;
@@ -190,5 +246,107 @@ header{
     left:49%;
     transform: translate(-50%);
     text-align: center;
+}
+.feature{
+    border-radius: 20px;
+}
+span{
+  font-size: 14px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.addcart{
+  position: relative;
+  left:10px;
+  width:480px;
+  letter-spacing: 4px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  background-color:black;
+  color:white
+}
+.reset{
+  position: relative;
+  margin-top:10px;
+  width:480px;
+  letter-spacing: 4px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  
+}
+.price{
+  color:red;
+  font-size: 20px ;
+  font-family: 'Courier New', Courier, monospace;
+}
+.inf_box{
+  float:right;
+  background-color: #e7eae8;
+  width:600px;
+  margin-right:100px;
+  height:550px;
+}
+.recommendation_container{
+  margin:0 auto;
+  width:1700px;
+  clear: both;
+
+}
+.tittle_container{
+  padding-top:20px;
+  width:500px;
+  margin:0 auto;
+}
+.product_container{
+  position: relative;
+  left:18%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.tittle2{
+  position: relative;
+  left:30%;
+  top:40%;
+  transform:translate(0,-50%) ;
+  font-size: 25px;
+}
+.example{
+  margin-top:-300px;
+}
+footer{
+  padding-top:20px;
+  width:1800px;
+  margin:0 auto;
+  img{
+    width:100%;
+  }
+}
+.blockk{
+  clear:both;
+}
+.line{
+  margin:0 auto;
+  background-color: black;
+  width:1600px;
+  height:2px;
+  clear:both;
+}
+.block{  
+  width:1600px;
+  height:80px;
+  clear:both;
+}
+p{
+      white-space:pre-wrap;
+}
+.description{
+    border: 2px solid black;
+    padding-left:30px;
+    border-radius: 20px;
+    clear:both;
+    position: relative;
+    left:11.5%;
+    width:1390px;
+    h2{
+      position: relative;
+      left: 42%;
+    }
 }
 </style>

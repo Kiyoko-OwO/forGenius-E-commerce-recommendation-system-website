@@ -35,8 +35,8 @@
           </el-form-item>
           <div class="block"></div>
           <el-form-item>
-          <el-button type="primary" @click="submitAdd" class="submit" >CONFIRM</el-button>
-          <el-button type="primary" @click="jumpManage" class="cancel">CANCEL</el-button>
+          <el-button type="brown" @click="submitAdd" class="submit" >CONFIRM</el-button>
+          <el-button type="brown" @click="jumpManage" class="cancel">CANCEL</el-button>
           </el-form-item>
 
       </el-form>

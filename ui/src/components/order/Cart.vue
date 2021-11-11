@@ -168,7 +168,7 @@ header{
 .checkout{
     position: relative;
     top:20px;
-    left:75%;
+    left:83%;
     width: 130px;
     background: #786662;
     border-radius: 10px;

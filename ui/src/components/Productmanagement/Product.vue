@@ -11,17 +11,16 @@
         <div class="img" v-for="fit in fits" :key="fit">
           <span class="demonstration">{{ fit }}</span>
           <el-image
-            style="width: 550px; height: 700px"
+            style="width: 550px; height: 550px"
             :src="product.picture"
             :fit="fit"></el-image>
         </div>
         <div class="inf_box">
         <div class="inf">
         <h2>{{product.name}}</h2>
-        <p>{{product.description}}</p>
         <!-- <h3>Feature:</h3>
         <p>{{product.feature}}</p> -->
-        <h3>Warranty: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span> {{product.warranty}} year(s)</span></h3>
+        <h3>Warranty: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span> {{product.warranty}} year(s)</span></h3>
         <h3>Delivery date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{product.delivery_date}}</span></h3>
         <p class="price">$ {{product.price}}</p>
         <h3>Feature: 
@@ -50,18 +49,18 @@
     </div>
     </main>
     <div class="block"></div>
+    <div class="description">
+      <h2>Description</h2>
+      <p>{{product.description}}</p></div>
+    <div class="block"></div>
+    <div class="line"></div>
     <footer>
  <div class="recommendation_container">
           <div>
             <div class="tittle_container">
-              <div class="tittle">
+              <div class="tittle2">
               <p>RECOMMENDATION</p>
               </div>
-              <div class="l_tittle">
-              <p>THE PRODUCTS</p>
-              <div class="line">
-              </div>
-              </div>  
             </div>
             <div class="product_container">
               <Home v-for="(obj,ind) in products" :key="obj.product_id"
@@ -72,6 +71,8 @@
               :proId="obj.product_id"
               :index="ind"
               > </Home>
+            </div>
+            <div class="blockk">
             </div>
           </div>
         </div>
@@ -264,6 +265,7 @@ span{
 }
 .reset{
   position: relative;
+  margin-top:10px;
   width:480px;
   letter-spacing: 4px;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -279,71 +281,26 @@ span{
   background-color: #e7eae8;
   width:600px;
   margin-right:100px;
+  height:550px;
 }
 .recommendation_container{
-  position: relative;
-  background-color: white;
   margin:0 auto;
-  height:700px;
   width:1700px;
-}
-.tittle_container{
-  float: left;
-  width:500px;
-  height:600px;
-}
-.product_container{
-  float: right;
-  width:1200px;
-  display: flex;
-  flex-wrap: wrap;
-}
-.tittle{
-  position: relative;
-  left:30%;
-  top:40%;
-  transform:translate(0,-50%) ;
-  font-size: 25px;
-}
-.example{
-  margin-top:-300px;
-}
-.l_tittle{
-  font-size: 5px;
-  position: relative;
-  left:34%;
-  top:40%;
-  transform:translate(0,-50%) ;
-}
-.line{
-  height:2px;
-  width:89px;
-  position: relative;
-  left:-1%;
-  top:40%;
-  transform:translate(0,-50%) ;
-  background-color:rgb(0, 217, 255);
-}
-.recommendation_container{
-  background-color: white;
-  margin:0 auto;
-  height:700px;
-  width:1700px;
-  clear:both;
+  clear: both;
 
 }
 .tittle_container{
-  float: left;
+  padding-top:20px;
   width:500px;
-  height:600px;
+  margin:0 auto;
 }
 .product_container{
-  float: right;
-  width:1200px;
+  position: relative;
+  left:18%;
   display: flex;
   flex-wrap: wrap;
 }
-.tittle{
+.tittle2{
   position: relative;
   left:30%;
   top:40%;
@@ -353,20 +310,43 @@ span{
 .example{
   margin-top:-300px;
 }
-.l_tittle{
-  font-size: 5px;
-  position: relative;
-  left:34%;
-  top:40%;
-  transform:translate(0,-50%) ;
+footer{
+  padding-top:20px;
+  width:1800px;
+  margin:0 auto;
+  img{
+    width:100%;
+  }
+}
+.blockk{
+  clear:both;
 }
 .line{
+  margin:0 auto;
+  background-color: black;
+  width:1600px;
   height:2px;
-  width:89px;
-  position: relative;
-  left:-1%;
-  top:40%;
-  transform:translate(0,-50%) ;
-  background-color:rgb(0, 217, 255);
+  clear:both;
+}
+.block{  
+  width:1600px;
+  height:80px;
+  clear:both;
+}
+p{
+      white-space:pre-wrap;
+}
+.description{
+    border: 2px solid black;
+    padding-left:30px;
+    border-radius: 20px;
+    clear:both;
+    position: relative;
+    left:11.5%;
+    width:1390px;
+    h2{
+      position: relative;
+      left: 42%;
+    }
 }
 </style>

@@ -24,7 +24,7 @@ body,
 
 .el-button--brown:focus,
 .el-button--brown:hover {
-  background:  #786662;
-  border-color:  #786662;
+  background:  #eededb;
+  border-color:  #eededb;
   color: black;
 }

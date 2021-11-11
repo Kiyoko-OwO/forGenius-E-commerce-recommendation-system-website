@@ -1,16 +1,17 @@
 <template>
   <div class="my-cartpro">
   <div class="detail">
-    <p> Product ID: {{id}} </p> 
-    <p> Product Name: {{name}} </p> 
-    <p> Product Warranty: {{warr}} </p> 
-    <p> Feature: </p>  
+    <p> <span>Product ID:</span>   {{id}} </p> 
+    <p> <span>Product Name:</span> </p> 
+    {{name}}
+    <p> <span>Product Warranty:</span> {{warr}} year(s)</p> 
+    <p> <span>Feature:</span> </p>  
     <p> {{features}} </p> 
-    <p> Description: </p>
+    <p> <span>Description:</span> </p>
     <p>{{description}}</p>
-    <p> Delivery Date: {{delivery}}</p>
-    <p> Sales Data: {{sales}}</p>
-    <p> Price: {{price}}</p>
+    <p> <span>Delivery Date: </span>{{delivery}}</p>
+    <p> <span>Sales Data: </span>{{sales}}</p>
+    <p> <span>Price: </span>{{price}}</p>
   </div>
     <div class="demo-image">
   <div class="img" v-for="fit in fits" :key="fit">
@@ -55,10 +56,10 @@
     </el-dialog>
     
     <el-button type="black" @click="deldialogFormVisible = true" icon="el-icon-delete" class="edit">Delete</el-button>
-    <el-dialog :visible.sync="deldialogFormVisible" width="13%" @close="closeDialog" append-to-body>
+    <el-dialog :visible.sync="deldialogFormVisible" width="16%" @close="closeDialog" append-to-body>
       <div slot="footer" class="dialog-footer">
-        <el-button type="white" @click="deldialogFormVisible = false">Cancel</el-button>
-        <el-button type="white" @click="delFn">Confim</el-button>
+        <el-button type="white" @click="deldialogFormVisible = false" icon="el-icon-circle-close">Cancel</el-button>
+        <el-button type="white" @click="delFn" icon="el-icon-circle-check">Confim</el-button>
       </div>
     </el-dialog>
   </div> 
@@ -266,6 +267,13 @@ left:40%;
 }
 .b{
   clear:both;
+}
+span{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size:17px;
+}
+p{
+    white-space:pre-wrap;
 }
 
 </style>

@@ -46,6 +46,8 @@
               :index="ind"
               > </Home>
             </div>
+            <div class="blockk">
+            </div>
           </div>
         </div>
         <footer>
@@ -253,7 +255,6 @@ main #logo {
 .recommendation_container{
   background-color: white;
   margin:0 auto;
-  height:700px;
   width:1700px;
 
 }
@@ -301,5 +302,8 @@ footer{
   img{
     width:100%;
   }
+}
+.blockk{
+  clear:both;
 }
 </style>

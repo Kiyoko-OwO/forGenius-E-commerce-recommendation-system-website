@@ -123,12 +123,12 @@ export default {
     if(!this.keywords){
       this.$message.error("Please input search keywords");
     }else{
-      if (this.isGuest == true) {
-        this.$message.error("Please log in first");
-      } else {
+      // if (this.isGuest == true) {
+      //   this.$message.error("Please log in first");
+      // } else {
         sessionStorage.setItem('word',this.keywords);
-      this.$router.push('/search')
-      }
+        this.$router.push('/search')
+      //}
     }},
     jumpProfile () {
       this.$router.push('/userprofile')

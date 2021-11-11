@@ -24,7 +24,11 @@
         <h3>Warranty: {{product.warranty}} year(s)</h3>
         <h3>Delivery date: {{product.delivery_date}}</h3>
         <h3>Price: $ {{product.price}}</h3>
-
+        <h3>Feature: 
+          <el-button v-for="feature in features" :key="feature" @click='searchFe(feature)'>
+          {{feature}}
+          </el-button>
+        </h3>
         <el-form :model="numberValidateForm" ref="numberValidateForm" label-width="100px" class="demo-ruleForm">
           <el-form-item
             label="Quantity"
@@ -63,7 +67,8 @@ export default {
             },
             product_id_form:{
               product_id: 1
-            }
+            },
+            features: []
         }
     },
     created () {
@@ -72,11 +77,9 @@ export default {
     methods: {
       async loadProduct () {
           this.product_id_form.product_id = sessionStorage.getItem('product');
-          
-          console.log(this.product_id_form);
           product_view(this.product_id_form).then ( res => {
-            console.log(res.data);
-            this.product = res.data.data
+            this.product = res.data.data;
+            this.features = this.product.features.split(" ");
           }).catch( error => {
             console.log(error);
           })
@@ -86,7 +89,6 @@ export default {
           if (valid) {
             this.numberValidateForm.product_id = this.product_id_form.product_id;
             this.numberValidateForm.token = sessionStorage.getItem('token');
-            console.log(this.numberValidateForm);
             cart_add(this.numberValidateForm).then( res => {
               this.$message({message: 'Sucess!',type: 'success'});
               this.$router.push('cart');
@@ -111,6 +113,9 @@ export default {
       jumpHome () {
         sessionStorage.removeItem('product');
         this.$router.push('Home');
+      }, searchFe(feature) {
+        sessionStorage.setItem('word',feature);
+        this.$router.push('/search')
       }
     }
 }

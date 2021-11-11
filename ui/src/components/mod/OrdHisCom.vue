@@ -30,6 +30,12 @@
       </el-dialog>
       <p>Paid: {{payStat}}</p>
       <p>Order Date: {{orderDate}}</p>
+      <div>
+        <el-image v-for="(item,index) in shows" :key="index"
+            style="width: 100px; height: 100px"
+            :src="item.picture"
+            :fit="fit"></el-image>
+      </div>
       <el-button @click="orderFn" class="detail">Detail</el-button>
       <el-button @click="orderShare" class="detail" icon="el-icon-message">Share</el-button>
       <el-dialog title="Share Order" :visible.sync="sharedialogFormVisible" class="editf"  width="30%" append-to-body>
@@ -97,7 +103,8 @@ export default {
               { validator: checkUsername, trigger: 'blur'}
             ]
             },
-            items: []  
+            items: [],
+            shows: []
         }
     },
     created () {
@@ -111,6 +118,7 @@ export default {
           this.viewForm.order_id = this.ordId;
           ord_sin_view(this.viewForm).then( res => {
               this.items = res.data.item;
+              this.shows = this.items.slice(0, 3);
           }).catch( error => {
               this.$message.error('Failed');
           })

@@ -4,6 +4,7 @@ from user.models import Admin
 from product.products import get_product_features
 from user.models import User, Search_history
 from user.errors import InputError
+from product.recommendation import recommendationDB as DB
 
 # return the search list from the chosen search key and sorting algothirms
 def get_search_result(email, search, sorting):
@@ -57,7 +58,7 @@ def get_search_result(email, search, sorting):
             "features" : get_product_features(product.product_id) 
         }
         return_list.append(item)
-        
+    DB[email] = return_list
     return return_list
     
 # the helper function for sorting

@@ -70,6 +70,9 @@ export default {
           },{
             value: 'z_to_a',
             label: 'From Z to A'
+          },{
+            value: 'relevance',
+            label: 'Recommendation'
           }],
         value: '',
         keywords: '',
@@ -89,15 +92,17 @@ export default {
     },
     methods: {
       async loadRes() {
+        if (sessionStorage.getItem('token') != null) {
+          this.view_formtoken = sessionStorage.getItem('token');
+        }
         this.keywords = sessionStorage.getItem('word');
-        this.view_form.token = sessionStorage.getItem('token');
         this.view_form.search = sessionStorage.getItem('word');
         if (sessionStorage.getItem('sort') != null) {
           this.view_form.sorting = sessionStorage.getItem('sort');
           this.value = sessionStorage.getItem('sort');
         } else {
-          this.view_form.sorting = 'best_sell';
-          this.value = 'best_sell';
+          this.view_form.sorting = 'relevance';
+          this.value = 'relevance';
         }
         ser_res(this.view_form).then( res => {
           this.product = res.data;

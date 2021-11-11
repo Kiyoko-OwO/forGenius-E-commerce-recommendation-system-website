@@ -4,17 +4,50 @@ from user.models import User, Interest
 from user.errors import InputError
 import random
 
+recommendationDB = {}
+lastDB = {}
 # return the recommendation if the user is logout(guest mode)
-def public_recommendation():
 
+
+def public_recommendation():
+    products = recomment_by_sales()
+    # output the products with ordered number
+    products = pick_products(products, 6)
+    data = {
+        "product_number": len(products),
+        "products": products,
+    }
+    return data
+
+# return the recommendation if the user is logged (user mode)
+
+
+def private_recommendation(email):
+    # search the user email to find its interest
+    try:
+        user_email = User.objects.get(pk=email)
+    except User.DoesNotExist:
+        raise InputError('User not exist')
+    if email not in lastDB:
+        # don't check the repetation
+        listA = pick_products(recomment_by_sales(), 6)
+        listB = pick_products(recomment_by_interest(email), 14)
+        lastDB[email] = combine_list(listA, listB)
+    lastDB[email] = pick_products(combine_list(
+        lastDB[email], pick_products(recomment_by_search(email), 20)), 20)
+    # output the products with ordered number
+    products = pick_products(lastDB[email], 6)
+    data = {
+        "product_number": len(products),
+        "products": products,
+    }
+    return data
+
+
+def recomment_by_sales():
     # sort the product with selling data
     top_selling_products = Product.objects.order_by('-sales_data')
-    data = {
-        "product_number": 0,
-        "products": [],
-    }
-    product_number = 0
-
+    data = []
     # output the relevant selling products
     for product in top_selling_products:
         info = {
@@ -26,22 +59,12 @@ def public_recommendation():
             "features": get_product_features(product.product_id),
             "sales_data": product.sales_data
         }
-        data["products"].append(info)
-        product_number += 1
+        data.append(info)
+    return data
 
-    data["product_number"] = product_number
-    # output the products with ordered number
-    return pick_products(data, 6)
 
-# return the recommendation if the user is logged (user mode)
-def private_recommendation(email):
-    # search the user email to find its interest
-    try:
-        user_email = User.objects.get(pk=email)
-    except User.DoesNotExist:
-        raise InputError('User not exist')
-    data = public_recommendation()
-
+def recomment_by_interest(user_email):
+    data = []
     # put relevent products with interests in the recommendation array
     interests = Interest.objects.filter(user_email=user_email)
     for interest in interests:
@@ -56,29 +79,42 @@ def private_recommendation(email):
                 "features": get_product_features(product.product_id),
                 "sales_data": product.sales_data
             }
-            if info not in data["products"]:
-                data["products"].append(info)
-                data["product_number"] += 1
+            if info not in data:
+                data.append(info)
     # sort the products with selling datas
-    data["products"] = sorted(data["products"], key=lambda x: -x["sales_data"])
-    return pick_products(data, 6)
-
-# pick selected number of the products from the recommendation lists
-def pick_products(product_list, num):
-    if product_list["product_number"] <= num:
-        return product_list
-    # use random algorithms to select
-    samples = random.sample(product_list["products"], num)
-    data = {
-        "product_number": num,
-        "products": samples,
-    }
+    data = sorted(data, key=lambda x: -x["sales_data"])
     return data
 
+
+def recomment_by_search(user_email):
+    if user_email in recommendationDB:
+        return recommendationDB[user_email]
+    else:
+        return []
+
 # balance recommendation lists to selected number of the products
+
+
 def balance_products(product_list, num):
     if len(product_list) <= num:
         return product_list
     # use random algorithms to select
     to_delete = random.sample(range(product_list), len(product_list) - num)
     return [x for i, x in enumerate(product_list) if not i in to_delete]
+
+# pick selected number of the products from the recommendation lists
+
+
+def pick_products(product_list, num):
+    if len(product_list) <= num:
+        return product_list
+    # use random algorithms to select
+    samples = random.sample(product_list, num)
+    return samples
+
+
+def combine_list(a_str, b_str):
+    for b in b_str:
+        if b not in a_str:
+            a_str.append(b)
+    return a_str

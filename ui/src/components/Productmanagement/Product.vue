@@ -46,13 +46,15 @@
         </el-form>
       </div>
     </div>
-    </div>
-    </main>
-    <div class="block"></div>
-    <div class="description">
+       <div class="block"></div>
+        <div class="description">
       <h2>Description</h2>
       <p>{{product.description}}</p></div>
+    </div>
+    
+    </main>
     <div class="block"></div>
+
     <div class="line"></div>
     <footer>
  <div class="recommendation_container">
@@ -221,8 +223,9 @@ header{
 
 .product_box{
     margin-top:20px;
-    width:1700px;
+    width:1500px;
     word-break:break-all;
+    margin-left: 25px;
 }
 .img{
   float:left;
@@ -281,13 +284,13 @@ span{
   float:right;
   background-color: #e7eae8;
   width:600px;
-  margin-right:100px;
   height:550px;
 }
 .recommendation_container{
-  margin:0 auto;
-  width:1700px;
+  width:1300px;
   clear: both;
+  position: relative;
+  left:20%;
 
 }
 .tittle_container{
@@ -297,13 +300,10 @@ span{
 }
 .product_container{
   position: relative;
-  left:18%;
   display: flex;
   flex-wrap: wrap;
 }
 .tittle2{
-  position: relative;
-  left:30%;
   top:40%;
   transform:translate(0,-50%) ;
   font-size: 25px;
@@ -313,24 +313,19 @@ span{
 }
 footer{
   padding-top:20px;
-  width:1800px;
-  margin:0 auto;
-  img{
-    width:100%;
-  }
 }
 .blockk{
   clear:both;
 }
 .line{
-  margin:0 auto;
   background-color: black;
-  width:1600px;
+  width:1300px;
   height:2px;
   clear:both;
+  margin:0 auto;
 }
 .block{  
-  width:1600px;
+  width:1200px;
   height:80px;
   clear:both;
 }
@@ -342,12 +337,11 @@ p{
     padding-left:30px;
     border-radius: 20px;
     clear:both;
+    width:1275px;
     position: relative;
-    left:11.5%;
-    width:1390px;
+    left:13%;
     h2{
-      position: relative;
-      left: 42%;
+      margin-left:41%;
     }
 }
 </style>

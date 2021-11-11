@@ -1,7 +1,7 @@
 <template>
     <div class="reset_container">
       <div class="fix">
-      <img class="logo" src=../../assets/2.png alt="logo">
+      <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpProfile">
         <div class="reset_box">
             <h1>RESET&nbsp;PASSWORD</h1>
         <el-form ref="resetFormRef" :model="resetForm" :rules="resetpasswordRule" label-position="left" label-width="225px" class="reset_form">
@@ -92,6 +92,9 @@ export default {
           })
         }
       })
+    },
+    jumpProfile () {
+      this.$router.push('/userprofile')
     }
   }
 }

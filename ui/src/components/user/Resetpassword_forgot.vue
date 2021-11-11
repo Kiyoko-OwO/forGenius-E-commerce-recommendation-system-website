@@ -1,7 +1,7 @@
 <template>
     <div class="reset_container">
       <div class="fix">
-        <img class="logo" src=../../assets/2.png alt="logo">
+        <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpHome">
         <div class="reset_box">
             <h1>RESET&nbsp;PASSWORD</h1>
         <el-form ref="resetFormRef" :model="resetForm" :rules="resetpasswordRules" label-position="left" label-width="225px" class="reset_form">
@@ -90,6 +90,9 @@ export default {
             this.$message.error('Failed');
         })
       })
+    },
+    jumpHome () {
+      this.$router.push('/home');
     }
   }
 }

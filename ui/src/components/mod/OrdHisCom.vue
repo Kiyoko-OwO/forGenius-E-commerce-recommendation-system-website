@@ -110,7 +110,6 @@ export default {
           this.viewForm.token = sessionStorage.getItem('token');
           this.viewForm.order_id = this.ordId;
           ord_sin_view(this.viewForm).then( res => {
-              console.log(res.data.item);
               this.items = res.data.item;
           }).catch( error => {
               this.$message.error('Failed');

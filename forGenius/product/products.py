@@ -107,6 +107,48 @@ def admin_products_all():
         data[info_str].append(info)
     return data
 
+# return all the product infomration in sales data order
+def admin_products_all_sort(sorting):
+    data = admin_products_all()
+    
+    # check the sorting is valid or not, if not valid,just return answer from admin_products_all()
+    if (sorting != "high_to_low" and sorting != "low_to_high"):
+        return data
+    
+    # if it is valid, return list in order
+    info_str = "product_details"
+    
+    # sort the list in sales data order
+    result_list = sort_help(sorting, data[info_str])
+    res = {info_str: []}
+    res[info_str] = result_list
+    return res
+
+# the helper function for sorting
+def sort_help(sorting, list):
+    result = []
+    return recursion_help(result, list, sorting)
+
+# the helper function for recursion sort list in sales data order   
+def recursion_help(result, list, sorting):
+    if len(list) == 0:
+        return result
+    first = 0
+    # choose the chosen method based on the sorting
+    for j in range(0, len(list)):
+        if (sorting == "high_to_low"):
+            if list[j]["sales_data"] > list[first]["sales_data"]:
+                first = j
+        if (sorting == "low_to_high"):
+            if list[j]["sales_data"] < list[first]["sales_data"]:
+                first = j
+
+    # add the most optinal one in the result lists and start next recursion.
+    result.append(list[first])
+    list.remove(list[first])
+    return recursion_help(result, list, sorting)
+
+
 # get the features of one product
 def get_product_features(product_id):
     arr = []

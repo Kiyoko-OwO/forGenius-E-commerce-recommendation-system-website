@@ -162,7 +162,7 @@ export default {
                     this.isEmpty = true;
                     console.log(res);
                     this.addressbook = res.data.data.address_book;
-                    this.addressbook = this.addressbook.slice().reverse()
+                    this.addressbook = this.addressbook.slice().reverse();
                     this.create_form.name = this.addressbook[0].name;
                     this.create_form.address_line = this.addressbook[0].address_line;
                     this.create_form.phone_number = this.addressbook[0].phone_number;

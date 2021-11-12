@@ -134,7 +134,11 @@ export default {
       // When search box has no input
       if(!this.keywords){
         this.$message.error("Please input search keywords");
-      }else{
+      }
+      else if(this.keywords.match(/^[ ]*$/)){
+        this.$message.error("Please input search keywords");
+      }
+      else{
         sessionStorage.setItem('word',this.keywords);
         this.$router.push('/search')
       }},
@@ -216,20 +220,17 @@ main #logo {
     margin-left: 300px;
     letter-spacing:10px;
 }
-
 .search {
     width: 1000px;
     height: 50px;
     margin: 50px auto;
 }
-
 .parent {
     width: 100%;
     height: 50px;
     top: 4px;
     position: relative;
 }
-
 .parent>input:first-of-type {
     width: 550px;
     height: 40px;
@@ -242,11 +243,9 @@ main #logo {
     padding-left: 10px;
     margin-right: 5px;
 }
-
 .parent>input:first-of-type:focus {
     border: 1px solid #786662;
 }
-
 .parent>input:last-of-type {
     width: 100px;
     height: 40px;
@@ -263,7 +262,6 @@ main #logo {
   background-color: white;
   margin:0 auto;
   width:1700px;
-
 }
 .tittle_container{
   float: left;

@@ -8,6 +8,14 @@ import request from '../utils/request'
     })
   }
 
+  export const admin_sort = parameter => {
+    return request({
+      method: 'GET',
+      url: '/product/all/sort',
+      params: parameter
+    })
+}
+
   export const product_add = data => {
     return request({
       method: 'POST',

@@ -8,6 +8,17 @@
         </div>
        <el-button type="brown" class="addProduct" v-on:click="jumpAddproduct">ADD PROCDUCT</el-button>
     </header>
+    <div class="sort">
+      <el-select v-model="value" clearable placeholder="Sort by Sales data" class="choose">
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </el-option>
+      </el-select>
+      <el-button class="apply" type="primary" v-on:click="reload()"> Apply</el-button>
+    </div>
     <div class="manage-container">
       <Manage v-for="(obj,ind) in product" :key="ind"
       :id="obj.product_id"
@@ -32,16 +43,28 @@
 <script>
 import Manage from '../mod/Manageproductpro.vue'
 import { admin_view } from '../../api/admin'
+import { admin_sort } from '../../api/admin'
 import { product_delete } from '../../api/admin'
 export default {
     inject:['reload'],
     data () {
       return {
         view_form: {},
+        sort_form: {
+          sorting: ""
+        },
         product: [],
         deleteForm : {
             product_id: ''
-        }
+        },
+        options: [{
+            value: 'low_to_high',
+            label: 'From Low to High'
+          },{
+            value: 'high_to_low',
+            label: 'From High to Low'
+          }],
+        value: ''
       }
     },
     created () {
@@ -51,14 +74,31 @@ export default {
     components: {
         Manage
     },
+    watch: {
+      value(newVal, oldVal) {
+        sessionStorage.setItem('adsort',newVal);
+      }
+    },
     methods: {
       async loadPro() {
-        admin_view(this.view_form).then( res => {
-          console.log(res.data.data.product_details);
-          this.product = res.data.data.product_details;
-        }).catch( error => {
-            this.$message.error('Failed');
-        })
+        if (sessionStorage.getItem('adsort') != null) {
+          this.sort_form.sorting = sessionStorage.getItem('adsort');
+          this.value = sessionStorage.getItem('adsort');
+          admin_sort(this.sort_form).then( res => {
+            console.log(res.data.data.product_details);
+            this.product = res.data.data.product_details;
+          }).catch( error => {
+              this.$message.error('Failed');
+          })
+        } else {
+          admin_view(this.view_form).then( res => {
+            console.log(res.data.data.product_details);
+            this.product = res.data.data.product_details;
+          }).catch( error => {
+              this.$message.error('Failed');
+          })
+        }
+        
       },
       async checkStat () {
             console.log(await this.check());
@@ -71,10 +111,13 @@ export default {
             }
       },
       jumpAddproduct () {
-        this.$router.push('/addproduct')
+        sessionStorage.removeItem('adsort');
+        this.$router.push('/addproduct');
       },
       jumpAdmin () {
-        this.$router.push('/admin')
+        sessionStorage.removeItem('adsort');
+        this.$router.push('/admin');
+        
       },
       del(index) {
         this.deleteForm.product_id = this.product[index].product_id;
@@ -150,7 +193,9 @@ header{
     left:49%;
     transform: translate(-50%);
     text-align: center;
-
-
+}
+.sort{
+    position: relative;
+    left:40%;
 }
 </style>

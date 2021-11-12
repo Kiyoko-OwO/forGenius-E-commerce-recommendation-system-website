@@ -38,7 +38,7 @@ def private_recommendation(email):
         lastDB[email], pick_products(recomment_by_search(email), 20)), 20)
     # output the products with ordered number
     products = pick_products(lastDB[email], 6)
-    print(products)
+
     data = {
         "product_number": len(products),
         "products": products,
@@ -101,8 +101,12 @@ def recomment_by_search(user_email):
         
         # get the product result with the lastest two search history
         # and put them to result list
-        result.append(get_search_result("", lastest_search[-1], "best_sell"))
-        result.append(get_search_result("", lastest_search[-2], "best_sell"))
+        for item in get_search_result("", lastest_search[-1], "best_sell"):
+            result.append(item)
+            
+        for item in get_search_result("", lastest_search[-2], "best_sell"):
+            result.append(item)
+            
         return result
     except:
         return []
@@ -129,7 +133,12 @@ def pick_products(product_list, num):
 
 
 def combine_list(a_str, b_str):
+    result = []
+    for a in a_str:
+        if a not in result:
+            result.append(a)
+            
     for b in b_str:
-        if b not in a_str:
-            a_str.append(b)
-    return a_str
+        if b not in result:
+            result.append(b)
+    return result

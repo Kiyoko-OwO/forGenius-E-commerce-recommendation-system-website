@@ -14,7 +14,7 @@
       </form>
     </div>
     <div>
-      <el-select v-model="value" clearable placeholder="Select sort method" class="choose">
+      <el-select v-model="value" placeholder="Select sort method" class="choose">
         <el-option
           v-for="item in options"
           :key="item.value"

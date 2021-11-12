@@ -6,7 +6,7 @@
        <div class="title">
         MANAGE&nbsp;PRODUCT
         </div>
-       <el-button class="addProduct" v-on:click="jumpAddproduct">ADD PROCDUCT</el-button>
+       <el-button type="brown" class="addProduct" v-on:click="jumpAddproduct">ADD PROCDUCT</el-button>
     </header>
     <div class="manage-container">
       <Manage v-for="(obj,ind) in product" :key="ind"

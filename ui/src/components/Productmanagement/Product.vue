@@ -287,7 +287,7 @@ span{
   float:right;
   background-color: #e7eae8;
   width:600px;
-  height:550px;
+  
 }
 .recommendation_container{
   width:1300px;

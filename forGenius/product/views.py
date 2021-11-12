@@ -215,6 +215,32 @@ def admin_products_all(request):
     return response
 
 # request for the recommendation list for guests
+def admin_products_all_sort(request):
+    response = HttpResponse()
+    if request.method == "GET":
+        sorting = request.GET.get("sorting")
+        if sorting is None:
+            response.status_code = 442
+            response.content = "KeyError"
+            return response
+        
+        try:
+            data = products.admin_products_all_sort(sorting)
+        except InputError as e:
+            response.status_code = 400
+            response.content = e
+            return response
+        response.status_code = 200
+        meta = {'msg': 'OK', 'status': 200}
+        jsons = {
+            'data': data,
+            'meta': meta
+        }
+        return JsonResponse(jsons)
+    response.status_code = 405
+    return response
+
+# request for the recommendation list for guests
 def public_recommendation(request):
     
     response = HttpResponse()

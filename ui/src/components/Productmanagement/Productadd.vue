@@ -158,7 +158,20 @@ export default {
       }
     }
   },
+  created () {
+    this.checkStat()
+  },
   methods: {
+    async checkStat () {
+        console.log(await this.check());
+    },
+      check () {
+        // Simple Navigation Guards
+        if (sessionStorage.getItem("adtoken") != null) {
+        } else {
+          this.$router.push('/login')
+        }
+    },
     jumpManage () {
       this.$router.push('/manageproduct')
     },

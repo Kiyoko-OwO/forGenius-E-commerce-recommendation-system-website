@@ -9,7 +9,7 @@
     </header>
     
     <div class="cart-container">
-        <Product v-for="(obj,ind) in cart.slice().reverse()" :key="ind"
+        <Product v-for="(obj,ind) in cart" :key="ind"
         :proName="obj.name"
         :proPrice="obj.price"
         :qua="obj.quantity"
@@ -56,21 +56,33 @@ export default {
         }
     },
     created () {
+        this.checkStat(),
         this.loadCart()
     },
     components: {
         Product
     },
     methods: {
+        async checkStat () {
+            console.log(await this.check());
+        },
+        check () {
+            // Simple Navigation Guards
+            if (sessionStorage.getItem("token") != null) {
+            } else {
+            this.$router.push('/login')
+            }
+        },
         async loadCart() {
             this.tokenForm.token = sessionStorage.getItem('token');
             cart_view(this.tokenForm).then( res => {
                 this.cart = res.data.data.cart;
+                this.cart = this.cart.slice().reverse();
                 this.total_price = res.data.data.total;
                 this.qua_form.token = sessionStorage.getItem('token');
                 this.del_form.token = sessionStorage.getItem('token');
             }).catch( error => {
-                this.$message.error('Failed1');
+                this.$message.error('You Need to Login First');
             })
         },
         submitForm() {

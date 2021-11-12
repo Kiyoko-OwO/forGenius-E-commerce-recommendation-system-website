@@ -45,7 +45,8 @@ export default {
       }
     },
     created () {
-      this.loadPro()
+      this.loadPro(),
+      this.checkStat()
     },
     components: {
         Manage
@@ -58,6 +59,16 @@ export default {
         }).catch( error => {
             this.$message.error('Failed');
         })
+      },
+      async checkStat () {
+            console.log(await this.check());
+        },
+        check () {
+            // Simple Navigation Guards
+            if (sessionStorage.getItem("adtoken") != null) {
+            } else {
+                this.$router.push('/login')
+            }
       },
       jumpAddproduct () {
         this.$router.push('/addproduct')

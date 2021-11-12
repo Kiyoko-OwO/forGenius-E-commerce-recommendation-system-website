@@ -53,6 +53,8 @@ export default {
       } else {
         this.isGuest = true;
         this.isUser = false;
+        this.$message.error('You Need to Login First');
+        this.$router.push('/login')
         return this.isUser;
       }
     },
@@ -88,7 +90,7 @@ export default {
       logout(this.tokenForm).then ( res => {
           this.$message({message: 'Log out Sucess!',type: 'success'});
           sessionStorage.clear();
-          this.reload();
+          this.$router.push('/home')
       }).catch( error => {
           this.$message.error('Log out Failed');
       })

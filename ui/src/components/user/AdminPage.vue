@@ -26,9 +26,20 @@ export default {
         }
     },
     created () {
-        this.username = sessionStorage.getItem('adusername');
+        this.checkStat(),
+        this.username = sessionStorage.getItem('adusername')
     },
     methods: {
+        async checkStat () {
+            console.log(await this.check());
+        },
+        check () {
+            // Simple Navigation Guards
+            if (sessionStorage.getItem("adtoken") != null) {
+            } else {
+                this.$router.push('/login')
+            }
+        },
         logOut () {
             this.tokenForm.token = sessionStorage.getItem('adtoken');
             logout(this.tokenForm).then ( res => {

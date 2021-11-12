@@ -26,11 +26,11 @@ export default {
         }
     },
     created () {
-        this.username = sessionStorage.getItem('username');
+        this.username = sessionStorage.getItem('adusername');
     },
     methods: {
         logOut () {
-            this.tokenForm.token = sessionStorage.getItem('token');
+            this.tokenForm.token = sessionStorage.getItem('adtoken');
             logout(this.tokenForm).then ( res => {
                 this.$message({message: 'Log out Sucess!',type: 'success'});
                 sessionStorage.clear();
@@ -43,7 +43,7 @@ export default {
             this.$router.push('/manageproduct')
         },
         jumpHome () {
-        this.$router.push('home')
+        this.$router.push('/admin')
     },
   }
 }

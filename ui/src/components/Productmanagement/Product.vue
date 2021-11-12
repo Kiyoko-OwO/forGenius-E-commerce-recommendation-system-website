@@ -144,14 +144,19 @@ export default {
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.numberValidateForm.product_id = this.product_id_form.product_id;
-            this.numberValidateForm.token = sessionStorage.getItem('token');
-            cart_add(this.numberValidateForm).then( res => {
-              this.$message({message: 'Sucess!',type: 'success'});
-              this.$router.push('cart');
-            }).catch( error => {
-              this.$message.error('You need return homepage to log in first');
-            })
+            if (sessionStorage.getItem('token') != null) {
+              this.numberValidateForm.product_id = this.product_id_form.product_id;
+              this.numberValidateForm.token = sessionStorage.getItem('token');
+              cart_add(this.numberValidateForm).then( res => {
+                this.$message({message: 'Sucess!',type: 'success'});
+                this.$router.push('/cart');
+              }).catch( error => {
+                this.$message.error('Failed');
+              })
+            } else {
+                this.$router.push('/login');
+                sessionStorage.setItem('fromPro', 1);
+            }
           } else {
             console.log('error submit!!');
             return false;

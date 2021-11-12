@@ -242,12 +242,13 @@ export default {
 .my-cartpro {
   width: 1400px;
   padding: 20px;
-  border: 2px solid #000;
-  border-radius: 5px;
+  // border: 2px solid #000;
+  // border-radius: 5px;
+  border-radius: 30px;
   margin: 10px;
   font-family: 'segUi';
   word-break:break-all;
-  
+  background-color: #e7eae8;
 }
 .img{
   float:right;

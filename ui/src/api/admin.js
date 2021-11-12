@@ -11,7 +11,7 @@ import request from '../utils/request'
   export const admin_sort = parameter => {
     return request({
       method: 'GET',
-      url: '/product/all/sort',
+      url: '/product/all/sort/',
       params: parameter
     })
 }

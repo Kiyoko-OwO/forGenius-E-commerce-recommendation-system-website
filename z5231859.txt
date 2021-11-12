@@ -44,9 +44,11 @@ Product page modified
 
 Week 8
 Sign up code connected with api
+Keep tring to optimize user experience
 
 Week 9
 Go product done
 Search result done
 Order share done
 All picture related done
+Start to work on Final Report

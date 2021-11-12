@@ -90,6 +90,7 @@ export default {
       logout(this.tokenForm).then ( res => {
           this.$message({message: 'Log out Sucess!',type: 'success'});
           sessionStorage.clear();
+          this.reload();
           this.$router.push('/home')
       }).catch( error => {
           this.$message.error('Log out Failed');

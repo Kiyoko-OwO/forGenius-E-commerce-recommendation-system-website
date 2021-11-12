@@ -29,6 +29,7 @@ VueRouter.prototype.push = function push(location) {
 
 const routes = [
   {
+    // Default root will be home
     path: '/', redirect: 'home'
   },
   {

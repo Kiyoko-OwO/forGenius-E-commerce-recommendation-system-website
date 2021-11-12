@@ -29,7 +29,7 @@
                     <p> State: {{item.state}}</p>
                     <p> Suburb: {{item.suburb}}</p>
                     <p> Postal Code:{{item.post_code}}</p>
-                    <p>Phone Number: {{item.phone_number}} </p> 
+                    <p> Phone Number: {{item.phone_number}} </p> 
                     <el-button @click="chooseAdd(ind)" class="choose_in">Choose</el-button>
                     <div class="block"></div>
                     <div class="link-in"></div>

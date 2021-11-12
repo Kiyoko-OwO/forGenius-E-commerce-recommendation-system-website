@@ -104,6 +104,7 @@ header {
     margin: 0 auto;
 }
 header #logo {
+    cursor: pointer;
     height: 50px;
     float: left;
     margin-top: 25px;

@@ -78,7 +78,7 @@ def send_email_share(user_name, email, data, receiver):
     subject = data
 
     # set email message info
-    message = MIMEText(subject, 'plain', 'utf-8')
+    message = MIMEText(subject, 'html', 'utf-8')
     message['From'] = Header(user_name, 'utf-8')
     message['To'] = Header(receiver, 'utf-8')
     message['Subject'] = Header(Title, 'utf-8')

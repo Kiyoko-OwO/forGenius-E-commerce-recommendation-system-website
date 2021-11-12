@@ -134,7 +134,11 @@ export default {
       // When search box has no input
       if(!this.keywords){
         this.$message.error("Please input search keywords");
-      }else{
+      }
+      else if(this.keywords.match(/^[ ]*$/)){
+        this.$message.error("Please input search keywords");
+      }
+      else{
         sessionStorage.setItem('word',this.keywords);
         this.$router.push('/search')
       }},

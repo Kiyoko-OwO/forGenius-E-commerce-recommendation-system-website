@@ -124,7 +124,11 @@ export default {
     jumpResult () {
     if(!this.keywords){
       this.$message.error("Please input search keywords");
-    }else{
+    }
+    else if(this.keywords.match(/^[ ]*$/)){
+      this.$message.error("Please input search keywords");
+    }
+    else {
       // if (this.isGuest == true) {
       //   this.$message.error("Please log in first");
       // } else {

@@ -1,7 +1,7 @@
 <template>
     <div id="admin_container">
         <header>
-            <img id="logo" src=../../assets/logoThin.png alt="logo" v-on:click="addFn">
+            <img id="logo" src=../../assets/logoThin.png alt="logo" v-on:click="jumpHome">
             <div class="button_position">
             <el-button @click="logOut" type="white" icon="el-icon-switch-button">Log out</el-button>
             <el-button id="usern" type="white" icon="el-icon-user-solid">{{ username }}</el-button>
@@ -41,7 +41,10 @@ export default {
         },
         jumpManageproduct () {
             this.$router.push('/manageproduct')
-        }
+        },
+        jumpHome () {
+        this.$router.push('home')
+    },
   }
 }
 </script>

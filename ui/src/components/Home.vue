@@ -86,27 +86,35 @@ export default {
   },
   methods: {
     async checkStat () {
+      // Wait check() complete
       console.log(await this.check());
     },
     check () {
+      // Judging the current situation
+      // Have user log in
       if (sessionStorage.getItem("username") != null) {
         this.isUser = true;
         this.isGuest = false;
         this.username = sessionStorage.getItem('username');
         return this.username;
-      } else {
+      } 
+      // No user log in
+      else {
         this.isGuest = true;
         this.isUser = false;
         return this.isUser;
       }
     },
     async loadRec () {
+      // Load recommendation product for homepage
+      // When no user log in
       if (this.isGuest == true) {
         rec_guest(this.tokenForm).then ( res => {
           this.products = res.data.products;
         }).catch( error => {
         })
       }
+      // When user log in
       else if (this.isUser == true) {
         this.tokenForm.token = sessionStorage.getItem('token');
         rec_user(this.tokenForm).then ( res => {
@@ -122,16 +130,14 @@ export default {
       this.$router.push('/login')
     },
     jumpResult () {
-    if(!this.keywords){
-      this.$message.error("Please input search keywords");
-    }else{
-      // if (this.isGuest == true) {
-      //   this.$message.error("Please log in first");
-      // } else {
+      // Fucntion for search
+      // When search box has no input
+      if(!this.keywords){
+        this.$message.error("Please input search keywords");
+      }else{
         sessionStorage.setItem('word',this.keywords);
         this.$router.push('/search')
-      //}
-    }},
+      }},
     jumpProfile () {
       this.$router.push('/userprofile')
     },
@@ -149,6 +155,7 @@ export default {
       this.$router.push('home')
     },
     async logOut () {
+      // Function for log out
       logout(this.tokenForm).then ( res => {
           this.$message({message: 'Log out Sucess!',type: 'success'});
           sessionStorage.clear();

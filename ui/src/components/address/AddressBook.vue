@@ -10,7 +10,7 @@
     </header>
     
     <div id="address-container">
-        <Address v-for="(obj,ind) in addressbook.slice().reverse()" :key="obj.address_id"
+        <Address v-for="(obj,ind) in addressbook" :key="obj.address_id"
         :userName="obj.name"
         :addressDe="obj.address_line"
         :phoneNumber="obj.phone_number"
@@ -130,6 +130,7 @@ export default {
             const { data } = await address_view(this.tokenForm);
             console.log(data);
             this.addressbook = data.data.address_book;
+            this.addressbook = this.addressbook.slice().reverse();
         },
         del(index) {
             this.deleteForm.address_id = this.addressbook[index].address_id;

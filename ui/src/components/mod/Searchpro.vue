@@ -1,6 +1,6 @@
 <template>
   <div class="search-pro">
-    <div class="img" v-for="fit in fits" :key="fit">
+    <div class="img" v-for="fit in fits" :key="fit" @click="goProduct">
     <span class="demonstration">{{ fit }}</span>
         <el-image
         style="width: 250px; height: 250px"
@@ -42,6 +42,7 @@ export default {
   font-family: 'segUi';
   word-break:break-all;
   .img{
+    cursor: pointer;
     margin-left:20px;
   }
 }

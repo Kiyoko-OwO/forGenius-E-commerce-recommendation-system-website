@@ -20,7 +20,7 @@
 </template>
 <script>
 import { interest_add } from '../../api/user'
-const tagOptions = ['Fashion', 'Toys', 'Hobby', 'DIY', 'Electronics', 'Media', 'Furniture', 'Appliance', 'Food', 'Personal Care']
+const tagOptions = ['Fashion', 'Toys', 'Health', 'Pet', 'Electronics', 'Media', 'Furniture', 'Game', 'Food', 'Personal Care']
 export default {
   data () {
     return {

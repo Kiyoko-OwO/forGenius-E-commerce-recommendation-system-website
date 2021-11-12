@@ -7,10 +7,10 @@
             <el-button icon= "el-icon-user-solid" class="logIn" v-on:click="jumpLog" v-show="isGuest" type="white" >Log in</el-button>
             <el-button v-on:click="jumpHome" @click="logOut" v-show="isUser" type="white" icon="el-icon-switch-button">Log out</el-button>
             <el-button id="usern" v-show="isUser" @click="jumpProfile" icon="el-icon-user-solid" type="white">{{ username }}</el-button>
-            </div>
             <a href="http://127.0.0.1:8000/admin/login/?next=/admin/">
-            <button class="logIn" v-show="isOk">Admin Log in</button>
+            <el-button class="logIn" v-show="isOk">Admin Log in</el-button>
             </a>
+            </div>
         </header>
         <main>
           <div>
@@ -190,7 +190,7 @@ button {
     float: right;
     border-radius: 4px;
     padding: 2px 15px;
-    margin-left: 50px;
+    margin-left: 16px;
     margin-top: 35px;
     border-color: grey;
     color: grey;

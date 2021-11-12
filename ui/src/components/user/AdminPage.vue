@@ -1,8 +1,11 @@
 <template>
     <div id="admin_container">
         <header>
-            <button @click="logOut">Log out</button>
-            <button id="usern">{{ username }}</button>
+            <img id="logo" src=../../assets/logoThin.png alt="logo" v-on:click="addFn">
+            <div class="button_position">
+            <el-button @click="logOut" type="white" icon="el-icon-switch-button">Log out</el-button>
+            <el-button id="usern" type="white" icon="el-icon-user-solid">{{ username }}</el-button>
+            </div>
         </header>
         <main>
             <img id="logo" src=../../assets/logoThin.png alt="logo">
@@ -53,19 +56,24 @@ export default {
 }
 header {
     height: 100px;
-    width: 1000px;
+    width: 1800px;
     margin: 0 auto;
 }
 header #logo {
     height: 50px;
     float: left;
     margin-top: 25px;
+    margin-left:400px;
+}
+.button_position{
+  float: right;
+  margin-right:400px;
 }
 button {
     float: right;
     border-radius: 4px;
     padding: 2px 15px;
-    margin-left: 50px;
+    margin-left: 16px;
     margin-top: 35px;
     border-color: grey;
     color: grey;

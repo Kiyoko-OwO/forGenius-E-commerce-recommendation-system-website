@@ -1,9 +1,21 @@
 Week1
+Joined group 3900-w16a-forgenius
+Switch lab time since group number cannot solve timetable clash
+Start working on proposal
+Decided use VUE as front end
+Plan to have meetting of group every week
+Work on proposal's background existing works analyze
 
 Week2
+Decided use Flask as back end
+Modified user story
+Come up with novel functionality
+Start to draw the flow chart with Wenxin
 
 Week3
-
+Finished flow chart
+Come up with second novel functionality
+Decided final UI design with group mumbers
 
 Week 4 front end
 Home basic base and functional code done
@@ -23,15 +35,17 @@ Week 5 front end
 Optimize user log in and log out experience
 Interest functional code done
 Admin draft page done
-Address done
+Address page all done
 Product view page done
-Add to cart done
+Add product to cart done
 Forgot password functional code done
 
-Week 6
+Week 6 front end
+View products of cart code connected
+Edit products of cart code connected
+Remove products of cart code connected
 
-
-Week 7
+Week 7 front end
 Admin add product done
 Admin manage product done
 User order hisotry done
@@ -44,9 +58,11 @@ Product page modified
 
 Week 8
 Sign up code connected with api
+Keep tring to optimize user experience
 
 Week 9
 Go product done
 Search result done
 Order share done
 All picture related done
+Start to work on Final Report

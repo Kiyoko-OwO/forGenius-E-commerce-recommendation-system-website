@@ -50,13 +50,13 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="submitEdit">Confim</el-button>
+        <el-button type="white" @click="dialogFormVisible = false" icon="el-icon-circle-close">Cancel</el-button>
+        <el-button type="white" @click="submitEdit" icon="el-icon-circle-check">Confim</el-button>
       </div>
     </el-dialog>
     
     <el-button type="black" @click="deldialogFormVisible = true" icon="el-icon-delete" class="edit">Delete</el-button>
-    <el-dialog :visible.sync="deldialogFormVisible" width="16%" @close="closeDialog" append-to-body>
+    <el-dialog title="Sure？" :visible.sync="deldialogFormVisible" width="16%" @close="closeDialog" append-to-body >
       <div slot="footer" class="dialog-footer">
         <el-button type="white" @click="deldialogFormVisible = false" icon="el-icon-circle-close">Cancel</el-button>
         <el-button type="white" @click="delFn" icon="el-icon-circle-check">Confim</el-button>

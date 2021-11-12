@@ -81,14 +81,18 @@ export default {
               console.log(res.status);
               if (res.status == 255) {
                 sessionStorage.clear();
-                sessionStorage.setItem('token',res.data.token);
-                sessionStorage.setItem('username',res.data.username);
+                sessionStorage.setItem('adtoken',res.data.token);
+                sessionStorage.setItem('adusername',res.data.username);
                 this.$router.push('/admin');
               } else {
-                sessionStorage.clear();
                 sessionStorage.setItem('token',res.data.token);
                 sessionStorage.setItem('username',res.data.username);
-                this.$router.push('/userprofile');
+                if (sessionStorage.getItem('fromPro') != null) {
+                  this.$router.push('/product');
+                  sessionStorage.removeItem('fromPro');
+                } else {
+                  this.$router.push('/userprofile');
+                }
               }
             }).catch( error => {
               this.$message.error('Incorrect email or password');

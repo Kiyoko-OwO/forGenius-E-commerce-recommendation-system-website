@@ -57,16 +57,6 @@
         </div>
       </div>
     </div>
-    <!-- <div class="share">
-      <h2 class="share_ti">Share Your Order</h2>
-      <el-form ref='share_form' :model="share_form" :rules="share_formRules" class="share_form" label-position="left" label-width="90px" >
-      <el-form-item label="EMAIL" class="email_change" prop="email">
-      <el-input v-model="share_form.email" placeholder="input email address" ></el-input>
-      </el-form-item>
-      <el-button @click="share" align="right">Share Order</el-button>
-      </el-form>
-      
-    </div> -->
     <el-button type="primary" @click="jumpPay" class="submit">Submit Order</el-button>
   </div>
   </div>
@@ -138,10 +128,21 @@ export default {
         Product
     },
     created () {
+        this.checkStat(),
         this.loadCart(),
         this.loadAddressBook()
     },
     methods: {
+        async checkStat () {
+            console.log(await this.check());
+        },
+        check () {
+            // Simple Navigation Guards
+            if (sessionStorage.getItem("token") != null) {
+            } else {
+            this.$router.push('/login')
+            }
+        },
         async loadCart() {
             this.tokenForm.token = sessionStorage.getItem('token');
             cart_view(this.tokenForm).then( res => {
@@ -151,7 +152,7 @@ export default {
                 this.del_form.token = sessionStorage.getItem('token');
                 this.create_form.token = sessionStorage.getItem('token');
             }).catch( error => {
-                this.$message.error('Failed');
+                this.$message.error('You Need to Login First');
             })
         },
         async loadAddressBook() {
@@ -173,7 +174,6 @@ export default {
                     this.isEmpty = false;
                 }
             }).catch( error => {
-                this.$message.error('Failed');
             })
         },
         add(index) {
@@ -236,16 +236,7 @@ export default {
         jumpAdd () {
             sessionStorage.setItem('from', 1);
             this.$router.push('/addressadd');
-        },
-        // share() {
-        //     this.$refs.share_form.validate(async (valid) =>{
-        //     if(!valid) return;
-        //     else{
-        //     this.$message({message: 'Shared',type: 'success'});
-        //     this.share_form.email = "";
-        //     }
-        //     });
-        //    }
+        }
     }  
 }
 </script>

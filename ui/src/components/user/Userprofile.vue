@@ -8,7 +8,6 @@
             <el-button v-on:click="jumpHome" @click="logOut" v-show="isUser" type="white" icon="el-icon-switch-button">Log out</el-button>
             <el-button id="usern" v-show="isUser" @click="jumpProfile" icon="el-icon-user-solid" type="white">{{ username }}</el-button>
             <a href="http://127.0.0.1:8000/admin/login/?next=/admin/">
-            <el-button class="logIn" v-show="isOk">Admin Log in</el-button>
             </a>
             </div>
         </header>
@@ -54,14 +53,19 @@ export default {
       } else {
         this.isGuest = true;
         this.isUser = false;
+        this.$message.error('You Need to Login First');
+        this.$router.push('/login')
         return this.isUser;
       }
     },
     jumpSign () {
-      this.$router.push('signup')
+      this.$router.push('/signup')
+    },
+    jumpProfile () {
+      this.$router.push('/userprofile')
     },
     jumpLog () {
-      this.$router.push('login')
+      this.$router.push('/login')
     },
     jumpResetpassword () {
       this.$router.push('/resetpassword')
@@ -73,10 +77,10 @@ export default {
       this.$router.push('/address')
     },
     jumpHome () {
-      this.$router.push('home')
+      this.$router.push('/home')
     },
     jumpOrdHis () {
-      this.$router.push('user/order')
+      this.$router.push('/user/order')
     },
     jumpUsernameChange(){
       this.$router.push('/usernamechange')
@@ -86,7 +90,7 @@ export default {
       logout(this.tokenForm).then ( res => {
           this.$message({message: 'Log out Sucess!',type: 'success'});
           sessionStorage.clear();
-          this.$router.push('home')
+          this.$router.push('/home')
       }).catch( error => {
           this.$message.error('Log out Failed');
       })

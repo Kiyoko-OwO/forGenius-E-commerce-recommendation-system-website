@@ -48,9 +48,21 @@ export default {
       }
   },
   created () {
+    this.checkStat(),
     this.loadOrder()
   },
   methods: {
+    async checkStat () {
+        console.log(await this.check());
+    },
+      check () {
+        // Simple Navigation Guards
+        if (sessionStorage.getItem("token") != null) {
+        } else {
+          this.$router.push('/login');
+          this.$message.error('You Need to Login First');
+      }
+    },
     loadOrder() {
       this.pay_from.token = sessionStorage.getItem('token');
       this.pay_from.order_id = sessionStorage.getItem('order');

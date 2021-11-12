@@ -1,10 +1,11 @@
 from product.models import Product, Features
 from product.products import get_product_features
-from user.models import User, Interest
+from product.search import get_search_result
+from user.models import User, Interest, Search_history
 from user.errors import InputError
 import random
 
-recommendationDB = {}
+
 lastDB = {}
 # return the recommendation if the user is logout(guest mode)
 
@@ -37,6 +38,7 @@ def private_recommendation(email):
         lastDB[email], pick_products(recomment_by_search(email), 20)), 20)
     # output the products with ordered number
     products = pick_products(lastDB[email], 6)
+
     data = {
         "product_number": len(products),
         "products": products,
@@ -87,9 +89,26 @@ def recomment_by_interest(user_email):
 
 
 def recomment_by_search(user_email):
-    if user_email in recommendationDB:
-        return recommendationDB[user_email]
-    else:
+    try:
+        # get user's search history
+        search = Search_history.objects.filter(user_email=user_email)
+        
+        # get the lastest search of this user
+        result = []
+        lastest_search = []
+        for record in search:
+            lastest_search.append(record.search)
+        
+        # get the product result with the lastest two search history
+        # and put them to result list
+        for item in get_search_result("", lastest_search[-1], "best_sell"):
+            result.append(item)
+            
+        for item in get_search_result("", lastest_search[-2], "best_sell"):
+            result.append(item)
+            
+        return result
+    except:
         return []
 
 # balance recommendation lists to selected number of the products
@@ -114,7 +133,12 @@ def pick_products(product_list, num):
 
 
 def combine_list(a_str, b_str):
+    result = []
+    for a in a_str:
+        if a not in result:
+            result.append(a)
+            
     for b in b_str:
-        if b not in a_str:
-            a_str.append(b)
-    return a_str
+        if b not in result:
+            result.append(b)
+    return result

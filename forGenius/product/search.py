@@ -26,22 +26,24 @@ def get_search_result(email, search, sorting):
     # check if the search word is valid
     if search == "":
         raise InputError("The search word in empty")
-    search = search.lower()
+    
+    search = search.lower().split()
     data = Product.objects.filter()
     result = []
     # choose the relevant products from the database
     for product in data:
-        # if the search word in the product name or desription
-        if search in product.name.lower() or search in product.description.lower():
-            result.append(product)
-            continue
-
-        # if the search word in the product feature
-        features = Features.objects.filter(product_id = product.product_id)
-        for feature in features:
-            if search in feature.feature.lower():
+        for search_word in search:
+            # if the search word in the product name or desription
+            if search_word in product.name.lower() or search_word in product.description.lower():
                 result.append(product)
-                break
+                continue
+
+            # if the search word in the product feature
+            features = Features.objects.filter(product_id = product.product_id)
+            for feature in features:
+                if search_word in feature.feature.lower():
+                    result.append(product)
+                    break
     
     # sort the result list with chosen method
     result_list = sort_help(sorting, result, search)
@@ -78,7 +80,6 @@ def recursion_help(result, list, search, sorting):
                 first = j
         if (sorting == "price_high"):
             if list[j].price > list[first].price:
-                print(11)
                 first = j
         if (sorting == "best_sell"):
             if list[j].sales_data > list[first].sales_data:

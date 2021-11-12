@@ -43,7 +43,7 @@ def admin_add_product(name, description, warranty, delivery_date, price, picture
 
     # save the feature of the product
     for feature in features.split():
-        fe = Features(product_id=reg, feature=feature)
+        fe = Features(product_id=reg, feature=feature.capitalize())
         fe.save()
 
 # edit one product in the database
@@ -112,5 +112,5 @@ def get_product_features(product_id):
     arr = []
     # add the relevant features in the array
     for fe in Features.objects.filter(product_id=product_id):
-        arr.append(fe.feature)
+        arr.append(fe.feature.capitalize())
     return ' '.join(arr)

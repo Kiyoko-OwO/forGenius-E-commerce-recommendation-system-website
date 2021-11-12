@@ -1,11 +1,16 @@
 <template>
     <div id="profile_container">
         <header>
-            <img id="logo" src=../../assets/logoThin.png alt="logo" @click="jumpHome">
-            <button class="signUp" v-on:click="jumpSign" v-show="isGuest">Sign up</button>
-            <button class="logIn" v-on:click="jumpLog" v-show="isGuest">Log in</button>
-            <button @click="logOut" v-show="isUser">Log out</button>
-            <button id="usern" v-show="isUser">{{ username }}</button>
+            <img id="logo" src=../../assets/logoThin.png alt="logo" v-on:click="jumpHome">
+            <div class="button_position">
+            <el-button icon="el-icon-user" class="signUp" v-on:click="jumpSign" v-show="isGuest" type="white">Sign up</el-button>
+            <el-button icon= "el-icon-user-solid" class="logIn" v-on:click="jumpLog" v-show="isGuest" type="white" >Log in</el-button>
+            <el-button v-on:click="jumpHome" @click="logOut" v-show="isUser" type="white" icon="el-icon-switch-button">Log out</el-button>
+            <el-button id="usern" v-show="isUser" @click="jumpProfile" icon="el-icon-user-solid" type="white">{{ username }}</el-button>
+            <a href="http://127.0.0.1:8000/admin/login/?next=/admin/">
+            <el-button class="logIn" v-show="isOk">Admin Log in</el-button>
+            </a>
+            </div>
         </header>
         <main>
             <img id="logo" src=../../assets/logoThin.png alt="logo">
@@ -100,20 +105,24 @@ export default {
 }
 header {
     height: 100px;
-    width: 1000px;
+    width: 1800px;
     margin: 0 auto;
 }
 header #logo {
-    cursor: pointer;
     height: 50px;
     float: left;
     margin-top: 25px;
+    margin-left:400px;
+}
+.button_position{
+  float: right;
+  margin-right:400px;
 }
 button {
     float: right;
     border-radius: 4px;
     padding: 2px 15px;
-    margin-left: 50px;
+    margin-left: 16px;
     margin-top: 35px;
     border-color: grey;
     color: grey;

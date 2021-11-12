@@ -17,7 +17,7 @@
           :value="item.value">
         </el-option>
       </el-select>
-      <el-button class="apply" type="primary" v-on:click="reload()"> Apply</el-button>
+      <el-button class="apply" type="white" v-on:click="reload()" icon="el-icon-thumb"> Apply</el-button>
     </div>
     <div class="manage-container">
       <Manage v-for="(obj,ind) in product" :key="ind"
@@ -137,9 +137,10 @@ export default {
 <style lang="less" scoped>
 .manage-container {
     position: relative;
-    top:10px;
+    top:30px;
     left:10%;
     width:1500px;
+    clear: both;
 }
 .manage_container{
     background-color: #d1dbda;
@@ -173,7 +174,7 @@ header{
     position: relative;
     border-radius: 4px;
     padding: 2px 20px;
-    left:480px;
+    left:600px;
     top:-370px;
     background: #786662;
     border-radius: 10px;
@@ -195,7 +196,11 @@ header{
     text-align: center;
 }
 .sort{
-    position: relative;
-    left:40%;
+   float:right;
+   margin-right:120px;
+   margin-top:30px;  
+}
+.apply{
+  margin-left:30px;
 }
 </style>

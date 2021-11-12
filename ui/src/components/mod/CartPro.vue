@@ -1,6 +1,6 @@
 <template>
   <div class="my-cartpro">
-    <div class="img" v-for="fit in fits" :key="fit">
+    <div class="img" v-for="fit in fits" :key="fit" @click="goProduct">
      <span class="demonstration">{{ fit }}</span>
         <el-image
           style="width: 100px; height: 100px"
@@ -55,6 +55,7 @@ export default {
   word-break:break-all;
 }
 .img{
+  cursor: pointer;
   float: right;
   margin-right:-20px;
 }

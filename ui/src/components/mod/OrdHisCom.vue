@@ -4,7 +4,7 @@
       Order id: {{ordId}}
       <el-dialog :title="order_id" :visible.sync="dialogFormVisible" class="editf" width="30%" append-to-body>
         <div class="item" v-for="item in items" :key="item.product_id">
-        <div class="img" v-for="fit in fits" :key="fit">
+        <div class="img" v-for="fit in fits" :key="fit" @click="goProduct(item)">
         <span class="demonstration">{{ fit }}</span>
           <el-image
             style="width: 100px; height: 100px"
@@ -164,7 +164,11 @@ export default {
             return false;
           }
           })
-        }
+        },
+        goProduct (item) {
+          sessionStorage.setItem('product',item.product_id);
+          this.$router.push('/product')
+      }
     }
 }
 </script>
@@ -196,6 +200,7 @@ export default {
    position: fixed;
 } 
 .img{
+   cursor: pointer;
    float:right;
    margin-right:20px;
    margin-top:-5px;

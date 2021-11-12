@@ -14,8 +14,10 @@
 
 <script>
 export default {
+    inject:['reload'],
     props: ['index', 'proName', 'proDescription', 'proSales_data', 'proPrice', 'proPic','proId'],
-    methods: {
+    mounted () {
+        window.scrollTo(0, 0)
     },
     data(){
         return {
@@ -25,9 +27,10 @@ export default {
     methods: {
       goProduct () {
         sessionStorage.setItem('product',this.proId);
-        this.$router.push('/product')
+        this.reload();
       }
     }
+    
 }
 </script>
 

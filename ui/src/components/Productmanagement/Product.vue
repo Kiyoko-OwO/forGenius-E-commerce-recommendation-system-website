@@ -18,8 +18,6 @@
         <div class="inf_box">
         <div class="inf">
         <h2>{{product.name}}</h2>
-        <!-- <h3>Feature:</h3>
-        <p>{{product.feature}}</p> -->
         <h3>Warranty: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span> {{product.warranty}} year(s)</span></h3>
         <h3>Delivery date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{product.delivery_date}}</span></h3>
         <p class="price">$ {{product.price}}</p>
@@ -84,7 +82,7 @@
 </template>
 
 <script>
-import Home from '.././mod/Homepro.vue'
+import Home from '.././mod/PruCom.vue'
 import { cart_add } from '../../api/order'
 import { product_view } from '../../api/product'
 import { rec_guest } from '../../api/product'
@@ -152,7 +150,7 @@ export default {
               this.$message({message: 'Sucess!',type: 'success'});
               this.$router.push('cart');
             }).catch( error => {
-              this.$message.error('Failed');
+              this.$message.error('You need return homepage to log in first');
             })
           } else {
             console.log('error submit!!');

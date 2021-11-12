@@ -76,14 +76,14 @@ export default {
     },
     watch: {
       value(newVal, oldVal) {
-        sessionStorage.setItem('sort',newVal);
+        sessionStorage.setItem('adsort',newVal);
       }
     },
     methods: {
       async loadPro() {
-        if (sessionStorage.getItem('sort') != null) {
-          this.sort_form.sorting = sessionStorage.getItem('sort');
-          this.value = sessionStorage.getItem('sort');
+        if (sessionStorage.getItem('adsort') != null) {
+          this.sort_form.sorting = sessionStorage.getItem('adsort');
+          this.value = sessionStorage.getItem('adsort');
           admin_sort(this.sort_form).then( res => {
             console.log(res.data.data.product_details);
             this.product = res.data.data.product_details;
@@ -111,11 +111,11 @@ export default {
             }
       },
       jumpAddproduct () {
-        sessionStorage.removeItem('sort');
+        sessionStorage.removeItem('adsort');
         this.$router.push('/addproduct');
       },
       jumpAdmin () {
-        sessionStorage.removeItem('sort');
+        sessionStorage.removeItem('adsort');
         this.$router.push('/admin');
         
       },

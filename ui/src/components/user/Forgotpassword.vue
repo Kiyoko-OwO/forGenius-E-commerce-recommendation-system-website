@@ -1,3 +1,5 @@
+<!--  Send Code To User E-mail Page For Forgot Password  -->
+
 <template>
     <div class="fogot_container">
       <div class="fix">
@@ -21,7 +23,7 @@
 import { send_code } from '../../api/user'
 export default {
   data () {
-    // The rules for input value
+    // The rules for Input data validation
     var checkEmail = (rule, value, callback) => {
       const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+\.com/
       if (!value) {
@@ -39,6 +41,7 @@ export default {
       forgotForm: {
         email: ''
       },
+      //Input data validation
       forgotRules: {
         email: [
           { validator: checkEmail, trigger: 'blur' }
@@ -119,34 +122,33 @@ h1{
     padding-top: 50px;
 }
 .username{
-      border-radius: 40px;
+    border-radius: 40px;
 }
 .email{
-      border-radius: 30px;
+    border-radius: 30px;
 }
-
+.el-form-item{
+    margin-bottom:15px
+}
+.fix{
+    margin:0 auto;
+    margin-top:-30px;
+    width:800px;
+}
+/*deep style for el in scoped*/
 .forgot_form /deep/.timr.el-form .el-form-item__error {
-  top: 30%;
-  right: 25% !important;
-  left: unset;
+    top: 30%;
+    right: 25% !important;
+    left: unset;
 }
 .email_change /deep/ .el-form-item__label{
     font-family: 'segUi';
     letter-spacing:.1em;
     font-size: 18px;
 }
-.el-form-item{
-   margin-bottom:15px
-}
-.fix{
-  margin:0 auto;
-  margin-top:-30px;
-  width:800px;
-}
 .el-input /deep/ .el-input__inner {
     border-radius:50px;
     height:30px;
 }
-
 </style>
 

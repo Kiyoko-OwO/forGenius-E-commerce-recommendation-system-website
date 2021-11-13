@@ -1,3 +1,5 @@
+<!--Address Main Page   -->
+
 <template class="ad">
   <div class="address_container">
     <div class="fix">
@@ -8,7 +10,6 @@
         </div>
         <el-button type="brown" class="add" @click="add()" >ADD ADDRESS</el-button>
     </header>
-    
     <div id="address-container">
         <Address v-for="(obj,ind) in addressbook" :key="obj.address_id"
         :userName="obj.name"
@@ -29,8 +30,7 @@
 </template>
 
 <script>
-// Main page for address book
-import Address from '../mod/Address.vue'
+import Address from '../mod/AddressPro.vue'
 import { address_view } from '../../api/user'
 import { address_delete } from '../../api/user'
 export default {
@@ -91,6 +91,10 @@ export default {
     background-color: #d1dbda;
     min-height: 100%;
 }
+.fix{
+    margin:0 auto;
+    width:1750px;
+}
 header{
     height: 100px;
     width: 100%;
@@ -107,9 +111,7 @@ header{
     overflow: hidden;
 }
 #address-container {
-    position: relative;
-    left:50%;
-    transform: translate(-50%);
+    margin-left:30%;
     width:500px;
 
 }
@@ -144,9 +146,4 @@ header{
     border-color:#786662;
     cursor: pointer;
 }
-.fix{
-    margin:0 auto;
-    width:1750px;
-}
-
 </style>

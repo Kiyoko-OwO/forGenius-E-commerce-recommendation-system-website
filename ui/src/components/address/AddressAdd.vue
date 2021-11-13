@@ -1,3 +1,5 @@
+<!--ADD Address Page   -->
+
 <template>
     <div class="add_container">
      <div class="fix">
@@ -44,21 +46,20 @@
 </template>
 
 <script>
-// Mod page for add address
 import { address_add } from '../../api/user'
 export default {
   data () {
-    // The rules for input value
+    // The rules for input data validation
     var checkName = (rule, value, callback) => {
       if (!value) {
-        return callback(new Error('username cannot be empty'))
+        return callback(new Error('Username cannot be empty'))
       } else {
         callback()
       }
     }
     var checkAddress = (rule, value, callback) => {
       if (!value) {
-        return callback(new Error('address cannot be empty'))
+        return callback(new Error('Address cannot be empty'))
       } else {
         callback()
       }
@@ -66,7 +67,7 @@ export default {
     var checkPhone = (rule, value, callback) => {
       const mailReg = /^\d+$/
       if (!value) {
-        return callback(new Error('phonenumber cannot be empty'))
+        return callback(new Error('Phonenumber cannot be empty'))
       }
       setTimeout(() => {
         if (mailReg.test(value)) {
@@ -121,6 +122,7 @@ export default {
         suburb:'',
         post_code:''
       },
+      // Input data validation
       addRules: {
         name: [
           { validator: checkName, trigger: 'blur' }
@@ -134,13 +136,13 @@ export default {
         post_code: [
           { validator: checkCode, trigger: 'blur'  }
         ],
-                suburb: [
+        suburb: [
           { validator: checkSuburb, trigger: 'blur'  }
         ],
-                state: [
+        state: [
           { validator: checkState, trigger: 'blur'  }
         ],
-                country: [
+        country: [
           { validator: checkCountry, trigger: 'blur'  }
         ]
       }
@@ -167,8 +169,7 @@ export default {
               // Otherwise, page will redirect to address page
               else {
                 this.$router.push('/address');
-              }
-           
+              }          
             }).catch( error => {
                 this.$message.error('Failed');
             })
@@ -183,14 +184,17 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
+.fix{
+    margin:0 auto;
+    margin-top:-70px;
+    width:800px;
+}
 .block{
     height: 60px;
 }
-
 h1{
     position: relative;
-    left: 27%;
+    left: 28%;
     top:50px;
     font-size: 40px;
     font-weight:normal;
@@ -221,14 +225,8 @@ h1{
     border-radius: 80px;
     padding-top: 50px;
 }
-
-.username_change /deep/ .el-form-item__label{
-    font-family: 'segUi';
-    letter-spacing:.1em;
-    font-size: 18px;
-}
 .el-form-item{
-   margin-bottom:15px
+    margin-bottom:15px
 }
 .submit{
     position: relative;
@@ -243,15 +241,17 @@ h1{
     padding-left: 30px;
     border-color: #786662;
 }
-.add_form /deep/.timr.el-form .el-form-item__error {
-  top: 30%;
-  right: 25% !important;
-  left: unset;
+
+/*deep style for el in scoped*/
+.username_change /deep/ .el-form-item__label{
+    font-family: 'segUi';
+    letter-spacing:.1em;
+    font-size: 18px;
 }
-.fix{
-  margin:0 auto;
-  margin-top:-70px;
-  width:800px;
+.add_form /deep/.timr.el-form .el-form-item__error {
+    top: 30%;
+    right: 25% !important;
+    left: unset;
 }
 .el-input /deep/ .el-input__inner {
     border-radius:50px;
@@ -259,9 +259,3 @@ h1{
 }
 </style>
 
-<style lang="less" scoped>
-input.el-input__inner {
-    border-radius:50px;
-    height:30px;
-}
-</style>

@@ -1,3 +1,5 @@
+<!--  Change Username Page  -->
+
 <template>
     <div class="usernamechange_container">
       <div class="fix">
@@ -17,7 +19,6 @@
 </template>
 
 <script>
-// Page for change user name
 import { change_username } from '../../api/user'
 export default {
   data () {
@@ -115,29 +116,28 @@ h1{
     border-radius: 80px;
     padding-top: 50px;
 }
-
+.el-form-item{
+    margin-bottom:15px
+}
+.fix{
+    margin:0 auto;
+    margin-top:-30px;
+    width:800px;
+}
+/*deep style for el in scoped*/
 .usernamechange_form /deep/.timr.el-form .el-form-item__error {
-  top: 30%;
-  right: 25% !important;
-  left: unset;
+    top: 30%;
+    right: 25% !important;
+    left: unset;
 }
 .username_change /deep/ .el-form-item__label{
     font-family: 'segUi';
     letter-spacing:.1em;
     font-size: 18px;
 }
-.el-form-item{
-   margin-bottom:15px
-}
-.fix{
-  margin:0 auto;
-  margin-top:-30px;
-  width:800px;
-}
 .el-input /deep/ .el-input__inner {
     border-radius:50px;
     height:30px;
 }
-
 </style>
 

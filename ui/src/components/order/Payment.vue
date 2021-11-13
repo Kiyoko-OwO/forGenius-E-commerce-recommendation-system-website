@@ -1,3 +1,5 @@
+<!--  Payment Page  -->
+
 <template>
   <div class="manage_container">
     <div class="fix">
@@ -23,7 +25,6 @@
 </template>
 
 <script>
-// Page to do the payment
 import { ord_pay } from '../../api/order'
 export default {
   data () {

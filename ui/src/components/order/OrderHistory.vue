@@ -1,3 +1,5 @@
+<!--  OrderHistory Main Page  -->
+
 <template>
   <div >
     <div class="fix">
@@ -21,7 +23,6 @@
       @checker = 'check'
       @jump = 'jumpToOrd'
       >
-
       </Order>
   </div>
  </div>
@@ -29,7 +30,6 @@
 </template>
 
 <script>
-// Main page for order history
 import Order from '../mod/OrdHisCom.vue'
 import { ord_view } from '../../api/order'
 export default {
@@ -79,6 +79,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.fix{
+    margin:0 auto;
+    width:1750px;
+}
 header{
     height: 100px;
     width: 100%;
@@ -107,10 +111,6 @@ header{
     top:-60px;
     left:-600px;
     z-index:100;
-}
-.fix{
-    margin:0 auto;
-    width:1750px;
 }
 .title{
     position: relative;

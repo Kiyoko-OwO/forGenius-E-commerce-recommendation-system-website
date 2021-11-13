@@ -1,3 +1,5 @@
+<!--  Admin Page  -->
+
 <template>
     <div id="admin_container">
         <header>

@@ -1,3 +1,5 @@
+<!--ManangeProduct Mod For ManangeProduct Main Page   -->
+
 <template>
   <div class="my-cartpro">
   <div class="detail">
@@ -23,6 +25,7 @@
   </div>
 </div>
 <div class="b"> 
+     <!-- Edit Form with dialog -->
     <el-button type="white" icon="el-icon-edit" @click="dialogFormVisible = true" class="edit">Edit</el-button>
     <el-dialog title="Product Management" :visible.sync="dialogFormVisible" width="40%" @close="closeDialog" class="editf" append-to-body>
       <el-form :model="editForm" ref="edit_FormRef" :rules="editRules">
@@ -54,7 +57,6 @@
         <el-button type="white" @click="submitEdit" icon="el-icon-circle-check">Confim</el-button>
       </div>
     </el-dialog>
-    
     <el-button type="black" @click="deldialogFormVisible = true" icon="el-icon-delete" class="edit">Delete</el-button>
     <el-dialog title="Sure？" :visible.sync="deldialogFormVisible" width="16%" @close="closeDialog" append-to-body >
       <div slot="footer" class="dialog-footer">
@@ -69,13 +71,12 @@
 </template>
 
 <script>
-// Mod page for admin to edit product
 import { product_edit } from '../../api/admin'
 export default {
     inject:['reload'],
     props: ['index', 'id', 'name', 'warr', 'description', 'delivery', 'sales', 'price','pic','features'],
     data () {
-      // The rules for input value
+     // The rules for input data validation
       var checkName = (rule, value, callback) => {
         if (!value) {
           return callback(new Error('name cannot be empty'))
@@ -157,6 +158,7 @@ export default {
           picture: this.pic,
           features:this.features
         },
+        //Input data validation
         editRules: {
         name: [
           { validator: checkName, trigger: 'blur' }
@@ -278,11 +280,5 @@ span{
 p{
     white-space:pre-wrap;
 }
-
 </style>
 
-<style >
-.editf{
-  position: fixed;
-}
-</style>

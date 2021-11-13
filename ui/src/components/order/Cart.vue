@@ -1,3 +1,5 @@
+<!--  Cart Main Page  -->
+
 <template>
   <div class="cart_container">
     <div class="fix">
@@ -7,7 +9,6 @@
         MY&nbsp;CART
     </div>
     </header>
-    
     <div class="cart-container">
         <Product v-for="(obj,ind) in cart" :key="ind"
         :proName="obj.name"
@@ -29,7 +30,6 @@
 </template>
 
 <script>
-// Main page for Cart
 // Without user login, this page cannot be reached
 import Product from '../mod/CartPro.vue'
 import { cart_view } from '../../api/order'

@@ -1,3 +1,5 @@
+<!--  Order Main Page  -->
+
 <template>
   <div >
     <div class="fix">
@@ -11,14 +13,15 @@
     <div class="order_contain">
     <h2>Address</h2>
       <div v-show="isEmpty">
-          <p> Name: {{create_form.name}} </p> 
-          <p> Address: {{create_form.address_line}}</p>
-          <p> Phone Number: {{create_form.phone_number}}</p>
+          <p> <span>Recipient's Name:</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{create_form.name}} </p> 
+          <p> <span>Phone Number:</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{create_form.phone_number}}</p>
+          <p> <span>Address:</span> </p>
+          <p> {{create_form.address_line}}</p>
           <el-button @click="chooseDialogFormVisible = true" align="left" style="float:left">Choose</el-button>
           <el-dialog title="Address Book" :visible.sync="chooseDialogFormVisible" width="40%" class="editf" append-to-body>
             <div v-for="(item,ind) in addressbook" :key="ind">
                     <div class="block1"></div>
-                    <p>Recipient's name: {{item.name}} </p> 
+                    <p> Recipient's name: {{item.name}} </p> 
                     <p> Address: </p>
                     <p> {{item.address_line}}</p>
                     <p> Country: {{item.country}}</p>
@@ -28,7 +31,7 @@
                     <p> Phone Number: {{item.phone_number}} </p> 
                     <el-button @click="chooseAdd(ind)" class="choose_in">Choose</el-button>
                     <div class="block"></div>
-                    <div class="link-in"></div>
+                    <div class="line-in"></div>
               </div>
             <div slot="footer" class="dialog-footer">
               <el-button @click="chooseDialogFormVisible = false">Cancel</el-button>
@@ -48,8 +51,8 @@
         @delPro = 'del'>
         </Product>
         <div class="price">
-        <p>Total Price: $</p>
-        <p>{{total_price}}</p>
+        <p>Total Price: </p>
+        <p>$ &nbsp;{{total_price}}</p>
         </div>
       </div>
     </div>
@@ -59,7 +62,6 @@
 </template>
 
 <script>
-// Main page for order
 // After submit cart
 // Without user login, this page cannot be reached
 import { address_view } from '../../api/user'
@@ -280,6 +282,7 @@ header{
     left:50%;
     transform: translate(-50%);
     width:500px;
+    word-break:break-all;
 }
 .logo{
     height: 200%;
@@ -323,7 +326,7 @@ header{
 }
 .cart-container{
     position: relative;
-    left:47%;
+    left:43%;
     transform: translate(-50%);
     width:500px;
 }
@@ -333,7 +336,7 @@ header{
 }
 .infor{
     position: relative;
-    left: 15px;
+    left: 30px;
 }
 .email_change{
     position: relative;
@@ -347,7 +350,7 @@ header{
     font-size: 18px;
 }
 
-.link-in {
+.line-in {
     position: relative;
     width: 100%;
     height: 1px;
@@ -375,7 +378,13 @@ header{
     left:49%;
     transform: translate(-50%);
     text-align: center;
-
+}
+span{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size:17px;
+}
+p{
+    font-family: 'segUi';
 }
 </style>
 

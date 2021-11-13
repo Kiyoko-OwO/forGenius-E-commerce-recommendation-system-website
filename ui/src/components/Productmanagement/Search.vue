@@ -1,3 +1,5 @@
+<!--  Search Result Page  -->
+
 <template>
   <div class="search_container">
     <div class="fix">
@@ -42,7 +44,6 @@
 </template>
 
 <script>
-// Main page for search result
 import Search from '../mod/Searchpro.vue'
 import { ser_res } from '../../api/product' 
 export default {
@@ -235,7 +236,7 @@ header{
 }
 
 .apply {
-  float: right;
-  margin-right:210px;
+    float: right;
+    margin-right:210px;
 }
 </style>

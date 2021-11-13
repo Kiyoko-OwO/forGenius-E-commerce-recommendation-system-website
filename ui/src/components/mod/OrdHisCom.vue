@@ -1,7 +1,11 @@
+<!--OrderHistory Mod For OrderHistory Main Page   -->
+
 <template>
-  <div class="order_item">
+  <div class="order_item" style="width:400px">
       <div class="block"></div>
-      Order id: {{ordId}}
+      <p><span> Order Id:</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ordId}}</p>
+      <p><span> Pay State:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{payStat}}</p>
+      <p><span> Order Date: </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{orderDate}}</p>
       <el-dialog :title="order_id" :visible.sync="dialogFormVisible" class="editf" width="30%" append-to-body>
         <div class="item" v-for="item in items" :key="item.product_id">
         <div class="img" v-for="fit in fits" :key="fit" @click="goProduct(item)">
@@ -16,7 +20,7 @@
         <p>${{item.price}} </p>
         <p>Quantity: {{item.quantity}} </p>
         </div>
-        <div class="link-in"></div>
+        <div class="line-in"></div>
         </div>
         <div class="item1">
         <p> Buyer Name: {{name}}</p>
@@ -30,11 +34,9 @@
             <el-button type="white" @click="dialogFormVisible = false" icon="el-icon-error">Close</el-button>
         </div>
       </el-dialog>
-      <p>Paid: {{payStat}}</p>
-      <p>Order Date: {{orderDate}}</p>
       <div>
         <el-image v-for="(item,index) in shows" :key="index"
-            style="width: 100px; height: 100px"
+            style="width: 100px; height: 100px; margin-right:10px"
             :src="item.picture"
             :fit="fit"></el-image>
       </div>
@@ -55,12 +57,11 @@
       </div>
       </el-dialog>
       <div class="block"></div>
-      <div class="link-top"></div>
+      <div class="line-top"></div>
   </div>
 </template>
 
 <script>
-// Mod page for order history
 import { ord_share } from '../../api/order'
 import { ord_sin_view } from '../../api/order'
 export default {
@@ -184,7 +185,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.link-top {
+.line-top {
     position: relative;
     width: 300%;
     height: 1px;
@@ -192,34 +193,37 @@ export default {
     transform: translate(-50%);
     border-top: solid #0b0b0f 1px;
 }
-.link-in {
+.line-in {
     position: relative;
     width: 100%;
     height: 1px;
     border-top: solid #0b0b0f 1px;
 }
 .block {
-   height: 20px;
+    height: 20px;
 }
 .detail{
-   position: relative;
-   left:100%;
+    position: relative;
+    left:80%;
 
 }
 .editf{
-   position: fixed;
+    position: fixed;
 } 
 .img{
-   cursor: pointer;
-   float:right;
-   margin-right:20px;
-   margin-top:-5px;
+    cursor: pointer;
+    float:right;
+    margin-right:20px;
+    margin-top:-5px;
 }
 .item1{
-  letter-spacing: 1.5px;
+    letter-spacing: 1.5px;
 }
-</style>
-
-<style>
-
+span{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size:17px;
+}
+p{
+    font-family: 'segUi';
+}
 </style>

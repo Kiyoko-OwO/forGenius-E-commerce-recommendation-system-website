@@ -1,3 +1,5 @@
+<!--  Manage Product Main Page  -->
+
 <template>
   <div class="manage_container">
     <div class="fix">
@@ -41,7 +43,6 @@
 </template>
 
 <script>
-// Main page for admin to manage product
 import Manage from '../mod/Manageproductpro.vue'
 import { admin_view } from '../../api/admin'
 import { admin_sort } from '../../api/admin'
@@ -203,11 +204,11 @@ header{
     text-align: center;
 }
 .sort{
-   float:right;
-   margin-right:120px;
-   margin-top:30px;  
+    float:right;
+    margin-right:120px;
+    margin-top:30px;  
 }
 .apply{
-  margin-left:30px;
+    margin-left:30px;
 }
 </style>

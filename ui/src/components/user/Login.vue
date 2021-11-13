@@ -1,3 +1,5 @@
+<!--  Login Page  -->
+
 <template>
     <div class="login_container">
       <div class="fix">
@@ -33,7 +35,7 @@ import { login } from '../../api/user'
 
 export default {
   data () {
-    // The rules for input value
+    // The rules for Input data validation
     var checkEmail = (rule, value, callback) => {
       const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+\.com/
       if (!value) {
@@ -60,6 +62,7 @@ export default {
         email: '',
         password: ''
       },
+      //Input data validation
       loginRules: {
         email: [
           { validator: checkEmail, trigger: 'blur' }
@@ -127,8 +130,8 @@ h1{
     letter-spacing:.2em;
 }
 .block {
-  width: 1000px;
-  height: 65px;
+    width: 1000px;
+    height: 65px;
 }
 .forget{
     position: relative;
@@ -195,10 +198,20 @@ h1{
     padding-top: 50px;
 }
 .username{
-      border-radius: 40px;
+    border-radius: 40px;
 }
 .email{
-      border-radius: 30px;
+    border-radius: 30px;
+}
+.fix{
+    margin:0 auto;
+    margin-top:-30px;
+    width:800px;
+}
+/*deep style for el in scoped*/
+.el-input /deep/ .el-input__inner {
+    border-radius:50px;
+    height:30px;
 }
 .email_change /deep/ .el-form-item__label{
     font-family: 'segUi';
@@ -210,15 +223,5 @@ h1{
     letter-spacing:.1em;
     font-size: 18px;
 }
-.fix{
-  margin:0 auto;
-  margin-top:-30px;
-  width:800px;
-}
-.el-input /deep/ .el-input__inner {
-    border-radius:50px;
-    height:30px;
-}
-
 </style>
 

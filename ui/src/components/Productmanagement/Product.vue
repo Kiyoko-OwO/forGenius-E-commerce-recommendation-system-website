@@ -1,3 +1,5 @@
+<!--  Product Detail Page  -->
+
 <template>
     <div class="fix">
     <header>
@@ -82,7 +84,6 @@
 </template>
 
 <script>
-// Page for view a product
 import Home from '.././mod/PruCom.vue'
 import { cart_add } from '../../api/order'
 import { product_view } from '../../api/product'
@@ -201,6 +202,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.fix{
+    margin:0 auto;
+    width:1750px;
+}
 .picture {
     position: relative;
     height: 200px;
@@ -257,10 +262,7 @@ header{
   width:500px;
   padding-bottom: 30px;
 }
-.fix{
-    margin:0 auto;
-    width:1750px;
-}
+
 .title{
     position: relative;
     top:-260px;

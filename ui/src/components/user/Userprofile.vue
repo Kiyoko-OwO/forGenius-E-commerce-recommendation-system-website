@@ -1,3 +1,5 @@
+<!--  User Profile Main Page  -->
+
 <template>
     <div id="profile_container">
         <header>
@@ -24,7 +26,6 @@
 </template>
 
 <script>
-// User profile main page
 import { logout } from '../../api/user'
 export default {
   inject:['reload'],

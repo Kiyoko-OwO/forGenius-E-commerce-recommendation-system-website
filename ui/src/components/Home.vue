@@ -1,3 +1,5 @@
+<!--  Home Page  -->
+
 <template>
     <div id="home_container">
         <header>
@@ -46,7 +48,7 @@
               :index="ind"
               > </Home>
             </div>
-            <div class="blockk">
+            <div style="clear:both">
             </div>
           </div>
         </div>
@@ -254,57 +256,54 @@ main #logo {
     cursor: pointer;
 }
 .recommendation_container{
-  background-color: white;
-  margin:0 auto;
-  width:1700px;
+    background-color: white;
+    margin:0 auto;
+    width:1700px;
 }
 .tittle_container{
-  float: left;
-  width:500px;
-  height:600px;
-  overflow: hidden;
+    float: left;
+    width:500px;
+    height:600px;
+    overflow: hidden;
 }
 .product_container{
-  float: right;
-  width:1200px;
-  display: flex;
-  flex-wrap: wrap;
+    float: right;
+    width:1200px;
+    display: flex;
+    flex-wrap: wrap;
 }
 .tittle{
-  position: relative;
-  left:30%;
-  top:40%;
-  transform:translate(0,-50%) ;
-  font-size: 25px;
+    position: relative;
+    left:30%;
+    top:40%;
+    transform:translate(0,-50%) ;
+    font-size: 25px;
 }
 .example{
-  margin-top:-300px;
+    margin-top:-300px;
 }
 .l_tittle{
-  font-size: 5px;
-  position: relative;
-  left:34%;
-  top:40%;
-  transform:translate(0,-50%) ;
+    font-size: 5px;
+    position: relative;
+    left:34%;
+    top:40%;
+    transform:translate(0,-50%) ;
 }
 .line{
-  height:2px;
-  width:89px;
-  position: relative;
-  left:-1%;
-  top:40%;
-  transform:translate(0,-50%) ;
-  background-color:rgb(0, 217, 255);
+    height:2px;
+    width:89px;
+    position: relative;
+    left:-1%;
+    top:40%;
+    transform:translate(0,-50%) ;
+    background-color:rgb(0, 217, 255);
 }
 footer{
-  padding-top:20px;
-  width:1800px;
-  margin:0 auto;
-  img{
-    width:100%;
-  }
-}
-.blockk{
-  clear:both;
+    padding-top:20px;
+    width:1800px;
+    margin:0 auto;
+    img{
+      width:100%;
+    }
 }
 </style>

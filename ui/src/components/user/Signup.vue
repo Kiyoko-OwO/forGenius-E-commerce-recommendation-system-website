@@ -1,3 +1,5 @@
+<!--  SignUp Page -->
+
 <template>
     <div class="signup_container">
       <div class="fix">
@@ -39,12 +41,11 @@
 </template>
 
 <script>
-// Page for sign up
 import { signup } from '../../api/user'
 import { signup_code } from '../../api/user'
 export default {
   data () {
-    // The rules for input value
+    // The rules for input data validation
     var checkEmail = (rule, value, callback) => {
       const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+\.com/
       if (!value) {
@@ -105,6 +106,7 @@ export default {
         name: "",
         email: ""
       },
+      //Input data validation
       signupRules: {
         email: [
           { validator: checkEmail, trigger: 'blur' }
@@ -265,16 +267,27 @@ h1{
     padding-top: 50px;
 }
 .username{
-      border-radius: 40px;
+    border-radius: 40px;
 }
 .email{
-      border-radius: 30px;
+    border-radius: 30px;
 }
-
+.code_change{
+    width: 400px
+}
+.fix{
+    margin:0 auto;
+    margin-top:-80px;
+    width:800px;
+}
+.el-form-item{
+    margin-bottom:15px
+}
+/*deep style for el in scoped*/
 .signup_form /deep/.timr.el-form .el-form-item__error {
-  top: 30%;
-  right: 25% !important;
-  left: unset;
+    top: 30%;
+    right: 25% !important;
+    left: unset;
 }
 .change /deep/ .el-form-item__label{
     font-family: 'segUi';
@@ -286,23 +299,10 @@ h1{
     letter-spacing:.1em;
     font-size: 18px;
 }
-.code_change{
-  width: 400px
-}
-.fix{
-  margin:0 auto;
-  margin-top:-80px;
-  width:800px;
-}
 .el-input /deep/ .el-input__inner {
     border-radius:50px;
     height:30px;
 }
 
-
-
-.el-form-item{
-   margin-bottom:15px
-}
 </style>
 

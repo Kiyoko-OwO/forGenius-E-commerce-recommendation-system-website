@@ -1,3 +1,5 @@
+<!--  Choose User Interest Field Page  -->
+
 <template>
   <div class="interest_container">
     <div class="fix">
@@ -91,9 +93,9 @@ header{
   position: relative;
 }
 .choose{
-  position: relative;
-  top:160px;
-  background-color:#e7eae8;
+    position: relative;
+    top:160px;
+    background-color:#e7eae8;
 }
 .fix{
     margin:0 auto;
@@ -109,9 +111,9 @@ header{
     text-align: center;
 }
 .checkbox {
-  height: 200px;
-  position: relative;
-  left:23%;
-  margin-top: 100px;
+    height: 200px;
+    position: relative;
+    left:23%;
+    margin-top: 100px;
 }
 </style>

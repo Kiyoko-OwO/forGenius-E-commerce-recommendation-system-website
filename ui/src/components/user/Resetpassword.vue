@@ -1,3 +1,5 @@
+<!--  Reset Password Page For When User Logged in  -->
+
 <template>
     <div class="reset_container">
       <div class="fix">
@@ -25,11 +27,10 @@
 </template>
 
 <script>
-// Page for user chenge password when they logged in
 import { change_password } from '../../api/user'
 export default {
   data () {
-    // The rules for input value
+    // The rules for input data validation
     var checkOldpassword = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('password cannot be empty'))
@@ -65,6 +66,7 @@ export default {
         old_password: '',
         new_password: ''
       },
+      //Input data validation
       resetpasswordRule: {
         old_password: [
           { min: 6, max: 12, message: 'the password should be 6-12 characters', trigger: 'blur' },
@@ -152,11 +154,16 @@ h1{
     border-radius: 80px;
     padding-top: 50px;
 }
-
+.fix{
+    margin:0 auto;
+    margin-top:-80px;
+    width:800px;
+}
+/*deep style for el in scoped*/
 .reset_form /deep/.timr.el-form .el-form-item__error {
-  top: 30%;
-  right: 25% !important;
-  left: unset;
+    top: 30%;
+    right: 25% !important;
+    left: unset;
 }
 .oldpassword_change /deep/ .el-form-item__label{
     font-family: 'segUi';
@@ -174,15 +181,8 @@ h1{
     letter-spacing:.1em;
     font-size: 18px;
 }
-.fix{
-  margin:0 auto;
-  margin-top:-80px;
-  width:800px;
-}
 .el-input /deep/ .el-input__inner {
     border-radius:50px;
     height:30px;
 }
-
-
 </style>

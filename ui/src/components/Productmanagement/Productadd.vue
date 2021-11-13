@@ -1,3 +1,5 @@
+<!--  Add Product Page  -->
+
 <template>
     <div class="add_container">
      <div class="fix">
@@ -46,12 +48,11 @@
 </template>
 
 <script>
-// Page for admin to add product
 // Without admin login, this page cannot be reached
 import { product_add } from '../../api/admin'
 export default {
   data () {
-    // The rules for input value
+    // The rules for input input data validation
     var checkName = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('name cannot be empty'))
@@ -135,6 +136,7 @@ export default {
         price:'',
         picture: '',
       },
+      //Input data validation
       addRules: {
         name: [
           { validator: checkName, trigger: 'blur' }
@@ -235,19 +237,6 @@ h1{
     border-radius: 80px;
     padding-top: 50px;
 }
-.change /deep/ .el-form-item__label{
-    font-family: 'segUi';
-    letter-spacing:.1em;
-    font-size: 18px;
-}
-.change_description /deep/ .el-form-item__label{
-    font-family: 'segUi';
-    letter-spacing:.1em;
-    font-size: 18px;
-}
-.change_description /deep/ .el-form-item__input{
-      height: 100%;
-}
 .el-form-item{
    margin-bottom:15px
 }
@@ -263,11 +252,6 @@ h1{
     color: #fefefe;
     letter-spacing:10px;
     padding-left: 30px;
-}
-.add_form /deep/.timr.el-form .el-form-item__error {
-  top: 30%;
-  right: 25% !important;
-  left: unset;
 }
 .cancel{
     position: relative;
@@ -288,10 +272,28 @@ h1{
   margin-top:-100px;
   width:800px;
 }
-
+/*deep style for el in scoped*/
+.add_form /deep/.timr.el-form .el-form-item__error {
+  top: 30%;
+  right: 25% !important;
+  left: unset;
+}
 .el-input /deep/ .el-input__inner {
     border-radius:50px;
     height:30px;
+}
+.change /deep/ .el-form-item__label{
+    font-family: 'segUi';
+    letter-spacing:.1em;
+    font-size: 18px;
+}
+.change_description /deep/ .el-form-item__label{
+    font-family: 'segUi';
+    letter-spacing:.1em;
+    font-size: 18px;
+}
+.change_description /deep/ .el-form-item__input{
+      height: 100%;
 }
 </style>
 

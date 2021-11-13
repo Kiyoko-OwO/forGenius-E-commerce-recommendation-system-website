@@ -13,9 +13,11 @@
 </template>
 
 <script>
+// Mod page for search result
 export default {
     props: ['index', 'proName', 'proDescription', 'proSales_data', 'proPrice', 'proPic','proId'],
     methods: {
+      // Go to corresponding product page
       goProduct () {
         sessionStorage.setItem('product',this.proId);
         this.$router.push('/product')
@@ -24,7 +26,7 @@ export default {
     },
     data(){
         return {
-            fits: [''],
+          fits: [''],
     }
     }
 }

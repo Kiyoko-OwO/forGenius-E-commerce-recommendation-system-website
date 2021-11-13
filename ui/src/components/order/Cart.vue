@@ -131,6 +131,7 @@ export default {
         },
         // delete corresponding product
         del(index) {
+            // Operation to delete product in frontend
             this.total_price = parseFloat(this.total_price);
             this.cart[index].price = parseFloat(this.cart[index].price);
             this.del_form.product_id = this.cart[index].product_id;

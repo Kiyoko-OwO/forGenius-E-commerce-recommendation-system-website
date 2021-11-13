@@ -18,6 +18,7 @@
 </template>
 
 <script>
+// Mod page for Cart
 export default {
     data() {
       return{
@@ -35,6 +36,7 @@ export default {
       delFn(){
         this.$emit("delPro", this.index)
       },
+      // Go to corresponding product page
       goProduct () {
         sessionStorage.setItem('product',this.proId);
         this.$router.push('/product')

@@ -13,6 +13,7 @@
 </template>
 
 <script>
+// Mod page for home product
 export default {
     props: ['index', 'proName', 'proDescription', 'proSales_data', 'proPrice', 'proPic','proId'],
     methods: {
@@ -23,6 +24,7 @@ export default {
     }
     },
     methods: {
+      // Go to corresponding product page
       goProduct () {
         sessionStorage.setItem('product',this.proId);
         this.$router.push('/product')

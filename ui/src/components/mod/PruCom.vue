@@ -13,6 +13,7 @@
 </template>
 
 <script>
+// Mod page for product recommond products
 export default {
     inject:['reload'],
     props: ['index', 'proName', 'proDescription', 'proSales_data', 'proPrice', 'proPic','proId'],
@@ -25,6 +26,7 @@ export default {
     }
     },
     methods: {
+      // Go to corresponding product page
       goProduct () {
         sessionStorage.setItem('product',this.proId);
         this.reload();

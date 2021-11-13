@@ -52,11 +52,13 @@
 </template>
 
 <script>
+// Mod page for address
 import { address_edit } from '../../api/user'
 export default {
     inject:['reload'],
     props: ['index', 'userName', 'addressId', 'addressDe', 'phoneNumber', 'suburb', 'post_code', 'state', 'country'],
     data () {
+      // The rules for input value
           var checkName = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('username cannot be empty'))
@@ -175,24 +177,25 @@ export default {
       editFn(){
         this.$emit("editAdd", this.index)
       },
+      // submit editted address
       submitEdit() {  
         this.$refs.edit_FormRef.validate(async (valid) =>{
         if(valid){
-        this.editForm.token = sessionStorage.getItem('token');
-        console.log(this.editForm);
-        this.editForm.phone_number = this.editForm.phone_number.toString();
-        address_edit(this.editForm).then( res => {
-            this.$message({message: 'Sucess!',type: 'success'});
-            this.dialogFormVisible = false;
-            this.reload();
-        }).catch( error => {
-            this.$message.error('Failed');
-        })
+          this.editForm.token = sessionStorage.getItem('token');
+          this.editForm.phone_number = this.editForm.phone_number.toString();
+          // Main operation for edit
+          address_edit(this.editForm).then( res => {
+              this.$message({message: 'Sucess!',type: 'success'});
+              this.dialogFormVisible = false;
+              this.reload();
+          }).catch( error => {
+              this.$message.error('Failed');
+          })
+          }
+        else{
+          // user cannot submit if input did not pass the rules
+          return false;
         }
-                else{
-            console.log('error submit!!');
-            return false;
-      }
     })
 }}}
 </script>

@@ -60,28 +60,30 @@
 </template>
 
 <script>
+// Mod page for order history
 import { ord_share } from '../../api/order'
 import { ord_sin_view } from '../../api/order'
 export default {
     props: ['index', 'ordId', 'payStat', 'ordItem','ordTotal','orderDate','name','address_line','phone_number'],
     data () {
-    var checkEmail = (rule, value, callback) => {
-      const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+\.com/
-      setTimeout(() => {
-        if (mailReg.test(value)) {
-          callback()
-        } else {
-          callback(new Error('Please enter the correct email format'))
-        }
-      }, 100)
-    }
-    var checkUsername = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('username cannot be empty'));
-      } else {
-        callback()
+      // The rules for input value
+      var checkEmail = (rule, value, callback) => {
+        const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+\.com/
+        setTimeout(() => {
+          if (mailReg.test(value)) {
+            callback()
+          } else {
+            callback(new Error('Please enter the correct email format'))
+          }
+        }, 100)
       }
-    }
+      var checkUsername = (rule, value, callback) => {
+        if (!value) {
+          return callback(new Error('username cannot be empty'));
+        } else {
+          callback()
+        }
+      }
         return {
             fits: [''],
             dialogFormVisible: false,
@@ -115,6 +117,7 @@ export default {
         this.getPro();
     },
     methods: {
+        // Show picture for three product of order
         async getPro() {
           this.viewForm.token = sessionStorage.getItem('token');
           this.viewForm.order_id = this.ordId;
@@ -125,10 +128,13 @@ export default {
               this.$message.error('Failed');
           })
         },
+        
         orderFn() {
+            // If pay stat is "Fail"
             if (this.payStat === "Fail") {
+                // page will redirect to payment page
                 this.$router.push('/payment');
-                console.log(this.ordId);
+                // keep order information
                 sessionStorage.setItem('order', this.ordId);
             } else {
                 this.dialogFormVisible = true
@@ -140,31 +146,35 @@ export default {
         closeDialog(){
             this.$refs['share_FormRef'].resetFields();
         },
+        // Reset share form
         resetShare () {
           this.shareForm.to_email = "";
           this.shareForm.receiver_name = "";
           this.sharedialogFormVisible = false;
         },
+        // Share corresponding order
         submit () {
           this.$refs.share_FormRef.validate(async (valid) => {
           if (valid) {
-          this.shareForm.order_id = this.ordId;
-          this.shareForm.token = sessionStorage.getItem('token');
-          console.log(this.shareForm);
-          ord_share(this.shareForm).then ( res => {
-          this.$message({message: 'Share Sucess!',type: 'success'});
-              this.sharedialogFormVisible = false;
-              this.shareForm.to_email = "";
-              this.shareForm.receiver_name = "";
-          }).catch( error => {
-              this.$message.error('Share Failed');
-          })}
+            this.shareForm.order_id = this.ordId;
+            this.shareForm.token = sessionStorage.getItem('token');
+            // Main operation to share order
+            ord_share(this.shareForm).then ( res => {
+            this.$message({message: 'Share Sucess!',type: 'success'});
+                this.sharedialogFormVisible = false;
+                this.shareForm.to_email = "";
+                this.shareForm.receiver_name = "";
+            }).catch( error => {
+                this.$message.error('Share Failed');
+            })
+          }
           else {
-            console.log('error submit!!');
+            // user cannot submit if input did not pass the rules
             return false;
           }
           })
         },
+        // Go to corresponding product page
         goProduct (item) {
           sessionStorage.setItem('product',item.product_id);
           this.$router.push('/product')

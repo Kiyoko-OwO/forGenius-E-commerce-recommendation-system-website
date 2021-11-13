@@ -69,76 +69,78 @@
 </template>
 
 <script>
+// Mod page for admin to edit product
 import { product_edit } from '../../api/admin'
 export default {
     inject:['reload'],
     props: ['index', 'id', 'name', 'warr', 'description', 'delivery', 'sales', 'price','pic','features'],
     data () {
-    var checkName = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('name cannot be empty'))
-      } else {
-        callback()
-      }
-    }
-    var checkFeature = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('Feature cannot be empty'))
-      } else {
-        callback()
-      }
-    }
-    var checkDes = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('name cannot be empty'))
-      } else {
-        callback()
-      }
-    }
-    var checkWarranty = (rule, value, callback) => {
-      const mailReg = /^\d+$/
-      setTimeout(() => {
-        if (mailReg.test(value)) {
-          callback()
+      // The rules for input value
+      var checkName = (rule, value, callback) => {
+        if (!value) {
+          return callback(new Error('name cannot be empty'))
         } else {
-          callback(new Error('The warranty should be number'))
-        }
-      }, 100)
-    }
-    var checkDelivery= (rule, value, callback) => {
-      value = this.editForm.delivery_date
-      const mailReg = /^\d+$/
-      setTimeout(() => {
-        if (mailReg.test(value)) {
           callback()
-        } else {
-          callback(new Error('The date should be number of day'))
         }
-      }, 100)
-    }
-    var checkSales= (rule, value, callback) => {
-      const mailReg = /^\d+$/
-      if (!value) {
-        return callback(new Error('Sales cannot be empty'))
       }
-      setTimeout(() => {
-        if (mailReg.test(value)) {
-          callback()
+      var checkFeature = (rule, value, callback) => {
+        if (!value) {
+          return callback(new Error('Feature cannot be empty'))
         } else {
-          callback(new Error('the sales should be number'))
-        }
-      }, 100)
-    }
-    var checkPrice= (rule, value, callback) => {
-      const mailReg =  /^((0{1}\.\d{1,2})|([1-9]\d*\.{1}\d{1,2})|([1-9]+\d*))$/
-      setTimeout(() => {
-        if (mailReg.test(value) & value != 0) {
           callback()
-        } else {
-          callback(new Error('Should more than 0 and at most two decimal places'))
         }
-      }, 100)
-    }
+      }
+      var checkDes = (rule, value, callback) => {
+        if (!value) {
+          return callback(new Error('name cannot be empty'))
+        } else {
+          callback()
+        }
+      }
+      var checkWarranty = (rule, value, callback) => {
+        const mailReg = /^\d+$/
+        setTimeout(() => {
+          if (mailReg.test(value)) {
+            callback()
+          } else {
+            callback(new Error('The warranty should be number'))
+          }
+        }, 100)
+      }
+      var checkDelivery= (rule, value, callback) => {
+        value = this.editForm.delivery_date
+        const mailReg = /^\d+$/
+        setTimeout(() => {
+          if (mailReg.test(value)) {
+            callback()
+          } else {
+            callback(new Error('The date should be number of day'))
+          }
+        }, 100)
+      }
+      var checkSales= (rule, value, callback) => {
+        const mailReg = /^\d+$/
+        if (!value) {
+          return callback(new Error('Sales cannot be empty'))
+        }
+        setTimeout(() => {
+          if (mailReg.test(value)) {
+            callback()
+          } else {
+            callback(new Error('the sales should be number'))
+          }
+        }, 100)
+      }
+      var checkPrice= (rule, value, callback) => {
+        const mailReg =  /^((0{1}\.\d{1,2})|([1-9]\d*\.{1}\d{1,2})|([1-9]+\d*))$/
+        setTimeout(() => {
+          if (mailReg.test(value) & value != 0) {
+            callback()
+          } else {
+            callback(new Error('Should more than 0 and at most two decimal places'))
+          }
+        }, 100)
+      }
       return {
         fits: [''],
         // url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
@@ -217,21 +219,22 @@ export default {
       closeDialog(){
       this.$refs['edit_FormRef'].resetFields();
       },
+      // submit editted product
       submitEdit() {
       this.$refs.edit_FormRef.validate(async (valid) =>{
         if(valid){
-        console.log(this.editForm);
-        product_edit(this.editForm).then( res => {
-            this.$message({message: 'Sucess!',type: 'success'});
-            this.dialogFormVisible = false;
-            this.reload();
-        }).catch( error => {
-            this.$message.error('Failed');
-        })
+          // Main operation for edit
+          product_edit(this.editForm).then( res => {
+              this.$message({message: 'Sucess!',type: 'success'});
+              this.dialogFormVisible = false;
+              this.reload();
+          }).catch( error => {
+              this.$message.error('Failed');
+          })
         }
         else{
-            console.log('error submit!!');
-            return false;
+          // admin cannot submit if input did not pass the rules
+          return false;
         }
       })
     }

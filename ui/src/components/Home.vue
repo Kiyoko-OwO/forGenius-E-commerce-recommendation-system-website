@@ -267,6 +267,7 @@ main #logo {
   float: left;
   width:500px;
   height:600px;
+  overflow: hidden;
 }
 .product_container{
   float: right;

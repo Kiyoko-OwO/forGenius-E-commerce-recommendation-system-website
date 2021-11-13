@@ -29,6 +29,7 @@
 </template>
 
 <script>
+// Main page for order history
 import Order from '../mod/OrdHisCom.vue'
 import { ord_view } from '../../api/order'
 export default {
@@ -47,7 +48,9 @@ export default {
         Order
     },
     methods: {
+        // Load order history
         async loadOrd() {
+            // Main operation to get order history
             this.tokenForm.token = sessionStorage.getItem('token');
             ord_view(this.tokenForm).then( res => {
                 this.order_list = res.data.data.order_list;
@@ -55,8 +58,10 @@ export default {
                 this.$message.error('No order exists');
             })
         },
+        // When prder is not paid yet
+        // "Fail" will be shown
+        // Oterwise will be "Success"
         check(index) {
-
             if (this.order_list[index].paid == 1) {
                 this.order_list[index].paid = "Success";
             } else {

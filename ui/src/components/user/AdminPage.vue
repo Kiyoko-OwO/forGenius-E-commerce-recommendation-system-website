@@ -16,7 +16,7 @@
 </template>
 
 <script>
-// Main page for admin
+// Page for admin
 // Without admin login, this page cannot be reached
 import { logout } from '../../api/user'
 export default {

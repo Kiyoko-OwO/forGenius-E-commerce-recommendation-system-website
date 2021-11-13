@@ -13,10 +13,6 @@
       <div v-show="isEmpty">
           <p> Name: {{create_form.name}} </p> 
           <p> Address: {{create_form.address_line}}</p>
-          <!-- <p> Country: {{create_form.country}}</p>
-          <p> State: {{create_form.state}}</p>
-          <p> Suburb: {{create_form.suburb}}</p>
-          <p> Postal Code:{{create_form.post_code}}</p> -->
           <p> Phone Number: {{create_form.phone_number}}</p>
           <el-button @click="chooseDialogFormVisible = true" align="left" style="float:left">Choose</el-button>
           <el-dialog title="Address Book" :visible.sync="chooseDialogFormVisible" width="40%" class="editf" append-to-body>
@@ -63,6 +59,9 @@
 </template>
 
 <script>
+// Main page for order
+// After submit cart
+// Without user login, this page cannot be reached
 import { address_view } from '../../api/user'
 import { cart_view } from '../../api/order'
 import Product from '../mod/CartPro.vue'
@@ -72,6 +71,7 @@ import { cart_create } from '../../api/order'
 export default {
     inject:['reload'],
     data () {
+        // The rules for input value
         var checkEmail = (rule, value, callback) => {
         const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+.com/
         if (!value) {
@@ -134,7 +134,7 @@ export default {
     },
     methods: {
         async checkStat () {
-            console.log(await this.check());
+            await this.check();
         },
         check () {
             // Simple Navigation Guards
@@ -143,8 +143,10 @@ export default {
             this.$router.push('/login')
             }
         },
+        // Load products in cart
         async loadCart() {
             this.tokenForm.token = sessionStorage.getItem('token');
+            // Main operation to get cart
             cart_view(this.tokenForm).then( res => {
                 this.cart = res.data.data.cart;
                 this.total_price = res.data.data.total;
@@ -155,12 +157,14 @@ export default {
                 this.$message.error('You Need to Login First');
             })
         },
+        // Load address
         async loadAddressBook() {
-            // this.tokenForm.token = sessionStorage.getItem('token');
+            // Main operation to get address
             address_view(this.tokenForm).then( res => {
+                // if address book is not empty
                 if (res.data.data.address_book.length > 0) {
                     this.isEmpty = true;
-                    console.log(res);
+                    // load result data into this window data 
                     this.addressbook = res.data.data.address_book;
                     this.addressbook = this.addressbook.slice().reverse();
                     this.create_form.name = this.addressbook[0].name;
@@ -171,12 +175,15 @@ export default {
                     this.create_form.state = this.addressbook[0].state;
                     this.create_form.country = this.addressbook[0].country;
                 } else {
+                    // if address book is empty
                     this.isEmpty = false;
                 }
             }).catch( error => {
             })
         },
+        // quantity + 1 for corresponding product
         add(index) {
+            // Operation to quantity + 1 in frontend
             this.cart[index].quantity += 1;
             this.total_price = parseFloat(this.total_price);
             this.cart[index].price = parseFloat(this.cart[index].price);
@@ -184,37 +191,44 @@ export default {
             this.total_price = this.total_price.toFixed(2)
             this.qua_form.quantity = this.cart[index].quantity;
             this.qua_form.product_id = this.cart[index].product_id
+            // Operation to quantity + 1 in backend
             cart_qua(this.qua_form).then( res => {
-
             }).catch( error => {
                 this.$message.error('Failed');
             })
         },
+        // quantity - 1 for corresponding product
         sub(index) {
+            // Operation to quantity - 1 in frontend
             this.total_price = parseFloat(this.total_price);
             this.cart[index].price = parseFloat(this.cart[index].price);
             this.cart[index].quantity > 1 && (this.cart[index].quantity -= 1) && (this.total_price = this.total_price - this.cart[index].price);
             this.total_price = this.total_price.toFixed(2)
             this.qua_form.quantity = this.cart[index].quantity;
             this.qua_form.product_id = this.cart[index].product_id;
+            // Operation to quantity - 1 in backend
             cart_qua(this.qua_form).then( res => {
             }).catch( error => {
                 this.$message.error('Failed');
             })
         },
         del(index) {
+            // Operation to delete product in frontend
             this.total_price = parseFloat(this.total_price);
             this.cart[index].price = parseFloat(this.cart[index].price);
             this.del_form.product_id = this.cart[index].product_id;
+            // Operation to delete product in backend
             cart_del(this.del_form).then( res => {
             }).catch( error => {
                 this.$message.error('Failed');
             })
+            // Recal the total price
             this.total_price = this.total_price - (this.cart[index].quantity * this.cart[index].price)
             this.total_price = this.total_price.toFixed(2);
+            // Delete the product in frontend
             this.cart.splice(index, 1);
-            console.log(this.cart);
         },
+        // Choose address from address book
         chooseAdd(index) {
             this.create_form.name = this.addressbook[index].name;
             this.create_form.address = this.addressbook[index].address;
@@ -224,7 +238,9 @@ export default {
         jumpCart () {
             this.$router.push('/cart');
         },
+        // Create order
         jumpPay () {
+            // Main operation to create order
             cart_create(this.create_form).then( res => {
                 this.$message({message: 'Order Placed',type: 'success'});
                 sessionStorage.setItem('order', res.data.order_id);
@@ -233,6 +249,8 @@ export default {
                 this.$message.error('Failed');
             })
         },
+        // When address book is empty
+        // Move to add address page
         jumpAdd () {
             sessionStorage.setItem('from', 1);
             this.$router.push('/addressadd');

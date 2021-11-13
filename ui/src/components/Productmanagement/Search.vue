@@ -42,7 +42,7 @@
 </template>
 
 <script>
-// Page for search result
+// Main page for search result
 import Search from '../mod/Searchpro.vue'
 import { ser_res } from '../../api/product' 
 export default {

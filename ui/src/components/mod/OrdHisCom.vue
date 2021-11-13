@@ -23,9 +23,10 @@
         <div class="line-in"></div>
         </div>
         <div class="item1">
-        <p> Buyer Name: {{name}}</p>
-        <p> Address: {{address_line}}</p>
-        <p> Phone Number: {{phone_number}}</p>
+        <p> Buyer Name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{name}}</p>
+        <p> Phone Number: &nbsp;&nbsp;&nbsp;{{phone_number}}</p>
+        <p> Address: </p>
+        <p> {{address_line}}</p>
         </div>
         <div class="block"></div>
         Order Date: {{orderDate}}
@@ -80,7 +81,7 @@ export default {
       }
       var checkUsername = (rule, value, callback) => {
         if (!value) {
-          return callback(new Error('username cannot be empty'));
+          return callback(new Error('Username cannot be empty'));
         } else {
           callback()
         }

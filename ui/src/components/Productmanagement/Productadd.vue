@@ -233,17 +233,18 @@ h1{
 }
 .add_form{
     width: 530px;
-    margin:0 100px;
+    margin:0 110px;
     border-radius: 80px;
     padding-top: 50px;
 }
 .el-form-item{
-   margin-bottom:15px
+    margin-bottom:15px
 }
 .submit{
     position: relative;
-    left:70%;
+    left:67%;
     height:50px;
+    top:-5px;
     width:200px;
     transform: translate(-50%,-50%);
     border-radius: 10px;
@@ -255,8 +256,8 @@ h1{
 }
 .cancel{
     position: relative;
-    top:-50px;
-    left:-50%;
+    top:-55px;
+    left:-47%;
     height:50px;
     width:200px;
     transform: translate(-50%,-50%);
@@ -268,15 +269,15 @@ h1{
     padding-left: 30px;
 }
 .fix{
-  margin:0 auto;
-  margin-top:-100px;
-  width:800px;
+    margin:0 auto;
+    margin-top:-100px;
+    width:800px;
 }
 /*deep style for el in scoped*/
 .add_form /deep/.timr.el-form .el-form-item__error {
-  top: 30%;
-  right: 25% !important;
-  left: unset;
+    top: 30%;
+    right: 25% !important;
+    left: unset;
 }
 .el-input /deep/ .el-input__inner {
     border-radius:50px;
@@ -293,7 +294,7 @@ h1{
     font-size: 18px;
 }
 .change_description /deep/ .el-form-item__input{
-      height: 100%;
+    height: 100%;
 }
 </style>
 

@@ -25,10 +25,12 @@
 </template>
 
 <script>
+// Page for user forgot password after send code
 import { reset_password } from '../../api/user'
 
 export default {
   data () {
+    // The rules for input value
     var checkCode = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('Code cannot be empty'))
@@ -80,8 +82,8 @@ export default {
   methods: {
     reset () {
       this.$refs.resetFormRef.validate(valid => {
-        console.log(valid);
-        console.log(this.resetForm);
+        // Main operation for change password
+        // in forgot mode
         reset_password(this.resetForm).then ( res => {
           this.$message({message: 'Sucess!',type: 'success'});
           console.log(res.data);

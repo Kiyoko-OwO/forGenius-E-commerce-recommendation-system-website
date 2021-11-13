@@ -16,6 +16,8 @@
 </template>
 
 <script>
+// Main page for admin
+// Without admin login, this page cannot be reached
 import { logout } from '../../api/user'
 export default {
     data () {
@@ -31,7 +33,7 @@ export default {
     },
     methods: {
         async checkStat () {
-            console.log(await this.check());
+            await this.check();
         },
         check () {
             // Simple Navigation Guards
@@ -42,6 +44,7 @@ export default {
         },
         logOut () {
             this.tokenForm.token = sessionStorage.getItem('adtoken');
+            // Main operation for log out
             logout(this.tokenForm).then ( res => {
                 this.$message({message: 'Log out Sucess!',type: 'success'});
                 sessionStorage.clear();

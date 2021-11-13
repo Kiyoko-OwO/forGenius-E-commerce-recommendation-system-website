@@ -17,9 +17,11 @@
 </template>
 
 <script>
+// Send code page when user forgot password 
 import { send_code } from '../../api/user'
 export default {
   data () {
+    // The rules for input value
     var checkEmail = (rule, value, callback) => {
       const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+\.com/
       if (!value) {
@@ -49,6 +51,7 @@ export default {
       this.$refs.forgotFormRef.validate(valid => {
         console.log(valid);
         if (valid) {
+          // Main operation for send code for forgot password
           send_code(this.forgotForm).then( res => {
           this.$message({message: 'Code sent',type: 'success'});
           this.$router.push('/resetpassword/forgot')

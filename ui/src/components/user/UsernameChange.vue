@@ -17,9 +17,11 @@
 </template>
 
 <script>
+// Page for change user name
 import { change_username } from '../../api/user'
 export default {
   data () {
+    // The rules for input value
     var checkUsername = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('username cannot be empty'));
@@ -44,8 +46,8 @@ export default {
     usernamechange () {
       this.$refs.usernamechangeFormRef.validate(valid => {
         if (valid) {
+          // Main operation for change user name
           this.usernamechangeForm.token = sessionStorage.getItem('token');
-          console.log(this.usernamechangeForm);
           change_username(this.usernamechangeForm).then( res => {
             this.$message({message: 'User Name Changed',type: 'success'});
             sessionStorage.setItem('username',this.usernamechangeForm.newname);

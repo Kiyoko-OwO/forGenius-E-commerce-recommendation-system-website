@@ -19,6 +19,7 @@
 
 </template>
 <script>
+// Page for user to choose their interest
 import { interest_add } from '../../api/user'
 const tagOptions = ['Fashion', 'Toys', 'Health', 'Pet', 'Electronics', 'Media', 'Furniture', 'Game', 'Food', 'Personal Care']
 export default {
@@ -35,6 +36,7 @@ export default {
   methods: {
     submitForm() {
       this.interestForm.token = sessionStorage.getItem('token');
+      // Main operation for choose interest
       interest_add(this.interestForm).then ( res => {
           this.$message({message: 'Sucess!',type: 'success'});
           this.$router.push('userprofile');

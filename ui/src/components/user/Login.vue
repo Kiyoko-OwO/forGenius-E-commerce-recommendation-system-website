@@ -27,11 +27,13 @@
 </template>
 
 <script>
+// Page for log in
 import '../../assets/css/form.css'
 import { login } from '../../api/user'
 
 export default {
   data () {
+    // The rules for input value
     var checkEmail = (rule, value, callback) => {
       const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+\.com/
       if (!value) {
@@ -70,21 +72,23 @@ export default {
   },
   methods: {
     jumpHome () {
-      this.$router.push('Home')
+      this.$router.push('/home')
     },
     submitForm(formName) {
         this.$refs[formName].validate(async (valid) => {
           if (valid) {
+            // Main operation for login
             login(this.loginForm).then( res => {
               this.$message({message: 'Log in Sucess!',type: 'success'});
-              console.log(res.data);
-              console.log(res.status);
+              // When return status code is 255
+              // It means log in from admin
               if (res.status == 255) {
                 sessionStorage.clear();
                 sessionStorage.setItem('adtoken',res.data.token);
                 sessionStorage.setItem('adusername',res.data.username);
                 this.$router.push('/admin');
               } else {
+                // else will be normal login
                 sessionStorage.setItem('token',res.data.token);
                 sessionStorage.setItem('username',res.data.username);
                 if (sessionStorage.getItem('fromPro') != null) {
@@ -98,7 +102,7 @@ export default {
               this.$message.error('Incorrect email or password');
             })
           } else {
-            console.log('error submit!!');
+            // user cannot submit if input did not pass the rules
             return false;
           }
         });

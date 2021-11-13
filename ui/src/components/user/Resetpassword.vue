@@ -25,9 +25,11 @@
 </template>
 
 <script>
+// Page for user chenge password when they logged in
 import { change_password } from '../../api/user'
 export default {
   data () {
+    // The rules for input value
     var checkOldpassword = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('password cannot be empty'))
@@ -80,13 +82,13 @@ export default {
   },
   methods: {
     reset () {
+      // Main operation for reset password
       this.$refs.resetFormRef.validate(async valid => {
-        console.log(valid);
         this.resetForm.token = sessionStorage.getItem('token');
         if (valid) {
           change_password(this.resetForm).then( res => {
             this.$message({message: 'Updated Successfully!',type: 'success'});
-            this.$router.push('userprofile');
+            this.$router.push('/userprofile');
           }).catch( error => {
              this.$message.error('Incorrect old password or new password invalid');
           })

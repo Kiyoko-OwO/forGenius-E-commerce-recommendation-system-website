@@ -81,13 +81,12 @@ export default {
     }
   },
   created () {
-    this.checkStat(),
-    this.loadRec()
+    this.checkStat()
   },
   methods: {
     async checkStat () {
       // Wait check() complete
-      console.log(await this.check());
+      await this.check();
     },
     check () {
       // Judging the current situation
@@ -96,31 +95,26 @@ export default {
         this.isUser = true;
         this.isGuest = false;
         this.username = sessionStorage.getItem('username');
+        this.tokenForm.token = sessionStorage.getItem('token');
+        // Load recommendation product for homepage
+        // When no user log in
+        rec_user(this.tokenForm).then ( res => {
+          this.products = res.data.products;
+        }).catch( error => {
+        })
         return this.username;
       } 
       // No user log in
       else {
         this.isGuest = true;
         this.isUser = false;
-        return this.isUser;
-      }
-    },
-    async loadRec () {
-      // Load recommendation product for homepage
-      // When no user log in
-      if (this.isGuest == true) {
+        sessionStorage.clear();
+        // Load recommendation product for guest
         rec_guest(this.tokenForm).then ( res => {
           this.products = res.data.products;
         }).catch( error => {
         })
-      }
-      // When user log in
-      else if (this.isUser == true) {
-        this.tokenForm.token = sessionStorage.getItem('token');
-        rec_user(this.tokenForm).then ( res => {
-          this.products = res.data.products;
-        }).catch( error => {
-        })
+        return this.isGuest;
       }
     },
     jumpSign () {
@@ -135,9 +129,11 @@ export default {
       if(!this.keywords){
         this.$message.error("Please input search keywords");
       }
+      // When search box only has space
       else if(this.keywords.match(/^[ ]*$/)){
         this.$message.error("Please input search keywords");
       }
+      // Real search trigger
       else{
         sessionStorage.setItem('word',this.keywords);
         this.$router.push('/search')

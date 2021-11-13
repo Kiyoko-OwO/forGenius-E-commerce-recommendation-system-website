@@ -39,10 +39,12 @@
 </template>
 
 <script>
+// Page for sign up
 import { signup } from '../../api/user'
 import { signup_code } from '../../api/user'
 export default {
   data () {
+    // The rules for input value
     var checkEmail = (rule, value, callback) => {
       const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+\.com/
       if (!value) {
@@ -128,6 +130,7 @@ export default {
     signup () {
       this.$refs.signupFormRef.validate(async valid => {
         if (valid) {
+          // Main operation for sign up
           signup(this.signupForm).then ( res => {
             this.$message({message: 'Sign up Sucess!',type: 'success'});
             sessionStorage.clear();
@@ -139,25 +142,30 @@ export default {
             this.$message.error('Already registered, please log in');
           })
         } else {
-          console.log('error submit!!');
+          // user cannot submit if input did not pass the rules
           return false;
         }
       })
     },
     send() {
+      // Fucntion for send code request
       const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+\.com/;
+      // Code cannot be sent when no email input
       if (this.signupForm.email == "") {
         this.$message.error('Email cannot be null');
       } else {
         if (mailReg.test(this.signupForm.email)) {
+          // Get ready to send code
           this.code_form.name = this.signupForm.name;
           this.code_form.email = this.signupForm.email;
+          // Main operation for send code
           signup_code(this.code_form).then ( res => {
             this.$message({message: 'Code Send Sucessfully!',type: 'success'});
           }).catch( error => {
             this.$message.error('Failed');
         })
         } else {
+            // Code cannot be sent when email format is not right
             this.$message.error('Email form is not right');
         }
       }

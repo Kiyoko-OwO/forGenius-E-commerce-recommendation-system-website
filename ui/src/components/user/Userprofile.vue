@@ -24,6 +24,7 @@
 </template>
 
 <script>
+// User profile main page
 import { logout } from '../../api/user'
 export default {
   inject:['reload'],
@@ -41,21 +42,22 @@ export default {
     this.checkStat()
   },
   methods: {
+    // checkStat helps to check user login statement
+    // same as homepage
     async checkStat () {
-      console.log(await this.check());
+      await this.check();
     },
     check () {
+      // Simple Navigation Guards
       if (sessionStorage.getItem("username") != null) {
         this.isUser = true;
         this.isGuest = false;
         this.username = sessionStorage.getItem('username');
-        return this.username;
       } else {
         this.isGuest = true;
         this.isUser = false;
         this.$message.error('You Need to Login First');
         this.$router.push('/login')
-        return this.isUser;
       }
     },
     jumpSign () {
@@ -88,9 +90,9 @@ export default {
     async logOut () {
       this.tokenForm.token = sessionStorage.getItem('token');
       logout(this.tokenForm).then ( res => {
-          this.$message({message: 'Log out Sucess!',type: 'success'});
           sessionStorage.clear();
-          this.reload();
+          this.$message({message: 'Log out Sucess!',type: 'success'});
+          this.$router.go(0);
           this.$router.push('/home')
       }).catch( error => {
           this.$message.error('Log out Failed');

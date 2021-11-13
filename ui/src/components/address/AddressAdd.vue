@@ -44,9 +44,11 @@
 </template>
 
 <script>
+// Mod page for add address
 import { address_add } from '../../api/user'
 export default {
   data () {
+    // The rules for input value
     var checkName = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('username cannot be empty'))
@@ -148,27 +150,32 @@ export default {
     jumpAddress () {
       this.$router.push('/address')
     },
+    // Submit address
     submitAdd () {
         this.$refs.add_FormRef.validate(async (valid) => {
           if (valid) {
-        this.addForm.token = sessionStorage.getItem('token');
-        console.log(this.addForm);
-        address_add(this.addForm).then( res => {
-            this.$message({message: 'Add Address Sucess!',type: 'success'});
-            if (sessionStorage.getItem('from') == 1) {
-              sessionStorage.removeItem('from');
-              this.$router.push('order');
-            } else {
-               this.$router.push('address');
-            }
+            this.addForm.token = sessionStorage.getItem('token');
+            // Main operation for submit address user want to add
+            address_add(this.addForm).then( res => {
+              this.$message({message: 'Add Address Sucess!',type: 'success'});
+              // If the page is from order page
+              // After sucess, page will back to order
+              if (sessionStorage.getItem('from') == 1) {
+                sessionStorage.removeItem('from');
+                this.$router.push('/order');
+              } 
+              // Otherwise, page will redirect to address page
+              else {
+                this.$router.push('/address');
+              }
            
-        }).catch( error => {
-            this.$message.error('Failed');
-        })
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
+            }).catch( error => {
+                this.$message.error('Failed');
+            })
+              } else {
+                console.log('error submit!!');
+                return false;
+              }
         });
     }
   }

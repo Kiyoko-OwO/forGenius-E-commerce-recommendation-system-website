@@ -42,6 +42,7 @@
 </template>
 
 <script>
+// Page for search result
 import Search from '../mod/Searchpro.vue'
 import { ser_res } from '../../api/product' 
 export default {
@@ -91,21 +92,29 @@ export default {
       }
     },
     methods: {
+      // Load search result
       async loadRes() {
+        // Store token if user logged in
         if (sessionStorage.getItem('token') != null) {
           this.view_formtoken = sessionStorage.getItem('token');
         }
+        // Get search word from sessionStorage
         this.keywords = sessionStorage.getItem('word');
         this.view_form.search = sessionStorage.getItem('word');
+        // Get sort method when sort already inside of sessionStorage
         if (sessionStorage.getItem('sort') != null) {
           this.view_form.sorting = sessionStorage.getItem('sort');
           this.value = sessionStorage.getItem('sort');
         } else {
+          // if no pre-setted sort method
+          // Defulat will be 'relevance'
           this.view_form.sorting = 'relevance';
           this.value = 'relevance';
         }
+        // Main operation to get search result
         ser_res(this.view_form).then( res => {
           this.product = res.data;
+          // Figure out whether search operation find products
           if (this.product.length == 0) {
             this.isRes = true;
           } else {
@@ -118,6 +127,7 @@ export default {
       jumpHome () {
         this.$router.push('/home')
       },
+      // extra search in search result page
       jumpResult () {
         sessionStorage.setItem('word',this.keywords);
         this.reload();

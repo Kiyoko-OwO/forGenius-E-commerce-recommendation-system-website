@@ -97,14 +97,13 @@ export default {
         this.username = sessionStorage.getItem('username');
         this.tokenForm.token = sessionStorage.getItem('token');
         // Load recommendation product for homepage
-        // When no user log in
         rec_user(this.tokenForm).then ( res => {
           this.products = res.data.products;
         }).catch( error => {
         })
         return this.username;
       } 
-      // No user log in
+      // When no user log in
       else {
         this.isGuest = true;
         this.isUser = false;

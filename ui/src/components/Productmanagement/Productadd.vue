@@ -46,9 +46,12 @@
 </template>
 
 <script>
+// Page for admin to add product
+// Without admin login, this page cannot be reached
 import { product_add } from '../../api/admin'
 export default {
   data () {
+    // The rules for input value
     var checkName = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('name cannot be empty'))
@@ -178,15 +181,15 @@ export default {
     submitAdd () {
         this.$refs.add_FormRef.validate(async (valid) => {
         if (valid) {
-        console.log(this.addForm);
-        product_add(this.addForm).then( res => {
+          // Main operation for add prodcut
+          product_add(this.addForm).then( res => {
             this.$message({message: 'Add product Sucess!',type: 'success'});
             this.$router.push('/manageproduct');
-        }).catch( error => {
+          }).catch( error => {
             this.$message.error('Failed');
-        })
+          })
           } else {
-            console.log('error submit!!');
+            // admin cannot submit if input did not pass the rules
             return false;
           }
         });

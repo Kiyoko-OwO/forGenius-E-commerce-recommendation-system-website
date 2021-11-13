@@ -82,6 +82,7 @@
 </template>
 
 <script>
+// Page for view a product
 import Home from '.././mod/PruCom.vue'
 import { cart_add } from '../../api/order'
 import { product_view } from '../../api/product'
@@ -115,8 +116,11 @@ export default {
         this.loadRec()
     },
     methods: {
+      // Load product
       async loadProduct () {
+          // Get target product id from sessionStorage
           this.product_id_form.product_id = sessionStorage.getItem('product');
+          // Main operation to get prodcut information
           product_view(this.product_id_form).then ( res => {
             this.product = res.data.data;
             this.features = this.product.features.split(" ");
@@ -124,26 +128,31 @@ export default {
             console.log(error);
           })
       },
+      // Load recommendation product for product page
       async loadRec () {
-      if (sessionStorage.getItem('token' != null)) {
-        this.tokenForm.token = sessionStorage.getItem('token');
-        rec_user(this.tokenForm).then ( res => {
-          this.products = res.data.products;
-          this.products = this.products.slice(0, 3);
-        }).catch( error => {
-        })
-      }
-      else {
-        rec_guest(this.tokenForm).then ( res => {
-          this.products = res.data.products;
-          this.products = this.products.slice(0, 3);
-        }).catch( error => {
-        })
-      }
-    },
+        // Have user log in
+        if (sessionStorage.getItem('token' != null)) {
+          this.tokenForm.token = sessionStorage.getItem('token');
+          rec_user(this.tokenForm).then ( res => {
+            this.products = res.data.products;
+            this.products = this.products.slice(0, 3);
+          }).catch( error => {
+          })
+        } 
+        // When no user log in
+        else {
+          rec_guest(this.tokenForm).then ( res => {
+            this.products = res.data.products;
+            this.products = this.products.slice(0, 3);
+          }).catch( error => {
+          })
+        }
+      },
+      // Add to cart
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
+            // Operation only sucess with user login
             if (sessionStorage.getItem('token') != null) {
               this.numberValidateForm.product_id = this.product_id_form.product_id;
               this.numberValidateForm.token = sessionStorage.getItem('token');
@@ -154,28 +163,36 @@ export default {
                 this.$message.error('Failed');
               })
             } else {
-                this.$router.push('/login');
-                sessionStorage.setItem('fromPro', 1);
+              // without login, page will redirect to log in page 
+              this.$router.push('/login');
+              sessionStorage.setItem('fromPro', 1);
             }
           } else {
-            console.log('error submit!!');
+            // user cannot submit if input did not pass the rules
             return false;
           }
         });
       },
+      // reset quantity
       resetForm(formName) {
         this.$refs[formName].resetFields();
       },
+      // quantity - 1
+      // cannot less than 1
       deleteOne () {
         this.numberValidateForm.quantity > 1 && (this.numberValidateForm.quantity -= 1)
       },
+      // quantity + 1
       addOne () {
         this.numberValidateForm.quantity += 1;
       },
       jumpHome () {
         sessionStorage.removeItem('product');
         this.$router.push('Home');
-      }, searchFe(feature) {
+      }, 
+      // Click feature buttom
+      // Search result of feature will be redirect
+      searchFe(feature) {
         sessionStorage.setItem('word',feature);
         this.$router.push('/search')
       }

@@ -91,10 +91,13 @@ export default {
                 // else will be normal login
                 sessionStorage.setItem('token',res.data.token);
                 sessionStorage.setItem('username',res.data.username);
+                // When page is from product
+                // After login, page will back to product page
                 if (sessionStorage.getItem('fromPro') != null) {
                   this.$router.push('/product');
                   sessionStorage.removeItem('fromPro');
                 } else {
+                  // Otherwise, page will redirect to userprofile page
                   this.$router.push('/userprofile');
                 }
               }

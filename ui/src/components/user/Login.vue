@@ -1,3 +1,5 @@
+<!--  Login Page  -->
+
 <template>
     <div class="login_container">
       <div class="fix">
@@ -27,11 +29,13 @@
 </template>
 
 <script>
+// Page for log in
 import '../../assets/css/form.css'
 import { login } from '../../api/user'
 
 export default {
   data () {
+    // The rules for Input data validation
     var checkEmail = (rule, value, callback) => {
       const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+\.com/
       if (!value) {
@@ -58,6 +62,7 @@ export default {
         email: '',
         password: ''
       },
+      //Input data validation
       loginRules: {
         email: [
           { validator: checkEmail, trigger: 'blur' }
@@ -70,27 +75,32 @@ export default {
   },
   methods: {
     jumpHome () {
-      this.$router.push('Home')
+      this.$router.push('/home')
     },
     submitForm(formName) {
         this.$refs[formName].validate(async (valid) => {
           if (valid) {
+            // Main operation for login
             login(this.loginForm).then( res => {
               this.$message({message: 'Log in Sucess!',type: 'success'});
-              console.log(res.data);
-              console.log(res.status);
+              // When return status code is 255
+              // It means log in from admin
               if (res.status == 255) {
                 sessionStorage.clear();
                 sessionStorage.setItem('adtoken',res.data.token);
                 sessionStorage.setItem('adusername',res.data.username);
                 this.$router.push('/admin');
               } else {
+                // else will be normal login
                 sessionStorage.setItem('token',res.data.token);
                 sessionStorage.setItem('username',res.data.username);
+                // When page is from product
+                // After login, page will back to product page
                 if (sessionStorage.getItem('fromPro') != null) {
                   this.$router.push('/product');
                   sessionStorage.removeItem('fromPro');
                 } else {
+                  // Otherwise, page will redirect to userprofile page
                   this.$router.push('/userprofile');
                 }
               }
@@ -98,7 +108,7 @@ export default {
               this.$message.error('Incorrect email or password');
             })
           } else {
-            console.log('error submit!!');
+            // user cannot submit if input did not pass the rules
             return false;
           }
         });
@@ -120,8 +130,8 @@ h1{
     letter-spacing:.2em;
 }
 .block {
-  width: 1000px;
-  height: 65px;
+    width: 1000px;
+    height: 65px;
 }
 .forget{
     position: relative;
@@ -188,10 +198,20 @@ h1{
     padding-top: 50px;
 }
 .username{
-      border-radius: 40px;
+    border-radius: 40px;
 }
 .email{
-      border-radius: 30px;
+    border-radius: 30px;
+}
+.fix{
+    margin:0 auto;
+    margin-top:-30px;
+    width:800px;
+}
+/*deep style for el in scoped*/
+.el-input /deep/ .el-input__inner {
+    border-radius:50px;
+    height:30px;
 }
 .email_change /deep/ .el-form-item__label{
     font-family: 'segUi';
@@ -203,15 +223,5 @@ h1{
     letter-spacing:.1em;
     font-size: 18px;
 }
-.fix{
-  margin:0 auto;
-  margin-top:-30px;
-  width:800px;
-}
-.el-input /deep/ .el-input__inner {
-    border-radius:50px;
-    height:30px;
-}
-
 </style>
 

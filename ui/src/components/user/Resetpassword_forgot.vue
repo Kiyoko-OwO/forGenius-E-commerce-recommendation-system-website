@@ -1,3 +1,5 @@
+<!--  Reset Password Page For Forgot Password  -->
+
 <template>
     <div class="reset_container">
       <div class="fix">
@@ -25,10 +27,12 @@
 </template>
 
 <script>
+// Page for user forgot password after send code
 import { reset_password } from '../../api/user'
 
 export default {
   data () {
+    // The rules for input data validation
     var checkCode = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('Code cannot be empty'))
@@ -63,6 +67,7 @@ export default {
         reset_code: '',
         new_password: ''
       },
+      //Input data validation
       resetpasswordRules: {
         reset_code: [
           { validator: checkCode, trigger: 'blur' }
@@ -80,8 +85,8 @@ export default {
   methods: {
     reset () {
       this.$refs.resetFormRef.validate(valid => {
-        console.log(valid);
-        console.log(this.resetForm);
+        // Main operation for change password
+        // in forgot mode
         reset_password(this.resetForm).then ( res => {
           this.$message({message: 'Sucess!',type: 'success'});
           console.log(res.data);
@@ -148,11 +153,20 @@ h1{
     border-radius: 80px;
     padding-top: 50px;
 }
-
+.fix{
+  margin:0 auto;
+  margin-top:-80px;
+  width:800px;
+}
+/*deep style for el in scoped*/
+.el-input /deep/ .el-input__inner {
+    border-radius:50px;
+    height:30px;
+}
 .reset_form /deep/.timr.el-form .el-form-item__error {
-  top: 30%;
-  right: 25% !important;
-  left: unset;
+    top: 30%;
+    right: 25% !important;
+    left: unset;
 }
 .code_change /deep/ .el-form-item__label{
     font-family: 'segUi';
@@ -169,16 +183,6 @@ h1{
     letter-spacing:.1em;
     font-size: 18px;
 }
-.fix{
-  margin:0 auto;
-  margin-top:-80px;
-  width:800px;
-}
-.el-input /deep/ .el-input__inner {
-    border-radius:50px;
-    height:30px;
-}
-
 </style>
 
 

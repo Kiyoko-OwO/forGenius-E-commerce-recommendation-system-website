@@ -1,7 +1,11 @@
+<!--OrderHistory Mod For OrderHistory Main Page   -->
+
 <template>
-  <div class="order_item">
+  <div class="order_item" style="width:400px">
       <div class="block"></div>
-      Order id: {{ordId}}
+      <p><span> Order Id:</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ordId}}</p>
+      <p><span> Pay State:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{payStat}}</p>
+      <p><span> Order Date: </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{orderDate}}</p>
       <el-dialog :title="order_id" :visible.sync="dialogFormVisible" class="editf" width="30%" append-to-body>
         <div class="item" v-for="item in items" :key="item.product_id">
         <div class="img" v-for="fit in fits" :key="fit" @click="goProduct(item)">
@@ -16,7 +20,7 @@
         <p>${{item.price}} </p>
         <p>Quantity: {{item.quantity}} </p>
         </div>
-        <div class="link-in"></div>
+        <div class="line-in"></div>
         </div>
         <div class="item1">
         <p> Buyer Name: {{name}}</p>
@@ -30,11 +34,9 @@
             <el-button type="white" @click="dialogFormVisible = false" icon="el-icon-error">Close</el-button>
         </div>
       </el-dialog>
-      <p>Paid: {{payStat}}</p>
-      <p>Order Date: {{orderDate}}</p>
       <div>
         <el-image v-for="(item,index) in shows" :key="index"
-            style="width: 100px; height: 100px"
+            style="width: 100px; height: 100px; margin-right:10px"
             :src="item.picture"
             :fit="fit"></el-image>
       </div>
@@ -55,7 +57,7 @@
       </div>
       </el-dialog>
       <div class="block"></div>
-      <div class="link-top"></div>
+      <div class="line-top"></div>
   </div>
 </template>
 
@@ -65,23 +67,24 @@ import { ord_sin_view } from '../../api/order'
 export default {
     props: ['index', 'ordId', 'payStat', 'ordItem','ordTotal','orderDate','name','address_line','phone_number'],
     data () {
-    var checkEmail = (rule, value, callback) => {
-      const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+\.com/
-      setTimeout(() => {
-        if (mailReg.test(value)) {
-          callback()
-        } else {
-          callback(new Error('Please enter the correct email format'))
-        }
-      }, 100)
-    }
-    var checkUsername = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('username cannot be empty'));
-      } else {
-        callback()
+      // The rules for input value
+      var checkEmail = (rule, value, callback) => {
+        const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+\.com/
+        setTimeout(() => {
+          if (mailReg.test(value)) {
+            callback()
+          } else {
+            callback(new Error('Please enter the correct email format'))
+          }
+        }, 100)
       }
-    }
+      var checkUsername = (rule, value, callback) => {
+        if (!value) {
+          return callback(new Error('username cannot be empty'));
+        } else {
+          callback()
+        }
+      }
         return {
             fits: [''],
             dialogFormVisible: false,
@@ -115,6 +118,7 @@ export default {
         this.getPro();
     },
     methods: {
+        // Show picture for three product of order
         async getPro() {
           this.viewForm.token = sessionStorage.getItem('token');
           this.viewForm.order_id = this.ordId;
@@ -125,10 +129,13 @@ export default {
               this.$message.error('Failed');
           })
         },
+        
         orderFn() {
+            // If pay stat is "Fail"
             if (this.payStat === "Fail") {
+                // page will redirect to payment page
                 this.$router.push('/payment');
-                console.log(this.ordId);
+                // keep order information
                 sessionStorage.setItem('order', this.ordId);
             } else {
                 this.dialogFormVisible = true
@@ -140,31 +147,35 @@ export default {
         closeDialog(){
             this.$refs['share_FormRef'].resetFields();
         },
+        // Reset share form
         resetShare () {
           this.shareForm.to_email = "";
           this.shareForm.receiver_name = "";
           this.sharedialogFormVisible = false;
         },
+        // Share corresponding order
         submit () {
           this.$refs.share_FormRef.validate(async (valid) => {
           if (valid) {
-          this.shareForm.order_id = this.ordId;
-          this.shareForm.token = sessionStorage.getItem('token');
-          console.log(this.shareForm);
-          ord_share(this.shareForm).then ( res => {
-          this.$message({message: 'Share Sucess!',type: 'success'});
-              this.sharedialogFormVisible = false;
-              this.shareForm.to_email = "";
-              this.shareForm.receiver_name = "";
-          }).catch( error => {
-              this.$message.error('Share Failed');
-          })}
+            this.shareForm.order_id = this.ordId;
+            this.shareForm.token = sessionStorage.getItem('token');
+            // Main operation to share order
+            ord_share(this.shareForm).then ( res => {
+            this.$message({message: 'Share Sucess!',type: 'success'});
+                this.sharedialogFormVisible = false;
+                this.shareForm.to_email = "";
+                this.shareForm.receiver_name = "";
+            }).catch( error => {
+                this.$message.error('Share Failed');
+            })
+          }
           else {
-            console.log('error submit!!');
+            // user cannot submit if input did not pass the rules
             return false;
           }
           })
         },
+        // Go to corresponding product page
         goProduct (item) {
           sessionStorage.setItem('product',item.product_id);
           this.$router.push('/product')
@@ -174,7 +185,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.link-top {
+.line-top {
     position: relative;
     width: 300%;
     height: 1px;
@@ -182,34 +193,37 @@ export default {
     transform: translate(-50%);
     border-top: solid #0b0b0f 1px;
 }
-.link-in {
+.line-in {
     position: relative;
     width: 100%;
     height: 1px;
     border-top: solid #0b0b0f 1px;
 }
 .block {
-   height: 20px;
+    height: 20px;
 }
 .detail{
-   position: relative;
-   left:100%;
+    position: relative;
+    left:80%;
 
 }
 .editf{
-   position: fixed;
+    position: fixed;
 } 
 .img{
-   cursor: pointer;
-   float:right;
-   margin-right:20px;
-   margin-top:-5px;
+    cursor: pointer;
+    float:right;
+    margin-right:20px;
+    margin-top:-5px;
 }
 .item1{
-  letter-spacing: 1.5px;
+    letter-spacing: 1.5px;
 }
-</style>
-
-<style>
-
+span{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size:17px;
+}
+p{
+    font-family: 'segUi';
+}
 </style>

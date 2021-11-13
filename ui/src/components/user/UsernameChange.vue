@@ -1,3 +1,5 @@
+<!--  Change Username Page  -->
+
 <template>
     <div class="usernamechange_container">
       <div class="fix">
@@ -20,6 +22,7 @@
 import { change_username } from '../../api/user'
 export default {
   data () {
+    // The rules for input value
     var checkUsername = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('username cannot be empty'));
@@ -44,8 +47,8 @@ export default {
     usernamechange () {
       this.$refs.usernamechangeFormRef.validate(valid => {
         if (valid) {
+          // Main operation for change user name
           this.usernamechangeForm.token = sessionStorage.getItem('token');
-          console.log(this.usernamechangeForm);
           change_username(this.usernamechangeForm).then( res => {
             this.$message({message: 'User Name Changed',type: 'success'});
             sessionStorage.setItem('username',this.usernamechangeForm.newname);
@@ -113,29 +116,28 @@ h1{
     border-radius: 80px;
     padding-top: 50px;
 }
-
+.el-form-item{
+    margin-bottom:15px
+}
+.fix{
+    margin:0 auto;
+    margin-top:-30px;
+    width:800px;
+}
+/*deep style for el in scoped*/
 .usernamechange_form /deep/.timr.el-form .el-form-item__error {
-  top: 30%;
-  right: 25% !important;
-  left: unset;
+    top: 30%;
+    right: 25% !important;
+    left: unset;
 }
 .username_change /deep/ .el-form-item__label{
     font-family: 'segUi';
     letter-spacing:.1em;
     font-size: 18px;
 }
-.el-form-item{
-   margin-bottom:15px
-}
-.fix{
-  margin:0 auto;
-  margin-top:-30px;
-  width:800px;
-}
 .el-input /deep/ .el-input__inner {
     border-radius:50px;
     height:30px;
 }
-
 </style>
 

@@ -1,3 +1,5 @@
+<!--  Payment Page  -->
+
 <template>
   <div class="manage_container">
     <div class="fix">
@@ -63,16 +65,18 @@ export default {
           this.$message.error('You Need to Login First');
       }
     },
+    // Get user and order information
     loadOrder() {
       this.pay_from.token = sessionStorage.getItem('token');
       this.pay_from.order_id = sessionStorage.getItem('order');
       this.pay_from.order_id = parseInt(this.pay_from.order_id);
-      sessionStorage.removeItem('order');
+      sessionStorage.removeItem('/order');
     },
     jumpHome () {
       this.$router.push('/home')
     },
     submitForm() {
+      // Main operation to pay
       ord_pay(this.pay_from).then( res => {
         this.$message({message: 'Payment Done',type: 'success'});
         this.$router.push('/userprofile')

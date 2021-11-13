@@ -1,3 +1,5 @@
+<!--  Manage Product Main Page  -->
+
 <template>
   <div class="manage_container">
     <div class="fix">
@@ -80,7 +82,10 @@ export default {
       }
     },
     methods: {
+      // Load all exist product
       async loadPro() {
+        // Get sort method when sort already inside of sessionStorage
+        // For admin
         if (sessionStorage.getItem('adsort') != null) {
           this.sort_form.sorting = sessionStorage.getItem('adsort');
           this.value = sessionStorage.getItem('adsort');
@@ -91,6 +96,7 @@ export default {
               this.$message.error('Failed');
           })
         } else {
+          // Defulat will be normal null sort
           admin_view(this.view_form).then( res => {
             console.log(res.data.data.product_details);
             this.product = res.data.data.product_details;
@@ -101,7 +107,7 @@ export default {
         
       },
       async checkStat () {
-            console.log(await this.check());
+            await this.check();
         },
         check () {
             // Simple Navigation Guards
@@ -119,9 +125,11 @@ export default {
         this.$router.push('/admin');
         
       },
+      // Delete a product 
       del(index) {
         this.deleteForm.product_id = this.product[index].product_id;
         this.product.splice(index, 1);
+        // Main operation to delete
         product_delete(this.deleteForm).then( res => {
             this.$message({message: 'Delete Sucess!',type: 'success'});
             this.reload();
@@ -196,11 +204,11 @@ header{
     text-align: center;
 }
 .sort{
-   float:right;
-   margin-right:120px;
-   margin-top:30px;  
+    float:right;
+    margin-right:120px;
+    margin-top:30px;  
 }
 .apply{
-  margin-left:30px;
+    margin-left:30px;
 }
 </style>

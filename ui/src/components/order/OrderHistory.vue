@@ -1,3 +1,5 @@
+<!--  OrderHistory Main Page  -->
+
 <template>
   <div >
     <div class="fix">
@@ -21,7 +23,6 @@
       @checker = 'check'
       @jump = 'jumpToOrd'
       >
-
       </Order>
   </div>
  </div>
@@ -47,7 +48,9 @@ export default {
         Order
     },
     methods: {
+        // Load order history
         async loadOrd() {
+            // Main operation to get order history
             this.tokenForm.token = sessionStorage.getItem('token');
             ord_view(this.tokenForm).then( res => {
                 this.order_list = res.data.data.order_list;
@@ -55,8 +58,10 @@ export default {
                 this.$message.error('No order exists');
             })
         },
+        // When prder is not paid yet
+        // "Fail" will be shown
+        // Oterwise will be "Success"
         check(index) {
-
             if (this.order_list[index].paid == 1) {
                 this.order_list[index].paid = "Success";
             } else {
@@ -74,6 +79,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.fix{
+    margin:0 auto;
+    width:1750px;
+}
 header{
     height: 100px;
     width: 100%;
@@ -102,10 +111,6 @@ header{
     top:-60px;
     left:-600px;
     z-index:100;
-}
-.fix{
-    margin:0 auto;
-    width:1750px;
 }
 .title{
     position: relative;

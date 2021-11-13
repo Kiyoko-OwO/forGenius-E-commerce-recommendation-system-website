@@ -46,6 +46,7 @@
         :proPrice="obj.price"
         :qua="obj.quantity"
         :proId="obj.product_id"
+        :proPic="obj.picture"
         :index = "ind"
         @addQua = 'add'
         @subQua = 'sub'

@@ -1,3 +1,5 @@
+<!--  Choose User Interest Field Page  -->
+
 <template>
   <div class="interest_container">
     <div class="fix">
@@ -19,6 +21,7 @@
 
 </template>
 <script>
+// Page for user to choose their interest
 import { interest_add } from '../../api/user'
 const tagOptions = ['Fashion', 'Toys', 'Health', 'Pet', 'Electronics', 'Media', 'Furniture', 'Game', 'Food', 'Personal Care']
 export default {
@@ -35,6 +38,7 @@ export default {
   methods: {
     submitForm() {
       this.interestForm.token = sessionStorage.getItem('token');
+      // Main operation for choose interest
       interest_add(this.interestForm).then ( res => {
           this.$message({message: 'Sucess!',type: 'success'});
           this.$router.push('userprofile');
@@ -89,9 +93,9 @@ header{
   position: relative;
 }
 .choose{
-  position: relative;
-  top:160px;
-  background-color:#e7eae8;
+    position: relative;
+    top:160px;
+    background-color:#e7eae8;
 }
 .fix{
     margin:0 auto;
@@ -107,9 +111,9 @@ header{
     text-align: center;
 }
 .checkbox {
-  height: 200px;
-  position: relative;
-  left:23%;
-  margin-top: 100px;
+    height: 200px;
+    position: relative;
+    left:23%;
+    margin-top: 100px;
 }
 </style>

@@ -1,3 +1,5 @@
+<!--  SignUp Page -->
+
 <template>
     <div class="signup_container">
       <div class="fix">
@@ -43,6 +45,7 @@ import { signup } from '../../api/user'
 import { signup_code } from '../../api/user'
 export default {
   data () {
+    // The rules for input data validation
     var checkEmail = (rule, value, callback) => {
       const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+\.com/
       if (!value) {
@@ -103,6 +106,7 @@ export default {
         name: "",
         email: ""
       },
+      //Input data validation
       signupRules: {
         email: [
           { validator: checkEmail, trigger: 'blur' }
@@ -128,6 +132,7 @@ export default {
     signup () {
       this.$refs.signupFormRef.validate(async valid => {
         if (valid) {
+          // Main operation for sign up
           signup(this.signupForm).then ( res => {
             this.$message({message: 'Sign up Sucess!',type: 'success'});
             sessionStorage.clear();
@@ -139,25 +144,30 @@ export default {
             this.$message.error('Already registered, please log in');
           })
         } else {
-          console.log('error submit!!');
+          // user cannot submit if input did not pass the rules
           return false;
         }
       })
     },
     send() {
+      // Fucntion for send code request
       const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+\.com/;
+      // Code cannot be sent when no email input
       if (this.signupForm.email == "") {
         this.$message.error('Email cannot be null');
       } else {
         if (mailReg.test(this.signupForm.email)) {
+          // Get ready to send code
           this.code_form.name = this.signupForm.name;
           this.code_form.email = this.signupForm.email;
+          // Main operation for send code
           signup_code(this.code_form).then ( res => {
             this.$message({message: 'Code Send Sucessfully!',type: 'success'});
           }).catch( error => {
             this.$message.error('Failed');
         })
         } else {
+            // Code cannot be sent when email format is not right
             this.$message.error('Email form is not right');
         }
       }
@@ -257,16 +267,27 @@ h1{
     padding-top: 50px;
 }
 .username{
-      border-radius: 40px;
+    border-radius: 40px;
 }
 .email{
-      border-radius: 30px;
+    border-radius: 30px;
 }
-
+.code_change{
+    width: 400px
+}
+.fix{
+    margin:0 auto;
+    margin-top:-80px;
+    width:800px;
+}
+.el-form-item{
+    margin-bottom:15px
+}
+/*deep style for el in scoped*/
 .signup_form /deep/.timr.el-form .el-form-item__error {
-  top: 30%;
-  right: 25% !important;
-  left: unset;
+    top: 30%;
+    right: 25% !important;
+    left: unset;
 }
 .change /deep/ .el-form-item__label{
     font-family: 'segUi';
@@ -278,23 +299,10 @@ h1{
     letter-spacing:.1em;
     font-size: 18px;
 }
-.code_change{
-  width: 400px
-}
-.fix{
-  margin:0 auto;
-  margin-top:-80px;
-  width:800px;
-}
 .el-input /deep/ .el-input__inner {
     border-radius:50px;
     height:30px;
 }
 
-
-
-.el-form-item{
-   margin-bottom:15px
-}
 </style>
 

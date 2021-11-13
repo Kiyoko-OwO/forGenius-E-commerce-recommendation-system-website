@@ -1,3 +1,5 @@
+<!--Cart Mod For Cart Main Page   -->
+
 <template>
   <div class="my-cartpro">
     <div class="img" v-for="fit in fits" :key="fit" @click="goProduct">
@@ -7,7 +9,7 @@
           :src="proPic"
           :fit="fit"></el-image>
     </div>
-    <p class="plink" @click="goProduct"> {{proName}} </p> 
+    <p class="plink" @click="goProduct"> {{proName}}  </p> 
     <p> $ {{proPrice}}</p>
     <p> Quantity: {{qua}}</p>
     <el-button class="el-icon-minus" circle @click="subFn" type="white"></el-button>
@@ -35,6 +37,7 @@ export default {
       delFn(){
         this.$emit("delPro", this.index)
       },
+      // Go to corresponding product page
       goProduct () {
         sessionStorage.setItem('product',this.proId);
         this.$router.push('/product')
@@ -47,31 +50,31 @@ export default {
 
 <style lang="less" scoped>
 .my-cartpro {
-  width: 475px;
-  padding: 20px;
-  border-radius: 5px;
-  margin: 10px;
-  font-family: 'segUi';
-  word-break:break-all;
+    width: 475px;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 10px;
+    font-family: 'segUi';
+    word-break:break-all;
 }
 .img{
-  cursor: pointer;
-  float: right;
-  margin-right:-20px;
+    cursor: pointer;
+    float: right;
+    margin-right:-10px;
 }
 .plink {
-  cursor: pointer;
+    cursor: pointer;
+    width:340px;
 }
 p{
-  letter-spacing: 1.5px;
-  
+    letter-spacing: 1.5px;
 }
 .line{
-  margin-top: 20px;
-  position: relative;
-  left:-145px;
-  width: 750px;
-  height:2px;
-  background-color: black;
-}
+    margin-top: 20px;
+    position: relative;
+    left:-145px;
+    width: 750px;
+    height:2px;
+    background-color: black;
+  }
 </style>

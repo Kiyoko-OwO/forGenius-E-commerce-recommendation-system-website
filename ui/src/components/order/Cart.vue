@@ -1,3 +1,5 @@
+<!--  Cart Main Page  -->
+
 <template>
   <div class="cart_container">
     <div class="fix">
@@ -7,7 +9,6 @@
         MY&nbsp;CART
     </div>
     </header>
-    
     <div class="cart-container">
         <Product v-for="(obj,ind) in cart" :key="ind"
         :proName="obj.name"
@@ -29,6 +30,7 @@
 </template>
 
 <script>
+// Without user login, this page cannot be reached
 import Product from '../mod/CartPro.vue'
 import { cart_view } from '../../api/order'
 import { cart_qua } from '../../api/order'
@@ -73,8 +75,10 @@ export default {
             this.$router.push('/login')
             }
         },
+        // Load all cart products
         async loadCart() {
             this.tokenForm.token = sessionStorage.getItem('token');
+            // Main operation to get cart
             cart_view(this.tokenForm).then( res => {
                 this.cart = res.data.data.cart;
                 this.cart = this.cart.slice().reverse();
@@ -85,16 +89,18 @@ export default {
                 this.$message.error('You Need to Login First');
             })
         },
+        // Submmit the cart
         submitForm() {
-            console.log(this.cart);
-            console.log(this.create_form);
+            // Make sure cart is not empty
             if (this.cart.length > 0) {
                 this.$router.push('order');
             } else {
                 this.$message.error('The cart is empty');
             }
         },
+        // quantity + 1 for corresponding product
         add(index) {
+            // Operation to quantity + 1 in frontend
             this.cart[index].quantity += 1;
             this.total_price = parseFloat(this.total_price);
             this.cart[index].price = parseFloat(this.cart[index].price);
@@ -102,36 +108,43 @@ export default {
             this.total_price = this.total_price.toFixed(2);
             this.qua_form.quantity = this.cart[index].quantity;
             this.qua_form.product_id = this.cart[index].product_id
+            // Operation to quantity + 1 in backend
             cart_qua(this.qua_form).then( res => {
-
             }).catch( error => {
-                this.$message.error('Failed2');
+                this.$message.error('Failed to add quantity');
             })
         },
+        // quantity - 1 for corresponding product
         sub(index) {
+            // Operation to quantity - 1 in frontend
             this.total_price = parseFloat(this.total_price);
             this.cart[index].price = parseFloat(this.cart[index].price);
             this.cart[index].quantity > 1 && (this.cart[index].quantity -= 1) && (this.total_price = this.total_price - this.cart[index].price);
             this.total_price = this.total_price.toFixed(2);
             this.qua_form.quantity = this.cart[index].quantity;
             this.qua_form.product_id = this.cart[index].product_id;
+            // Operation to quantity - 1 in backend
             cart_qua(this.qua_form).then( res => {
             }).catch( error => {
-                this.$message.error('Failed3');
+                this.$message.error('Failed to sub quantity');
             })
         },
+        // delete corresponding product
         del(index) {
+            // Operation to delete product in frontend
             this.total_price = parseFloat(this.total_price);
             this.cart[index].price = parseFloat(this.cart[index].price);
             this.del_form.product_id = this.cart[index].product_id;
+            // Operation to delete product in backend
             cart_del(this.del_form).then( res => {
             }).catch( error => {
                 this.$message.error('Failed');
             })
+            // Recal the total price
             this.total_price = this.total_price - (this.cart[index].quantity * this.cart[index].price)
             this.total_price = this.total_price.toFixed(2);
+            // Delete the product in frontend
             this.cart.splice(index, 1);
-            console.log(this.cart);
         },
         jumpHome () {
             this.$router.push('Home');

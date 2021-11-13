@@ -45,6 +45,7 @@
         :proName="obj.name"
         :proPrice="obj.price"
         :qua="obj.quantity"
+        :proId="obj.product_id"
         :index = "ind"
         @addQua = 'add'
         @subQua = 'sub'
@@ -233,7 +234,7 @@ export default {
         // Choose address from address book
         chooseAdd(index) {
             this.create_form.name = this.addressbook[index].name;
-            this.create_form.address = this.addressbook[index].address;
+            this.create_form.address_line = this.addressbook[index].address_line;
             this.create_form.phone_number = this.addressbook[index].phone_number;
             this.chooseDialogFormVisible = false;
         },

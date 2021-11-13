@@ -22,7 +22,7 @@
           :value="item.value">
         </el-option>
       </el-select>
-      <el-button class="apply" type="primary" v-on:click="reload()"> Apply</el-button>
+      <el-button class="apply" type="white" icon="el-icon-thumb" v-on:click="reload()"> Apply</el-button>
     </div>
       
     <div class="search-container">
@@ -178,7 +178,7 @@ header{
 }
 .choose{
     position: relative;
-    left: 1400px;
+    left: 1220px;
 }
 
 .search {
@@ -226,5 +226,6 @@ header{
 
 .apply {
   float: right;
+  margin-right:210px;
 }
 </style>

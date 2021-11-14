@@ -33,8 +33,7 @@
         <el-button class='submit' @click="signup" type="brown">SUBMIT</el-button>
         </el-form-item>
         </el-form>
-        <a href="#/login" text-decoration:underline class="login">LOG IN</a>
-        <a text-decoration:underline class="login_1">ALREADY REGISTERED, PLEASE</a>
+        <a  class="login_1">ALREADY REGISTERED, PLEASE <a style="color:black" href="#/login" text-decoration:underline >LOG IN</a></a>
         </div>
       </div>
     </div>
@@ -195,18 +194,9 @@ h1{
     height: 50px;
 }
 
-.login{
-    position: relative;
-    left: 65%;
-    bottom:3%;
-    color:black;
-    transform: translate(-50%,0%);
-    font-size: 15px;
-    letter-spacing:.2em;
-}
 .login_1{
     position: relative;
-    left: 14%;
+    left: 25%;
     bottom:3%;
     color:black;
     transform: translate(-50%,0%);

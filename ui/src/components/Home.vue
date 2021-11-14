@@ -52,10 +52,10 @@
             </div>
           </div>
         </div>
-        <footer>
-         <img class="foot" src=../assets/home_foot.jpeg alt="foot">
-        </footer>
-    </div>
+        <div class="bottom">
+         <img src=../assets/home_foot.jpeg alt="foot">
+        </div>
+    </div> 
 </template>
 
 <script>
@@ -298,12 +298,17 @@ main #logo {
     transform:translate(0,-50%) ;
     background-color:rgb(0, 217, 255);
 }
-footer{
-    padding-top:20px;
-    width:1800px;
-    margin:0 auto;
+.bottom{
+    width:100%;
+    background:#2f2a29;
+    margin-top:20px;
+    bottom:0%;
     img{
-      width:100%;
+      position: relative;
+      left:50%;
+      transform:translate(-50%);
+      width:1800px;
+      height:100%;
     }
 }
 </style>

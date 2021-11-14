@@ -35,6 +35,7 @@ And also, this project’s backend needs the VSCode to run. If you don’t have 
 
 ### Setup
 This setup guide is based on the VLAB environment.
+
 First of all, download the project’s zip file and extract it to a folder. Open this folder via VScode.
 
 #### Backend
@@ -53,6 +54,7 @@ $ pip3 install django-cors-headers
 #### Frontend
 
 Use the terminal to open the project’s folder.
+
 Then, input the following command in the terminal.
 ```
 $ cd ui
@@ -64,4 +66,5 @@ After that and wait a second, your terminal should show the following picture.
 
 #### Open
 Make sure you finish all steps of backend and frontend, and both of them are running like the last picture in the last step of their instructions.
+
 Open the URL http://localhost:xxxx/ (the local one, the last 4 numbers may be different)  provided by the “npm run serve”. 

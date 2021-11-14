@@ -182,7 +182,7 @@ export default {
 
 h1{
     position: relative;
-    left: 34%;
+    left: 270px;
     top:50px;
     font-size: 40px;
     font-weight:normal;
@@ -196,8 +196,8 @@ h1{
 
 .login_1{
     position: relative;
-    left: 25%;
-    bottom:3%;
+    left: 180px;
+    bottom: 20px;
     color:black;
     transform: translate(-50%,0%);
     font-size: 15px;
@@ -205,7 +205,7 @@ h1{
 }
 .submit{
     position: relative;
-    left:13%;
+    left:47px;
     height:50px;
     width:200px;
     transform: translate(-50%,-75%);

@@ -4,11 +4,9 @@
   <div class="interest_container">
     <div class="fix">
     <header>
-    <img class="logo" src=../../assets/2.png alt="logo">
-    <div class="title">
         PLEASE CHOOSE YOUR INTEREST FIELD
-    </div>
     </header>
+    <img class="logo" src=../../assets/2.png alt="logo">
     <div class="checkBox">
       <el-checkbox-group v-model="interestForm.interest" class="checkbox">
         <el-checkbox-button v-for="int in tags" :label="int" :key="int">{{int}}</el-checkbox-button>
@@ -70,7 +68,7 @@ export default {
 header{
     height: 100px;
     width: 100%;
-    position: relative;
+    margin:0 auto;
     left:0;
     top:0;
     z-index: 999;
@@ -83,11 +81,11 @@ header{
     overflow: hidden;
 }
 .logo{
-    height: 200%;
-    position: relative;
-    top:-60px;
-    left:-600px;
+    height: 230px;
+    cursor: pointer;
+    margin-top:-170px ;
     z-index:100;
+    overflow: hidden;
 }
 .checkbox{
   position: relative;
@@ -102,12 +100,9 @@ header{
     width:1750px;
 }
 .title{
-    position: relative;
-    top:-260px;
     height:100px;
     width:200x;
-    left:49%;
-    transform: translate(-50%);
+    margin:0 auto;
     text-align: center;
 }
 .checkbox {

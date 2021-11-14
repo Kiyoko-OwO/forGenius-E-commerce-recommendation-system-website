@@ -7,7 +7,9 @@
         <el-image
           style="width: 100px; height: 100px"
           :src="proPic"
-          :fit="fit"></el-image>
+          :fit="fit"><div slot="error" > <div slot="placeholder" style="background:rgb(243, 243, 243);height:100px">
+        <div style="background:rgb(243, 243, 243);height:100px"><div style="padding-top:40%; padding-left:35%; font-size:30%; ">Failed</div></div>
+      </div></div></el-image>
     </div>
     <p class="plink" @click="goProduct"> {{proName}}  </p> 
     <p> $ {{proPrice}}</p>

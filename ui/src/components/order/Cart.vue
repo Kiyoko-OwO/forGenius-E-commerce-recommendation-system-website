@@ -4,11 +4,9 @@
   <div class="cart_container">
     <div class="fix">
     <header>
-    <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpHome">
-    <div class="title">
         MY&nbsp;CART
-    </div>
     </header>
+    <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpHome">
     <div class="cart-container">
         <Product v-for="(obj,ind) in cart" :key="ind"
         :proName="obj.name"
@@ -159,6 +157,7 @@ export default {
 .cart-container {
     position: relative;
     left:50%;
+    top:-40px;
     transform: translate(-50%);
     width:500px;
 }
@@ -170,7 +169,7 @@ export default {
 header{
     height: 100px;
     width: 100%;
-    position: relative;
+    margin:0 auto;
     left:0;
     top:0;
     z-index: 999;
@@ -183,12 +182,11 @@ header{
     overflow: hidden;
 }
 .logo{
-    height: 200%;
-    position: relative;
+    height: 230px;
     cursor: pointer;
-    top:-60px;
-    left:-600px;
+    margin-top:-170px ;
     z-index:100;
+    overflow: hidden;
 }
 .checkout{
     position: relative;
@@ -204,12 +202,9 @@ header{
     z-index: 200;
 }
 .title{
-    position: relative;
-    top:-260px;
     height:100px;
     width:200x;
-    left:50%;
-    transform: translate(-50%);
+    margin:0 auto;
     text-align: center;
 }
 .fix{

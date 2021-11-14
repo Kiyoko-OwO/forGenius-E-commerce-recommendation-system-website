@@ -307,8 +307,7 @@ footer{
       position: relative;
       left:50%;
       transform:translate(-50%);
-      width:1800px;
-      height:100%;
+      width:1750px;
     }
 }
 </style>

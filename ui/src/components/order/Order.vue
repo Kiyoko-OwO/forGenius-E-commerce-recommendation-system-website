@@ -4,12 +4,10 @@
   <div >
     <div class="fix">
     <header>
-        <img class="logo" src=../../assets/2.png alt="logo">
-        <div class="title">
         ORDER&nbsp;
-        </div>
-        <el-button @click="jumpCart" class='return' type="primary">Return Cart</el-button>
     </header>
+    <img class="logo" src=../../assets/2.png alt="logo">
+    <el-button @click="jumpCart" class='return' type="brown">Return Cart</el-button>
     <div class="order_contain">
     <h2>Address</h2>
       <div v-show="isEmpty">
@@ -17,7 +15,7 @@
           <p> <span>Phone Number:</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{create_form.phone_number}}</p>
           <p> <span>Address:</span> </p>
           <p> {{create_form.address_line}}</p>
-          <el-button @click="chooseDialogFormVisible = true" align="left" style="float:left">Choose</el-button>
+          <el-button type="white" @click="chooseDialogFormVisible = true" align="left" style="float:left">Choose</el-button>
           <el-dialog title="Address Book" :visible.sync="chooseDialogFormVisible" width="40%" class="editf" append-to-body>
             <div v-for="(item,ind) in addressbook" :key="ind">
                     <div class="block1"></div>
@@ -29,16 +27,16 @@
                     <p> Suburb: {{item.suburb}}</p>
                     <p> Postal Code:{{item.post_code}}</p>
                     <p> Phone Number: {{item.phone_number}} </p> 
-                    <el-button @click="chooseAdd(ind)" class="choose_in">Choose</el-button>
+                    <el-button type="white" @click="chooseAdd(ind)" class="choose_in">Choose</el-button>
                     <div class="block"></div>
                     <div class="line-in"></div>
               </div>
             <div slot="footer" class="dialog-footer">
-              <el-button @click="chooseDialogFormVisible = false">Cancel</el-button>
+              <el-button type="white" @click="chooseDialogFormVisible = false">Cancel</el-button>
             </div>
           </el-dialog>
       </div>
-      <el-button @click="jumpAdd" align="right">Add</el-button>
+      <el-button type="white" @click="jumpAdd" align="right">Add</el-button>
       <div class="cart-container">
         <h2 class="infor">Product information</h2>
         <Product v-for="(obj,ind) in cart" :key="obj.id"
@@ -58,7 +56,7 @@
         </div>
       </div>
     </div>
-    <el-button type="primary" @click="jumpPay" class="submit">Submit Order</el-button>
+    <el-button type="brown" @click="jumpPay" class="submit">Submit Order</el-button>
   </div>
   </div>
 </template>
@@ -267,7 +265,7 @@ export default {
 header{
     height: 100px;
     width: 100%;
-    position: relative;
+    margin:0 auto;
     left:0;
     top:0;
     z-index: 999;
@@ -279,31 +277,30 @@ header{
     font-size: 50px;
     overflow: hidden;
 }
+.logo{
+    height: 230px;
+    cursor: pointer;
+    margin-top:-170px ;
+    z-index:100;
+    overflow: hidden;
+}
 .order_contain{
     position: relative;
-    left:50%;
+    left:53%;
+    top:-40px;
     transform: translate(-50%);
     width:500px;
     word-break:break-all;
-}
-.logo{
-    height: 200%;
-    position: relative;
-    cursor: pointer;
-    top:-60px;
-    left:-600px;
-    z-index:100;
 }
 .share_form{
     width:300px;
 }
 .return{
-    height: 40%;
-    position: relative;
+    height: 43px;
+    margin-top:-63px;
+    float:right;
     border-radius: 4px;
     padding: 2px 20px;
-    left:480px;
-    top:-370px;
     background: #786662;
     border-radius: 10px;
     color: #fefefe;
@@ -313,7 +310,8 @@ header{
 }
 .submit{
     position: relative;
-    left:52%;
+    left:53%;
+    top:-20px;
     width:130px;
     font-size: 16px;
     height:40px;
@@ -373,12 +371,9 @@ header{
     width:1750px;
 }
 .title{
-    position: relative;
-    top:-260px;
     height:100px;
     width:200x;
-    left:49%;
-    transform: translate(-50%);
+    margin:0 auto;
     text-align: center;
 }
 span{

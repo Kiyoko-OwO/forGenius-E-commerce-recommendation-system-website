@@ -4,11 +4,9 @@
   <div class="manage_container">
     <div class="fix">
     <header>
-       <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpHome">
-        <div class="title">
         PAYMENT
-        </div>
     </header>
+    <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpHome">
     <div class="payment-container">
       <el-select v-model="value" clearable placeholder="Choose payment method" class="choose">
         <el-option
@@ -19,7 +17,7 @@
         </el-option>
       </el-select>
     </div>
-      <el-button class="Pay" @click="submitForm()">Pay</el-button>
+      <el-button type="brown" class="Pay" @click="submitForm()">Pay</el-button>
    </div>
   </div>
 </template>
@@ -102,7 +100,7 @@ export default {
 header{
     height: 100px;
     width: 100%;
-    position: relative;
+    margin:0 auto;
     left:0;
     top:0;
     z-index: 999;
@@ -115,12 +113,11 @@ header{
     overflow: hidden;
 }
 .logo{
-    height: 200%;
-    position: relative;
+    height: 230px;
     cursor: pointer;
-    top:-60px;
-    left:-600px;
+    margin-top:-170px ;
     z-index:100;
+    overflow: hidden;
 }
 
 .Pay{
@@ -149,12 +146,9 @@ header{
     width:1750px;
 }
 .title{
-    position: relative;
-    top:-260px;
     height:100px;
     width:200x;
-    left:49%;
-    transform: translate(-50%);
+    margin:0 auto;
     text-align: center;
 }
 </style>

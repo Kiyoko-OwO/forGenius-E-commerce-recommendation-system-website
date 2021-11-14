@@ -4,11 +4,9 @@
   <div >
     <div class="fix">
     <header>
-      <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpUser">
-       <div class="title">
         ORDER&nbsp;HISTORY
-       </div>
     </header>
+    <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpUser">
   <div class="order_container">
       <Order v-for="(obj,ind) in order_list.slice().reverse()" :key="obj.order_id"
       :ordId="obj.order_id"
@@ -86,7 +84,7 @@ export default {
 header{
     height: 100px;
     width: 100%;
-    position: relative;
+    margin:0 auto;
     left:0;
     top:0;
     z-index: 999;
@@ -98,27 +96,24 @@ header{
     font-size: 50px;
     overflow: hidden;
 }
+.logo{
+    height: 230px;
+    cursor: pointer;
+    margin-top:-170px ;
+    z-index:100;
+    overflow: hidden;
+}
 .order_container{
     position: relative;
-    left:50%;
+    left:49%;
+    top:-60px;
     transform: translate(-50%);
     width:300px;
 }
-.logo{
-    height: 200%;
-    position: relative;
-    cursor: pointer;
-    top:-60px;
-    left:-600px;
-    z-index:100;
-}
 .title{
-    position: relative;
-    top:-260px;
     height:100px;
     width:200x;
-    left:49%;
-    transform: translate(-50%);
+    margin:0 auto;
     text-align: center;
 }
 </style>

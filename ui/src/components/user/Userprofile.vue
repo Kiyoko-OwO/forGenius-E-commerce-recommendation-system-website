@@ -157,7 +157,7 @@ footer{
       position: relative;
       left:50%;
       transform:translate(-50%);
-      width:1800px;
+      width:1750px;
       height:100%;
     }
 }

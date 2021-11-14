@@ -9,6 +9,8 @@ body,
     background-color: #d1dbda;
     width:100%;
 }
+
+/*Different button type*/
 .el-button--black:focus,
 .el-button--black:hover {
   background: black;
@@ -27,4 +29,25 @@ body,
   background:  #eededb;
   border-color:  #eededb;
   color: black;
+}
+
+.Form_logo{
+  height: 300px;
+  left: 1500px;
+  cursor: pointer;
+}
+
+/* table style */
+.table-label {
+  width:120px;
+}
+
+.table-content {
+  border: 0cm;
+  width:230px;
+}
+
+/* edit dialog fix page*/
+.editf{
+  position: fixed;
 }

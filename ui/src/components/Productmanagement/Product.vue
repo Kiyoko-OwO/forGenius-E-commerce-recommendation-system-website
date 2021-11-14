@@ -1,11 +1,11 @@
+<!--  Product Detail Page  -->
+
 <template>
     <div class="fix">
     <header>
-        <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpHome">
-        <div class="title">
         PRODUCT&nbsp;DETAIL
-       </div>
     </header>
+    <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpHome">
     <main>
     <div class="product_box">
         <div class="img" v-for="fit in fits" :key="fit">
@@ -13,7 +13,9 @@
           <el-image
             style="width: 550px; height: 550px"
             :src="product.picture"
-            :fit="fit"></el-image>
+            :fit="fit"><div slot="error" > <div slot="placeholder" style="background:rgb(243, 243, 243);height:550px">
+        <div style="background:rgb(243, 243, 243);height:550px"><div style="padding-top:45%; padding-left:45%; ">Failed</div></div>
+      </div></div></el-image>
         </div>
         <div class="inf_box">
         <div class="inf">
@@ -32,7 +34,7 @@
             prop="quantity"
             :rules="[
             { required: true, message: 'Quantity cannot be null'},
-            { type: 'number', message: 'Quantity need to be number'}
+            { type: 'number', min: 0, message: 'Quantity need to be number and larger than 0'},
             ]"
           >
           <el-button class="el-icon-remove-outline" @click='deleteOne' circle type="white"></el-button>
@@ -115,8 +117,11 @@ export default {
         this.loadRec()
     },
     methods: {
+      // Load product
       async loadProduct () {
+          // Get target product id from sessionStorage
           this.product_id_form.product_id = sessionStorage.getItem('product');
+          // Main operation to get prodcut information
           product_view(this.product_id_form).then ( res => {
             this.product = res.data.data;
             this.features = this.product.features.split(" ");
@@ -124,26 +129,31 @@ export default {
             console.log(error);
           })
       },
+      // Load recommendation product for product page
       async loadRec () {
-      if (sessionStorage.getItem('token' != null)) {
-        this.tokenForm.token = sessionStorage.getItem('token');
-        rec_user(this.tokenForm).then ( res => {
-          this.products = res.data.products;
-          this.products = this.products.slice(0, 3);
-        }).catch( error => {
-        })
-      }
-      else {
-        rec_guest(this.tokenForm).then ( res => {
-          this.products = res.data.products;
-          this.products = this.products.slice(0, 3);
-        }).catch( error => {
-        })
-      }
-    },
+        // Have user log in
+        if (sessionStorage.getItem('token' != null)) {
+          this.tokenForm.token = sessionStorage.getItem('token');
+          rec_user(this.tokenForm).then ( res => {
+            this.products = res.data.products;
+            this.products = this.products.slice(0, 3);
+          }).catch( error => {
+          })
+        } 
+        // When no user log in
+        else {
+          rec_guest(this.tokenForm).then ( res => {
+            this.products = res.data.products;
+            this.products = this.products.slice(0, 3);
+          }).catch( error => {
+          })
+        }
+      },
+      // Add to cart
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
+            // Operation only sucess with user login
             if (sessionStorage.getItem('token') != null) {
               this.numberValidateForm.product_id = this.product_id_form.product_id;
               this.numberValidateForm.token = sessionStorage.getItem('token');
@@ -154,28 +164,36 @@ export default {
                 this.$message.error('Failed');
               })
             } else {
-                this.$router.push('/login');
-                sessionStorage.setItem('fromPro', 1);
+              // without login, page will redirect to log in page 
+              this.$router.push('/login');
+              sessionStorage.setItem('fromPro', 1);
             }
           } else {
-            console.log('error submit!!');
+            // user cannot submit if input did not pass the rules
             return false;
           }
         });
       },
+      // reset quantity
       resetForm(formName) {
         this.$refs[formName].resetFields();
       },
+      // quantity - 1
+      // cannot less than 1
       deleteOne () {
         this.numberValidateForm.quantity > 1 && (this.numberValidateForm.quantity -= 1)
       },
+      // quantity + 1
       addOne () {
         this.numberValidateForm.quantity += 1;
       },
       jumpHome () {
         sessionStorage.removeItem('product');
         this.$router.push('Home');
-      }, searchFe(feature) {
+      }, 
+      // Click feature buttom
+      // Search result of feature will be redirect
+      searchFe(feature) {
         sessionStorage.setItem('word',feature);
         this.$router.push('/search')
       }
@@ -184,6 +202,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.fix{
+    margin:0 auto;
+    width:1750px;
+}
 .picture {
     position: relative;
     height: 200px;
@@ -203,7 +225,7 @@ export default {
 header{
     height: 100px;
     width: 100%;
-    position: relative;
+    margin:0 auto;
     left:0;
     top:0;
     z-index: 999;
@@ -216,125 +238,116 @@ header{
     overflow: hidden;
 }
 .logo{
-    height: 200%;
-    position: relative;
+    height: 230px;
     cursor: pointer;
-    top:-60px;
-    left:-600px;
+    margin-top:-170px ;
     z-index:100;
+    overflow: hidden;
 }
 
 .product_box{
-    margin-top:20px;
+    margin-top:-20px;
     width:1500px;
     word-break:break-all;
     margin-left: 25px;
 }
 .img{
-  float:left;
-  margin-left:200px;
+    float:left;
+    margin-left:200px;
 }
 .inf{
-  margin:0 auto;
-  word-break:break-all;
-  width:500px;
-  padding-bottom: 30px;
-}
-.fix{
     margin:0 auto;
-    width:1750px;
+    word-break:break-all;
+    width:500px;
+    padding-bottom: 30px;
 }
 .title{
-    position: relative;
-    top:-260px;
     height:100px;
     width:200x;
-    left:49%;
-    transform: translate(-50%);
+    margin:0 auto;
     text-align: center;
 }
 .feature{
     border-radius: 20px;
 }
 span{
-  font-size: 14px;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .addcart{
-  margin-top:20px;
-  position: relative;
-  left:10px;
-  width:480px;
-  letter-spacing: 4px;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  background-color:black;
-  color:white
+    margin-top:20px;
+    position: relative;
+    left:10px;
+    width:480px;
+    letter-spacing: 4px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color:black;
+    color:white
 }
 .reset{
-  position: relative;
-  margin-top:10px;
-  width:480px;
-  letter-spacing: 4px;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    position: relative;
+    margin-top:10px;
+    width:480px;
+    letter-spacing: 4px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   
 }
 .price{
-  color:red;
-  font-size: 20px ;
-  font-family: 'Courier New', Courier, monospace;
+    color:red;
+    font-size: 20px ;
+    font-family: 'Courier New', Courier, monospace;
 }
 .inf_box{
-  float:right;
-  background-color: #e7eae8;
-  width:600px;
+    float:right;
+    background-color: #e7eae8;
+    width:600px;
   
 }
 .recommendation_container{
-  width:1300px;
-  clear: both;
-  position: relative;
-  left:20%;
-
+    width:1300px;
+    clear: both;
+    position: relative;
+    left:20%;
 }
 .tittle_container{
-  padding-top:20px;
-  width:500px;
-  margin:0 auto;
+    padding-top:20px;
+    width:500px;
+    margin:0 auto;
 }
 .product_container{
-  position: relative;
-  left:-30px;
-  display: flex;
-  flex-wrap: wrap;
+    position: relative;
+    left:-30px;
+    display: flex;
+    flex-wrap: wrap;
 }
 .tittle2{
-  top:40%;
-  transform:translate(0,-50%) ;
-  font-size: 25px;
+    top:40%;
+    transform:translate(0,-50%) ;
+    font-size: 25px;
 }
 .example{
-  margin-top:-300px;
+    margin-top:-300px;
 }
 footer{
-  padding-top:20px;
+    padding-top:20px;
 }
 .blockk{
-  clear:both;
+    clear:both;
 }
 .line{
-  background-color: black;
-  width:1300px;
-  height:2px;
-  clear:both;
-  margin:0 auto;
+    background-color: black;
+    width:1300px;
+    height:2px;
+    clear:both;
+    margin:0 auto;
 }
 .block{  
-  width:1200px;
-  height:80px;
-  clear:both;
+    width:1200px;
+    height:80px;
+    clear:both;
 }
 p{
-      white-space:pre-wrap;
+    white-space:pre-wrap;
 }
 .description{
     border: 2px solid black;

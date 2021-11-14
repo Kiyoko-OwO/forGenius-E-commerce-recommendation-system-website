@@ -1,3 +1,5 @@
+<!--  User Profile Main Page  -->
+
 <template>
     <div id="profile_container">
         <header>
@@ -19,7 +21,10 @@
             <button class="order" v-on:click="jumpOrdHis">ORDER HISTORY</button>
             <button class="order" v-on:click="jumpUsernameChange">USERNAME CHANGE</button>
         </main>
-        <footer></footer>
+        <div style="clear:both; height:20px"></div>
+        <footer>
+         <img src=../../assets/home_foot.jpeg alt="foot">
+        </footer>
     </div>
 </template>
 
@@ -41,21 +46,22 @@ export default {
     this.checkStat()
   },
   methods: {
+    // checkStat helps to check user login statement
+    // same as homepage
     async checkStat () {
-      console.log(await this.check());
+      await this.check();
     },
     check () {
+      // Simple Navigation Guards
       if (sessionStorage.getItem("username") != null) {
         this.isUser = true;
         this.isGuest = false;
         this.username = sessionStorage.getItem('username');
-        return this.username;
       } else {
         this.isGuest = true;
         this.isUser = false;
         this.$message.error('You Need to Login First');
         this.$router.push('/login')
-        return this.isUser;
       }
     },
     jumpSign () {
@@ -88,9 +94,9 @@ export default {
     async logOut () {
       this.tokenForm.token = sessionStorage.getItem('token');
       logout(this.tokenForm).then ( res => {
-          this.$message({message: 'Log out Sucess!',type: 'success'});
           sessionStorage.clear();
-          this.reload();
+          this.$message({message: 'Log out Sucess!',type: 'success'});
+          this.$router.go(0);
           this.$router.push('/home')
       }).catch( error => {
           this.$message.error('Log out Failed');
@@ -141,5 +147,18 @@ main #logo {
     width: 800px;
     margin-left: 100px;
     margin-top: 0px;
+}
+footer{
+    width:100%;
+    background:#2f2a29;
+    margin-top:20px;
+    bottom:0%;
+    img{
+      position: relative;
+      left:50%;
+      transform:translate(-50%);
+      width:1750px;
+      height:100%;
+    }
 }
 </style>

@@ -1,3 +1,5 @@
+<!--  Login Page  -->
+
 <template>
     <div class="login_container">
       <div class="fix">
@@ -19,19 +21,20 @@
             </el-form-item>
         </el-form>
         <a  text-decoration:underline href="#/forgotpassword" class="forget">FORGET MY PASSWORD</a>
-        <a href="#/signup" text-decoration:underline class="signup">SIGN UP</a>
-        <a text-decoration:underline class="signup_1">DON'T HAVE AN ACCOUNT YET? PLEASE</a>
         </div>
+          <a  class="signup_1">DON'T HAVE AN ACCOUNT YET? PLEASE <a style="color:black" href="#/signup" text-decoration:underline>SIGN UP </a></a>
       </div>
     </div>
 </template>
 
 <script>
+// Page for log in
 import '../../assets/css/form.css'
 import { login } from '../../api/user'
 
 export default {
   data () {
+    // The rules for Input data validation
     var checkEmail = (rule, value, callback) => {
       const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+\.com/
       if (!value) {
@@ -58,6 +61,7 @@ export default {
         email: '',
         password: ''
       },
+      //Input data validation
       loginRules: {
         email: [
           { validator: checkEmail, trigger: 'blur' }
@@ -70,27 +74,32 @@ export default {
   },
   methods: {
     jumpHome () {
-      this.$router.push('Home')
+      this.$router.push('/home')
     },
     submitForm(formName) {
         this.$refs[formName].validate(async (valid) => {
           if (valid) {
+            // Main operation for login
             login(this.loginForm).then( res => {
               this.$message({message: 'Log in Sucess!',type: 'success'});
-              console.log(res.data);
-              console.log(res.status);
+              // When return status code is 255
+              // It means log in from admin
               if (res.status == 255) {
                 sessionStorage.clear();
                 sessionStorage.setItem('adtoken',res.data.token);
                 sessionStorage.setItem('adusername',res.data.username);
                 this.$router.push('/admin');
               } else {
+                // else will be normal login
                 sessionStorage.setItem('token',res.data.token);
                 sessionStorage.setItem('username',res.data.username);
+                // When page is from product
+                // After login, page will back to product page
                 if (sessionStorage.getItem('fromPro') != null) {
                   this.$router.push('/product');
                   sessionStorage.removeItem('fromPro');
                 } else {
+                  // Otherwise, page will redirect to userprofile page
                   this.$router.push('/userprofile');
                 }
               }
@@ -98,7 +107,7 @@ export default {
               this.$message.error('Incorrect email or password');
             })
           } else {
-            console.log('error submit!!');
+            // user cannot submit if input did not pass the rules
             return false;
           }
         });
@@ -112,7 +121,7 @@ export default {
 
 h1{
     position: relative;
-    left: 40%;
+    left: 310px;
     top:50px;
     font-size: 40px;
     font-weight:normal;
@@ -120,8 +129,8 @@ h1{
     letter-spacing:.2em;
 }
 .block {
-  width: 1000px;
-  height: 65px;
+    width: 1000px;
+    height: 65px;
 }
 .forget{
     position: relative;
@@ -132,21 +141,12 @@ h1{
     font-size: 15px;
     letter-spacing:.2em;
 }
-.signup{
-    position: relative;
-    left: 42%;
-    bottom:0%;
-    color:black;
-    transform: translate(-50%,0%);
-    font-size: 15px;
-    letter-spacing:.2em;
-}
 .signup_1{
     position: relative;
-    left: -23%;
-    bottom:0%;
+    bottom:50px;
+    left:160px;
     color:black;
-    transform: translate(-50%,0%);
+    margin:0 auto;
     font-size: 15px;
     letter-spacing:.2em;
 }
@@ -155,6 +155,7 @@ h1{
     left:18%;
     height:50px;
     width:200px;
+    top:10px;
     transform: translate(-50%,-50%);
     border-radius: 10px;
     background: #786662;
@@ -188,10 +189,20 @@ h1{
     padding-top: 50px;
 }
 .username{
-      border-radius: 40px;
+    border-radius: 40px;
 }
 .email{
-      border-radius: 30px;
+    border-radius: 30px;
+}
+.fix{
+    margin:0 auto;
+    margin-top:-30px;
+    width:800px;
+}
+/*deep style for el in scoped*/
+.el-input /deep/ .el-input__inner {
+    border-radius:50px;
+    height:30px;
 }
 .email_change /deep/ .el-form-item__label{
     font-family: 'segUi';
@@ -203,15 +214,5 @@ h1{
     letter-spacing:.1em;
     font-size: 18px;
 }
-.fix{
-  margin:0 auto;
-  margin-top:-30px;
-  width:800px;
-}
-.el-input /deep/ .el-input__inner {
-    border-radius:50px;
-    height:30px;
-}
-
 </style>
 

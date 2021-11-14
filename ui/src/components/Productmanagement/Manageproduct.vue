@@ -1,13 +1,13 @@
+<!--  Manage Product Main Page  -->
+
 <template>
   <div class="manage_container">
     <div class="fix">
     <header>
-       <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpAdmin">
-       <div class="title">
         MANAGE&nbsp;PRODUCT
-        </div>
-       <el-button type="brown" class="addProduct" v-on:click="jumpAddproduct">ADD PROCDUCT</el-button>
     </header>
+      <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpAdmin">
+      <el-button type="brown" class="addProduct" v-on:click="jumpAddproduct">ADD PROCDUCT</el-button>
     <div class="sort">
       <el-select v-model="value" clearable placeholder="Sort by Sales data" class="choose">
         <el-option
@@ -80,7 +80,10 @@ export default {
       }
     },
     methods: {
+      // Load all exist product
       async loadPro() {
+        // Get sort method when sort already inside of sessionStorage
+        // For admin
         if (sessionStorage.getItem('adsort') != null) {
           this.sort_form.sorting = sessionStorage.getItem('adsort');
           this.value = sessionStorage.getItem('adsort');
@@ -91,6 +94,7 @@ export default {
               this.$message.error('Failed');
           })
         } else {
+          // Defulat will be normal null sort
           admin_view(this.view_form).then( res => {
             console.log(res.data.data.product_details);
             this.product = res.data.data.product_details;
@@ -101,7 +105,7 @@ export default {
         
       },
       async checkStat () {
-            console.log(await this.check());
+            await this.check();
         },
         check () {
             // Simple Navigation Guards
@@ -119,9 +123,11 @@ export default {
         this.$router.push('/admin');
         
       },
+      // Delete a product 
       del(index) {
         this.deleteForm.product_id = this.product[index].product_id;
         this.product.splice(index, 1);
+        // Main operation to delete
         product_delete(this.deleteForm).then( res => {
             this.$message({message: 'Delete Sucess!',type: 'success'});
             this.reload();
@@ -136,9 +142,8 @@ export default {
 
 <style lang="less" scoped>
 .manage-container {
-    position: relative;
-    top:30px;
-    left:10%;
+    margin:15px auto;
+    padding-top:30px;
     width:1500px;
     clear: both;
 }
@@ -149,7 +154,7 @@ export default {
 header{
     height: 100px;
     width: 100%;
-    position: relative;
+    margin:0 auto;
     left:0;
     top:0;
     z-index: 999;
@@ -162,20 +167,18 @@ header{
     overflow: hidden;
 }
 .logo{
-    height: 200%;
-    position: relative;
+    height: 230px;
     cursor: pointer;
-    top:-60px;
-    left:-600px;
+    margin-top:-170px ;
     z-index:100;
+    overflow: hidden;
 }
 .addProduct{
-    height: 40%;
-    position: relative;
+    height: 43px;
+    margin-top:-63px;
+    float:right;
     border-radius: 4px;
     padding: 2px 20px;
-    left:600px;
-    top:-370px;
     background: #786662;
     border-radius: 10px;
     color: #fefefe;
@@ -187,20 +190,17 @@ header{
     width:1750px;
 }
 .title{
-    position: relative;
-    top:-260px;
     height:100px;
     width:200x;
-    left:49%;
-    transform: translate(-50%);
+    margin:0 auto;
     text-align: center;
 }
 .sort{
-   float:right;
-   margin-right:120px;
-   margin-top:30px;  
+    float:right;
+    margin-right:120px;
+    margin-top:30px;  
 }
 .apply{
-  margin-left:30px;
+    margin-left:30px;
 }
 </style>

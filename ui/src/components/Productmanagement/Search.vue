@@ -1,12 +1,12 @@
+<!--  Search Result Page  -->
+
 <template>
   <div class="search_container">
     <div class="fix">
     <header>
-       <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpHome">
-       <div class="title">
         SEARCH&nbsp;RESULT
-        </div>
     </header>
+    <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpHome">
     <div class="search">
       <form action="" class="parent">
         <input type="text" v-model="keywords" placeholder="search keywords">
@@ -91,21 +91,29 @@ export default {
       }
     },
     methods: {
+      // Load search result
       async loadRes() {
+        // Store token if user logged in
         if (sessionStorage.getItem('token') != null) {
           this.view_formtoken = sessionStorage.getItem('token');
         }
+        // Get search word from sessionStorage
         this.keywords = sessionStorage.getItem('word');
         this.view_form.search = sessionStorage.getItem('word');
+        // Get sort method when sort already inside of sessionStorage
         if (sessionStorage.getItem('sort') != null) {
           this.view_form.sorting = sessionStorage.getItem('sort');
           this.value = sessionStorage.getItem('sort');
         } else {
+          // if no pre-setted sort method
+          // Defulat will be 'relevance'
           this.view_form.sorting = 'relevance';
           this.value = 'relevance';
         }
+        // Main operation to get search result
         ser_res(this.view_form).then( res => {
           this.product = res.data;
+          // Figure out whether search operation find products
           if (this.product.length == 0) {
             this.isRes = true;
           } else {
@@ -118,6 +126,7 @@ export default {
       jumpHome () {
         this.$router.push('/home')
       },
+      // extra search in search result page
       jumpResult () {
         sessionStorage.setItem('word',this.keywords);
         this.reload();
@@ -143,7 +152,7 @@ export default {
 header{
     height: 100px;
     width: 100%;
-    position: relative;
+    margin:0 auto;
     left:0;
     top:0;
     z-index: 999;
@@ -156,24 +165,20 @@ header{
     overflow: hidden;
 }
 .logo{
-    height: 200%;
-    position: relative;
+    height: 230px;
     cursor: pointer;
-    top:-60px;
-    left:-600px;
+    margin-top:-170px ;
     z-index:100;
+    overflow: hidden;
 }
 .fix{
     margin:0 auto;
     width:1750px;
 }
 .title{
-    position: relative;
-    top:-260px;
     height:100px;
     width:200x;
-    left:49%;
-    transform: translate(-50%);
+    margin:0 auto;
     text-align: center;
 }
 .choose{
@@ -184,7 +189,7 @@ header{
 .search {
     width: 1000px;
     height: 50px;
-    margin: 50px auto;
+    margin: 0px auto;
 }
 
 .parent {
@@ -225,7 +230,7 @@ header{
 }
 
 .apply {
-  float: right;
-  margin-right:210px;
+    float: right;
+    margin-right:210px;
 }
 </style>

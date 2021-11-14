@@ -1,3 +1,5 @@
+<!--ADD Address Page   -->
+
 <template>
     <div class="add_container">
      <div class="fix">
@@ -47,16 +49,17 @@
 import { address_add } from '../../api/user'
 export default {
   data () {
+    // The rules for input data validation
     var checkName = (rule, value, callback) => {
       if (!value) {
-        return callback(new Error('username cannot be empty'))
+        return callback(new Error('Username cannot be empty'))
       } else {
         callback()
       }
     }
     var checkAddress = (rule, value, callback) => {
       if (!value) {
-        return callback(new Error('address cannot be empty'))
+        return callback(new Error('Address cannot be empty'))
       } else {
         callback()
       }
@@ -64,7 +67,7 @@ export default {
     var checkPhone = (rule, value, callback) => {
       const mailReg = /^\d+$/
       if (!value) {
-        return callback(new Error('phonenumber cannot be empty'))
+        return callback(new Error('Phonenumber cannot be empty'))
       }
       setTimeout(() => {
         if (mailReg.test(value)) {
@@ -119,6 +122,7 @@ export default {
         suburb:'',
         post_code:''
       },
+      // Input data validation
       addRules: {
         name: [
           { validator: checkName, trigger: 'blur' }
@@ -132,13 +136,13 @@ export default {
         post_code: [
           { validator: checkCode, trigger: 'blur'  }
         ],
-                suburb: [
+        suburb: [
           { validator: checkSuburb, trigger: 'blur'  }
         ],
-                state: [
+        state: [
           { validator: checkState, trigger: 'blur'  }
         ],
-                country: [
+        country: [
           { validator: checkCountry, trigger: 'blur'  }
         ]
       }
@@ -148,27 +152,31 @@ export default {
     jumpAddress () {
       this.$router.push('/address')
     },
+    // Submit address
     submitAdd () {
         this.$refs.add_FormRef.validate(async (valid) => {
           if (valid) {
-        this.addForm.token = sessionStorage.getItem('token');
-        console.log(this.addForm);
-        address_add(this.addForm).then( res => {
-            this.$message({message: 'Add Address Sucess!',type: 'success'});
-            if (sessionStorage.getItem('from') == 1) {
-              sessionStorage.removeItem('from');
-              this.$router.push('order');
-            } else {
-               this.$router.push('address');
-            }
-           
-        }).catch( error => {
-            this.$message.error('Failed');
-        })
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
+            this.addForm.token = sessionStorage.getItem('token');
+            // Main operation for submit address user want to add
+            address_add(this.addForm).then( res => {
+              this.$message({message: 'Add Address Sucess!',type: 'success'});
+              // If the page is from order page
+              // After sucess, page will back to order
+              if (sessionStorage.getItem('from') == 1) {
+                sessionStorage.removeItem('from');
+                this.$router.push('/order');
+              } 
+              // Otherwise, page will redirect to address page
+              else {
+                this.$router.push('/address');
+              }          
+            }).catch( error => {
+                this.$message.error('Failed');
+            })
+              } else {
+                console.log('error submit!!');
+                return false;
+              }
         });
     }
   }
@@ -176,14 +184,17 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
+.fix{
+    margin:0 auto;
+    margin-top:-70px;
+    width:800px;
+}
 .block{
     height: 60px;
 }
-
 h1{
     position: relative;
-    left: 27%;
+    left: 28%;
     top:50px;
     font-size: 40px;
     font-weight:normal;
@@ -214,14 +225,8 @@ h1{
     border-radius: 80px;
     padding-top: 50px;
 }
-
-.username_change /deep/ .el-form-item__label{
-    font-family: 'segUi';
-    letter-spacing:.1em;
-    font-size: 18px;
-}
 .el-form-item{
-   margin-bottom:15px
+    margin-bottom:15px
 }
 .submit{
     position: relative;
@@ -236,15 +241,17 @@ h1{
     padding-left: 30px;
     border-color: #786662;
 }
-.add_form /deep/.timr.el-form .el-form-item__error {
-  top: 30%;
-  right: 25% !important;
-  left: unset;
+
+/*deep style for el in scoped*/
+.username_change /deep/ .el-form-item__label{
+    font-family: 'segUi';
+    letter-spacing:.1em;
+    font-size: 18px;
 }
-.fix{
-  margin:0 auto;
-  margin-top:-70px;
-  width:800px;
+.add_form /deep/.timr.el-form .el-form-item__error {
+    top: 30%;
+    right: 25% !important;
+    left: unset;
 }
 .el-input /deep/ .el-input__inner {
     border-radius:50px;
@@ -252,9 +259,3 @@ h1{
 }
 </style>
 
-<style lang="less" scoped>
-input.el-input__inner {
-    border-radius:50px;
-    height:30px;
-}
-</style>

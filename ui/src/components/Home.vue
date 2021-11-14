@@ -1,3 +1,5 @@
+<!--  Home Page  -->
+
 <template>
     <div id="home_container">
         <header>
@@ -46,14 +48,14 @@
               :index="ind"
               > </Home>
             </div>
-            <div class="blockk">
+            <div style="clear:both">
             </div>
           </div>
         </div>
         <footer>
-         <img class="foot" src=../assets/home_foot.jpeg alt="foot">
+         <img src=../assets/home_foot.jpeg alt="foot">
         </footer>
-    </div>
+    </div> 
 </template>
 
 <script>
@@ -81,13 +83,12 @@ export default {
     }
   },
   created () {
-    this.checkStat(),
-    this.loadRec()
+    this.checkStat()
   },
   methods: {
     async checkStat () {
       // Wait check() complete
-      console.log(await this.check());
+      await this.check();
     },
     check () {
       // Judging the current situation
@@ -96,31 +97,25 @@ export default {
         this.isUser = true;
         this.isGuest = false;
         this.username = sessionStorage.getItem('username');
-        return this.username;
-      } 
-      // No user log in
-      else {
-        this.isGuest = true;
-        this.isUser = false;
-        return this.isUser;
-      }
-    },
-    async loadRec () {
-      // Load recommendation product for homepage
-      // When no user log in
-      if (this.isGuest == true) {
-        rec_guest(this.tokenForm).then ( res => {
-          this.products = res.data.products;
-        }).catch( error => {
-        })
-      }
-      // When user log in
-      else if (this.isUser == true) {
         this.tokenForm.token = sessionStorage.getItem('token');
+        // Load recommendation product for homepage
         rec_user(this.tokenForm).then ( res => {
           this.products = res.data.products;
         }).catch( error => {
         })
+        return this.username;
+      } 
+      // When no user log in
+      else {
+        this.isGuest = true;
+        this.isUser = false;
+        sessionStorage.clear();
+        // Load recommendation product for guest
+        rec_guest(this.tokenForm).then ( res => {
+          this.products = res.data.products;
+        }).catch( error => {
+        })
+        return this.isGuest;
       }
     },
     jumpSign () {
@@ -135,9 +130,11 @@ export default {
       if(!this.keywords){
         this.$message.error("Please input search keywords");
       }
+      // When search box only has space
       else if(this.keywords.match(/^[ ]*$/)){
         this.$message.error("Please input search keywords");
       }
+      // Real search trigger
       else{
         sessionStorage.setItem('word',this.keywords);
         this.$router.push('/search')
@@ -259,57 +256,58 @@ main #logo {
     cursor: pointer;
 }
 .recommendation_container{
-  background-color: white;
-  margin:0 auto;
-  width:1700px;
+    background-color: white;
+    margin:0 auto;
+    width:1700px;
 }
 .tittle_container{
-  float: left;
-  width:500px;
-  height:600px;
-  overflow: hidden;
+    float: left;
+    width:500px;
+    height:600px;
+    overflow: hidden;
 }
 .product_container{
-  float: right;
-  width:1200px;
-  display: flex;
-  flex-wrap: wrap;
+    float: right;
+    width:1200px;
+    display: flex;
+    flex-wrap: wrap;
 }
 .tittle{
-  position: relative;
-  left:30%;
-  top:40%;
-  transform:translate(0,-50%) ;
-  font-size: 25px;
+    position: relative;
+    left:30%;
+    top:40%;
+    transform:translate(0,-50%) ;
+    font-size: 25px;
 }
 .example{
-  margin-top:-300px;
+    margin-top:-300px;
 }
 .l_tittle{
-  font-size: 5px;
-  position: relative;
-  left:34%;
-  top:40%;
-  transform:translate(0,-50%) ;
+    font-size: 5px;
+    position: relative;
+    left:34%;
+    top:40%;
+    transform:translate(0,-50%) ;
 }
 .line{
-  height:2px;
-  width:89px;
-  position: relative;
-  left:-1%;
-  top:40%;
-  transform:translate(0,-50%) ;
-  background-color:rgb(0, 217, 255);
+    height:2px;
+    width:89px;
+    position: relative;
+    left:-1%;
+    top:40%;
+    transform:translate(0,-50%) ;
+    background-color:rgb(0, 217, 255);
 }
 footer{
-  padding-top:20px;
-  width:1800px;
-  margin:0 auto;
-  img{
     width:100%;
-  }
-}
-.blockk{
-  clear:both;
+    background:#2f2a29;
+    margin-top:20px;
+    bottom:0%;
+    img{
+      position: relative;
+      left:50%;
+      transform:translate(-50%);
+      width:1750px;
+    }
 }
 </style>

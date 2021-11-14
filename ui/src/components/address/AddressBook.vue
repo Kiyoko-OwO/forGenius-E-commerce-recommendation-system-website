@@ -1,14 +1,13 @@
+<!--Address Main Page   -->
+
 <template class="ad">
   <div class="address_container">
     <div class="fix">
     <header>
-        <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpUser">
-        <div class="title">
         ADDRESS&nbsp;BOOK
-        </div>
-        <el-button type="brown" class="add" @click="add()" >ADD ADDRESS</el-button>
     </header>
-    
+    <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpUser">
+    <el-button type="brown" class="add" @click="add()" >ADD ADDRESS</el-button>
     <div id="address-container">
         <Address v-for="(obj,ind) in addressbook" :key="obj.address_id"
         :userName="obj.name"
@@ -29,84 +28,11 @@
 </template>
 
 <script>
-import Address from '../mod/Address.vue'
+import Address from '../mod/AddressPro.vue'
 import { address_view } from '../../api/user'
 import { address_delete } from '../../api/user'
 export default {
     data () {
-            var checkName = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('name cannot be empty'))
-      } else {
-        callback()
-      }
-    }
-    var checkDes = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('name cannot be empty'))
-      } else {
-        callback()
-      }
-    }
-    var checkFeature= (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('feature cannot be empty'))
-      } else {
-        callback()
-      }
-    }
-    var checkWarranty = (rule, value, callback) => {
-      const mailReg = /^\d+$/
-      if (!value) {
-        return callback(new Error('warranty cannot be empty'))
-      }
-      setTimeout(() => {
-        if (mailReg.test(value)) {
-          callback()
-        } else {
-          callback(new Error('the warranty should be number'))
-        }
-      }, 100)
-    }
-    var checkDelivery= (rule, value, callback) => {
-      const mailReg = /^\d+$/
-      if (!value) {
-        return callback(new Error('number of day cannot be empty'))
-      }
-      setTimeout(() => {
-        if (mailReg.test(value)) {
-          callback()
-        } else {
-          callback(new Error('the data should be number of day'))
-        }
-      }, 100)
-    }
-    var checkSales= (rule, value, callback) => {
-      const mailReg = /^\d+$/
-      if (!value) {
-        return callback(new Error('Sales cannot be empty'))
-      }
-      setTimeout(() => {
-        if (mailReg.test(value)) {
-          callback()
-        } else {
-          callback(new Error('the sales should be number'))
-        }
-      }, 100)
-    }
-    var checkPrice= (rule, value, callback) => {
-      const mailReg =  /^((0{1}\.\d{1,2})|([1-9]\d*\.{1}\d{1,2})|([1-9]+\d*))$/
-      if (!value) {
-        return callback(new Error('Price cannot be empty'))
-      }
-      setTimeout(() => {
-        if (mailReg.test(value) & value != 0) {
-          callback()
-        } else {
-          callback(new Error('the price should be number'))
-        }
-      }, 100)
-    }
         return {
             addressbook : [],
             tokenForm: {
@@ -125,17 +51,22 @@ export default {
         Address
     },
     methods: {
+        // Load address book
         async loadAddressBook () {
             this.tokenForm.token = sessionStorage.getItem('token');
+            // Main operation to get address from backend
             const { data } = await address_view(this.tokenForm);
             console.log(data);
             this.addressbook = data.data.address_book;
             this.addressbook = this.addressbook.slice().reverse();
         },
+        // Delete an address
         del(index) {
+            // Operation to delete in frontend
             this.deleteForm.address_id = this.addressbook[index].address_id;
             this.deleteForm.token = this.tokenForm.token;
             this.addressbook.splice(index, 1);
+            // Operation to delete in backend
             address_delete(this.deleteForm).then( res => {
                 this.$message({message: 'Delete Sucess!',type: 'success'});
             }).catch( error => {
@@ -143,7 +74,7 @@ export default {
             })
         },
         add() {
-            this.$router.push('addressadd');
+            this.$router.push('/addressadd');
         },
         jumpUser () {
             this.$router.push('/userprofile');
@@ -158,10 +89,14 @@ export default {
     background-color: #d1dbda;
     min-height: 100%;
 }
+.fix{
+    margin:0 auto;
+    width:1750px;
+}
 header{
     height: 100px;
     width: 100%;
-    position: relative;
+    margin:0 auto;
     left:0;
     top:0;
     z-index: 999;
@@ -173,47 +108,34 @@ header{
     font-size: 50px;
     overflow: hidden;
 }
-#address-container {
-    position: relative;
-    left:50%;
-    transform: translate(-50%);
-    width:500px;
-
-}
 .logo{
-    height: 200%;
-    position: relative;
+    height: 230px;
     cursor: pointer;
-    top:-60px;
-    left:-600px;
+    margin-top:-170px ;
     z-index:100;
+    overflow: hidden;
+}
+#address-container {
+    margin-top:-50px;
+    margin-left:29%;
+    width:500px;
 }
 .title{
-    position: relative;
-    top:-260px;
     height:100px;
     width:200x;
-    left:49%;
-    transform: translate(-50%);
+    margin:0 auto;
     text-align: center;
-
 }
 .add{
-    height: 40%;
-    position: relative;
+    height: 43px;
+    margin-top:-63px;
+    float:right;
     border-radius: 4px;
     padding: 2px 20px;
-    left:480px;
-    top:-370px;
     background: #786662;
     border-radius: 10px;
     color: #fefefe;
     border-color:#786662;
     cursor: pointer;
 }
-.fix{
-    margin:0 auto;
-    width:1750px;
-}
-
 </style>

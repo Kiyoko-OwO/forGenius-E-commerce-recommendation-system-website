@@ -1,3 +1,5 @@
+<!--  Admin Page  -->
+
 <template>
     <div id="admin_container">
         <header>
@@ -11,11 +13,16 @@
             <img id="logo" src=../../assets/logoThin.png alt="logo">
             <button class="manageProduct" v-on:click="jumpManageproduct">MANAGE PRODUCT</button>
         </main>
-        <footer></footer>
+        <div style="clear:both; height:20px"></div>
+        <footer>
+         <img src=../../assets/home_foot.jpeg alt="foot">
+        </footer>
     </div>
 </template>
 
 <script>
+// Page for admin
+// Without admin login, this page cannot be reached
 import { logout } from '../../api/user'
 export default {
     data () {
@@ -31,7 +38,7 @@ export default {
     },
     methods: {
         async checkStat () {
-            console.log(await this.check());
+            await this.check();
         },
         check () {
             // Simple Navigation Guards
@@ -42,6 +49,7 @@ export default {
         },
         logOut () {
             this.tokenForm.token = sessionStorage.getItem('adtoken');
+            // Main operation for log out
             logout(this.tokenForm).then ( res => {
                 this.$message({message: 'Log out Sucess!',type: 'success'});
                 sessionStorage.clear();
@@ -101,5 +109,18 @@ main #logo {
     width: 800px;
     margin-left: 100px;
     margin-top: 0px;
+}
+footer{
+    position: relative;
+    width:100%;
+    background:#2f2a29;
+    bottom:0%;
+    img{
+      position: relative;
+      left:50%;
+      transform:translate(-50%);
+      width:1750px;
+      height:100%;
+    }
 }
 </style>

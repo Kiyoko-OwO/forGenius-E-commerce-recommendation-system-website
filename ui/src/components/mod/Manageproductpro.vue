@@ -1,3 +1,5 @@
+<!--ManangeProduct Mod For ManangeProduct Main Page   -->
+
 <template>
   <div class="my-cartpro">
   <div class="detail">
@@ -19,10 +21,13 @@
     <el-image
       style="width: 400px; height: 400px"
       :src="editForm.picture"
-      :fit="fit"></el-image>
+      :fit="fit"><div slot="error" > <div slot="placeholder" style="background:rgb(243, 243, 243);height:400px">
+        <div style="background:rgb(243, 243, 243);height:400px"><div style="padding-top:45%; padding-left:45%; ">Failed</div></div>
+      </div></div></el-image>
   </div>
 </div>
 <div class="b"> 
+     <!-- Edit Form with dialog -->
     <el-button type="white" icon="el-icon-edit" @click="dialogFormVisible = true" class="edit">Edit</el-button>
     <el-dialog title="Product Management" :visible.sync="dialogFormVisible" width="40%" @close="closeDialog" class="editf" append-to-body>
       <el-form :model="editForm" ref="edit_FormRef" :rules="editRules">
@@ -54,7 +59,6 @@
         <el-button type="white" @click="submitEdit" icon="el-icon-circle-check">Confim</el-button>
       </div>
     </el-dialog>
-    
     <el-button type="black" @click="deldialogFormVisible = true" icon="el-icon-delete" class="edit">Delete</el-button>
     <el-dialog title="Sure？" :visible.sync="deldialogFormVisible" width="16%" @close="closeDialog" append-to-body >
       <div slot="footer" class="dialog-footer">
@@ -74,71 +78,72 @@ export default {
     inject:['reload'],
     props: ['index', 'id', 'name', 'warr', 'description', 'delivery', 'sales', 'price','pic','features'],
     data () {
-    var checkName = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('name cannot be empty'))
-      } else {
-        callback()
-      }
-    }
-    var checkFeature = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('Feature cannot be empty'))
-      } else {
-        callback()
-      }
-    }
-    var checkDes = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('name cannot be empty'))
-      } else {
-        callback()
-      }
-    }
-    var checkWarranty = (rule, value, callback) => {
-      const mailReg = /^\d+$/
-      setTimeout(() => {
-        if (mailReg.test(value)) {
-          callback()
+     // The rules for input data validation
+      var checkName = (rule, value, callback) => {
+        if (!value) {
+          return callback(new Error('name cannot be empty'))
         } else {
-          callback(new Error('The warranty should be number'))
-        }
-      }, 100)
-    }
-    var checkDelivery= (rule, value, callback) => {
-      value = this.editForm.delivery_date
-      const mailReg = /^\d+$/
-      setTimeout(() => {
-        if (mailReg.test(value)) {
           callback()
-        } else {
-          callback(new Error('The date should be number of day'))
         }
-      }, 100)
-    }
-    var checkSales= (rule, value, callback) => {
-      const mailReg = /^\d+$/
-      if (!value) {
-        return callback(new Error('Sales cannot be empty'))
       }
-      setTimeout(() => {
-        if (mailReg.test(value)) {
-          callback()
+      var checkFeature = (rule, value, callback) => {
+        if (!value) {
+          return callback(new Error('Feature cannot be empty'))
         } else {
-          callback(new Error('the sales should be number'))
-        }
-      }, 100)
-    }
-    var checkPrice= (rule, value, callback) => {
-      const mailReg =  /^((0{1}\.\d{1,2})|([1-9]\d*\.{1}\d{1,2})|([1-9]+\d*))$/
-      setTimeout(() => {
-        if (mailReg.test(value) & value != 0) {
           callback()
-        } else {
-          callback(new Error('Should more than 0 and at most two decimal places'))
         }
-      }, 100)
-    }
+      }
+      var checkDes = (rule, value, callback) => {
+        if (!value) {
+          return callback(new Error('name cannot be empty'))
+        } else {
+          callback()
+        }
+      }
+      var checkWarranty = (rule, value, callback) => {
+        const mailReg = /^\d+$/
+        setTimeout(() => {
+          if (mailReg.test(value)) {
+            callback()
+          } else {
+            callback(new Error('The warranty should be number'))
+          }
+        }, 100)
+      }
+      var checkDelivery= (rule, value, callback) => {
+        value = this.editForm.delivery_date
+        const mailReg = /^\d+$/
+        setTimeout(() => {
+          if (mailReg.test(value)) {
+            callback()
+          } else {
+            callback(new Error('The date should be number of day'))
+          }
+        }, 100)
+      }
+      var checkSales= (rule, value, callback) => {
+        const mailReg = /^\d+$/
+        if (!value) {
+          return callback(new Error('Sales cannot be empty'))
+        }
+        setTimeout(() => {
+          if (mailReg.test(value)) {
+            callback()
+          } else {
+            callback(new Error('the sales should be number'))
+          }
+        }, 100)
+      }
+      var checkPrice= (rule, value, callback) => {
+        const mailReg =  /^((0{1}\.\d{1,2})|([1-9]\d*\.{1}\d{1,2})|([1-9]+\d*))$/
+        setTimeout(() => {
+          if (mailReg.test(value) & value != 0) {
+            callback()
+          } else {
+            callback(new Error('Should more than 0 and at most two decimal places'))
+          }
+        }, 100)
+      }
       return {
         fits: [''],
         // url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
@@ -155,6 +160,7 @@ export default {
           picture: this.pic,
           features:this.features
         },
+        //Input data validation
         editRules: {
         name: [
           { validator: checkName, trigger: 'blur' }
@@ -217,21 +223,22 @@ export default {
       closeDialog(){
       this.$refs['edit_FormRef'].resetFields();
       },
+      // submit editted product
       submitEdit() {
       this.$refs.edit_FormRef.validate(async (valid) =>{
         if(valid){
-        console.log(this.editForm);
-        product_edit(this.editForm).then( res => {
-            this.$message({message: 'Sucess!',type: 'success'});
-            this.dialogFormVisible = false;
-            this.reload();
-        }).catch( error => {
-            this.$message.error('Failed');
-        })
+          // Main operation for edit
+          product_edit(this.editForm).then( res => {
+              this.$message({message: 'Sucess!',type: 'success'});
+              this.dialogFormVisible = false;
+              this.reload();
+          }).catch( error => {
+              this.$message.error('Failed');
+          })
         }
         else{
-            console.log('error submit!!');
-            return false;
+          // admin cannot submit if input did not pass the rules
+          return false;
         }
       })
     }
@@ -276,11 +283,5 @@ span{
 p{
     white-space:pre-wrap;
 }
-
 </style>
 
-<style >
-.editf{
-  position: fixed;
-}
-</style>

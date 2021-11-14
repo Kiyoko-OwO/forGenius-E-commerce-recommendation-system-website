@@ -1,23 +1,28 @@
+<!--Address Mod For Address Main Page   -->
+
 <template>
   <div class="my-address">
-    <p> Name: {{userName}} </p> 
-    <p> Address: </p>
-    <p> {{addressDe}}</p>
-    <p> Country: {{country}}</p>
-    <p> State: {{state}}</p>
-    <p> Suburb: {{suburb}}</p>
-    <p> Postal Code:{{post_code}}</p>
-    <p> Phone Number: {{phoneNumber}}</p>
-    <!-- Form -->
-    <el-button type="white" icon="el-icon-edit" @click="dialogFormVisible = true">Edit</el-button>
+  <el-descriptions title="Address Detail" :column="2" border>
+    <el-descriptions-item label="Name" label-class-name="table-label" content-class-name="table-content">{{userName}}</el-descriptions-item>
+    <el-descriptions-item label="Phone Number" label-class-name="table-label" content-class-name="table-content">{{phoneNumber}}</el-descriptions-item>
+    <el-descriptions-item label="Country" label-class-name="table-label" content-class-name="table-content">{{country}}</el-descriptions-item>
+    <el-descriptions-item label="State" label-class-name="table-label" content-class-name="table-content">{{state}}</el-descriptions-item>
+    <el-descriptions-item label="Suburb" label-class-name="table-label" content-class-name="table-content">{{suburb}}</el-descriptions-item>
+    <el-descriptions-item label="Postal Code" label-class-name="table-label" content-class-name="table-content">{{post_code}}</el-descriptions-item>
+    <el-descriptions-item label="Address" label-class-name="table-label" >{{addressDe}}</el-descriptions-item>
+  </el-descriptions>
+    <el-button type="white" icon="el-icon-delete" @click="delFn" style="float:right; margin-top:20px">Delete</el-button>
+    <el-button type="white" icon="el-icon-edit" @click="dialogFormVisible = true" style="float:right; margin-top:20px">Edit</el-button>
+    <div style="clear:both"></div>
+    <!-- Edit Form with dialog -->
     <el-dialog title="Address Book" :visible.sync="dialogFormVisible" class="editf" width="30%" append-to-body>
       <el-form :model="editForm" ref="edit_FormRef" :rules="editRules">
            <el-form-item label="NAME" class="username_change" prop="name">
             <el-input v-model="editForm.name" autocomplete="off">
             </el-input>
           </el-form-item>
-          <el-form-item label="ADDRESS" class="username_change" prop="address_line">
-            <el-input v-model="editForm.address_line" autocomplete="off">
+          <el-form-item label="PHONE NUMBER" class="username_change" prop="phone_number">
+            <el-input v-model="editForm.phone_number" autocomplete="off">
             </el-input>
           </el-form-item>
            <el-form-item label="COUNTRY" class="username_change" prop="country">
@@ -36,8 +41,8 @@
             <el-input v-model="editForm.post_code" autocomplete="off">
             </el-input>
           </el-form-item>
-          <el-form-item label="PHONE NUMBER" class="username_change" prop="phone_number">
-            <el-input v-model="editForm.phone_number" autocomplete="off">
+          <el-form-item label="ADDRESS" class="username_change" prop="address_line">
+            <el-input v-model="editForm.address_line" autocomplete="off">
             </el-input>
           </el-form-item>
       </el-form>
@@ -46,8 +51,6 @@
         <el-button type="white" @click="submitEdit" icon="el-icon-circle-check">Confim</el-button>
       </div>
     </el-dialog>
-    
-    <el-button type="white" icon="el-icon-delete" @click="delFn">Delete</el-button>
   </div>
 </template>
 
@@ -57,6 +60,7 @@ export default {
     inject:['reload'],
     props: ['index', 'userName', 'addressId', 'addressDe', 'phoneNumber', 'suburb', 'post_code', 'state', 'country'],
     data () {
+    // The rules for input data validation
           var checkName = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('username cannot be empty'))
@@ -125,6 +129,7 @@ export default {
           state: this.state,
           suburb: this.suburb
         },
+      //Input data validation
       editRules: {        
         name: [
           { validator: checkName, trigger: 'blur' }
@@ -138,21 +143,17 @@ export default {
         post_code: [
           { validator: checkCode, trigger: 'blur'  }
         ],
-                suburb: [
+        suburb: [
           { validator: checkSuburb, trigger: 'blur'  }
         ],
-                state: [
+        state: [
           { validator: checkState, trigger: 'blur'  }
         ],
-                country: [
+        country: [
           { validator: checkCountry, trigger: 'blur'  }
         ]
-
-      
-       }
-    
+       }    
       }
-
     },
     watch: {
       userName:function(newVal,oldVal){
@@ -175,38 +176,44 @@ export default {
       editFn(){
         this.$emit("editAdd", this.index)
       },
+      // submit editted address
       submitEdit() {  
         this.$refs.edit_FormRef.validate(async (valid) =>{
         if(valid){
-        this.editForm.token = sessionStorage.getItem('token');
-        console.log(this.editForm);
-        this.editForm.phone_number = this.editForm.phone_number.toString();
-        address_edit(this.editForm).then( res => {
-            this.$message({message: 'Sucess!',type: 'success'});
-            this.dialogFormVisible = false;
-            this.reload();
-        }).catch( error => {
-            this.$message.error('Failed');
-        })
+          this.editForm.token = sessionStorage.getItem('token');
+          this.editForm.phone_number = this.editForm.phone_number.toString();
+          // Main operation for edit
+          address_edit(this.editForm).then( res => {
+              this.$message({message: 'Sucess!',type: 'success'});
+              this.dialogFormVisible = false;
+              this.reload();
+          }).catch( error => {
+              this.$message.error('Failed');
+          })
+          }
+        else{
+          // user cannot submit if input did not pass the rules
+          return false;
         }
-                else{
-            console.log('error submit!!');
-            return false;
-      }
     })
 }}}
 </script>
 
 <style lang="less" scoped>
 .my-address {
-  width: 400px;
-  padding: 20px;
-  border: 2px solid #000;
-  border-radius: 5px;
-  margin: 10px;
-  word-break:break-all;
+    width: 700px;
+    padding: 30px;
+    border-radius: 5px;
+    margin-top: 30px;
+    word-break:break-all;
+    background-color:#e7eae8;
 }
 .editf{
-  position: fixed;
+    position: fixed;
 }
+span{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size:17px;
+}
+
 </style>

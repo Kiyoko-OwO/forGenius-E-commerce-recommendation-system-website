@@ -8,7 +8,7 @@
 
 ##### Kaiyu Chen 	  z5248118  Scrum Master (Also do backend)
 ##### Hanqing Guan  z5213081  Developer(Backend&Database)
-##### Minghao Cai   z5231859  Developer(Frontend&API)
+##### Minghao Cai   z5231859  Developer(Frontend)
 ##### Tianchen Yang z5248280 	Developer(Backend)
 ##### Wenxin Ma     z5248280 	Developer(Frontend)
 

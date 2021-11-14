@@ -21,7 +21,10 @@
             <button class="order" v-on:click="jumpOrdHis">ORDER HISTORY</button>
             <button class="order" v-on:click="jumpUsernameChange">USERNAME CHANGE</button>
         </main>
-        <footer></footer>
+        <div style="clear:both; height:20px"></div>
+        <footer>
+         <img src=../../assets/home_foot.jpeg alt="foot">
+        </footer>
     </div>
 </template>
 
@@ -144,5 +147,18 @@ main #logo {
     width: 800px;
     margin-left: 100px;
     margin-top: 0px;
+}
+footer{
+    width:100%;
+    background:#2f2a29;
+    margin-top:20px;
+    bottom:0%;
+    img{
+      position: relative;
+      left:50%;
+      transform:translate(-50%);
+      width:1800px;
+      height:100%;
+    }
 }
 </style>

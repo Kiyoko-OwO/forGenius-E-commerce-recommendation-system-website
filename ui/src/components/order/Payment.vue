@@ -77,12 +77,18 @@ export default {
     },
     submitForm() {
       // Main operation to pay
-      ord_pay(this.pay_from).then( res => {
-        this.$message({message: 'Payment Done',type: 'success'});
-        this.$router.push('/userprofile')
-      }).catch( error => {
-          this.$message.error('Failed');
-      })
+      // Payment method caanot be null
+      if (this.value != '') {
+        ord_pay(this.pay_from).then( res => {
+          this.$message({message: 'Payment Done',type: 'success'});
+          this.$router.push('/userprofile')
+        }).catch( error => {
+            this.$message.error('Failed');
+        })
+      } else {
+        this.$message.error('You Need to Choose a method First');
+      }
+      
     }
   },
   

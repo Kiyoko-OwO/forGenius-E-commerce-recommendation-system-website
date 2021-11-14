@@ -34,8 +34,7 @@
             prop="quantity"
             :rules="[
             { required: true, message: 'Quantity cannot be null'},
-            { type: 'number', message: 'Quantity need to be number'},
-            { min: 'number', message: 'Quantity need to larger than 0'}
+            { type: 'number', min: 0, message: 'Quantity need to be number and larger than 0'},
             ]"
           >
           <el-button class="el-icon-remove-outline" @click='deleteOne' circle type="white"></el-button>

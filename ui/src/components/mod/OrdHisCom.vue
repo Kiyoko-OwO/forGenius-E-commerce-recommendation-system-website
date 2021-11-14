@@ -39,7 +39,9 @@
         <el-image v-for="(item,index) in shows" :key="index"
             style="width: 100px; height: 100px; margin-right:10px"
             :src="item.picture"
-            :fit="fit"></el-image>
+            :fit="fit"><div slot="error" > <div slot="placeholder" style="background:rgb(243, 243, 243);height:100px">
+        <div style="background:rgb(243, 243, 243);height:100px"><div style="padding-top:40%; padding-left:35%; font-size:30%; ">Failed</div></div>
+      </div></div></el-image>
       </div>
       <el-button type="white" @click="orderFn" class="detail" icon="el-icon-reading">Detail</el-button>
       <el-button type="white" @click="orderShare" class="detail" icon="el-icon-message">Share</el-button>

@@ -21,8 +21,8 @@
             </el-form-item>
         </el-form>
         <a  text-decoration:underline href="#/forgotpassword" class="forget">FORGET MY PASSWORD</a>
-        <a  class="signup_1">DON'T HAVE AN ACCOUNT YET? PLEASE <a style="color:black" href="#/signup" text-decoration:underline>SIGN UP </a></a>
         </div>
+          <a  class="signup_1">DON'T HAVE AN ACCOUNT YET? PLEASE <a style="color:black" href="#/signup" text-decoration:underline>SIGN UP </a></a>
       </div>
     </div>
 </template>
@@ -121,7 +121,7 @@ export default {
 
 h1{
     position: relative;
-    left: 40%;
+    left: 310px;
     top:50px;
     font-size: 40px;
     font-weight:normal;
@@ -141,21 +141,12 @@ h1{
     font-size: 15px;
     letter-spacing:.2em;
 }
-.signup{
-    position: relative;
-    left: 42%;
-    bottom:0%;
-    color:black;
-    transform: translate(-50%,0%);
-    font-size: 15px;
-    letter-spacing:.2em;
-}
 .signup_1{
     position: relative;
-    left: -14%;
-    bottom:0%;
+    bottom:50px;
+    left:160px;
     color:black;
-    transform: translate(-50%,0%);
+    margin:0 auto;
     font-size: 15px;
     letter-spacing:.2em;
 }

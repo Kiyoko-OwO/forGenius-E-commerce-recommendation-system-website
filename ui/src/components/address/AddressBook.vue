@@ -4,12 +4,10 @@
   <div class="address_container">
     <div class="fix">
     <header>
-        <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpUser">
-        <div class="title">
         ADDRESS&nbsp;BOOK
-        </div>
-        <el-button type="brown" class="add" @click="add()" >ADD ADDRESS</el-button>
     </header>
+    <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpUser">
+    <el-button type="brown" class="add" @click="add()" >ADD ADDRESS</el-button>
     <div id="address-container">
         <Address v-for="(obj,ind) in addressbook" :key="obj.address_id"
         :userName="obj.name"
@@ -98,7 +96,7 @@ export default {
 header{
     height: 100px;
     width: 100%;
-    position: relative;
+    margin:0 auto;
     left:0;
     top:0;
     z-index: 999;
@@ -110,36 +108,30 @@ header{
     font-size: 50px;
     overflow: hidden;
 }
-#address-container {
-    margin-left:30%;
-    width:500px;
-
-}
 .logo{
-    height: 200%;
-    position: relative;
+    height: 230px;
     cursor: pointer;
-    top:-60px;
-    left:-600px;
+    margin-top:-170px ;
     z-index:100;
+    overflow: hidden;
+}
+#address-container {
+    margin-top:-50px;
+    margin-left:29%;
+    width:500px;
 }
 .title{
-    position: relative;
-    top:-260px;
     height:100px;
     width:200x;
-    left:49%;
-    transform: translate(-50%);
+    margin:0 auto;
     text-align: center;
-
 }
 .add{
-    height: 40%;
-    position: relative;
+    height: 43px;
+    margin-top:-63px;
+    float:right;
     border-radius: 4px;
     padding: 2px 20px;
-    left:480px;
-    top:-370px;
     background: #786662;
     border-radius: 10px;
     color: #fefefe;

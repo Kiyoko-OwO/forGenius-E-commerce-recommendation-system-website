@@ -4,11 +4,9 @@
   <div class="search_container">
     <div class="fix">
     <header>
-       <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpHome">
-       <div class="title">
         SEARCH&nbsp;RESULT
-        </div>
     </header>
+    <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpHome">
     <div class="search">
       <form action="" class="parent">
         <input type="text" v-model="keywords" placeholder="search keywords">
@@ -154,7 +152,7 @@ export default {
 header{
     height: 100px;
     width: 100%;
-    position: relative;
+    margin:0 auto;
     left:0;
     top:0;
     z-index: 999;
@@ -167,24 +165,20 @@ header{
     overflow: hidden;
 }
 .logo{
-    height: 200%;
-    position: relative;
+    height: 230px;
     cursor: pointer;
-    top:-60px;
-    left:-600px;
+    margin-top:-170px ;
     z-index:100;
+    overflow: hidden;
 }
 .fix{
     margin:0 auto;
     width:1750px;
 }
 .title{
-    position: relative;
-    top:-260px;
     height:100px;
     width:200x;
-    left:49%;
-    transform: translate(-50%);
+    margin:0 auto;
     text-align: center;
 }
 .choose{
@@ -195,7 +189,7 @@ header{
 .search {
     width: 1000px;
     height: 50px;
-    margin: 50px auto;
+    margin: 0px auto;
 }
 
 .parent {

@@ -21,7 +21,9 @@
     <el-image
       style="width: 400px; height: 400px"
       :src="editForm.picture"
-      :fit="fit"></el-image>
+      :fit="fit"><div slot="error" > <div slot="placeholder" style="background:rgb(243, 243, 243);height:400px">
+        <div style="background:rgb(243, 243, 243);height:400px"><div style="padding-top:45%; padding-left:45%; ">Failed</div></div>
+      </div></div></el-image>
   </div>
 </div>
 <div class="b"> 

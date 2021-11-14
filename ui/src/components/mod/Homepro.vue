@@ -3,11 +3,13 @@
 <template>
   <div class="home-pro">
     <div class="img" v-for="fit in fits" :key="fit" @click="goProduct">
-    <span class="demonstration">{{ fit }}</span>
+    <span class="demonstration" >{{ fit }}</span>
         <el-image
         style="width: 250px; height: 250px"
         :src="proPic"
-        :fit="fit" @click="goProduct"></el-image>
+        :fit="fit" @click="goProduct"><div slot="error" > <div slot="placeholder" style="background:rgb(243, 243, 243);height:250px">
+        <div style="background:rgb(243, 243, 243);height:250px"><div style="padding-top:45%; padding-left:42%; ">Failed</div></div>
+      </div></div></el-image>
     </div>
     <p @click="goProduct"> {{proName}}</p>
     <p @click="goProduct"> <span>${{proPrice}}</span></p>
@@ -60,4 +62,5 @@ span{
     position: relative;
     left:9%;
 }
+
 </style>

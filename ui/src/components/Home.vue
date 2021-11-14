@@ -52,9 +52,9 @@
             </div>
           </div>
         </div>
-        <div class="bottom">
+        <footer>
          <img src=../assets/home_foot.jpeg alt="foot">
-        </div>
+        </footer>
     </div> 
 </template>
 
@@ -298,7 +298,7 @@ main #logo {
     transform:translate(0,-50%) ;
     background-color:rgb(0, 217, 255);
 }
-.bottom{
+footer{
     width:100%;
     background:#2f2a29;
     margin-top:20px;

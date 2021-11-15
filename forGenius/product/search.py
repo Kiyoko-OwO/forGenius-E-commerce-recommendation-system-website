@@ -28,26 +28,12 @@ def get_search_result(email, search, sorting):
     
     search = search.lower().split()
     data = Product.objects.filter()
-    result = []
-    # choose the relevant products from the database
-    for product in data:
-        add = False
-        for search_word in search:
-            if add == True:
-                break
-            # if the search word in the product name or desription
-            if search_word in product.name.lower():
-                result.append(product)
-                add = True
-                continue
-
-            # if the search word in the product feature
-            features = Features.objects.filter(product_id = product.product_id)
-            for feature in features:
-                if search_word in feature.feature.lower():
-                    result.append(product)
-                    add = True
-                    break
+    result = get_products(search, data, 1)
+    if len(result) == 0:
+        result = get_products(search, data, 2)
+        if len(result) == 0:
+            result = get_products(search, data, 3)
+   
     
     # sort the result list with chosen method
     result_list = sort_help(sorting, result, search)
@@ -66,6 +52,63 @@ def get_search_result(email, search, sorting):
         return_list.append(item)
         
     return return_list
+
+def get_products(search, data, level):
+    result = []
+     # choose the relevant products from the database
+    for product in data:
+        add = False
+        for search_word in search:
+            if add == True:
+                break
+            # if the search word in the product name or desription
+            word = " " + search_word + " "
+            if word in product.name.lower():
+                result.append(product)
+                add = True
+                continue
+            
+            if level >= 3:
+                if search_word in product.name.lower():
+                    result.append(product)
+                    add = True
+                    continue
+            
+            
+            # if the search word in the product feature
+            features = Features.objects.filter(product_id = product.product_id)
+            for feature in features:
+                # if there are many words in the feature, split them and check if same
+                if "_" in feature.feature:
+                    words = feature.feature.lower().split('_')
+                    for feature_word in words:
+                        if feature_word == search_word and add != True:
+                            result.append(product)
+                            add = True
+                            break
+                    
+                    if level >=2:
+                        if search_word in feature.feature.lower():
+                            result.append(product)
+                            add = True
+                            break
+                    
+                    if add == True:
+                        break
+                    
+                
+                if search_word == feature.feature.lower():
+                    result.append(product)
+                    add = True
+                    break
+                
+                if level >= 3:
+                    if search_word in feature.feature.lower():
+                        result.append(product)
+                        add = True
+                        break
+                
+    return result
     
 # the helper function for sorting
 def sort_help(sorting, list, search):
@@ -102,22 +145,35 @@ def recursion_help(result, list, search_list, sorting):
             for search in search_list:
                 if search in product_j.name:
                     val1 += 1.0
+                    
                 if search in product_first.name:
                     val2 += 1.0
+                    
                 if search in product_j.description:
-                    val1 += 0.5
+                    val1 += 0.1
+                    
                 if search in product_first.description:
-                    val2 += 0.5            
+                    val2 += 0.1  
+                           
                 # if the search word in the product feature
-                features = Features.objects.filter(product_id = product_j.product_id)
-                for feature in features:
-                    if search in feature.feature:
-                        val1 += 1.0                
+                featuresj = Features.objects.filter(product_id = product_j.product_id)
+                for feature in featuresj:
+                    if search == feature.feature.lower():
+                        val1 += 1.0
+                    if search in feature.feature.lower():
+                        val1 += 1.0   
+                                     
                 features = Features.objects.filter(product_id = product_first.product_id)
                 for feature in features:
-                    if search in feature.feature:
-                        val2 += 1.0       
-            if val1 > val2 or val1 == val2 and list[j].sales_data > list[first].sales_data:
+                    if search == feature.feature.lower():
+                        val2 += 1.0
+                    if search in feature.feature.lower():
+                        val2 += 1.0     
+            
+            if val1 > val2:
+                first = j
+                      
+            if val1 == val2 and list[j].sales_data > list[first].sales_data:
                 first = j
 
     # add the most optinal one in the result lists and start next recursion.

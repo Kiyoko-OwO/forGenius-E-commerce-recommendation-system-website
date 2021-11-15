@@ -121,7 +121,6 @@ export default {
 
 h1{
     position: relative;
-    left: 310px;
     top:50px;
     font-size: 40px;
     font-weight:normal;
@@ -134,7 +133,7 @@ h1{
 }
 .forget{
     position: relative;
-    left: 47%;
+    left: 15%;
     bottom:32%;
     color:black;
     transform: translate(-50%,0%);
@@ -144,7 +143,6 @@ h1{
 .signup_1{
     position: relative;
     bottom:50px;
-    left:160px;
     color:black;
     margin:0 auto;
     font-size: 15px;
@@ -152,7 +150,6 @@ h1{
 }
 .submit{
     position: relative;
-    left:18%;
     height:50px;
     width:200px;
     top:10px;
@@ -178,8 +175,9 @@ h1{
     margin-top:-30px;
 }
 .logo{
+    position: relative;
     height: 300px;
-    left: 1500px;
+    left:-250px;
     cursor: pointer;
 }
 .login_form{
@@ -198,6 +196,7 @@ h1{
     margin:0 auto;
     margin-top:-30px;
     width:800px;
+    text-align: center;
 }
 /*deep style for el in scoped*/
 .el-input /deep/ .el-input__inner {

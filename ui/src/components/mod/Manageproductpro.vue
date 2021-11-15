@@ -221,7 +221,7 @@ export default {
         this.$emit("editAdd", this.index)
       },
       closeDialog(){
-      this.$refs['edit_FormRef'].resetFields();
+        this.$refs['edit_FormRef'].resetFields();
       },
       // submit editted product
       submitEdit() {

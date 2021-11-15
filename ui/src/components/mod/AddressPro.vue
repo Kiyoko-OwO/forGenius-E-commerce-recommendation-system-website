@@ -15,7 +15,7 @@
     <el-button type="white" icon="el-icon-edit" @click="dialogFormVisible = true" style="float:right; margin-top:20px">Edit</el-button>
     <div style="clear:both"></div>
     <!-- Edit Form with dialog -->
-    <el-dialog title="Address Book" :visible.sync="dialogFormVisible" class="editf" width="30%" append-to-body>
+    <el-dialog title="Address Book" :visible.sync="dialogFormVisible" @close="closeDialog" class="editf" width="30%" append-to-body>
       <el-form :model="editForm" ref="edit_FormRef" :rules="editRules">
            <el-form-item label="NAME" class="username_change" prop="name">
             <el-input v-model="editForm.name" autocomplete="off">
@@ -193,6 +193,9 @@ export default {
       },
       editFn(){
         this.$emit("editAdd", this.index)
+      },
+      closeDialog(){
+        this.$refs['edit_FormRef'].resetFields();
       },
       // submit editted address
       submitEdit() {  

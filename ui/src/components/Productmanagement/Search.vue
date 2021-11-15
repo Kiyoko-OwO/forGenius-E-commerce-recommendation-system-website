@@ -95,7 +95,7 @@ export default {
       async loadRes() {
         // Store token if user logged in
         if (sessionStorage.getItem('token') != null) {
-          this.view_formtoken = sessionStorage.getItem('token');
+          this.view_form.token = sessionStorage.getItem('token');
         }
         // Get search word from sessionStorage
         this.keywords = sessionStorage.getItem('word');

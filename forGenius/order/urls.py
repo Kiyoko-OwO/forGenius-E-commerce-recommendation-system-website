@@ -13,4 +13,5 @@ urlpatterns = [
     path('pay/', pay_order, name='pay_order'),
     path('view/all/', view_all_order, name='view_all_order'),
     path('share/', share_order, name='share_order'),
+    path('admin_view/all/', admin_view_all_order, name='admin_view_all_order'),
 ]

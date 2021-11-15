@@ -237,3 +237,125 @@ def share_order(email, order_id, to_email, receiver):
     # send the text message to receiver's email
     email_robot.send_email_share(
         email_query.user_name, to_email, message, receiver)
+
+# the function for admin to view the order detail information 
+def admin_view_order():
+
+    # get all orders
+    order = Order.objects.all()
+    if len(order) == 0:
+        raise EmptyOrderError("No order exists")
+
+    # Put all of the detail information of this order to data
+    for temp in order:
+        data = {
+                "user_email": temp.user_email.user_email,
+                "order_id": temp.order_id,
+                "item": [],
+                "total": 0,
+                "name": temp.name,
+                "address_line": temp.address_line,
+                "post_code": temp.post_code,
+                "suburb": temp.suburb,
+                "state": temp.state,
+                "country": temp.country,
+                "phone_number": temp.phone_number,
+                "order_date": temp.date_time.strftime("%Y-%m-%d"),
+                "paid": temp.paid,
+                }
+        break
+
+    total = 0
+    
+    # put the items in order to data
+    for item in order:
+        product_pic = ""
+        try:
+            product_pic = Product.objects.get(pk=item.product_id).picture
+        except:
+            product_pic = "https://i.imgur.com/xzuy857.png"
+
+        info = {
+            "product_id": item.product_id,
+            "name": item.product_name,
+            "price": round(float(item.price), 2),
+            "quantity": item.quantity,
+            "picture": product_pic,
+            "total_price": round(float(item.price), 2) * item.quantity
+        }
+        total += round(float(item.price), 2) * item.quantity
+        data["item"].append(info)
+
+    data["total"] = round(total, 2)
+    return data
+
+# the function for admin to view all orders
+def admin_view_all_order():
+    # get all orders
+    user_order = Order.objects.all()
+    if len(user_order) == 0:
+        raise EmptyOrderError("No order exists")
+
+    order_ids = []
+    
+    # get all order id from dababase
+    for temp in user_order:
+        if order_ids.count(temp.order_id) == 0:
+            order_ids.append(temp.order_id)
+
+    order_list = {"order_list": []}
+
+    # get all details of the order ids
+    for curr_id in order_ids:
+        order = Order.objects.filter(order_id=curr_id)
+
+        data = {"order_id": curr_id,
+                "email": "",
+                "item": [],
+                "total": 0,
+                "name": "",
+                "address_line": "",
+                "post_code": "",
+                "suburb": "",
+                "state": "",
+                "country": "",
+                "phone_number": "",
+                "order_date": "",
+                "paid": "",
+                }
+
+        total = 0
+        
+        # put the items in order to order's data
+        for item in order:
+            product_pic = ""
+            try:
+                product_pic = Product.objects.get(pk=item.product_id).picture
+            except:
+                product_pic = "https://i.imgur.com/xzuy857.png"
+            info = {
+                "product_id": item.product_id,
+                "name": item.product_name,
+                "price": round(float(item.price), 2),
+                "quantity": item.quantity,
+                "picture": product_pic,
+                "total_price": round(float(item.price), 2) * item.quantity
+            }
+            if total == 0:
+                data['email'] = item.user_email.user_email
+                data['name'] = item.name
+                data['address_line'] = item.address_line
+                data['post_code'] = item.post_code
+                data['suburb'] = item.suburb
+                data['state'] = item.state
+                data['country'] = item.country
+                data['phone_number'] = item.phone_number
+                data['order_date'] = item.date_time.strftime("%Y-%m-%d")
+                data['paid'] = item.paid
+
+            total += round(float(item.price), 2) * item.quantity
+            data["item"].append(info)
+
+        data["total"] = round(total, 2)
+        order_list["order_list"].append(data)
+    return order_list

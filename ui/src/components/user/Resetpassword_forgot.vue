@@ -107,7 +107,6 @@ export default {
 
 h1{
     position: relative;
-    left: 23%;
     top:50px;
     font-size: 40px;
     font-weight:normal;
@@ -117,10 +116,8 @@ h1{
 
 .submit{
     position: relative;
-    left:50%;
     height:50px;
     width:200px;
-    transform: translate(-50%,-50%);
     border-radius: 10px;
     background: #786662;
     color: #fefefe;
@@ -143,8 +140,9 @@ h1{
     margin-top:-60px;
 }
 .logo{
+    position: relative;
     height: 300px;
-    left: 1500px;
+    left:-250px;
     cursor: pointer;
 }
 .reset_form{
@@ -154,9 +152,10 @@ h1{
     padding-top: 50px;
 }
 .fix{
-  margin:0 auto;
-  margin-top:-80px;
-  width:800px;
+    margin:0 auto;
+    margin-top:-80px;
+    width:800px;
+    text-align: center;
 }
 /*deep style for el in scoped*/
 .el-input /deep/ .el-input__inner {

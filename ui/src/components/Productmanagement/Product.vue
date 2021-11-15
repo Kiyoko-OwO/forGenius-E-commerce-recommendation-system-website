@@ -19,7 +19,7 @@
         </div>
         <div class="inf_box">
         <div class="inf">
-        <h2>{{product.name}}</h2>
+        <h2 style=" word-break: keep-all;">{{product.name}}</h2>
         <h3>Warranty: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span> {{product.warranty}} year(s)</span></h3>
         <h3>Delivery date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{product.delivery_date}}</span></h3>
         <p class="price">$ {{product.price}}</p>
@@ -348,6 +348,7 @@ footer{
 }
 p{
     white-space:pre-wrap;
+    word-break: keep-all;
 }
 .description{
     border: 2px solid black;

@@ -75,7 +75,6 @@ export default {
 
 h1{
     position: relative;
-    left: 20%;
     top:50px;
     font-size: 40px;
     font-weight:normal;
@@ -85,11 +84,9 @@ h1{
 
 .send{
     position: relative;
-    left:50%;
     bottom:-15%;
     height:50px;
     width:200px;
-    transform: translate(-50%,-50%);
     border-radius: 10px;
     background: #786662;
     color: #fefefe;
@@ -111,8 +108,9 @@ h1{
     margin-top:-30px;
 }
 .logo{
+    position: relative;
     height: 300px;
-    left: 1500px;
+    left:-250px;
     cursor: pointer;
 }
 .forgot_form{
@@ -134,6 +132,7 @@ h1{
     margin:0 auto;
     margin-top:-30px;
     width:800px;
+    text-align: center;
 }
 /*deep style for el in scoped*/
 .forgot_form /deep/.timr.el-form .el-form-item__error {

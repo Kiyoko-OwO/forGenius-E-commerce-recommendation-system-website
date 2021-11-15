@@ -182,7 +182,6 @@ export default {
 
 h1{
     position: relative;
-    left: 270px;
     top:50px;
     font-size: 40px;
     font-weight:normal;
@@ -196,7 +195,6 @@ h1{
 
 .login_1{
     position: relative;
-    left: 180px;
     bottom: 20px;
     color:black;
     transform: translate(-50%,0%);
@@ -205,7 +203,6 @@ h1{
 }
 .submit{
     position: relative;
-    left:47px;
     height:50px;
     width:200px;
     transform: translate(-50%,-75%);
@@ -242,12 +239,12 @@ h1{
     width: 750px;
     margin:0 auto;
     border-radius: 30px;
-    left:40px;
     margin-top:-60px;
 }
 .logo{
+    position: relative;
     height: 300px;
-    left: 1500px;
+    left:-250px;
     cursor: pointer;
 }
 .signup_form{
@@ -267,8 +264,9 @@ h1{
 }
 .fix{
     margin:0 auto;
-    margin-top:-80px;
+    margin-top:-30px;
     width:800px;
+    text-align: center;
 }
 .el-form-item{
     margin-bottom:15px

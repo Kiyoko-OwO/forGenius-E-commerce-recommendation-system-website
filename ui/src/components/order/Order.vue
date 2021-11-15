@@ -382,6 +382,7 @@ span{
 }
 p{
     font-family: 'segUi';
+    word-break: keep-all;
 }
 </style>
 

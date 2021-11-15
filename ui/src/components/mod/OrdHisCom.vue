@@ -194,11 +194,11 @@ export default {
     position: relative;
     width: 300%;
     height: 1px;
-    left:50%;
+    left:40%;
     transform: translate(-50%);
     border-top: solid #0b0b0f 1px;
 }
-.line-in {
+.line-in {  
     margin-top:35px;
     width: 100%;
     height: 1px;
@@ -231,5 +231,6 @@ span{
 }
 p{
     font-family: 'segUi';
+    word-break: keep-all;
 }
 </style>

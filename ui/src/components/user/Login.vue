@@ -171,7 +171,6 @@ h1{
     width: 750px;
     margin:0 auto;
     border-radius: 30px;
-    left:40px;
     margin-top:-30px;
 }
 .logo{

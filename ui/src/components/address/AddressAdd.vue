@@ -210,15 +210,15 @@ export default {
 <style lang="less" scoped>
 .fix{
     margin:0 auto;
-    margin-top:-70px;
+    margin-top:-30px;
     width:800px;
+    text-align: center;
 }
 .block{
     height: 60px;
 }
 h1{
     position: relative;
-    left: 28%;
     top:50px;
     font-size: 40px;
     font-weight:normal;
@@ -235,12 +235,12 @@ h1{
     width: 750px;
     margin:0 auto;
     border-radius: 30px;
-    left:40px;
     margin-top:-60px;
 }
 .logo{
+    position: relative;
     height: 300px;
-    left: 1500px;
+    left:-250px;
     cursor: pointer;
 }
 .add_form{
@@ -254,10 +254,9 @@ h1{
 }
 .submit{
     position: relative;
-    left:21%;
     height:50px;
     width:200px;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%,-75%);
     border-radius: 10px;
     background: #786662;
     color: #fefefe;

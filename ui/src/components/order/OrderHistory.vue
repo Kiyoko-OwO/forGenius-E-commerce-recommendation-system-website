@@ -105,7 +105,7 @@ header{
 }
 .order_container{
     position: relative;
-    left:49%;
+    left:50%;
     top:-60px;
     transform: translate(-50%);
     width:300px;

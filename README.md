@@ -62,7 +62,7 @@ $ npm install --force
 $ npm run serve
 ```
 After that and wait a second, your terminal should show the following picture.
-(Note: The reason why we use “npm install --force” is because in this project,  “less border” pacage’s version is too low; there may be some useless errors here if you use the command  without “--force”.).
+(Note: The reason why we use “npm install --force” is because in this project,  “less border” package’s version is too low; there may be some useless errors here if you use the command  without “--force”.).
 
 #### Open
 Make sure you finish all steps of backend and frontend, and both of them are running like the last picture in the last step of their instructions.

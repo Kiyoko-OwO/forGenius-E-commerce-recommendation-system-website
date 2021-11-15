@@ -16,7 +16,7 @@
         </header>
         <main>
             <img id="logo" src=../../assets/logoThin.png alt="logo">
-            <button class="resetPassword" v-on:click="jumpResetpassword">Reset PASSWORD</button>
+            <button class="resetPassword" v-on:click="jumpResetpassword">RESET PASSWORD</button>
             <button class="cart" v-on:click="jumpMycart">MY CART</button>
             <button class="address" v-on:click="jumpAddressbook">ADDRESS BOOK</button>
             <button class="order" v-on:click="jumpOrdHis">ORDER HISTORY</button>

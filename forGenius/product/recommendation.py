@@ -34,7 +34,8 @@ def private_recommendation(email):
         listA = pick_products(recomment_by_sales(), 6)
         listB = pick_products(recomment_by_interest(email), 14)
         lastDB[email] = combine_list(listA, listB)
-    listC = combine_list(lastDB[email], pick_products(recomment_by_search(email), 20))
+    search = pick_products(recomment_by_search(email), 20)
+    listC = combine_list(lastDB[email], search)
     lastDB[email] = pick_products(listC, 20)
     # output the products with ordered number
     products = pick_products(lastDB[email], 6)
@@ -102,11 +103,11 @@ def recomment_by_search(user_email):
         # get the product result with the lastest two search history
         # and put them to result list
         for item in get_search_result("", lastest_search[-1], "best_sell"):
-            if item in result:
+            if item not in result:
                 result.append(item)
             
         for item in get_search_result("", lastest_search[-2], "best_sell"):
-            if item in result:
+            if item not in result:
                 result.append(item)
             
         return result
@@ -135,12 +136,16 @@ def pick_products(product_list, num):
 
 
 def combine_list(a_str, b_str):
+    id_result = []
     result = []
     for a in a_str:
-        if a not in result:
+        if a["product_id"] not in id_result:
             result.append(a)
+            id_result.append(a["product_id"])
             
     for b in b_str:
-        if b not in result:
+        if b["product_id"] not in id_result:
             result.append(b)
+            id_result.append(b["product_id"])
+            
     return result

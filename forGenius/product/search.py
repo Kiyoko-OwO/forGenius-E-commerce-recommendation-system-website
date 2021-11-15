@@ -22,7 +22,7 @@ def get_search_result(email, search, sorting):
         except User.DoesNotExist:
             raise InputError('User not exist')
 
-
+        print(search)
         search_save = Search_history(user_email=user_email, search=search)
         search_save.save()
     
@@ -37,7 +37,7 @@ def get_search_result(email, search, sorting):
             if add == True:
                 break
             # if the search word in the product name or desription
-            if search_word in product.name.lower() or search_word in product.description.lower():
+            if search_word in product.name.lower():
                 result.append(product)
                 add = True
                 continue

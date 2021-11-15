@@ -132,7 +132,7 @@ export default {
             this.$message({message: 'Delete Sucess!',type: 'success'});
             this.reload();
         }).catch( error => {
-            this.$message.error('Failed');
+            this.$message.error('Delete Failed');
         })
       },
     }

@@ -158,10 +158,10 @@ export default {
               this.numberValidateForm.product_id = this.product_id_form.product_id;
               this.numberValidateForm.token = sessionStorage.getItem('token');
               cart_add(this.numberValidateForm).then( res => {
-                this.$message({message: 'Sucess!',type: 'success'});
+                this.$message({message: 'Added to Cart!',type: 'success'});
                 this.$router.push('/cart');
               }).catch( error => {
-                this.$message.error('Failed');
+                this.$message.error('Add to Cart Failed');
               })
             } else {
               // without login, page will redirect to log in page 

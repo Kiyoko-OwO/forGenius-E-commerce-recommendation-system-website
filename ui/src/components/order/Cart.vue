@@ -136,7 +136,7 @@ export default {
             // Operation to delete product in backend
             cart_del(this.del_form).then( res => {
             }).catch( error => {
-                this.$message.error('Failed');
+                this.$message.error('Failed to delete');
             })
             // Recal the total price
             this.total_price = this.total_price - (this.cart[index].quantity * this.cart[index].price)

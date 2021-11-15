@@ -196,7 +196,7 @@ export default {
             // Operation to quantity + 1 in backend
             cart_qua(this.qua_form).then( res => {
             }).catch( error => {
-                this.$message.error('Failed');
+                this.$message.error('Failed to add quantity');
             })
         },
         // quantity - 1 for corresponding product
@@ -211,7 +211,7 @@ export default {
             // Operation to quantity - 1 in backend
             cart_qua(this.qua_form).then( res => {
             }).catch( error => {
-                this.$message.error('Failed');
+                this.$message.error('Failed to sub quantity');
             })
         },
         del(index) {
@@ -222,7 +222,7 @@ export default {
             // Operation to delete product in backend
             cart_del(this.del_form).then( res => {
             }).catch( error => {
-                this.$message.error('Failed');
+                this.$message.error('Failed to Delete');
             })
             // Recal the total price
             this.total_price = this.total_price - (this.cart[index].quantity * this.cart[index].price)
@@ -248,7 +248,7 @@ export default {
                 sessionStorage.setItem('order', res.data.order_id);
                 this.$router.push('/payment');
             }).catch( error => {
-                this.$message.error('Failed');
+                this.$message.error('Create Order Failed');
             })
         },
         // When address book is empty

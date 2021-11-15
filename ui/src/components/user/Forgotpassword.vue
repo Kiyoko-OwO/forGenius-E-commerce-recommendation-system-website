@@ -59,7 +59,7 @@ export default {
           this.$message({message: 'Code sent',type: 'success'});
           this.$router.push('/resetpassword/forgot')
           }).catch( error => {
-            this.$message.error('Failed');
+            this.$message.error('Send Code For Forgot Password Failed');
           })
         }
       })

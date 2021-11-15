@@ -195,7 +195,7 @@ export default {
                 this.$router.push('/address');
               }          
             }).catch( error => {
-                this.$message.error('Failed');
+                this.$message.error('Add Address Failed');
             })
               } else {
                 console.log('error submit!!');

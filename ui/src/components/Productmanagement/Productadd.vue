@@ -188,7 +188,7 @@ export default {
             this.$message({message: 'Add product Sucess!',type: 'success'});
             this.$router.push('/manageproduct');
           }).catch( error => {
-            this.$message.error('Failed');
+            this.$message.error('Add Prodcut Failed');
           })
           } else {
             // admin cannot submit if input did not pass the rules

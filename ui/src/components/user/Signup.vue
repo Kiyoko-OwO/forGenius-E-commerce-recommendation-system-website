@@ -163,7 +163,7 @@ export default {
           signup_code(this.code_form).then ( res => {
             this.$message({message: 'Code Send Sucessfully!',type: 'success'});
           }).catch( error => {
-            this.$message.error('Failed');
+            this.$message.error('Code Send Failed');
         })
         } else {
             // Code cannot be sent when email format is not right

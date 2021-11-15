@@ -92,7 +92,7 @@ export default {
           console.log(res.data);
           this.$router.push('/login');
         }).catch( error => {
-            this.$message.error('Failed');
+            this.$message.error('Change Password Failed');
         })
       })
     },

@@ -233,7 +233,7 @@ export default {
               this.dialogFormVisible = false;
               this.reload();
           }).catch( error => {
-              this.$message.error('Failed');
+              this.$message.error('Edit Failed');
           })
         }
         else{

@@ -70,7 +70,7 @@ export default {
             address_delete(this.deleteForm).then( res => {
                 this.$message({message: 'Delete Sucess!',type: 'success'});
             }).catch( error => {
-                this.$message.error('Failed');
+                this.$message.error('Delete Failed');
             })
         },
         add() {

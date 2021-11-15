@@ -81,7 +81,7 @@ export default {
           this.$message({message: 'Payment Done',type: 'success'});
           this.$router.push('/user/order')
         }).catch( error => {
-            this.$message.error('Failed');
+            this.$message.error('Payment Failed');
         })
       } else {
         this.$message.error('You Need to Choose a method First');

@@ -202,11 +202,11 @@ export default {
           this.editForm.phone_number = this.editForm.phone_number.toString();
           // Main operation for edit
           address_edit(this.editForm).then( res => {
-              this.$message({message: 'Sucess!',type: 'success'});
+              this.$message({message: 'Edit Sucess!',type: 'success'});
               this.dialogFormVisible = false;
               this.reload();
           }).catch( error => {
-              this.$message.error('Failed');
+              this.$message.error('Edit Failed');
           })
           }
         else{

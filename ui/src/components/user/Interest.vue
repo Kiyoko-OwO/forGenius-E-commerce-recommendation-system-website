@@ -41,7 +41,7 @@ export default {
           this.$message({message: 'Sucess!',type: 'success'});
           this.$router.push('userprofile');
       }).catch( error => {
-          this.$message.error('Failed');
+          this.$message.error('Choose Interest Failed');
       })
     }
   }

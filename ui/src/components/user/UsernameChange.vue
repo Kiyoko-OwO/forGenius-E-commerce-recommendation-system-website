@@ -54,7 +54,7 @@ export default {
             sessionStorage.setItem('username',this.usernamechangeForm.newname);
             this.$router.push('/userprofile')
           }).catch( error => {
-              this.$message.error('Failed');
+              this.$message.error('Change User Name Failed');
       })
         }
       })

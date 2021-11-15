@@ -120,7 +120,7 @@ export default {
             this.isRes = false;
           }
         }).catch( error => {
-          this.$message.error('Failed');
+          this.$message.error('Get Search Result Failed');
         })
       },
       jumpHome () {

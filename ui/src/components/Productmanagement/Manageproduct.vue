@@ -97,7 +97,7 @@ export default {
           // Defulat will be normal null sort
           admin_view(this.view_form).then( res => {
             console.log(res.data.data.product_details);
-            this.product = res.data.data.product_details;
+            this.product = res.data.data.product_details.slice().reverse();
           }).catch( error => {
               this.$message.error('Failed');
           })

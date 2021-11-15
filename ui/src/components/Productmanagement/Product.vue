@@ -188,8 +188,7 @@ export default {
         this.numberValidateForm.quantity += 1;
       },
       jumpHome () {
-        sessionStorage.removeItem('product');
-        this.$router.push('Home');
+        this.$router.push('/search');
       }, 
       // Click feature buttom
       // Search result of feature will be redirect

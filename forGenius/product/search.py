@@ -22,7 +22,6 @@ def get_search_result(email, search, sorting):
         except User.DoesNotExist:
             raise InputError('User not exist')
 
-        print(search)
         search_save = Search_history(user_email=user_email, search=search)
         search_save.save()
     

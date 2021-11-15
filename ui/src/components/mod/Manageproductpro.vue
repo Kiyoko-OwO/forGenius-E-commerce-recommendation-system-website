@@ -282,6 +282,7 @@ span{
 }
 p{
     white-space:pre-wrap;
+    word-break: keep-all;
 }
 </style>
 

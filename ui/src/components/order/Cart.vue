@@ -213,5 +213,6 @@ header{
 }
 p{
     letter-spacing: 1.5px;
+    word-break: keep-all;
 }
 </style>

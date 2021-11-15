@@ -140,7 +140,7 @@ export default {
 .search-container {
     position: relative;
     top:10px;
-    left:9%;
+    left:10%;
     width:1500px;
     display: flex;
     flex-wrap: wrap;

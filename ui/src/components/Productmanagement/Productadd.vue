@@ -206,7 +206,6 @@ export default {
 }
 h1{
     position: relative;
-    left: 27%;
     top:50px;
     font-size: 40px;
     font-weight:normal;
@@ -227,8 +226,9 @@ h1{
     left:40px;
 }
 .logo{
+    position: relative;
     height: 300px;
-    left: 1500px;
+    left:-250px;
     cursor: pointer;
 }
 .add_form{
@@ -242,7 +242,7 @@ h1{
 }
 .submit{
     position: relative;
-    left:67%;
+    left:50%;
     height:50px;
     top:-5px;
     width:200px;
@@ -257,7 +257,7 @@ h1{
 .cancel{
     position: relative;
     top:-55px;
-    left:-47%;
+    left:-60%;
     height:50px;
     width:200px;
     transform: translate(-50%,-50%);
@@ -272,6 +272,7 @@ h1{
     margin:0 auto;
     margin-top:-100px;
     width:800px;
+    text-align: center;
 }
 /*deep style for el in scoped*/
 .add_form /deep/.timr.el-form .el-form-item__error {

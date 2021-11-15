@@ -70,6 +70,7 @@ export default {
 }
 p{
     letter-spacing: 1.5px;
+    word-break: keep-all;
 }
 .line{
     margin-top: 20px;

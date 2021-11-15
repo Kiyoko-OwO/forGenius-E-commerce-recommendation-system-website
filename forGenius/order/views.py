@@ -492,3 +492,21 @@ def share_order(request):
         return response
     response.status_code = 405
     return response
+
+def admin_view_all_order(request):
+    """
+    url: http://127.0.0.1:8000/order/admin_view/all/
+    method: GET
+    """
+    response = HttpResponse()
+    if request.method == "GET":
+        try:
+            data = order.admin_view_all_order()
+        except EmptyOrderError as e:
+            response.status_code = 400
+            response.content = e
+            return response
+        response.status_code = 200
+        return HttpResponse(json.dumps(data), content_type="application/json")
+    response.status_code = 405
+    return response

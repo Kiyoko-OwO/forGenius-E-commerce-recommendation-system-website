@@ -15,6 +15,7 @@ import Cart from '../components/order/Cart.vue'
 import AdminPage from '../components/user/AdminPage'
 import Addproduct from '../components/Productmanagement/Productadd'
 import Manageproduct from '../components/Productmanagement/Manageproduct'
+import Manageorder from '../components/order/Manageorder'
 import OrderHistory from '../components/order/OrderHistory'
 import Order from '../components/order/Order'
 import Payment from '../components/order/Payment'
@@ -85,6 +86,9 @@ const routes = [
   },{
     path: '/manageproduct',
     component: Manageproduct
+  },{
+    path: '/manageorder',
+    component: Manageorder
   },{
     path: '/user/order',
     component: OrderHistory

@@ -13,6 +13,7 @@
         <main>
             <img id="logo" src=../../assets/logoThin.png alt="logo">
             <button class="manageProduct" v-on:click="jumpManageproduct">MANAGE PRODUCT</button>
+            <button class="manageProduct" v-on:click="jumpOrder">MANAGE ORDER</button>
         </main>
         <div style="clear:both; height:20px"></div>
         </div>
@@ -62,6 +63,9 @@ export default {
         },
         jumpManageproduct () {
             this.$router.push('/manageproduct')
+        },
+        jumpOrder () {
+            this.$router.push('/manageorder')
         },
         jumpHome () {
         this.$router.push('/admin')

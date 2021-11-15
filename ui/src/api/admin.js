@@ -8,13 +8,21 @@ import request from '../utils/request'
     })
   }
 
+  export const admin_ord = parameter => {
+    return request({
+      method: 'GET',
+      url: '/order/admin_view/all/',
+      params: parameter
+    })
+  }
+
   export const admin_sort = parameter => {
     return request({
       method: 'GET',
       url: '/product/all/sort/',
       params: parameter
     })
-}
+  }
 
   export const product_add = data => {
     return request({

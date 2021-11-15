@@ -140,7 +140,7 @@ export default {
             sessionStorage.setItem('username',res.data.username);
             this.$router.push('/interest');
           }).catch( error => {
-            this.$message.error('Already registered, please log in');
+            this.$message.error('Sign up failed. Please try again!');
           })
         } else {
           // user cannot submit if input did not pass the rules

@@ -188,7 +188,13 @@ export default {
         this.numberValidateForm.quantity += 1;
       },
       jumpHome () {
-        this.$router.push('/search');
+        if (sessionStorage.getItem('fromHome') == 1) {
+            sessionStorage.removeItem('fromHome');
+            this.$router.push('/home');
+        }
+        else {
+          this.$router.push('/search');
+        }
       }, 
       // Click feature buttom
       // Search result of feature will be redirect

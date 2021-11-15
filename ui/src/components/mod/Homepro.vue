@@ -30,7 +30,8 @@ export default {
       // Go to corresponding product page
       goProduct () {
         sessionStorage.setItem('product',this.proId);
-        this.$router.push('/product')
+        this.$router.push('/product');
+        sessionStorage.setItem('fromHome', 1);
       }
     }
 }

@@ -2,6 +2,7 @@
 
 <template>
     <div id="admin_container">
+        <div class="fix">
         <header>
             <img id="logo" src=../../assets/logoThin.png alt="logo" v-on:click="jumpHome">
             <div class="button_position">
@@ -14,6 +15,7 @@
             <button class="manageProduct" v-on:click="jumpManageproduct">MANAGE PRODUCT</button>
         </main>
         <div style="clear:both; height:20px"></div>
+        </div>
         <footer>
          <img src=../../assets/home_foot.jpeg alt="foot">
         </footer>
@@ -76,6 +78,10 @@ export default {
     background-color: #d1dbda;
     height: 100%;
 }
+.fix{
+    width:1800px;
+    margin:0 auto;
+}
 header {
     height: 100px;
     width: 1800px;
@@ -112,15 +118,18 @@ main #logo {
 }
 footer{
     position: relative;
+    left:50%;
+    transform: translate(-50%);
+    height:375px;
     width:100%;
     background:#2f2a29;
+    margin-top:20px;
     bottom:0%;
     img{
-      position: relative;
-      left:50%;
-      transform:translate(-50%);
-      width:1750px;
-      height:100%;
+          height:375px;
+          width:1800px;
+          margin:0 auto;
+          display:block;
     }
 }
 </style>

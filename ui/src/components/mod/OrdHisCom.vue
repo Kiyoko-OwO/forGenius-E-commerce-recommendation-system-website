@@ -13,7 +13,9 @@
           <el-image
             style="width: 100px; height: 100px"
             :src="item.picture"
-            :fit="fit"></el-image>
+            :fit="fit"><div slot="error" > <div slot="placeholder" style="background:rgb(243, 243, 243);height:400px">
+        <div style="background:rgb(243, 243, 243);height:400px"><div style="padding-top:45%; padding-left:45%; ">Failed</div></div>
+      </div></div></el-image>
         </div>
         <div class="item1">
         <p>{{item.name}} </p>
@@ -197,7 +199,7 @@ export default {
     border-top: solid #0b0b0f 1px;
 }
 .line-in {
-    position: relative;
+    margin-top:35px;
     width: 100%;
     height: 1px;
     border-top: solid #0b0b0f 1px;
@@ -221,6 +223,7 @@ export default {
 }
 .item1{
     letter-spacing: 1.5px;
+
 }
 span{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

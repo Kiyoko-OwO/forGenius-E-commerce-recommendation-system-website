@@ -3,11 +3,11 @@
 <template>
   <div class="order_item" style="width:400px">
       <div class="block"></div>
-      <p><span> User:</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{email}}</p>
+      <p><span> User:</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{email}}</p>
       <p><span> Order Id:</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ordId}}</p>
       <p><span> Pay State:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{payStat}}</p>
-      <p><span> Order Date: </span> &nbsp;&nbsp;&nbsp;&nbsp;{{orderDate}}</p>
-      <el-dialog :title="order_id" :visible.sync="dialogFormVisible" class="editf" width="30%" append-to-body>
+      <p><span> Order Date: </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{orderDate}}</p>
+      <el-dialog :title="order_id" :visible.sync="dialogFormVisible" class="editf" width="800px" append-to-body>
         <h2><span> User: </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{email}}</h2>
         <div class="line-in"></div>
         <div class="item" v-for="item in ordItem" :key="item.product_id">

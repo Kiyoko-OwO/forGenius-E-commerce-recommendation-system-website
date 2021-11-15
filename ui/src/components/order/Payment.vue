@@ -79,7 +79,7 @@ export default {
       if (this.value != '') {
         ord_pay(this.pay_from).then( res => {
           this.$message({message: 'Payment Done',type: 'success'});
-          this.$router.push('/userprofile')
+          this.$router.push('/user/order')
         }).catch( error => {
             this.$message.error('Failed');
         })

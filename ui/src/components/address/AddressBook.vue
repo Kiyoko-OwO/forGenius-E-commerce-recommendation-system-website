@@ -1,141 +1,237 @@
-<!--Address Main Page   -->
+<!--Address Mod For Address Main Page   -->
 
-<template class="ad">
-  <div class="address_container">
-    <div class="fix">
-    <header>
-        ADDRESS&nbsp;BOOK
-    </header>
-    <img class="logo" src=../../assets/2.png alt="logo" v-on:click="jumpUser">
-    <el-button type="brown" class="add" @click="add()" >ADD ADDRESS</el-button>
-    <div id="address-container">
-        <Address v-for="(obj,ind) in addressbook" :key="obj.address_id"
-        :userName="obj.name"
-        :addressDe="obj.address_line"
-        :phoneNumber="obj.phone_number"
-        :addressId="obj.address_id"
-        :country="obj.country"
-        :state="obj.state"
-        :suburb="obj.suburb"
-        :post_code="obj.post_code"
-        :index = "ind"
-        @delAdd = 'del'
-        >
-        </Address>
-    </div>
-  </div>
+<template>
+  <div class="my-address">
+  <el-descriptions title="Address Detail" :column="2" border>
+    <el-descriptions-item label="Name" label-class-name="table-label" content-class-name="table-content">{{userName}}</el-descriptions-item>
+    <el-descriptions-item label="Phone Number" label-class-name="table-label" content-class-name="table-content">{{phoneNumber}}</el-descriptions-item>
+    <el-descriptions-item label="Country" label-class-name="table-label" content-class-name="table-content">{{country}}</el-descriptions-item>
+    <el-descriptions-item label="State" label-class-name="table-label" content-class-name="table-content">{{state}}</el-descriptions-item>
+    <el-descriptions-item label="Suburb" label-class-name="table-label" content-class-name="table-content">{{suburb}}</el-descriptions-item>
+    <el-descriptions-item label="Postal Code" label-class-name="table-label" content-class-name="table-content">{{post_code}}</el-descriptions-item>
+    <el-descriptions-item label="Address" label-class-name="table-label" >{{addressDe}}</el-descriptions-item>
+  </el-descriptions>
+    <el-button type="white" icon="el-icon-delete" @click="delFn" style="float:right; margin-top:20px">Delete</el-button>
+    <el-button type="white" icon="el-icon-edit" @click="dialogFormVisible = true" style="float:right; margin-top:20px">Edit</el-button>
+    <div style="clear:both"></div>
+    <!-- Edit Form with dialog -->
+    <el-dialog title="Address Book" :visible.sync="dialogFormVisible" class="editf" width="30%" append-to-body>
+      <el-form :model="editForm" ref="edit_FormRef" :rules="editRules">
+           <el-form-item label="NAME" class="username_change" prop="name">
+            <el-input v-model="editForm.name" autocomplete="off">
+            </el-input>
+          </el-form-item>
+          <el-form-item label="PHONE NUMBER" class="username_change" prop="phone_number">
+            <el-input v-model="editForm.phone_number" autocomplete="off">
+            </el-input>
+          </el-form-item>
+           <el-form-item label="COUNTRY" class="username_change" prop="country">
+            <el-input v-model="editForm.country" autocomplete="off">
+            </el-input>
+          </el-form-item>
+          <el-form-item label="STATE" class="username_change" prop="state">
+            <el-input v-model="editForm.state" autocomplete="off">
+            </el-input>
+          </el-form-item>
+          <el-form-item label="SUBURB" class="username_change" prop="suburb">
+            <el-input v-model="editForm.suburb" autocomplete="off">
+            </el-input>
+          </el-form-item>
+          <el-form-item label="POSTAL CODE" class="username_change" prop="post_code">
+            <el-input v-model="editForm.post_code" autocomplete="off">
+            </el-input>
+          </el-form-item>
+          <el-form-item label="ADDRESS" class="username_change" prop="address_line">
+            <el-input v-model="editForm.address_line" autocomplete="off">
+            </el-input>
+          </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="white" @click="dialogFormVisible = false" icon="el-icon-circle-close">Cancel</el-button>
+        <el-button type="white" @click="submitEdit" icon="el-icon-circle-check">Confim</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import Address from '../mod/AddressPro.vue'
-import { address_view } from '../../api/user'
-import { address_delete } from '../../api/user'
+import { address_edit } from '../../api/user'
 export default {
+    inject:['reload'],
+    props: ['index', 'userName', 'addressId', 'addressDe', 'phoneNumber', 'suburb', 'post_code', 'state', 'country'],
     data () {
-        return {
-            addressbook : [],
-            tokenForm: {
-                token: ''
-            },
-            deleteForm : {
-                address_id: '',
-                token: ''
-            }
+    // The rules for input data validation
+          var checkName = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('username cannot be empty'))
+      } else {
+        callback()
+      }
+    }
+    var checkAddress = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('address cannot be empty'))
+      } else {
+        callback()
+      }
+    }
+    var checkPhone = (rule, value, callback) => {
+      const mailReg = /^\d+$/
+      setTimeout(() => {
+        if (mailReg.test(value)) {
+          callback()
+        } else {
+          callback(new Error('Phonenumber should be number'))
         }
+      }, 100)
+    }
+    var checkState = (rule, value, callback) => {
+      const mailReg = /^[A-Za-z]+$/
+      if (!value) {
+        return callback(new Error('State cannot be empty'))
+      }
+      setTimeout(() => {
+        if (mailReg.test(value)) {
+          callback()
+        } else {
+          callback(new Error('State should all be letters'))
+        }
+      }, 100)
+    }
+    var checkSuburb = (rule, value, callback) => {
+      const mailReg = /^[A-Za-z]+$/
+      if (!value) {
+        return callback(new Error('Suburb cannot be empty'))
+      }
+      setTimeout(() => {
+        if (mailReg.test(value)) {
+          callback()
+        } else {
+          callback(new Error('Suburb should all be letters'))
+        }
+      }, 100)
+    }
+    var checkCountry = (rule, value, callback) => {
+      const mailReg = /^[A-Za-z]+$/
+      if (!value) {
+        return callback(new Error('Country cannot be empty'))
+      }
+      setTimeout(() => {
+        if (mailReg.test(value)) {
+          callback()
+        } else {
+          callback(new Error('Country should all be letters'))
+        }
+      }, 100)
+    }
+    var checkCode = (rule, value, callback) => {
+      const mailReg = /^\d+$/
+      setTimeout(() => {
+        if (mailReg.test(value)) {
+          callback()
+        } else {
+          callback(new Error('Postal code should be number'))
+        }
+      }, 100)
+    }
+      return {
+        dialogFormVisible: false,
+        editForm: {
+          token: '',
+          address_id: this.addressId,
+          address_line: this.addressDe,
+          country: this.country,
+          name: this.userName,
+          phone_number: this.phoneNumber,
+          post_code: this.post_code,
+          state: this.state,
+          suburb: this.suburb
+        },
+      //Input data validation
+      editRules: {        
+        name: [
+          { validator: checkName, trigger: 'blur' }
+        ],        
+        address_line: [
+          { validator: checkAddress, trigger: 'blur' }
+        ],
+        phone_number: [
+          { validator: checkPhone, trigger: 'blur'  }
+        ],
+        post_code: [
+          { validator: checkCode, trigger: 'blur'  }
+        ],
+        suburb: [
+          { validator: checkSuburb, trigger: 'blur'  }
+        ],
+        state: [
+          { validator: checkState, trigger: 'blur'  }
+        ],
+        country: [
+          { validator: checkCountry, trigger: 'blur'  }
+        ]
+       }    
+      }
     },
-    created () {
-        this.loadAddressBook()
-    },
-    components: {
-        Address
+    watch: {
+      userName:function(newVal,oldVal){
+        this.userName = newVal;
+      },
+      addressDe:function(newVal,oldVal){
+        this.addressDe = newVal;
+      },
+      phoneNumber:function(newVal,oldVal){
+        this.phoneNumber = newVal;
+      },
+      addressId:function(newVal,oldVal){
+        this.addressId = newVal;
+      }
     },
     methods: {
-        // Load address book
-        async loadAddressBook () {
-            this.tokenForm.token = sessionStorage.getItem('token');
-            // Main operation to get address from backend
-            const { data } = await address_view(this.tokenForm);
-            console.log(data);
-            this.addressbook = data.data.address_book;
-            this.addressbook = this.addressbook.slice().reverse();
-        },
-        // Delete an address
-        del(index) {
-            // Operation to delete in frontend
-            this.deleteForm.address_id = this.addressbook[index].address_id;
-            this.deleteForm.token = this.tokenForm.token;
-            this.addressbook.splice(index, 1);
-            // Operation to delete in backend
-            address_delete(this.deleteForm).then( res => {
-                this.$message({message: 'Delete Sucess!',type: 'success'});
-            }).catch( error => {
-                this.$message.error('Failed');
-            })
-        },
-        add() {
-            this.$router.push('/addressadd');
-        },
-        jumpUser () {
-            this.$router.push('/userprofile');
+      delFn(){
+        this.$emit("delAdd", this.index)
+      },
+      editFn(){
+        this.$emit("editAdd", this.index)
+      },
+      // submit editted address
+      submitEdit() {  
+        this.$refs.edit_FormRef.validate(async (valid) =>{
+        if(valid){
+          this.editForm.token = sessionStorage.getItem('token');
+          this.editForm.phone_number = this.editForm.phone_number.toString();
+          // Main operation for edit
+          address_edit(this.editForm).then( res => {
+              this.$message({message: 'Sucess!',type: 'success'});
+              this.dialogFormVisible = false;
+              this.reload();
+          }).catch( error => {
+              this.$message.error('Failed');
+          })
+          }
+        else{
+          // user cannot submit if input did not pass the rules
+          return false;
         }
-    }
-}
+    })
+}}}
 </script>
 
 <style lang="less" scoped>
+.my-address {
+    width: 700px;
+    padding: 30px;
+    border-radius: 5px;
+    margin-top: 30px;
+    word-break:break-all;
+    background-color:#e7eae8;
+}
+.editf{
+    position: fixed;
+}
+span{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size:17px;
+}
 
-.address_container{
-    background-color: #d1dbda;
-    min-height: 100%;
-}
-.fix{
-    margin:0 auto;
-    width:1750px;
-}
-header{
-    height: 100px;
-    width: 100%;
-    margin:0 auto;
-    left:0;
-    top:0;
-    z-index: 999;
-    border-bottom:3px solid #ccc;
-    text-align: center;
-    line-height: 130px;
-    font-weight:normal;
-    font-family: 'segUi';
-    font-size: 50px;
-    overflow: hidden;
-}
-.logo{
-    height: 230px;
-    cursor: pointer;
-    margin-top:-170px ;
-    z-index:100;
-    overflow: hidden;
-}
-#address-container {
-    margin-top:-50px;
-    margin-left:29%;
-    width:500px;
-}
-.title{
-    height:100px;
-    width:200x;
-    margin:0 auto;
-    text-align: center;
-}
-.add{
-    height: 43px;
-    margin-top:-63px;
-    float:right;
-    border-radius: 4px;
-    padding: 2px 20px;
-    background: #786662;
-    border-radius: 10px;
-    color: #fefefe;
-    border-color:#786662;
-    cursor: pointer;
-}
 </style>

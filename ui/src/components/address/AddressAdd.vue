@@ -78,25 +78,43 @@ export default {
       }, 100)
     }
     var checkState = (rule, value, callback) => {
+      const mailReg = /^[A-Za-z]+$/
       if (!value) {
         return callback(new Error('State cannot be empty'))
-      } else {
-        callback()
       }
+      setTimeout(() => {
+        if (mailReg.test(value)) {
+          callback()
+        } else {
+          callback(new Error('State should all be letters'))
+        }
+      }, 100)
     }
     var checkSuburb = (rule, value, callback) => {
+      const mailReg = /^[A-Za-z]+$/
       if (!value) {
         return callback(new Error('Suburb cannot be empty'))
-      } else {
-        callback()
       }
+      setTimeout(() => {
+        if (mailReg.test(value)) {
+          callback()
+        } else {
+          callback(new Error('Suburb should all be letters'))
+        }
+      }, 100)
     }
     var checkCountry = (rule, value, callback) => {
+      const mailReg = /^[A-Za-z]+$/
       if (!value) {
         return callback(new Error('Country cannot be empty'))
-      } else {
-        callback()
       }
+      setTimeout(() => {
+        if (mailReg.test(value)) {
+          callback()
+        } else {
+          callback(new Error('Country should all be letters'))
+        }
+      }, 100)
     }
     var checkCode = (rule, value, callback) => {
       const mailReg = /^\d+$/

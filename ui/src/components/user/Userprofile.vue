@@ -153,6 +153,7 @@ main #logo {
     width: 800px;
     margin-left: 100px;
     margin-top: 0px;
+    cursor: pointer;
 }
 footer{
     position: relative;

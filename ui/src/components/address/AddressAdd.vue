@@ -168,7 +168,13 @@ export default {
   },
   methods: {
     jumpAddress () {
-      this.$router.push('/address')
+        if (sessionStorage.getItem('from') == 1) {
+            sessionStorage.removeItem('from');
+            this.$router.push('/order');
+        }
+        else {
+          this.$router.push('/address');
+        }
     },
     // Submit address
     submitAdd () {

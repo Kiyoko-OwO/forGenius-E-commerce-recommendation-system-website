@@ -137,12 +137,16 @@ header #logo {
 }
 button {
     float: right;
-    border-radius: 4px;
+    // border-radius: 4px;
     padding: 2px 15px;
     margin-left: 16px;
     margin-top: 35px;
-    border-color: grey;
-    color: grey;
+    // border-color: grey;
+    // color: grey;
+    height: 30px;
+    border-radius: 10px;
+    border-color: #786662;
+    background-color: #e7eae8;
     cursor: pointer;
 }
 main {

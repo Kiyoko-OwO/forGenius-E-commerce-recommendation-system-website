@@ -37,10 +37,12 @@ export default {
 <style lang="less" scoped>
 .search-pro {
     width: 300px;
-    padding: 10px;
-    border: 4px solid bisque;
-    border-style:groove;
-    border-radius: 5px;
+    padding: 20px;
+    // border: 4px solid bisque;
+    // border-style:groove;
+    // border-radius: 5px;
+    border-radius: 30px;
+    background-color: #e7eae8;
     margin: 10px;
     font-family: 'segUi';
     word-break:break-all;

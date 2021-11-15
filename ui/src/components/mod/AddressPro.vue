@@ -221,7 +221,7 @@ export default {
 .my-address {
     width: 700px;
     padding: 30px;
-    border-radius: 5px;
+    border-radius: 30px;
     margin-top: 30px;
     word-break:break-all;
     background-color:#e7eae8;

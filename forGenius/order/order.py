@@ -67,7 +67,7 @@ def view_order(email, order_id):
                 "state": temp.state,
                 "country": temp.country,
                 "phone_number": temp.phone_number,
-                "order_date": temp.date_time.strftime("%Y-%m-%d"),
+                "order_date": temp.date_time.strftime("%Y-%m-%d, %H:%M:%S"),
                 "paid": temp.paid,
                 }
         break
@@ -186,7 +186,7 @@ def view_all_order(email):
                 data['state'] = item.state
                 data['country'] = item.country
                 data['phone_number'] = item.phone_number
-                data['order_date'] = item.date_time.strftime("%Y-%m-%d")
+                data['order_date'] = item.date_time.strftime("%Y-%m-%d, %H:%M:%S")
                 data['paid'] = item.paid
 
             total += round(float(item.price), 2) * item.quantity
@@ -260,7 +260,7 @@ def admin_view_order():
                 "state": temp.state,
                 "country": temp.country,
                 "phone_number": temp.phone_number,
-                "order_date": temp.date_time.strftime("%Y-%m-%d"),
+                "order_date": temp.date_time.strftime("%Y-%m-%d, %H:%M:%S"),
                 "paid": temp.paid,
                 }
         break
@@ -350,7 +350,7 @@ def admin_view_all_order():
                 data['state'] = item.state
                 data['country'] = item.country
                 data['phone_number'] = item.phone_number
-                data['order_date'] = item.date_time.strftime("%Y-%m-%d")
+                data['order_date'] = item.date_time.strftime("%Y-%m-%d, %H:%M:%S")
                 data['paid'] = item.paid
 
             total += round(float(item.price), 2) * item.quantity

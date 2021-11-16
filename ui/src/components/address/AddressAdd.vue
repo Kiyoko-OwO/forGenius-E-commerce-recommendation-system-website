@@ -11,8 +11,8 @@
             <el-input v-model="addForm.name" autocomplete="off">
             </el-input>
           </el-form-item>
-          <el-form-item label="ADDRESS" class="username_change" prop="address_line">
-            <el-input v-model="addForm.address_line" autocomplete="off">
+          <el-form-item label="PHONE NUMBER" class="username_change" prop="phone_number">
+            <el-input v-model="addForm.phone_number" autocomplete="off">
             </el-input>
           </el-form-item>
            <el-form-item label="COUNTRY" class="username_change" prop="country">
@@ -31,8 +31,8 @@
             <el-input v-model="addForm.post_code" autocomplete="off">
             </el-input>
           </el-form-item>
-          <el-form-item label="PHONE NUMBER" class="username_change" prop="phone_number">
-            <el-input v-model="addForm.phone_number" autocomplete="off">
+          <el-form-item label="ADDRESS" class="username_change" prop="address_line">
+            <el-input v-model="addForm.address_line" autocomplete="off">
             </el-input>
           </el-form-item>
           <div class="block"></div>

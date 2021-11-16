@@ -279,7 +279,6 @@ header{
 }
 .logo{
     height: 230px;
-    cursor: pointer;
     margin-top:-170px ;
     z-index:100;
     overflow: hidden;

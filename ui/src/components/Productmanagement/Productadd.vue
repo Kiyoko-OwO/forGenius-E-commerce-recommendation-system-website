@@ -20,7 +20,7 @@
             </el-input>
           </el-form-item>
           <el-form-item label="WARRANTY" class="change" prop="warranty" >
-            <el-input v-model="addForm.warranty" autocomplete="off" placeholder="The warranty time">
+            <el-input v-model="addForm.warranty" autocomplete="off" placeholder="The warranty time (years)">
             </el-input>
           </el-form-item>
           <el-form-item label="DELIVERY DATE" class="change" prop="delivery_date">

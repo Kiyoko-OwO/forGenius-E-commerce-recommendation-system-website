@@ -68,6 +68,23 @@ def get_products(search, data, level):
                 add = True
                 continue
             
+            # check the first word
+            
+            name = product.name.lower().split( )
+            if search_word == name[0]:
+                result.append(product)
+                add = True
+                continue
+            
+             # check the last word
+            
+            if search_word == name[len(name) - 1]:
+                result.append(product)
+                add = True
+                continue
+            
+            
+            
             if level >= 3:
                 if search_word in product.name.lower():
                     result.append(product)
@@ -102,7 +119,7 @@ def get_products(search, data, level):
                     add = True
                     break
                 
-                if level >= 3:
+                if level >= 2:
                     if search_word in feature.feature.lower():
                         result.append(product)
                         add = True
@@ -143,16 +160,16 @@ def recursion_help(result, list, search_list, sorting):
             product_j = Product.objects.get(product_id = list[j].product_id)
             product_first = Product.objects.get(product_id = list[first].product_id)
             for search in search_list:
-                if search in product_j.name:
+                if search in product_j.name.lower():
                     val1 += 1.0
                     
-                if search in product_first.name:
+                if search in product_first.name.lower():
                     val2 += 1.0
                     
-                if search in product_j.description:
+                if search in product_j.description.lower():
                     val1 += 0.1
                     
-                if search in product_first.description:
+                if search in product_first.description.lower():
                     val2 += 0.1  
                            
                 # if the search word in the product feature

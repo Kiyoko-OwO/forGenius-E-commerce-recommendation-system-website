@@ -45,7 +45,7 @@
           <el-input v-model="editForm.delivery_date" autocomplete="off" placeholder="The number of days it takes for delivery"></el-input>
         </el-form-item>
         <el-form-item label="Warranty" prop="warranty">
-          <el-input v-model="editForm.warranty" autocomplete="off" placeholder="The warranty time"></el-input>
+          <el-input v-model="editForm.warranty" autocomplete="off" placeholder="The warranty time (years)"></el-input>
         </el-form-item>
         <el-form-item label="Price" prop="price">
           <el-input v-model="editForm.price" autocomplete="off" placeholder="More than 0 and at most two decimal places"></el-input>

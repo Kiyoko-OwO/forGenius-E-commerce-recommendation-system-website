@@ -17,7 +17,7 @@
           :value="item.value">
         </el-option>
       </el-select>
-      <el-button class="apply" type="white" v-on:click="reload()" icon="el-icon-thumb"> Apply</el-button>
+      <el-button class="apply" type="white" v-on:click="reset_sort" icon="el-icon-thumb"> Apply</el-button>
     </div>
     <div class="manage-container">
       <Manage v-for="(obj,ind) in product" :key="ind"
@@ -122,6 +122,13 @@ export default {
         sessionStorage.removeItem('adsort');
         this.$router.push('/admin');
         
+      },
+      reset_sort () {
+        if ( this.value != "") {
+        } else {
+          sessionStorage.removeItem('adsort');
+        }
+        this.reload();
       },
       // Delete a product 
       del(index) {

@@ -13,7 +13,7 @@
         <main>
             <img id="logo" src=../../assets/logoThin.png alt="logo">
             <button class="manageProduct" v-on:click="jumpManageproduct">MANAGE PRODUCT</button>
-            <button class="manageProduct" v-on:click="jumpOrder">MANAGE ORDER</button>
+            <button class="manageProduct" v-on:click="jumpOrder">VIEW ORDER</button>
         </main>
         <div style="clear:both; height:20px"></div>
         </div>

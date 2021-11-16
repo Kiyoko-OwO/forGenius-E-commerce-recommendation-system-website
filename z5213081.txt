@@ -62,4 +62,17 @@ Week 9
 1. I wrote the description of the share order function.
 2. I finished the backend part of the function "get_search_reslut". (Search & search result)
 3. I improved some issues that Yu mentioned in demoB, improved the backend code to return product's picture in view order and cart function.
+4. I finished the ER diagram in final report.
+5. I finished improve the recommendation algorithm based on search, change it to get data via database instead of global variable.
+6. I finished add a sales data sorting function of admin product management in backend. Then the admin can sort the products based on sales data.
+7. I improved the search algorithm and after improving, the search can revieve multiple words split by space and do the search.
+8. I changed the layout of the admin product management page in frontend.
+9. I tested the project in VLAB and wirte the user manual (set up), user setup guid, readme.md to show how to set up the project (in VLAB).
 
+Week 10
+1. I fixed some bugs of the recommendation algorithm.
+2. I changed the layout of the search result page in frontend.
+3. We had the meeting and discussed about the sturcture of demo.
+4. I changed the layout of the search result page.
+5. I changed some button layout in the frontend.
+6. I improved the search algorithm in the backend.

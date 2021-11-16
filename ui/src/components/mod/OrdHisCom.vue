@@ -14,7 +14,7 @@
             style="width: 100px; height: 100px"
             :src="item.picture"
             :fit="fit"><div slot="error" > <div slot="placeholder" style="background:rgb(243, 243, 243);height:400px">
-        <div style="background:rgb(243, 243, 243);height:400px"><div style="padding-top:45%; padding-left:45%; ">Failed</div></div>
+        <div style="background:rgb(243, 243, 243);height:400px"><div style="padding-top:45%; padding-left:30%; ">Failed</div></div>
       </div></div></el-image>
         </div>
         <div class="item1">
@@ -47,7 +47,7 @@
       </div>
       <el-button type="white" @click="orderFn" class="detail" icon="el-icon-reading">Detail</el-button>
       <el-button type="white" @click="orderShare" class="detail" icon="el-icon-message">Share</el-button>
-      <el-dialog title="Share Order" :visible.sync="sharedialogFormVisible" class="editf"  width="30%" append-to-body>
+      <el-dialog title="Share Order" :visible.sync="sharedialogFormVisible" class="editf"  width="25%" append-to-body>
       <el-form :model="shareForm" ref="share_FormRef" :rules="shareRules">
         <el-form-item label="Receiver Name" prop="receiver_name">
           <el-input v-model="shareForm.receiver_name" autocomplete="off" ></el-input>

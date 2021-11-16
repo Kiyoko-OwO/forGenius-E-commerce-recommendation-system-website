@@ -11,6 +11,14 @@
         <h2><span> User: </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{email}}</h2>
         <div class="line-in"></div>
         <div class="item" v-for="item in ordItem" :key="item.product_id">
+        
+        <span class="demonstration">{{ fit }}</span>
+          <el-image
+            style="width: 100px; height: 100px"
+            :src="item.picture"
+            :fit="fit"><div slot="error" > <div slot="placeholder" style="background:rgb(243, 243, 243);height:400px">
+        <div style="background:rgb(243, 243, 243);height:400px"><div style="padding-top:45%; padding-left:45%; ">Failed</div></div>
+      </div></div></el-image>
         <div class="item1">
         <p>{{item.name}} </p>
         <p>${{item.price}} </p>

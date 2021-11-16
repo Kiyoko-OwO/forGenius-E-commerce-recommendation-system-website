@@ -35,6 +35,8 @@ def product_userView(product_id):
 
 # add new product in the database
 def admin_add_product(name, description, warranty, delivery_date, price, picture, features):
+    if picture == "":
+        picture = "https://i.imgur.com/cscnobv.png"
     # create new product information
     reg = Product(admin_email=get_Admin(), name=name, description=description,
                   warranty=warranty, delivery_date=delivery_date, price=price, picture=picture)

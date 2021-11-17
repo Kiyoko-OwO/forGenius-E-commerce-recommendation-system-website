@@ -66,6 +66,7 @@ Week 8 front end
 DEMO B and Retrospective B done
 Add sign up code connected with api
 Keep tring to optimize user experience
+Recommendation related with backend
 Plan to start the Sprint3 front end code next week
 
 Week 9 front end

@@ -12,11 +12,19 @@
 ##### Tianchen Yang z5248280 	Developer(Backend)
 ##### Wenxin Ma     z5248280 	Developer(Frontend)
 
+
 ## Structure:
 ##### /forGenius: Software backend folder.
 ##### /ui: Software frontend folder.
 ##### /UI_design: UI design's files.
 ##### /static: supported files for frontend.
+
+2.png: our logo
+
+User Setup guide.pdf: User setup guide
+
+Also there are the diaries for everyone with their zid
+
 
 ## Setup Guide:(detailed information in User Setup guide.pdf) 
 ### Prerequisite

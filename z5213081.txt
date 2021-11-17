@@ -83,4 +83,4 @@ Week 10
   but this function is mentioned by Specification of E-Commerce Recommender System, so we just simply add it. 
   But we did not have enough time to improve this function's detail. 
   This happened because we didn't notice that when we wrote the proposal and build the database. And this may impact the admin user's use experiences.
- 
+ 9. On Wednesday wk10, we had meeting to check the demo again.

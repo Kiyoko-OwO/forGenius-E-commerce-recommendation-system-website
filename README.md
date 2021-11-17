@@ -44,6 +44,11 @@ First of all, download the project’s zip file and extract it to a folder. Open
 2. Setup the venv for backend in backend folder.
 ```
 $ python3 -m venv venv
+```
+Select the interpreter in VScode and choose "venv" one. 
+Then, open a new termianl, and input the command.
+(details in User Setup guide.pdf)
+```
 $ pip3 install setuptools_rust
 $ pip3 install pyjwt
 $ pip3 install django

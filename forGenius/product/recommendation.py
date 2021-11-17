@@ -105,10 +105,7 @@ def recomment_by_search(user_email):
         for item in get_search_result("", lastest_search[-1], "best_sell"):
             if item not in result:
                 result.append(item)
-            
-        for item in get_search_result("", lastest_search[-2], "best_sell"):
-            if item not in result:
-                result.append(item)
+
             
         return result
     except:

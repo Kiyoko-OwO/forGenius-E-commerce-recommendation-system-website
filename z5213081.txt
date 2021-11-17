@@ -21,6 +21,7 @@ WEEK 3
 4. Improved the UML diagram with Kaiyu Chen and Tianchen Ma.
 5. Discussed with tutor about the our purposal and got a lot of feedback. 
 6. Improved the database layer of system architecture.
+7. We plan to start the sprint1 and finish sprint 1 before Monday of week4.
 
 Week 4
 1. I finished build the Django backend frame.
@@ -34,7 +35,7 @@ Week 5
 2. Before the Demo A, we had a meeting to check everything is alright and have a rehearse for demo A.
 3. We discussed and finished the Retrospective A.
 4. We discussed the feedback from Yu, improve the points that Yu mentioned. 
-5. Then we assigned the new tasks (included the improvement and sprint2) to everyone. 
+5. Then we assigned the new tasks (included the improvement and sprint2) to everyone and plan to finish sprint2 before the Monday of week7. 
 
 Week 6 
 1. I finished the backend part of the function "view cart". (cart management)
@@ -54,7 +55,7 @@ Week 8
 2. Before the Demo B, we had a meeting to check everything is alright and have a rehearse for demo B.
 3. We discussed and finished the Retrospective B.
 4. We discussed the feedback of Retrospective A from Yu, improve the points that Yu mentioned in Retrospective B. 
-5. Then we assigned the new tasks (included the improvement and sprint3) to everyone. 
+5. Then we assigned the new tasks (included the improvement and sprint3) to everyone and plan to finish sprint3 in one week. 
 6. I finished the backend part of the function "change_username". (user information)
 7. I finished the backend part of the function "share_order". (Novel functionality)
 
@@ -62,12 +63,13 @@ Week 9
 1. I wrote the description of the share order function.
 2. I finished the backend part of the function "get_search_reslut". (Search & search result)
 3. I improved some issues that Yu mentioned in demoB, improved the backend code to return product's picture in view order and cart function.
-4. I finished the ER diagram in final report.
-5. I finished improve the recommendation algorithm based on search, change it to get data via database instead of global variable.
-6. I finished add a sales data sorting function of admin product management in backend. Then the admin can sort the products based on sales data.
-7. I improved the search algorithm and after improving, the search can revieve multiple words split by space and do the search.
-8. I changed the layout of the admin product management page in frontend.
-9. I tested the project in VLAB and wirte the user manual (set up), user setup guid, readme.md to show how to set up the project (in VLAB).
+4. We plan to start the final report and finish it before the deadline.
+5. I finished the ER diagram in final report.
+6. I finished improve the recommendation algorithm based on search, change it to get data via database instead of global variable.
+7. I finished add a sales data sorting function of admin product management in backend. Then the admin can sort the products based on sales data.
+8. I improved the search algorithm and after improving, the search can revieve multiple words split by space and do the search.
+9. I changed the layout of the admin product management page in frontend.
+10. I tested the project in VLAB and wirte the user manual (set up), user setup guid, readme.md to show how to set up the project (in VLAB).
 
 Week 10
 1. I fixed some bugs of the recommendation algorithm.
@@ -76,3 +78,7 @@ Week 10
 4. I changed the layout of the search result page.
 5. I changed some button layout in the frontend.
 6. I improved the search algorithm in the backend.
+7. I found the timezone of the project is UTC, change it to the timezone based on server time.
+8. We had a meeting and checked all thing about demo.
+9. On Monday wk10, we found the admin cannot see all order, we didn't add this function to the project, but this function is mentioned by Specification of E-Commerce Recommender System, so we just simply add it. But we did not have enough time to improve this function's detail. This happened because we didn't notice that when we wrote the proposal and build the database. And this may impact the admin user's use experiences.
+ 

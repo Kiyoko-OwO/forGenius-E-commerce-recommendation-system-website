@@ -31,12 +31,12 @@ def private_recommendation(email):
         raise InputError('User not exist')
     if email not in lastDB:
         # don't check the repetation
-        listA = pick_products(recomment_by_sales(), 6)
-        listB = pick_products(recomment_by_interest(email), 14)
+        listA = pick_products(recomment_by_sales(), 2)
+        listB = pick_products(recomment_by_interest(email), 4)
         lastDB[email] = combine_list(listA, listB)
-    search = pick_products(recomment_by_search(email), 20)
+    search = pick_products(recomment_by_search(email), 8)
     listC = combine_list(lastDB[email], search)
-    lastDB[email] = pick_products(listC, 20)
+    lastDB[email] = pick_products(listC, 12)
     # output the products with ordered number
     products = pick_products(lastDB[email], 6)
 

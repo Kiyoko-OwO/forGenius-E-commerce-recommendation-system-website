@@ -23,7 +23,8 @@
 
 This project backend is based on Python3 and Django. The frontend is based on Nodejs and NPM. Please ensure your machine has these environments. You can check them via the command:
 ```
-$ python3 --version $ node -v
+$ python3 --version 
+$ node -v
 $ npm -v
 ```
 

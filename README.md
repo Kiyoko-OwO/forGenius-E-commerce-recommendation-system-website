@@ -10,7 +10,7 @@
 ##### Hanqing Guan  z5213081  Developer(Backend&Database)
 ##### Minghao Cai   z5231859  Developer(Frontend)
 ##### Tianchen Yang z5248280 	Developer(Backend)
-##### Wenxin Ma     z5248280 	Developer(Frontend)
+##### Wenxin Ma     z5301383 	Developer(Frontend)
 
 
 ## Structure:

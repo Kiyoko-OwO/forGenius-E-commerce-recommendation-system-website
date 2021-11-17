@@ -128,8 +128,20 @@ export default {
       },
       // extra search in search result page
       jumpResult () {
-        sessionStorage.setItem('word',this.keywords);
-        this.reload();
+        // Fucntion for search
+        // When search box has no input
+        if(!this.keywords){
+          this.$message.error("Please input search keywords");
+        }
+        // When search box only has space
+        else if(this.keywords.match(/^[ ]*$/)){
+          this.$message.error("Please input search keywords");
+        }
+        // Real search trigger
+        else{
+          sessionStorage.setItem('word',this.keywords);
+          this.reload();
+        }
       },
     }
 }

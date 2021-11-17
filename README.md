@@ -47,6 +47,7 @@ $ python3 -m venv venv
 ```
 Select the interpreter in VScode and choose "venv" one. 
 Then, open a new termianl, and input the command.
+
 (details in User Setup guide.pdf)
 ```
 $ pip3 install setuptools_rust
@@ -67,7 +68,8 @@ $ cd ui
 $ npm install --force
 $ npm run serve
 ```
-After that and wait a second, your terminal should show the following picture.
+After that and wait a second, your terminal should show the following picture. (This picture show in the User Setup guide.pdf)
+
 (Note: The reason why we use “npm install --force” is because in this project,  “less border” package’s version is too low; there may be some useless errors here if you use the command  without “--force”.).
 
 #### Open

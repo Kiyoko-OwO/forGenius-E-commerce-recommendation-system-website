@@ -80,5 +80,8 @@ Week 10
 6. I improved the search algorithm in the backend.
 7. I found the timezone of the project is UTC, change it to the timezone based on server time.
 8. We had a meeting and checked all thing about demo.
-9. On Monday wk10, we found the admin cannot see all order, we didn't add this function to the project, but this function is mentioned by Specification of E-Commerce Recommender System, so we just simply add it. But we did not have enough time to improve this function's detail. This happened because we didn't notice that when we wrote the proposal and build the database. And this may impact the admin user's use experiences.
+9. On Monday wk10, we found the admin cannot see all order, we didn't add this function to the project, 
+  but this function is mentioned by Specification of E-Commerce Recommender System, so we just simply add it. 
+  But we did not have enough time to improve this function's detail. 
+  This happened because we didn't notice that when we wrote the proposal and build the database. And this may impact the admin user's use experiences.
  

@@ -32,6 +32,10 @@ Require users to double input passwords when users signup.
 Add check for data validation.
 Improve web page aesthetics.
 
+WEEK 6
+Change features according to Retrospective.
+Finish admin page.
+
 WEEK 7
 Manageproduct functional code done.
 Order functional code down.
@@ -46,5 +50,23 @@ Search functional code done.
 Finished userchange function.
 Finished Data cheak and validation.
 Improve user experience.
+
+WEEK9
+Change the pages layout.
+Plan to start report.
+I finished add a sales data sorting function of admin product management in frontend. Then the admin can sort the products based on sales data.
+I changed the layout of the admin product management page in frontend.
+Test in vlab and chage the code style let the page can have good performance in valab.
+Clear code and make it in a good structure and add the comment.
+
+WEEK10
+Improve the page aesthetics.
+Add the manage view order function.
+Change addressbook layout.
+Complete the final report, change background change flow chart and complete the user manual.
+Prepare demo meeting for discussion.
+Check and Debug for every function.
+
+
 
 

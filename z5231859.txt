@@ -1,4 +1,4 @@
-Week1
+Week 1
 Joined group 3900-w16a-forgenius
 Switch lab time since group number cannot solve timetable clash
 Start working on proposal
@@ -6,13 +6,13 @@ Decided use VUE as front end
 Plan to have meetting of group every week
 Work on proposal's background existing works analyze
 
-Week2
+Week 2
 Decided use Flask as back end
 Modified user story with group
 Come up with novel functionality
 Plan to draw the flow chart with Wenxin
 
-Week3
+Week 3
 Finished flow chart
 Come up with second novel functionality
 Decided final UI design with group mumbers

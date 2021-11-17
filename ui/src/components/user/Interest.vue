@@ -21,7 +21,7 @@
 <script>
 // Page for user to choose their interest
 import { interest_add } from '../../api/user'
-const tagOptions = ['Fashion', 'Toys', 'Health', 'Pet', 'Electronics', 'Media', 'Furniture', 'Game', 'Food', 'Personal Care']
+const tagOptions = ['Fashion', 'Toys', 'Health', 'Pet', 'Electronics', 'Sports', 'Furniture', 'Game', 'Food', 'Personal Care']
 export default {
   data () {
     return {
